@@ -1,0 +1,1 @@
+-- script de consultas uteis

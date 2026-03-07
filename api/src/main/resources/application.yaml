@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: nexusrpg
+
+  data:
+    web:
+      pageable:
+        page-serialization-mode: via-dto
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/nexus
+    username: postgres
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
