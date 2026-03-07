@@ -10,7 +10,7 @@ Projeto Extensionista Integrador - Engenharia de Software 5º Semestre Matutino 
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend (API)
 
@@ -30,7 +30,7 @@ Projeto Extensionista Integrador - Engenharia de Software 5º Semestre Matutino 
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 O projeto é organizado seguindo princípios de **Clean Architecture**, visando a separação de responsabilidades e fácil manutenção:
 
@@ -54,7 +54,7 @@ O projeto é organizado seguindo princípios de **Clean Architecture**, visando 
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 
