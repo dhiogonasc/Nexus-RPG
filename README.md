@@ -47,10 +47,10 @@ O projeto é organizado seguindo princípios de **Clean Architecture**, visando 
 │   ├── mapper/       # Conversão entre Entidades e DTOs
 │   ├── exception/    # Tratamento global de erros
 │   └── validator/    # Validações personalizadas
-└── docs/             # Recursos de suporte
+└── resources/        # Recursos de suporte
     ├── db/           # Scripts SQL (schema, inserts)
     ├── assets/       # Diagramas e documentação visual
-    └── api-postman/  # Coleção de requisições para testes
+    └── api/          # Coleção de requisições para testes
 
 ```
 
