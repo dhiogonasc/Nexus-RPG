@@ -1,14 +1,6 @@
 # Nexus-RPG
 Projeto Extensionista Integrador - Engenharia de Software 5º Semestre Matutino - UNIVAG
 
-Este é um modelo de `README.md` profissional, estruturado para transmitir confiança e clareza sobre o seu projeto. Você pode copiar e colar este conteúdo no arquivo do seu repositório.
-
----
-
-# NEXUS RPG
-
-Bem-vindo ao repositório oficial do **NEXUS RPG**, uma plataforma dedicada à experiência de RPG. Este projeto integra uma API robusta em Java com uma interface móvel dinâmica, focada em performance e escalabilidade.
-
 ## Integrantes
 
 * Dhiogo [Sobrenome]
