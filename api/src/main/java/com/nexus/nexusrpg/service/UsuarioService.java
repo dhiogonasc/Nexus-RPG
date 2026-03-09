@@ -6,8 +6,10 @@ import com.nexus.nexusrpg.mapper.UsuarioMapper;
 import com.nexus.nexusrpg.model.entity.Usuario;
 import com.nexus.nexusrpg.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,12 +27,11 @@ public class UsuarioService {
 
         usuario.setSenha(passwordEncoder.encode(dto.senha()));
 
-        Usuario salvo = usuarioRepository.save(usuario);
-
-        return usuarioMapper.toResponse(salvo);
+        return usuarioMapper.toResponse(usuarioRepository.save(usuario));
     }
 
-    public List<UsuarioResponseDTO> listarTodos() {
+    public List<UsuarioResponseDTO> listar() {
+
         return usuarioRepository.findAll().stream()
                 .map(usuarioMapper::toResponse)
                 .toList();
@@ -38,16 +39,22 @@ public class UsuarioService {
 
     public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto) {
 
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow();
+        Usuario usuario = this.buscarPorId(id);
 
         usuario.setNome(dto.nome());
-        usuario.setEmail(dto.email());
         usuario.setSenha(passwordEncoder.encode(dto.senha()));
 
         return usuarioMapper.toResponse(usuarioRepository.save(usuario));
     }
 
     public void deletar(Long id) {
-        usuarioRepository.deleteById(id);
+        Usuario usuario = buscarPorId(id);
+
+        usuarioRepository.delete(usuario);
+    }
+
+    private Usuario buscarPorId(Long id){
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));
     }
 }
