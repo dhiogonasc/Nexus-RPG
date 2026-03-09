@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public record UsuarioResponseDTO(
 
-        @Schema(description = "Identificação do usuário")
+        @Schema(description = "Identificador do usuário")
         Long id,
 
         @Schema(description = "Nome de usuário")
