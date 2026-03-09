@@ -10,7 +10,6 @@ import org.mapstruct.Mapping;
 public interface UsuarioMapper {
 
     Usuario toEntity(UsuarioRequestDTO dto);
-
-    @Mapping(target = "senha", ignore = true)
+    
     UsuarioResponseDTO toResponse(Usuario entity);
 }
