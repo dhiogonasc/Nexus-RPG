@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.controller;
 
-import com.nexus.nexusrpg.controller.dto.request.LoginDTO;
+import com.nexus.nexusrpg.controller.dto.request.LoginRequestDTO;
+import com.nexus.nexusrpg.controller.dto.response.LoginResponseDTO;
 import com.nexus.nexusrpg.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -29,12 +30,12 @@ public class AuthController {
             @ApiResponse(responseCode = "400", description = "Erro de validação nos dados fornecidos.")
     })
     @PostMapping
-    public ResponseEntity<String> login(
+    public ResponseEntity<LoginResponseDTO> login(
             @Parameter(description = "Credenciais de acesso")
-            @RequestBody LoginDTO dto
+            @RequestBody LoginRequestDTO dto
     ) {
 
-        String token = authService.autenticar(dto);
+        LoginResponseDTO token = authService.autenticar(dto);
 
         return ResponseEntity.ok(token);
     }

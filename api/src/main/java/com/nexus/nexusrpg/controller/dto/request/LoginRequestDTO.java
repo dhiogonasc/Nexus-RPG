@@ -4,8 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.*;
 
-@Tag(name = "Login DTO", description = "Credenciais de acesso")
-public record LoginDTO(
+@Tag(name = "Login Request DTO", description = "Credenciais de acesso")
+public record LoginRequestDTO(
 
         @Schema(name = "Email", description = "Endereço de email cadastrado")
         @NotBlank(message = "O e-mail é obrigatório")
