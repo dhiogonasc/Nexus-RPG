@@ -20,11 +20,14 @@ public class UsuarioService {
     private final PasswordEncoder passwordEncoder;
 
     public UsuarioResponseDTO criar(UsuarioRequestDTO dto) {
+
         Usuario usuario = usuarioMapper.toEntity(dto);
 
         usuario.setSenha(passwordEncoder.encode(dto.senha()));
 
-        return usuarioMapper.toResponse(usuarioRepository.save(usuario));
+        Usuario salvo = usuarioRepository.save(usuario);
+
+        return usuarioMapper.toResponse(salvo);
     }
 
     public List<UsuarioResponseDTO> listarTodos() {

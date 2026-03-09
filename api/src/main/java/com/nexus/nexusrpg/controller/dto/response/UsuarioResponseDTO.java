@@ -6,6 +6,5 @@ public record UsuarioResponseDTO(
         Long id,
         String nome,
         String email,
-        LocalDateTime dataCriacao,
-        String token
+        LocalDateTime dataCriacao
 ) {}

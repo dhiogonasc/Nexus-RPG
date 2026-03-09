@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.security;
 
+import com.nexus.nexusrpg.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import static java.util.Collections.emptyList;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
     protected void doFilterInternal(
@@ -36,9 +38,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String email = tokenService.getEmailDoToken(token);
 
                 if (email != null) {
-                    UsernamePasswordAuthenticationToken auth =
-                            new UsernamePasswordAuthenticationToken(email, null, emptyList());
-                    SecurityContextHolder.getContext().setAuthentication(auth);
+                    if (usuarioRepository.existsByEmail(email)) {
+                        UsernamePasswordAuthenticationToken auth =
+                                new UsernamePasswordAuthenticationToken(email, null, emptyList());
+                        SecurityContextHolder.getContext().setAuthentication(auth);
+                    } else {
+                        SecurityContextHolder.clearContext();
+                    }
                 }
             } catch (Exception ignored) {}
         }
