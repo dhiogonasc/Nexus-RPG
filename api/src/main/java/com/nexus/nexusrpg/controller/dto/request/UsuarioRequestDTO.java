@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.controller.dto.request;
 
+import com.nexus.nexusrpg.validator.EmailUnico;
 import jakarta.validation.constraints.*;
 
 public record UsuarioRequestDTO(
@@ -9,6 +10,7 @@ public record UsuarioRequestDTO(
 
         @NotBlank(message = "O e-mail é obrigatório")
         @Email(message = "Formato de e-mail inválido")
+        @EmailUnico(message = "E-mail já está sendo utilizado")
         String email,
 
         @NotBlank(message = "A senha é obrigatória")
