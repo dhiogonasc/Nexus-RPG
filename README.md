@@ -54,9 +54,6 @@ Projeto Extensionista Integrador - Engenharia de Software 5º Semestre Matutino 
 
 ---
 
-## 📖 Documentação Adicional
+## Documentação Adicional
 
 * **API:** Após rodar o backend, acesse `http://localhost:8080/swagger-ui.html` para visualizar os endpoints.
-* **Banco de Dados:** Consulte o arquivo `docs/db/db.me` para instruções detalhadas sobre o esquema e migrações.
-
----
