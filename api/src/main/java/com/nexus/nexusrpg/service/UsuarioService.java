@@ -37,8 +37,13 @@ public class UsuarioService {
     }
 
     public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto) {
+
         Usuario usuario = usuarioRepository.findById(id).orElseThrow();
+
         usuario.setNome(dto.nome());
+        usuario.setEmail(dto.email());
+        usuario.setSenha(passwordEncoder.encode(dto.senha()));
+
         return usuarioMapper.toResponse(usuarioRepository.save(usuario));
     }
 
