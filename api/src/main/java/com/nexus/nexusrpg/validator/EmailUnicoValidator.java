@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class EmailUnicoValidator implements ConstraintValidator<EmailUnico, String> {
 
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
