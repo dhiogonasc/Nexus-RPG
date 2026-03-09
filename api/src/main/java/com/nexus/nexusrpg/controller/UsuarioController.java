@@ -2,6 +2,7 @@ package com.nexus.nexusrpg.controller;
 
 import com.nexus.nexusrpg.controller.dto.request.UsuarioRequestDTO;
 import com.nexus.nexusrpg.controller.dto.response.UsuarioResponseDTO;
+import com.nexus.nexusrpg.security.TokenService;
 import com.nexus.nexusrpg.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +17,24 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RequiredArgsConstructor
 @RequestMapping("/usuarios")
 public class UsuarioController {
+    
     final private UsuarioService usuarioService;
+    final private TokenService tokenService;
 
     @PostMapping
     public ResponseEntity<UsuarioResponseDTO> criar(@Valid @RequestBody UsuarioRequestDTO dto) {
 
-        return ResponseEntity
-                .status(CREATED)
-                .body(usuarioService.criar(dto));
+        UsuarioResponseDTO usuarioCriado = usuarioService.criar(dto);
+
+        String token = tokenService.gerarToken(dto.email());
+
+        return ResponseEntity.status(CREATED).body(new UsuarioResponseDTO(
+                usuarioCriado.id(),
+                usuarioCriado.nome(),
+                usuarioCriado.email(),
+                usuarioCriado.dataCriacao(),
+                token
+        ));
     }
 
     @GetMapping

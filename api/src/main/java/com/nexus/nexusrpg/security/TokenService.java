@@ -9,11 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
-@RequiredArgsConstructor
 public class TokenService {
 
-    @Value("${api.security.token.secret}")
-    private final String secret;
+    @Value("${jwt.secret}")
+    private String secret;
 
     public String gerarToken(String email) {
         return Jwts.builder()

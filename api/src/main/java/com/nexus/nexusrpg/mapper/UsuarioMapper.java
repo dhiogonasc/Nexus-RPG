@@ -10,6 +10,6 @@ import org.mapstruct.Mapping;
 public interface UsuarioMapper {
 
     Usuario toEntity(UsuarioRequestDTO dto);
-    
+
     UsuarioResponseDTO toResponse(Usuario entity);
 }
