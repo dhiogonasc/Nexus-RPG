@@ -2,6 +2,7 @@ package com.nexus.nexusrpg.controller;
 
 import com.nexus.nexusrpg.controller.dto.request.LoginDTO;
 import com.nexus.nexusrpg.security.TokenService;
+import com.nexus.nexusrpg.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,8 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Autenticação", description = "Endpoints para gerenciamento de sessão de usuário")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-    private final TokenService tokenService;
+    private final AuthService authService;
 
     @Operation(
             summary = "Realizar login",
@@ -38,12 +38,7 @@ public class AuthController {
             @RequestBody LoginDTO dto
     ) {
 
-        UsernamePasswordAuthenticationToken authToken =
-                new UsernamePasswordAuthenticationToken(dto.email(), dto.senha());
-
-        Authentication auth = authenticationManager.authenticate(authToken);
-
-        String token = tokenService.gerarToken(auth.getName());
+        String token = authService.autenticar(dto);
 
         return ResponseEntity.ok(token);
     }
