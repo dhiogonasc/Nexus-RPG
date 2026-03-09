@@ -1,8 +1,10 @@
 package com.nexus.nexusrpg.controller.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.*;
 
+@Tag(name = "Login DTO", description = "Credenciais de acesso")
 public record LoginDTO(
 
         @Schema(name = "Email", description = "Endereço de email cadastrado")

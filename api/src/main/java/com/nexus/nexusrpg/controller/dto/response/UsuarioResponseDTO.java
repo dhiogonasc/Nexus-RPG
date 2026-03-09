@@ -1,9 +1,12 @@
 package com.nexus.nexusrpg.controller.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.time.LocalDateTime;
 
+
+@Tag(name = "Usuário Response DTO", description = "Campos de resposta")
 public record UsuarioResponseDTO(
 
         @Schema(name = "Id", description = "Identificador do usuário")

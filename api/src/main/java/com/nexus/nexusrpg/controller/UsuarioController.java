@@ -28,7 +28,7 @@ public class UsuarioController {
     @Operation(summary = "Criar novo usuário", description = "Cadastra um novo usuário no sistema")
     @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso")
     public ResponseEntity<UsuarioResponseDTO> criar(
-            @Parameter(description = "Campos de cadastro")
+            @Parameter(description = "Campos de cadastro de usuário")
             @Valid @RequestBody UsuarioRequestDTO dto
     ) {
 
@@ -50,7 +50,7 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponseDTO> atualizar(
             @Parameter(description = "ID do usuário")
             @PathVariable Long id,
-            @Parameter(description = "Campos atualizados")
+            @Parameter(description = "Campos para atualização de usuário")
             @Valid @RequestBody UsuarioRequestDTO dto
     ) {
 

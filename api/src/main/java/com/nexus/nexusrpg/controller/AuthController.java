@@ -34,7 +34,7 @@ public class AuthController {
     })
     @PostMapping
     public ResponseEntity<String> login(
-            @Parameter(description = "Campos de login: credenciais")
+            @Parameter(description = "Credenciais de acesso")
             @RequestBody LoginDTO dto
     ) {
 
