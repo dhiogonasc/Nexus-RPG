@@ -3,6 +3,7 @@ package com.nexus.nexusrpg.controller;
 import com.nexus.nexusrpg.controller.dto.request.UsuarioRequestDTO;
 import com.nexus.nexusrpg.controller.dto.response.UsuarioResponseDTO;
 import com.nexus.nexusrpg.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class UsuarioController {
     final private UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<UsuarioResponseDTO> criar(@RequestBody UsuarioRequestDTO dto) {
+    public ResponseEntity<UsuarioResponseDTO> criar(@Valid @RequestBody UsuarioRequestDTO dto) {
 
         return ResponseEntity
                 .status(CREATED)
@@ -35,7 +36,7 @@ public class UsuarioController {
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> atualizar(
             @PathVariable Long id,
-            @RequestBody UsuarioRequestDTO dto) {
+            @Valid @RequestBody UsuarioRequestDTO dto) {
 
         return ResponseEntity
                 .ok(usuarioService.atualizar(id, dto));
