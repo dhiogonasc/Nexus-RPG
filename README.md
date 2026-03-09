@@ -41,7 +41,7 @@ O projeto é organizado seguindo princípios de **Clean Architecture**, visando 
 ├── app/              # Código fonte do Frontend (React Native)
 ├── api/              # Código fonte do Backend (Spring Boot)
 │   ├── controller/   # Endpoints e DTOs (Request/Response)
-│   ├── domain/       # Entidades e regras de negócio
+│   ├── model/        # Entidades
 │   ├── service/      # Regras de negócio e orquestração
 │   ├── repository/   # Acesso ao banco de dados
 │   ├── mapper/       # Conversão entre Entidades e DTOs
