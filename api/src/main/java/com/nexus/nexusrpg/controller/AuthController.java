@@ -1,7 +1,6 @@
 package com.nexus.nexusrpg.controller;
 
 import com.nexus.nexusrpg.controller.dto.request.LoginDTO;
-import com.nexus.nexusrpg.security.TokenService;
 import com.nexus.nexusrpg.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -10,15 +9,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/login")
 @RequiredArgsConstructor
-@Tag(name = "Autenticação", description = "Endpoints para gerenciamento de sessão de usuário")
+@Tag(name = "Auth", description = "Endpoints para gerenciamento de sessão de usuário")
 public class AuthController {
 
     private final AuthService authService;

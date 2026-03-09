@@ -19,7 +19,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/usuarios")
-@Tag(name = "Usuários", description = "Endpoints para gerenciamento de usuários")
+@Tag(name = "Usuario", description = "Endpoints para gerenciamento de usuários")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
