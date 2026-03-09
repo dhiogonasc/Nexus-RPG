@@ -9,15 +9,15 @@ import java.time.LocalDateTime;
 @Tag(name = "Usuário Response DTO", description = "Campos de resposta")
 public record UsuarioResponseDTO(
 
-        @Schema(name = "Id", description = "Identificador do usuário")
+        @Schema(description = "Identificador do usuário")
         Long id,
 
-        @Schema(name = "Nome", description = "Nome de usuário")
+        @Schema(description = "Nome de usuário")
         String nome,
 
-        @Schema(name = "Email", description = "Endereço de email do usuário")
+        @Schema(description = "Endereço de email do usuário")
         String email,
 
-        @Schema(name = "Data de cadastro", description = "Data e hora de cadastro do usuário")
+        @Schema(description = "Data e hora de cadastro do usuário")
         LocalDateTime dataCriacao
 ) {}

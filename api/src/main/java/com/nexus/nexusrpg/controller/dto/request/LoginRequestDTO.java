@@ -7,12 +7,12 @@ import jakarta.validation.constraints.*;
 @Tag(name = "Login Request DTO", description = "Credenciais de acesso")
 public record LoginRequestDTO(
 
-        @Schema(name = "Email", description = "Endereço de email cadastrado")
+        @Schema(description = "Endereço de email cadastrado")
         @NotBlank(message = "O e-mail é obrigatório")
         @Email(message = "Formato de e-mail inválido")
         String email,
 
-        @Schema(name = "Senha",  description = "Senha de acesso vinculada ao endereço de email")
+        @Schema(description = "Senha de acesso vinculada ao endereço de email")
         @NotBlank(message = "A senha é obrigatória")
         String senha
 ) {}

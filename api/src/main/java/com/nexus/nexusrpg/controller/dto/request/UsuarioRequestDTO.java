@@ -7,18 +7,18 @@ import jakarta.validation.constraints.*;
 
 @Tag(name = "Usuário Request DTO", description = "Campo de requisição")
 public record UsuarioRequestDTO(
-        @Schema(name = "Nome", description = "Nome de usuário")
+        @Schema(description = "Nome de usuário")
         @NotBlank(message = "O nome é obrigatório")
         @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
         String nome,
 
-        @Schema(name = "Email", description = "Endereço de email do usuário")
+        @Schema(description = "Endereço de email do usuário")
         @NotBlank(message = "O e-mail é obrigatório")
         @Email(message = "Formato de e-mail inválido")
         @EmailUnico(message = "E-mail já está sendo utilizado")
         String email,
 
-        @Schema(name = "Senha", description = "Senha de acesso do usuário")
+        @Schema(description = "Senha de acesso do usuário")
         @NotBlank(message = "A senha é obrigatória")
         @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres")
         String senha
