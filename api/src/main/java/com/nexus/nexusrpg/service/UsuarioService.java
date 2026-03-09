@@ -6,6 +6,7 @@ import com.nexus.nexusrpg.mapper.UsuarioMapper;
 import com.nexus.nexusrpg.model.entity.Usuario;
 import com.nexus.nexusrpg.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +17,12 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final UsuarioMapper usuarioMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public UsuarioResponseDTO criar(UsuarioRequestDTO dto) {
         Usuario usuario = usuarioMapper.toEntity(dto);
+
+        usuario.setSenha(passwordEncoder.encode(dto.senha()));
 
         return usuarioMapper.toResponse(usuarioRepository.save(usuario));
     }
