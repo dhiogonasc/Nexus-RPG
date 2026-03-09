@@ -6,15 +6,15 @@ import java.time.LocalDateTime;
 
 public record UsuarioResponseDTO(
 
-        @Schema(description = "Identificador do usuário")
+        @Schema(name = "Id", description = "Identificador do usuário")
         Long id,
 
-        @Schema(description = "Nome de usuário")
+        @Schema(name = "Nome", description = "Nome de usuário")
         String nome,
 
-        @Schema(description = "Endereço de email do usuário")
+        @Schema(name = "Email", description = "Endereço de email do usuário")
         String email,
 
-        @Schema(description = "Data e hora de cadastro do usuário")
+        @Schema(name = "Data de criação", description = "Data e hora de cadastro do usuário")
         LocalDateTime dataCriacao
 ) {}
