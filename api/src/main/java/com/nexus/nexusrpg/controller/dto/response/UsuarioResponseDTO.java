@@ -18,6 +18,6 @@ public record UsuarioResponseDTO(
         @Schema(name = "Email", description = "Endereço de email do usuário")
         String email,
 
-        @Schema(name = "Data de criação", description = "Data e hora de cadastro do usuário")
+        @Schema(name = "Data de cadastro", description = "Data e hora de cadastro do usuário")
         LocalDateTime dataCriacao
 ) {}
