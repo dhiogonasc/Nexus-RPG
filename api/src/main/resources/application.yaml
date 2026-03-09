@@ -8,13 +8,17 @@ spring:
         page-serialization-mode: via-dto
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/nexus
-    username: postgres
-    password: root
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
       ddl-auto: validate
+
+app:
+  cors:
+    allowed-origins: ${FRONTEND_URL}
 
 server:
   error:
