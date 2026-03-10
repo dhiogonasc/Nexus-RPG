@@ -1,22 +1,22 @@
 -- 1. Tabelas de Histórico e Execução
-DROP TABLE IF EXISTS user_response;
-DROP TABLE IF EXISTS user_mission_attempt;
-DROP TABLE IF EXISTS user_mission;
-DROP TABLE IF EXISTS user_achievement;
+DROP TABLE IF EXISTS user_response CASCADE;
+DROP TABLE IF EXISTS user_mission_attempt CASCADE;
+DROP TABLE IF EXISTS user_mission CASCADE;
+DROP TABLE IF EXISTS user_achievement CASCADE;
 
 -- 2. Tabelas de Conteúdo e Recompensas
-DROP TABLE IF EXISTS alternative;
-DROP TABLE IF EXISTS question;
-DROP TABLE IF EXISTS boss;
-DROP TABLE IF EXISTS achievement;
+DROP TABLE IF EXISTS alternative CASCADE;
+DROP TABLE IF EXISTS question CASCADE;
+DROP TABLE IF EXISTS boss CASCADE;
+DROP TABLE IF EXISTS achievement CASCADE;
 
 -- 3. Tabelas Base de Conteúdo
-DROP TABLE IF EXISTS mission;
+DROP TABLE IF EXISTS mission CASCADE;
 
 -- 4. Tabelas de Usuário e Stats
-DROP TABLE IF EXISTS user_stat;
-DROP TABLE IF EXISTS "user";
-DROP TABLE IF EXISTS "level";
+DROP TABLE IF EXISTS user_stat CASCADE;
+DROP TABLE IF EXISTS "user" CASCADE;
+DROP TABLE IF EXISTS "level" CASCADE;
 
 -- Levels
 CREATE TABLE "level" (
