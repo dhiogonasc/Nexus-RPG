@@ -7,12 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-
-import static java.util.Collections.emptyList;
+import java.util.List;
 
 @Data
 @Builder
@@ -39,12 +39,15 @@ public class User implements UserDetails {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserStat userStat;
+
+
+    @Override
+    public String getUsername() { return this.email; }
 
     @Override
     public String getPassword() { return this.password; }
-
-    @Override
-    public String getUsername() { return this.username; }
 
     @Override public boolean isAccountNonExpired() { return true; }
 
@@ -55,7 +58,7 @@ public class User implements UserDetails {
     @Override public boolean isEnabled() { return true; }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() { //IMPLEMENTAÇÃO FUTURA
-        return emptyList();
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 }

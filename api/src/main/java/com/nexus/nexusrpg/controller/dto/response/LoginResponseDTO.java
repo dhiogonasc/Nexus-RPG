@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Tag(name = "Login Response DTO", description = "Token de acesso")
 public record LoginResponseDTO (
 
-        @Schema(description = "Código de acesso")
+        @Schema(description = "Token de acesso")
         String token,
 
         @Schema(description = "Data e hora de login")

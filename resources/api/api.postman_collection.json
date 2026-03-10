@@ -14,9 +14,6 @@
         {
           "name": "/auth/regiser Cadastro",
           "request": {
-            "auth": {
-              "type": "noauth"
-            },
             "method": "POST",
             "header": [],
             "body": {
@@ -92,12 +89,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/usuarios/me",
+              "raw": "{{baseUrl}}/users/me",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "usuarios",
+                "users",
                 "me"
               ]
             },

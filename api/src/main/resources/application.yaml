@@ -35,4 +35,4 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 jwt:
-  secret: ${JWT_SECRET:projeto-integrador-extensionista-5-semestre-matutino-univag}
+  secret: projeto-integrador-extensionista-5-semestre-matutino-univag

@@ -33,6 +33,7 @@ CREATE TABLE "user" (
     username varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     "password" varchar(255) NOT NULL,
+	created_at timestamp NOT NULL,
 	CONSTRAINT pk_user PRIMARY KEY (id),
     CONSTRAINT uk_user_email UNIQUE(email)
 );
@@ -44,7 +45,7 @@ CREATE TABLE user_stat (
     level_id bigint NOT NULL,
     xp_current int DEFAULT 0 ,
     streak_current int DEFAULT 0,
-    last_access timestamp DEFAULT CURRENT_TIMESTAMP,
+    last_access timestamp NOT NULL,
 	CONSTRAINT pk_user_stat PRIMARY KEY (id),
     CONSTRAINT uk_user_stat_user UNIQUE (user_id),
     CONSTRAINT fk_user_stat_user FOREIGN KEY(user_id) REFERENCES "user"(id) ON DELETE CASCADE,
