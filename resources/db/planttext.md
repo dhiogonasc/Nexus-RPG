@@ -12,7 +12,7 @@ entity "Level" as level {
     * id : bigint <<PK>>
     --
     number : int
-    xp_required : int
+    xp_required : int <<CK>>
 }
 
 entity "User" as user {
@@ -28,8 +28,8 @@ entity "UserStat" as user_stat {
     --
     user_id : bigint <<FK>> <<UK>>
     level_id : bigint <<FK>>
-    xp_current : int
-    streak_current : int
+    xp_current : int <<CK>>
+    streak_current : int <<CK>>
     last_access : timestamp
 }
 
@@ -47,7 +47,7 @@ entity "Boss" as boss {
     mission_id : bigint <<FK>> <<UK>>
     name : varchar(255)
     description : text
-    max_health : int
+    max_health : int <<CK>>
 }
 
 entity "Question" as question {
@@ -98,7 +98,7 @@ entity "Achievement" as achievement {
     --
     name : varchar(255)
     description : text
-    bonus_xp : int
+    bonus_xp : int <<CK>>
     mission_id : bigint <<FK>> <<UK>>
 }
 
@@ -126,8 +126,7 @@ mission ||--o| achievement
 user ||--o{ user_achievement
 achievement ||--o{ user_achievement
 
-header Nexus
-footer Banco de dados - PEI
+header Nexus DB
 
 @enduml
 
