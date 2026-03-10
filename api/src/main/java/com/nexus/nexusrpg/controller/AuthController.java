@@ -1,19 +1,24 @@
 package com.nexus.nexusrpg.controller;
 
 import com.nexus.nexusrpg.controller.dto.request.LoginRequestDTO;
+import com.nexus.nexusrpg.controller.dto.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.controller.dto.response.LoginResponseDTO;
+import com.nexus.nexusrpg.controller.dto.response.RegisterResponseDTO;
 import com.nexus.nexusrpg.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 @Tag(name = "Auth", description = "Endpoints para gerenciamento de sessão de usuário")
 public class AuthController {
@@ -29,14 +34,28 @@ public class AuthController {
             @ApiResponse(responseCode = "401", description = "Credenciais inválidas ou usuário não autorizado."),
             @ApiResponse(responseCode = "400", description = "Erro de validação nos dados fornecidos.")
     })
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(
             @Parameter(description = "Credenciais de acesso")
             @RequestBody LoginRequestDTO dto
     ) {
 
-        LoginResponseDTO token = authService.autenticar(dto);
+        LoginResponseDTO token = authService.auth(dto);
 
-        return ResponseEntity.ok(token);
+        return ResponseEntity
+                .ok(token);
+    }
+
+    @PostMapping("/register")
+    @Operation(summary = "Criar novo usuário", description = "Cadastra um novo usuário no sistema")
+    @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso")
+    public ResponseEntity<RegisterResponseDTO> criar(
+            @Parameter(description = "Campos de cadastro de usuário")
+            @Valid @RequestBody RegisterRequestDTO dto
+    ) {
+
+        return ResponseEntity
+                .status(CREATED)
+                .body(authService.create(dto));
     }
 }

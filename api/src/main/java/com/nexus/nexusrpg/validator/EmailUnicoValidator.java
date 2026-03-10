@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.validator;
 
-import com.nexus.nexusrpg.repository.UsuarioRepository;
+import com.nexus.nexusrpg.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class EmailUnicoValidator implements ConstraintValidator<EmailUnico, String> {
 
-    private final UsuarioRepository usuarioRepository;
+    private final UserRepository userRepository;
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
         if (email == null || email.isEmpty()) return true;
-        return !usuarioRepository.existsByEmail(email);
+        return !userRepository.existsByEmail(email);
     }
 }

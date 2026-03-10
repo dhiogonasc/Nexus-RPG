@@ -21,6 +21,7 @@ entity "User" as user {
     username : varchar(255)
     email : varchar(255) <<UK>>
     password : varchar(255)
+    created_at : timestamp
 }
 
 entity "UserStat" as user_stat {

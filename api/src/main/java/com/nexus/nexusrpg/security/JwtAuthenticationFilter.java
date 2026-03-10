@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.security;
 
-import com.nexus.nexusrpg.repository.UsuarioRepository;
+import com.nexus.nexusrpg.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,14 +21,20 @@ import static java.util.Collections.emptyList;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
-    private final UsuarioRepository usuarioRepository;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(
-            HttpServletRequest request,
+            @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+
+        String requestURI = request.getRequestURI();
+        if (requestURI.startsWith("/auth/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String header = request.getHeader("Authorization");
 
@@ -37,8 +43,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String token = header.substring(7);
                 String email = tokenService.getEmailDoToken(token);
 
-                if (email != null) {
-                    if (usuarioRepository.existsByEmail(email)) {
+                if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    if (userRepository.existsByEmail(email)) {
                         UsernamePasswordAuthenticationToken auth =
                                 new UsernamePasswordAuthenticationToken(email, null, emptyList());
                         SecurityContextHolder.getContext().setAuthentication(auth);
@@ -46,7 +52,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         SecurityContextHolder.clearContext();
                     }
                 }
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                logger.error("Falha ao processar token JWT: " + e.getMessage());
+                SecurityContextHolder.clearContext();
+            }
         }
 
         filterChain.doFilter(request, response);

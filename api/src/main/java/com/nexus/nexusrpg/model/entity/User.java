@@ -19,32 +19,32 @@ import static java.util.Collections.emptyList;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "usuario")
-public class Usuario implements UserDetails {
+@Table(name = "\"user\"")
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome", nullable = false)
-    private String nome;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "senha", nullable = false)
-    private String senha;
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @CreationTimestamp
-    @Column(name = "data_criacao", updatable = false)
-    private LocalDateTime dataCriacao;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
 
     @Override
-    public String getPassword() { return this.senha; }
+    public String getPassword() { return this.password; }
 
     @Override
-    public String getUsername() { return this.email; }
+    public String getUsername() { return this.username; }
 
     @Override public boolean isAccountNonExpired() { return true; }
 
