@@ -1,4 +1,4 @@
-# NEXUS - PostgresQL
+# NEXUS - PostgreSQL
 
 ## 1. Convenções de Escrita e Padrões
 
