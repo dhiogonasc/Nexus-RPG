@@ -1,3 +1,7 @@
+# NEXUS - Script Diagramação ER
+
+## Script para diagramação ER via PlantText
+
 ```
 @startuml
 !theme plain
@@ -129,4 +133,6 @@ footer Banco de dados - PEI
 
 ```
 
-LINK: https://www.planttext.com/
+---
+
+Visualize ou atualize: [PlantText](https://www.planttext.com/)
