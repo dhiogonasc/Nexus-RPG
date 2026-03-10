@@ -24,7 +24,7 @@ ORDER BY m.id, q."order", a.id;
 
 CREATE OR REPLACE VIEW vw_user_mission_progress AS
 SELECT 
-    u.name as user_name,
+    u.username as user_name,
     m.title as mission_title,
     um.status as mission_status,
     um.best_result,
@@ -43,7 +43,7 @@ GROUP BY u.name, m.title, um.status, um.best_result;
 
 CREATE VIEW vw_user_achievements_history AS
 SELECT 
-    u.name as user_name,
+    u.username as user_name,
     ach.name as achievement_name,
     ach.bonus_xp,
     ua.earned_at,
