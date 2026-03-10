@@ -70,3 +70,23 @@ O sistema de gratificação por objetivos alcançados.
 2. **Unicidade de Missão:** Um usuário não pode ter dois registros de progresso para a mesma missão (`uk_user_mission`).
 3. **Ordem de Questões:** Não podem existir duas perguntas com o mesmo número de ordem dentro de uma mesma missão (`uk_question_mission_order`).
 4. **Status Controlado:** O campo `status` em `user_mission` aceita apenas os valores fixos `IN_PROGRESS` ou `COMPLETED`.
+
+---
+
+Excelente ideia. Incluir uma representação visual (usando a sintaxe **Mermaid**, que é o padrão do GitHub e de várias ferramentas de documentação Markdown) torna o entendimento da estrutura imediato.
+
+Aqui está a seção atualizada para você inserir na sua documentação:
+
+---
+
+## 5. Diagrama de Entidade-Relacionamento (ER)
+
+![Texto Alternativo](../assets/dbER.png)
+
+
+### Como ler o diagrama:
+
+* **`||--||`**: Relacionamento 1 para 1 (Obrigatório).
+* **`||--o{`**: Relacionamento 1 para Muitos (Opcional - pode ser zero).
+* **`||--|{`**: Relacionamento 1 para Muitos (Obrigatório - ao menos um).
+* **`|o--o|`**: Relacionamento opcional de ambos os lados (Auto-referência).
