@@ -1,3 +1,4 @@
+```
 @startuml
 !theme plain
 skinparam Linetype ortho
@@ -121,6 +122,11 @@ mission ||--o| achievement
 user ||--o{ user_achievement
 achievement ||--o{ user_achievement
 
+header Nexus
+footer Banco de dados - PEI
+
 @enduml
+
+```
 
 LINK: https://www.planttext.com/
