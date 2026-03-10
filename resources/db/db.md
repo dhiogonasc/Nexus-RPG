@@ -81,7 +81,7 @@ Aqui está a seção atualizada para você inserir na sua documentação:
 
 ## 5. Diagrama de Entidade-Relacionamento (ER)
 
-![Texto Alternativo](../assets/dbER.png)
+![Diagrama de Entidade-Relacionamento](../assets/dbER.png)
 
 
 ### Como ler o diagrama:
