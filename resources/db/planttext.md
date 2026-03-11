@@ -106,12 +106,13 @@ entity "UserResponse" as response {
 entity "Achievement" as achievement {
     * id : bigint <<PK>>
     --
+    level_id : bigint <<FK>> <<UK>>    
+    planet_id : bigint <<FK>>
+    mission_id : bigint <<FK>>
     name : varchar(255)
     description : text
     bonus_xp : int <<CK>>
     "type" : varchar(50) <<CK>>
-    planet_id : bigint <<FK>> <<UK>>
-    mission_id : bigint <<FK>> <<UK>>
 }
 
 entity "UserAchievement" as user_achievement {
@@ -136,6 +137,7 @@ mission ||--o{ user_mission
 user_mission ||--o{ attempt
 attempt ||--{ response
 alternative ||--o{ response
+level ||--|| achievement
 planet ||--{ achievement
 mission ||--{ achievement
 user ||--o{ user_achievement
