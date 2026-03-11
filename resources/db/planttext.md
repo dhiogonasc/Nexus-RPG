@@ -34,6 +34,14 @@ entity "UserStat" as user_stat {
     last_access : timestamp
 }
 
+entity "Planet" as planet {
+    * id : bigint <<PK>>
+    --
+    name : varchar(255)
+    description : text
+    planet_prerequisite_id : bigint <<FK>>
+}
+
 entity "Mission" as mission {
     * id : bigint <<PK>>
     --
@@ -100,6 +108,7 @@ entity "Achievement" as achievement {
     name : varchar(255)
     description : text
     bonus_xp : int <<CK>>
+    planet_id : bigint <<FK>> <<UK>>
     mission_id : bigint <<FK>> <<UK>>
 }
 
@@ -114,6 +123,8 @@ entity "UserAchievement" as user_achievement {
 ' Relacionamentos
 user ||--|| user_stat
 level ||--o{ user_stat
+planet |o--o| planet : "prerequisite"
+planet ||--o{ mission
 mission |o--o| mission : "prerequisite"
 mission ||--o| boss
 mission ||--o{ question
