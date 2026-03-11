@@ -11,7 +11,7 @@ skinparam shadowing false
 entity "Level" as level {
     * id : bigint <<PK>>
     --
-    number : int
+    number : int <<UK>>
     xp_required : int <<CK>>
 }
 
@@ -37,26 +37,27 @@ entity "UserStat" as user_stat {
 entity "Planet" as planet {
     * id : bigint <<PK>>
     --
-    name : varchar(255)
+    name : varchar(255) <<UK>>
     description : text
-    planet_prerequisite_id : bigint <<FK>>
+    planet_prerequisite_id : bigint <<FK>> <<UK>>
 }
+
 
 entity "Mission" as mission {
     * id : bigint <<PK>>
     --
-    title : varchar(255)
+    planet_id : bigint <<FK>>
+    title : varchar(255) <<UK>>
     description : text
-    mission_prerequisite_id : bigint <<FK>>
+    mission_prerequisite_id : bigint <<FK>> <<UK>>
 }
 
-entity "Boss" as boss {
+entity "Resource" as resource {
     * id : bigint <<PK>>
     --
-    mission_id : bigint <<FK>> <<UK>>
-    name : varchar(255)
+    planet_id : bigint <<FK>> <<UK>>
+    name : varchar(255) <<UK>>
     description : text
-    max_health : int <<CK>>
 }
 
 entity "Question" as question {
@@ -108,6 +109,7 @@ entity "Achievement" as achievement {
     name : varchar(255)
     description : text
     bonus_xp : int <<CK>>
+    "type" : varchar(50) <<CK>>
     planet_id : bigint <<FK>> <<UK>>
     mission_id : bigint <<FK>> <<UK>>
 }
@@ -124,17 +126,18 @@ entity "UserAchievement" as user_achievement {
 user ||--|| user_stat
 level ||--o{ user_stat
 planet |o--o| planet : "prerequisite"
-planet ||--o{ mission
+planet ||--{ mission
+planet ||--|| resource
 mission |o--o| mission : "prerequisite"
-mission ||--o| boss
-mission ||--o{ question
-question ||--o{ alternative
+mission ||--{ question
+question ||--{ alternative
 user ||--o{ user_mission
 mission ||--o{ user_mission
 user_mission ||--o{ attempt
-attempt ||--o{ response
+attempt ||--{ response
 alternative ||--o{ response
-mission ||--o| achievement
+planet ||--{ achievement
+mission ||--{ achievement
 user ||--o{ user_achievement
 achievement ||--o{ user_achievement
 
