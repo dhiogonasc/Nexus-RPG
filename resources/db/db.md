@@ -30,6 +30,7 @@ Responsável por armazenar quem são os jogadores e em que estágio de evoluçã
 
 Define a estrutura do jogo: o que o usuário precisa aprender e quem ele deve enfrentar.
 
+* **`planet`**: A unidade principal das missÔes. Pode ter um planeta pré-requisito (auto-relacionamento).
 * **`mission`**: A unidade principal de conteúdo. Pode ter uma missão pré-requisito (auto-relacionamento).
 * **`boss`**: Um desafio final opcional para a missão (Relação 1:1 com `mission`).
 * **`question`**: Perguntas associadas a uma missão. A coluna `"order"` garante a sequência pedagógica.
@@ -57,6 +58,7 @@ O sistema de gratificação por objetivos alcançados.
 | Relação | Tipo | Descrição |
 | --- | --- | --- |
 | `user` → `user_stat` | **1:1** | Todo usuário tem exatamente um registro de estatísticas. |
+| `planet` → `mission` | **1:N** | Um planeta pode ter várias mmissões. |
 | `mission` → `question` | **1:N** | Uma missão pode ter várias perguntas. |
 | `question` → `alternative` | **1:N** | Uma pergunta tem várias opções, mas apenas uma costuma ser a correta. |
 | `user` → `mission` | **N:N** | Muitos usuários fazem muitas missões (resolvido por `user_mission`). |
