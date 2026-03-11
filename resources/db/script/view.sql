@@ -2,16 +2,19 @@
 
 CREATE OR REPLACE VIEW vw_mission_details AS
 SELECT 
+    p.id as planet_id,
+    p.name as plnaet_name,
     m.id as mission_id,
     m.title as mission_title,
-    b.name as boss_name, -- Adicionado para contexto
+    b.name as boss_name,
     q.id as question_id,
     q."statement" as question_text,
     q."order" as question_order,
     a.id as alternative_id,
     a."content" as alternative_text,
     a.is_correct
-FROM mission m
+FROM planet p
+JOIN mission m ON p.id = m.planet_id
 JOIN boss b ON m.id = b.mission_id
 JOIN question q ON m.id = q.mission_id
 JOIN alternative a ON q.id = a.question_id
