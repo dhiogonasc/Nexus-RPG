@@ -151,6 +151,7 @@ CREATE TABLE achievement (
     planet_id bignint,
     mission_id bigint,
     CONSTRAINT pk_achievement PRIMARY KEY(id),
+    CONSTRAINT uk_achievement_planet UNIQUE (planet_id), 
     CONSTRAINT uk_achievement_mission UNIQUE (mission_id), 
     CONSTRAINT fk_achievement_planet FOREIGN KEY (planet_id) REFERENCES planet(id) ON DELETE CASCADE,
     CONSTRAINT fk_achievement_mission FOREIGN KEY (mission_id) REFERENCES mission(id) ON DELETE CASCADE,
