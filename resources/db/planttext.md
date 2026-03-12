@@ -121,7 +121,7 @@ entity "Planet" as planet {
     --
     name : varchar(255) <<UK>>
     description : text
-    planet_prerequisite_id : bigint <<FK>>
+    planet_prerequisite_id : bigint <<FK>> <<UK>>
 }
 
 entity "Mission" as mission {
@@ -140,11 +140,9 @@ entity "Mission" as mission {
 entity "Resource" as resource {
     * id : bigint <<PK>>
     --
-    planet_id : bigint <<FK>>
-    name : varchar(255)
+    planet_id : bigint <<FK>> <<UK>>
+    name : varchar(255) <<UK>>
     description : text
-    --
-    <<UK (planet_id,name)>>
 }
 
 entity "Question" as question {
