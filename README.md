@@ -6,7 +6,7 @@ Projeto Extensionista Integrador - Engenharia de Software 5º Semestre Matutino 
 ## Integrantes
 
 * Dhiogo Nascimento
-* Flávio [Sobrenome]
+* Flávio Gimenes
 * Guilherme [Sobrenome]
 * Matheus [Sobrenome]
 
