@@ -8,7 +8,7 @@
 skinparam Linetype ortho
 skinparam shadowing false
 
-' =============================+
+' ==============================
 ' USER DOMAIN
 ' ==============================
 
