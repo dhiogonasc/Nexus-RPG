@@ -1,0 +1,13 @@
+package com.nexus.nexusrpg.repository;
+
+import com.nexus.nexusrpg.model.entity.UserStat;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.Optional;
+
+@Repository
+public interface UserStatExtractionRepository extends JpaRepository<UserStat, Long> {
+    
+    Optional<UserStat> findByUserId(Long userId);
+    
+}
