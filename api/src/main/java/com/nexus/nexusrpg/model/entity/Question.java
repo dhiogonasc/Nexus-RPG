@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "question")
+@Table(name = "\"question\"")
 public class Question {
 
     @Id
@@ -19,12 +19,12 @@ public class Question {
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "\"description\"", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "code_snippet", columnDefinition = "TEXT")
+    @Column(name = "\"code_snippet\"", columnDefinition = "TEXT")
     private String codeSnippet;
 
-    @Column(name = "order", nullable = false)
+    @Column(name = "\"order\"", nullable = false)
     private int order;
 }
