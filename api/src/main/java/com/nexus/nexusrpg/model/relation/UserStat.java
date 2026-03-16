@@ -1,6 +1,8 @@
 package com.nexus.nexusrpg.model.relation;
 
 import com.nexus.nexusrpg.model.entity.Level;
+import com.nexus.nexusrpg.model.entity.Mission;
+import com.nexus.nexusrpg.model.entity.Planet;
 import com.nexus.nexusrpg.model.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +29,14 @@ public class UserStat {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id", nullable = false)
     private Level level;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "current_planet_id")
+    private Planet currentPlanet;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "current_mission_id")
+    private Mission currentMission;
 
     @Builder.Default
     @Column(name = "\"xp_total\"", nullable = false)
