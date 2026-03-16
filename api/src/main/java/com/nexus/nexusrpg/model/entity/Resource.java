@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "resource")
+@Table(name = "\"resource\"")
 public class Resource {
 
     @Id
@@ -19,9 +19,9 @@ public class Resource {
     @JoinColumn(name = "planet_id", nullable = false)
     private Planet planet;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "\"name\"", nullable = false)
     private String name;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "\"description\"", columnDefinition = "TEXT")
     private String description;
 }
