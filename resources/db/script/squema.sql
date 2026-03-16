@@ -160,7 +160,7 @@ CREATE TABLE "mission" (
 
     CONSTRAINT fk_mission_planet FOREIGN KEY(planet_id) REFERENCES "planet"(id) ON DELETE CASCADE,
 
-    CONSTRAINT uk_mission_planet_title UNIQUE(planet_id, "title"),
+    CONSTRAINT uk_mission_planet_name UNIQUE(planet_id, "name"),
     CONSTRAINT uk_mission_planet_order UNIQUE (planet_id, "order"),
 
 	CONSTRAINT ck_mission_reward CHECK ("xp_reward" >= 0)
