@@ -27,8 +27,8 @@ public class UserStat {
     private Level level;
 
     @Builder.Default
-    @Column(name = "\"xp_current\"", nullable = false)
-    int xpCurrent = 0;
+    @Column(name = "\"xp_total\"", nullable = false)
+    private int xpTotal = 0;
 
     @Builder.Default
     @Column(name = "\"streak_current\"", nullable = false)
