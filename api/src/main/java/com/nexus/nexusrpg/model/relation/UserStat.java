@@ -33,7 +33,7 @@ public class UserStat {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "current_planet_id")
     private Planet currentPlanet;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "current_mission_id")
     private Mission currentMission;

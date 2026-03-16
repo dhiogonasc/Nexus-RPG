@@ -245,7 +245,7 @@ CREATE TABLE "alternative" (
     question_id bigint NOT NULL,
 
     "content" text NOT NULL,
-    "feedbackTip" text NOT NULL,
+    "feedback_tip" text NOT NULL,
     "is_correct" boolean NOT NULL DEFAULT false,
 	
     CONSTRAINT pk_alternative PRIMARY KEY(id),
