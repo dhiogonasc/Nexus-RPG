@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "\"level\"")
+@Table(name = "level")
 public class Level {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "\"number\"", nullable = false)
+    @Column(name = "number", nullable = false)
     int number;
 
     @Column(name = "xp_required", nullable = false)
