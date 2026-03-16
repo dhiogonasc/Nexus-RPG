@@ -339,7 +339,7 @@ CREATE TABLE "user_achievement" (
     user_id bigint NOT NULL,
     achievement_id bigint NOT NULL,
 
-    "collected_at" DEFAULT CURRENT_TIMESTAMP,
+    "collected_at" timestamp DEFAULT CURRENT_TIMESTAMP,
 	
     CONSTRAINT pk_user_achievement PRIMARY KEY(id),
 	
