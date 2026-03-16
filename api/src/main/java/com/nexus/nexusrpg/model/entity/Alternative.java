@@ -11,7 +11,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "\"alternative\"")
+@Table(name = "\"alternative\"", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_alternative_content", columnNames = {"question_id", "\"content\""}),
+        @UniqueConstraint(name = "uk_alternative", columnNames = {"question_id", "id"})
+})
 public class Alternative {
 
     @Id
