@@ -18,7 +18,7 @@ public class Level {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number", nullable = false)
+    @Column(name = "number", nullable = false, unique = true)
     int number;
 
     @Column(name = "xp_required", nullable = false)
