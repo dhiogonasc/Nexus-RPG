@@ -11,7 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "\"question\"")
+@Table(name = "\"question\"", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_question_mission_order", columnNames = {"mission_id", "\"order\""})
+})
 public class Question {
 
     @Id
@@ -22,10 +24,10 @@ public class Question {
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
 
-    @Column(name = "\"description\"", columnDefinition = "TEXT")
+    @Column(name = "\"description\"", nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "\"code_snippet\"", columnDefinition = "TEXT")
+    @Column(name = "\"code_snippet\"", nullable = false, columnDefinition = "TEXT")
     private String codeSnippet;
 
     @Column(name = "\"order\"", nullable = false)
