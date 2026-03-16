@@ -20,7 +20,7 @@ public class UserMissionAttempt {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_mission_id")
+    @JoinColumn(name = "user_mission_id", nullable = false)
     private UserMission userMission;
 
     @CreationTimestamp
