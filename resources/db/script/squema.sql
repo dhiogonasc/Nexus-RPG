@@ -197,7 +197,6 @@ CREATE TABLE "user_mission_attempt" (
     CONSTRAINT fk_attempt_user_mission FOREIGN KEY (user_mission_id) REFERENCES "user_mission"(id) ON DELETE CASCADE,
 
     CONSTRAINT ck_user_mission_attempt CHECK ("end_at" >= "start_at")
-
 );
 
 
@@ -297,10 +296,10 @@ CREATE TABLE "user_resource" (
 	
     CONSTRAINT pk_user_resource PRIMARY KEY(id),
 	
-    CONSTRAINT uk_user_resource UNIQUE (user_id, resource_id),
-	
     CONSTRAINT fk_user_resource_user FOREIGN KEY(user_id) REFERENCES "user"(id) ON DELETE CASCADE,
-    CONSTRAINT fk_user_resource_resource FOREIGN KEY(resource_id) REFERENCES "resource"(id) ON DELETE CASCADE
+    CONSTRAINT fk_user_resource_resource FOREIGN KEY(resource_id) REFERENCES "resource"(id) ON DELETE CASCADE,
+
+    CONSTRAINT uk_user_resource UNIQUE (user_id, resource_id)
 );
 
 
