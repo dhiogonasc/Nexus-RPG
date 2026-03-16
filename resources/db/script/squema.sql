@@ -36,8 +36,7 @@ CREATE TYPE difficulty_level
 CREATE TYPE mission_status 
     AS ENUM (
         'IN_PROGRESS', 
-        'COMPLETED', 
-        'BLOCKED'
+        'COMPLETED'
         );
 
 CREATE TYPE achievement_scope 
@@ -174,7 +173,7 @@ CREATE TABLE "user_mission" (
     mission_id bigint NOT NULL,
 
     "status" mission_status NOT NULL DEFAULT 'IN_PROGRESS',
-    "best_result" score NOT NULL,
+    "best_result" score NOT NULL DEFAULT 0,
 	
     CONSTRAINT pk_user_mission PRIMARY KEY(id),
 	
