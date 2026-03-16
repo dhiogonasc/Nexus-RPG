@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.model.entity;
 
+import com.nexus.nexusrpg.model.enums.DifficultyLevel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "\"mission\"")
+@Table(name = "mission")
 public class Mission {
 
     @Id
@@ -19,18 +20,19 @@ public class Mission {
     @JoinColumn(name = "planet_id", nullable = false)
     private Planet planet;
 
-    @Column(name = "\"name\"", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "\"description\"", columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "\"order\"", nullable = false)
+    @Column(name = "order", nullable = false)
     private int order;
-    
-    @Column(name = "\"difficulty\"", nullable = false)
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "difficulty", nullable = false)
     private DifficultyLevel difficulty;
-    
-    @Column(name = "\"xp_reward\"", nullable = false)
-    private Integer xpReward;
+
+    @Column(name = "xp_reward", nullable = false)
+    private int xpReward;
 }
