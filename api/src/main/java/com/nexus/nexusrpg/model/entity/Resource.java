@@ -16,10 +16,10 @@ public class Resource {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "planet_id", nullable = false)
+    @JoinColumn(name = "planet_id", nullable = false, unique = true)
     private Planet planet;
 
-    @Column(name = "\"name\"", nullable = false)
+    @Column(name = "\"name\"", nullable = false, unique = true)
     private String name;
 
     @Column(name = "\"description\"", columnDefinition = "TEXT")
