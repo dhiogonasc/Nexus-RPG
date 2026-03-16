@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user_stat")
+@Table(name = "\"user_stat\"")
 public class UserStat {
 
     @Id
@@ -27,14 +27,14 @@ public class UserStat {
     private Level level;
 
     @Builder.Default
-    @Column(name = "xp_current", nullable = false)
+    @Column(name = "\"xp_current\"", nullable = false)
     int xpCurrent = 0;
 
     @Builder.Default
-    @Column(name = "streak_current", nullable = false)
+    @Column(name = "\"streak_current\"", nullable = false)
     int streakCurrent = 0;
 
     @CreationTimestamp
-    @Column(name = "last_access", nullable = false)
+    @Column(name = "\"last_access\"", nullable = false)
     LocalDateTime lastAccess;
 }
