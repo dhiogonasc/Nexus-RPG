@@ -24,11 +24,11 @@ public class Achievement {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "\"type\"", nullable = false)
+    @Column(name = "\"type\"", nullable = false, columnDefinition = "achievement_type")
     private AchievementType type;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "\"scope\"", nullable = false)
+    @Column(name = "\"scope\"", nullable = false, columnDefinition = "achievement_scope")
     private AchievementScope scope;
 
     @Builder.Default
