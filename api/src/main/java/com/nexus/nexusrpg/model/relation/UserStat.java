@@ -21,11 +21,11 @@ public class UserStat {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, unique = true, referencedColumnName = "id")
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "level_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "level_id", nullable = false)
     private Level level;
 
     @Builder.Default
