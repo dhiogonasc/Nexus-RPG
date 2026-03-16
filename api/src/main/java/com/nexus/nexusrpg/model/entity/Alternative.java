@@ -1,10 +1,7 @@
 package com.nexus.nexusrpg.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
@@ -22,12 +19,12 @@ public class Alternative {
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String text;
-
-    @Column(name = "is_correct", nullable = false)
-    private Boolean isCorrect;
+    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
+    private String content;
 
     @Column(name = "feedback_tip", columnDefinition = "TEXT")
     private String feedbackTip;
+
+    @Column(name = "is_correct", nullable = false)
+    private Boolean isCorrect;
 }
