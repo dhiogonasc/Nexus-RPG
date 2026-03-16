@@ -1,5 +1,7 @@
 package com.nexus.nexusrpg.model.entity;
 
+import com.nexus.nexusrpg.model.enums.AchievementScope;
+import com.nexus.nexusrpg.model.enums.AchievementType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,9 +23,11 @@ public class Achievement {
     @Column(name = "\"description\"", columnDefinition = "TEXT")
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "\"type\"", nullable = false)
     private AchievementType type;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "\"scope\"", nullable = false)
     private AchievementScope scope;
 
