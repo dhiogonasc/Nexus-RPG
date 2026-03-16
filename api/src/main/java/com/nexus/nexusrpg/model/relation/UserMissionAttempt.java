@@ -31,12 +31,6 @@ public class UserMissionAttempt {
     private LocalDateTime endAt;
 
     @Builder.Default
-    @Column(
-            name = "\"result\"",
-            nullable = false,
-            precision = 5,
-            scale = 2,
-            columnDefinition = "score DEFAULT 0"
-    )
+    @Column(name = "\"result\"", nullable = false, columnDefinition = "score")
     private BigDecimal result = BigDecimal.ZERO;
 }

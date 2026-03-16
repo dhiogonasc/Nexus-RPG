@@ -34,12 +34,6 @@ public class UserMission {
     private MissionStatus status = MissionStatus.IN_PROGRESS;
 
     @Builder.Default
-    @Column(
-            name = "\"best_result\"",
-            nullable = false,
-            precision = 5,
-            scale = 2,
-            columnDefinition = "score DEFAULT 0"
-    )
+    @Column(name = "\"best_result\"", nullable = false, columnDefinition = "score")
     private BigDecimal bestResult = BigDecimal.ZERO;
 }

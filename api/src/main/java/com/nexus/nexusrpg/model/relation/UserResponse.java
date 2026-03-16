@@ -1,7 +1,6 @@
 package com.nexus.nexusrpg.model.relation;
 
 import com.nexus.nexusrpg.model.entity.Alternative;
-import com.nexus.nexusrpg.model.entity.Question;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,17 +21,19 @@ public class UserResponse {
     private UserMissionAttempt attempt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id", nullable = false)
-    private Question question;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "question_id", 
-                        referencedColumnName = "question_id", 
-                        insertable = false, 
-                        updatable = false
-                       ),
-            @JoinColumn(name = "alternative_id", referencedColumnName = "id")
+            @JoinColumn(
+                    name = "question_id",
+                    referencedColumnName = "question_id",
+                    insertable = false,
+                    updatable = false
+            ),
+            @JoinColumn(
+                    name = "alternative_id",
+                    referencedColumnName = "id",
+                    insertable = false,
+                    updatable = false
+            )
     })
     private Alternative alternative;
 }
