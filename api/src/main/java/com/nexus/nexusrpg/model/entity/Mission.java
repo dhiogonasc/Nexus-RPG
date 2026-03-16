@@ -29,7 +29,7 @@ public class Mission {
     private int order;
     
     @Column(name = "\"difficulty\"", nullable = false)
-    private Difficulty difficulty;
+    private DifficultyLevel difficulty;
     
     @Column(name = "\"xp_reward\"", nullable = false)
     private Integer xpReward;
