@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.model.entity;
+package com.nexus.nexusrpg.model.serials;
 
 import com.nexus.nexusrpg.model.enums.EntityType;
 import lombok.*;

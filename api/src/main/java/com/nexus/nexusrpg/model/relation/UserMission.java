@@ -1,5 +1,7 @@
-package com.nexus.nexusrpg.model.entity;
+package com.nexus.nexusrpg.model.relation;
 
+import com.nexus.nexusrpg.model.entity.Mission;
+import com.nexus.nexusrpg.model.entity.User;
 import com.nexus.nexusrpg.model.enums.MissionStatus;
 import jakarta.persistence.*;
 import lombok.*;

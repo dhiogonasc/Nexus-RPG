@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.service.extraction;
 
 import com.nexus.nexusrpg.model.entity.Alternative;
-import com.nexus.nexusrpg.model.entity.UserMissionAttempt;
-import com.nexus.nexusrpg.model.entity.UserResponse;
+import com.nexus.nexusrpg.model.relation.UserMissionAttempt;
+import com.nexus.nexusrpg.model.relation.UserResponse;
 import com.nexus.nexusrpg.repository.UserMissionAttemptRepository;
 import com.nexus.nexusrpg.repository.UserResponseRepository;
 import org.springframework.stereotype.Service;

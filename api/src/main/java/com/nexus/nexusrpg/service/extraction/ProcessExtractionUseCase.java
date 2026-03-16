@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.service.extraction;
 import com.nexus.nexusrpg.controller.dto.request.ExtractionRequestDTO;
 import com.nexus.nexusrpg.controller.dto.response.ExtractionResponseDTO;
 import com.nexus.nexusrpg.model.entity.Alternative;
-import com.nexus.nexusrpg.model.entity.UserStat;
+import com.nexus.nexusrpg.model.relation.UserStat;
 import com.nexus.nexusrpg.repository.AlternativeRepository;
 import com.nexus.nexusrpg.repository.UserStatExtractionRepository;
 import org.springframework.stereotype.Service;

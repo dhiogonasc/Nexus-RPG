@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.repository;
 
-import com.nexus.nexusrpg.model.entity.UserResource;
+import com.nexus.nexusrpg.model.relation.UserResource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

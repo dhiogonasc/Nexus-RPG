@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.model.entity;
+package com.nexus.nexusrpg.model.relation;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.service.extraction;
 
 import com.nexus.nexusrpg.model.entity.Alternative;
 import com.nexus.nexusrpg.model.entity.Level;
-import com.nexus.nexusrpg.model.entity.UserStat;
+import com.nexus.nexusrpg.model.relation.UserStat;
 import com.nexus.nexusrpg.repository.LevelRepository;
 import org.springframework.stereotype.Service;
 

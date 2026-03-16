@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.service.extraction;
 
 import com.nexus.nexusrpg.model.entity.Alternative;
 import com.nexus.nexusrpg.model.entity.Resource;
-import com.nexus.nexusrpg.model.entity.UserResource;
+import com.nexus.nexusrpg.model.relation.UserResource;
 import com.nexus.nexusrpg.repository.ResourceRepository;
 import com.nexus.nexusrpg.repository.UserResourceRepository;
 import org.springframework.stereotype.Service;

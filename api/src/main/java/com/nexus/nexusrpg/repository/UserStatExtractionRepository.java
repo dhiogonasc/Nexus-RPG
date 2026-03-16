@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.repository;
 
-import com.nexus.nexusrpg.model.entity.UserStat;
+import com.nexus.nexusrpg.model.relation.UserStat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;

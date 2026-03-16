@@ -1,5 +1,7 @@
-package com.nexus.nexusrpg.model.entity;
+package com.nexus.nexusrpg.model.relation;
 
+import com.nexus.nexusrpg.model.entity.Achievement;
+import com.nexus.nexusrpg.model.serials.AchievementTargetId;
 import com.nexus.nexusrpg.model.enums.EntityType;
 import jakarta.persistence.*;
 import lombok.*;

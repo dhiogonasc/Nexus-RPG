@@ -7,7 +7,7 @@ import com.nexus.nexusrpg.controller.dto.response.RegisterResponseDTO;
 import com.nexus.nexusrpg.mapper.AuthMapper;
 import com.nexus.nexusrpg.model.entity.Level;
 import com.nexus.nexusrpg.model.entity.User;
-import com.nexus.nexusrpg.model.entity.UserStat;
+import com.nexus.nexusrpg.model.relation.UserStat;
 import com.nexus.nexusrpg.repository.LevelRepository;
 import com.nexus.nexusrpg.repository.UserRepository;
 import com.nexus.nexusrpg.repository.UserStatRepository;

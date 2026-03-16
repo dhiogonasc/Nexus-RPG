@@ -1,11 +1,8 @@
 package com.nexus.nexusrpg.repository;
 
-import com.nexus.nexusrpg.model.entity.UserStat;
+import com.nexus.nexusrpg.model.relation.UserStat;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
