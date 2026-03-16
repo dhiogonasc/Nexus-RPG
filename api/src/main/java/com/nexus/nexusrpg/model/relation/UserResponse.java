@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.model.relation;
 
 import com.nexus.nexusrpg.model.entity.Alternative;
+import com.nexus.nexusrpg.model.entity.Question;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "\"user_response\"")
+@Table(name = "\"user_response\"", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_user_response_question", columnNames = {"attempt_id", "question_id"})
+})
 public class UserResponse {
 
     @Id
@@ -19,6 +22,10 @@ public class UserResponse {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attempt_id", nullable = false)
     private UserMissionAttempt attempt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id", nullable = false)
+    private Question question;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
