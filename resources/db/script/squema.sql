@@ -190,7 +190,7 @@ CREATE TABLE "user_mission_attempt" (
 
     "start_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "end_at" timestamp,
-    "result" score NOT NULL,
+    "result" score NOT NULL DEFAULT 0,
 
     CONSTRAINT pk_attempt PRIMARY KEY(id),
 
