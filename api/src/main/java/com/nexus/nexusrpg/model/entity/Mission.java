@@ -1,10 +1,7 @@
 package com.nexus.nexusrpg.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
@@ -22,15 +19,18 @@ public class Mission {
     @JoinColumn(name = "planet_id", nullable = false)
     private Planet planet;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "order", nullable = false)
+    private int order;
+    
+    @Column(name = "difficulty", nullable = false)
+    private Difficulty difficulty;
+    
     @Column(name = "xp_reward", nullable = false)
     private Integer xpReward;
-
-    @Column(name = "is_boss_mission")
-    private Boolean isBossMission;
 }
