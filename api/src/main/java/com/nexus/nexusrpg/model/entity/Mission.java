@@ -30,7 +30,7 @@ public class Mission {
     private int order;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "difficulty", nullable = false)
+    @Column(name = "difficulty", nullable = false, columnDefinition = "difficulty_level")
     private DifficultyLevel difficulty;
 
     @Column(name = "xp_reward", nullable = false)
