@@ -229,7 +229,7 @@ CREATE TABLE "question" (
     mission_id bigint NOT NULL,
 
     "description" text NOT NULL,
-    "codeSnippet" text NOT NULL,
+    "code_snippet" text NOT NULL,
     "order" int NOT NULL,
 	
     CONSTRAINT pk_question PRIMARY KEY (id),
