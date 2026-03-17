@@ -18,7 +18,7 @@ public record RegisterRequestDTO(
         @Schema(description = "Endereço de email")
         @NotBlank(message = "O e-mail é obrigatório")
         @Email(message = "Formato de e-mail inválido")
-        @EmailUnico(message = "E-mail já cadastrado")
+        @EmailUnico(message = "Este e-mail já está sendo utilizado por outro usuário")
         String email,
 
         @Schema(description = "Senha de acesso")

@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.controller;
 
+import com.nexus.nexusrpg.controller.dto.UserProfileDTO;
 import com.nexus.nexusrpg.service.UserProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,10 +20,8 @@ public class UserController {
 
     @GetMapping("/me")
     @Operation(summary = "Perfil de usuário")
-    public ResponseEntity<UserResponseDTO> getMe() {
+    public ResponseEntity<UserProfileDTO> getMe() {
 
-        UserResponseDTO me = userService.getMe();
-
-        return ResponseEntity.ok(me);
+        return ResponseEntity.ok(userService.getMe());
     }
 }

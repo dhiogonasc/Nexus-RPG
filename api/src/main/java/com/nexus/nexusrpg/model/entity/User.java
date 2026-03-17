@@ -1,6 +1,5 @@
 package com.nexus.nexusrpg.model.entity;
 
-import com.nexus.nexusrpg.model.relation.UserStat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,9 +29,6 @@ public class User implements UserDetails {
     
     @Column(name = "\"password\"", nullable = false)
     private String password;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserStat userStat;
 
 
     @Override

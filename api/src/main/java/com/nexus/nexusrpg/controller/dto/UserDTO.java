@@ -15,9 +15,6 @@ public record UserDTO(
         String username,
 
         @Schema(description = "Endereço de email")
-        String email,
-
-        @Schema(description = "Data e hora de cadastro do usuário")
-        LocalDateTime createdAt
+        String email
 ) {
 }

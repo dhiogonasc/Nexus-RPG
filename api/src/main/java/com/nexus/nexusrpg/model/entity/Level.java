@@ -1,10 +1,7 @@
 package com.nexus.nexusrpg.model.entity;
 
-import com.nexus.nexusrpg.model.relation.UserStat;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Data
 @Builder

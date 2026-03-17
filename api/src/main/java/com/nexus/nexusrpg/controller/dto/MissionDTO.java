@@ -8,9 +8,6 @@ public record MissionDTO(
         @Schema(description = "Identificador da Missão")
         Long id,
 
-        @Schema(description = "Identificador do Planeta de vinculo")
-        Long planetId,
-
         @Schema(description = "Nome")
         String name,
 
