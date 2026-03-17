@@ -1,59 +1,139 @@
--- Missao, Questões e Alternativas
+-- ==========================================
+-- DROP VIEWS (Ordem de Dependência Lógica)
+-- ==========================================
 
-CREATE OR REPLACE VIEW vw_mission_details AS
+DROP VIEW IF EXISTS vw_question_alternatives;
+DROP VIEW IF EXISTS vw_mission_questions;
+
+DROP VIEW IF EXISTS vw_planet_missions;
+DROP VIEW IF EXISTS vw_achievements_detailed;
+
+DROP VIEW IF EXISTS vw_user_achievement_history;
+DROP VIEW IF EXISTS vw_user_mission_progression;
+
+
+--- ==============================
+--- USER MISSION PROGRESS
+--- ==============================
+
+CREATE OR REPLACE VIEW vw_user_mission_progression AS
 SELECT 
-    p.id as planet_id,
-    p.name as plnaet_name,
-    m.id as mission_id,
-    m.title as mission_title,
-    b.name as boss_name,
-    q.id as question_id,
-    q."statement" as question_text,
-    q."order" as question_order,
-    a.id as alternative_id,
-    a."content" as alternative_text,
-    a.is_correct
-FROM planet p
-JOIN mission m ON p.id = m.planet_id
-JOIN boss b ON m.id = b.mission_id
-JOIN question q ON m.id = q.mission_id
-JOIN alternative a ON q.id = a.question_id
-ORDER BY m.id, q."order", a.id;
-
--- SELECT * FROM vw_mission_details;
-
-
--- Progresso do usuário em missões
-
-CREATE OR REPLACE VIEW vw_user_mission_progress AS
-SELECT 
-    u.username as user_name,
-    m.title as mission_title,
-    um.status as mission_status,
-    um.best_result,
-    COUNT(uma.id) as total_attempts,
-    COALESCE(MAX(uma.is_boss_defeated::int)::boolean, false) as boss_defeated
+    u.username,
+    p.name AS planet_name,
+    m.name AS mission_name,
+    m.difficulty,
+    um.status AS mission_status,
+    um.best_result AS best_score
 FROM "user" u
-JOIN user_mission um ON u.id = um.user_id
-JOIN mission m ON um.mission_id = m.id
-LEFT JOIN user_mission_attempt uma ON um.id = uma.user_mission_id
-GROUP BY u.name, m.title, um.status, um.best_result;
+JOIN "user_mission" um ON u.id = um.user_id
+JOIN "mission" m ON um.mission_id = m.id
+JOIN "planet" p ON m.planet_id = p.id
+ORDER BY p."order" ASC, m."order" ASC;
 
--- SELECT * FROM vw_user_mission_progress;
+-- SELECT * FROM vw_user_mission_progression;
 
 
--- Histórico de conquistas por usuário
+--- ==============================
+--- USER ACHIEVEMENT HISTORY
+--- ==============================
 
-CREATE VIEW vw_user_achievements_history AS
+CREATE OR REPLACE VIEW vw_achievements_detailed AS
 SELECT 
-    u.username as user_name,
-    ach.name as achievement_name,
-    ach.bonus_xp,
-    ua.earned_at,
-    m.title as related_mission
-FROM user_achievement ua
-JOIN "user" u ON ua.user_id = u.id
-JOIN achievement ach ON ua.achievement_id = ach.id
-LEFT JOIN mission m ON ach.mission_id = m.id;
+    a.name AS achievement,
+    a.description,
+    a.scope,
+    a.type,
+    a.bonus_xp,
+    CASE 
+        WHEN a.scope = 'GAME' THEN 'Global'
+        WHEN at.entity = 'PLANET' THEN 'Planeta: ' || p.name
+        WHEN at.entity = 'MISSION' THEN 'Missão: ' || m.name
+        WHEN at.entity = 'LEVEL' THEN 'Nível Alcançado: ' || l.number
+        ELSE 'Indefinido'
+    END AS achievement_target_name,
+FROM "achievement" a
+LEFT JOIN "achievement_target" at ON a.id = at.achievement_id
+LEFT JOIN "planet" p ON (at.entity = 'PLANET' AND at.entity_id = p.id)
+LEFT JOIN "mission" m ON (at.entity = 'MISSION' AND at.entity_id = m.id)
+LEFT JOIN "level" l ON (at.entity = 'LEVEL' AND at.entity_id = l.id)
+ORDER BY 
+    a.scope ASC, 
+    a.type ASC, 
+    p."order" NULLS FIRST, 
+    m."order" NULLS FIRST;
 
--- SELECT * FROM vw_user_achievements_history;
+-- SELECT * FROM vw_achievements_detailed;
+
+
+--- ==============================
+--- USER ACHIEVEMENT HISTORY
+--- ==============================
+
+CREATE OR REPLACE VIEW vw_user_achievement_history AS
+SELECT 
+    u.username,
+    a.name AS achievement,
+    a.description,
+    a.type,
+    a.bonus_xp,
+    ua.collected_at
+FROM "user" u
+JOIN "user_achievement" ua ON u.id = ua.user_id
+JOIN "achievement" a ON ua.achievement_id = a.id
+ORDER BY a.scope, a.type, ua.collected_at DESC;
+
+-- SELECT * FROM vw_user_achievement_history;
+
+
+--- ==============================
+--- PLANET MISSION
+--- ==============================
+
+CREATE OR REPLACE VIEW vw_planet_missions AS
+SELECT 
+    p.name AS planet,
+    m.name AS mission,
+    m.difficulty,
+    m.xp_reward
+FROM "planet" p
+JOIN "mission" m ON p.id = m.planet_id
+ORDER BY p."order" ASC, m."order" ASC;
+
+-- SELECT * FROM vw_planet_missions;
+
+
+--- ==============================
+--- MISSION QUESTION
+--- ==============================
+
+CREATE OR REPLACE VIEW vw_mission_questions AS
+SELECT 
+    p.name AS planet,
+    m.name AS mission,
+    q.description AS question,
+    q.code_snippet
+FROM "planet" p
+JOIN "mission" m ON p.id = m.planet_id
+JOIN "question" q ON m.id = q.mission_id
+ORDER BY p."order" ASC, m."order" ASC, q."order" ASC;
+
+-- SELECT * FROM vw_mission_questions;
+
+
+--- ==============================
+--- QUESTION ALTERNATIVE
+--- ==============================
+
+CREATE OR REPLACE VIEW vw_question_alternatives AS
+SELECT 
+    m.name AS mission,
+    q.description AS question,
+    alt.content AS alternative,
+    alt.is_correct,
+    alt.feedback_tip
+FROM "mission" m
+JOIN "question" q ON m.id = q.mission_id
+JOIN "alternative" alt ON q.id = alt.question_id
+ORDER BY m."order" ASC, q."order" ASC, alt.id ASC;
+
+-- SELECT * FROM vw_question_alternatives;
