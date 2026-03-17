@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.controller;
 
-import com.nexus.nexusrpg.service.UserService;
+import com.nexus.nexusrpg.service.UserProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Usuarios", description = "Endpoints para gerenciamento de usuários")
 public class UserController {
 
-    private final UserService userService;
+    private final UserProfileService userService;
 
     @GetMapping("/me")
     @Operation(summary = "Perfil de usuário")
