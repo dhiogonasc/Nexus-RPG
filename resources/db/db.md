@@ -55,7 +55,11 @@ Para garantir a integridade dos dados, o esquema utiliza:
 
 ---
 
-## 3. Matriz de Cardinalidade (Completa e Auditada)
+## 3. Diagrama ER e Matriz de Cardinalidade
+
+![Diagrama de Entidade-Relacionamento](../assets/dbER.png)
+
+---
 
 | Entidade A | Entidade B | Tipo | Descrição / Regra de Negócio |
 | :--- | :--- | :---: | :--- |
@@ -98,9 +102,3 @@ As regras abaixo estão aplicadas diretamente na camada de dados via `CHECK`, `U
 ### 4.4 Regras de Recompensa e Coleta
 * **Coleta Única:** Um usuário não pode coletar o mesmo recurso (`user_resource`) ou a mesma conquista (`user_achievement`) mais de uma vez.
 * **Alvos de Conquista:** A tabela `achievement_target` garante a unicidade da tríade (Conquista, Tipo de Entidade e ID da Entidade), permitindo que o sistema verifique exatamente qual missão ou nível desbloqueia cada troféu.
-
----
-
-## 5. Diagrama de Entidade-Relacionamento (ER)
-
-![Diagrama de Entidade-Relacionamento](../assets/dbER.png)
