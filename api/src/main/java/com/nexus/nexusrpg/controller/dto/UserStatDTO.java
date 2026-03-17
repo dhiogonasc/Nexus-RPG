@@ -11,8 +11,20 @@ public record UserStatDTO(
         @Schema(description = "Identificador do Stat de usuário")
         Long id,
 
+        @Schema(description = "Dados do usuário")
+        UserDTO user,
+
+        @Schema(description = "Nivel atual")
+        LevelDTO level,
+
+        @Schema(description = "Planeta atual")
+        PlanetDTO currentPlanet,
+
+        @Schema(description = "Missão atual")
+        MissionDTO currentMission,
+
         @Schema(description = "XP atual do usuário")
-        int xpCurrent,
+        int xpTotal,
 
         @Schema(description = "Sequência de dias de acesso continuo")
         int streakCurrent,
