@@ -24,20 +24,17 @@ public class AuthController {
 
     @Operation(summary = "Login")
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login( @Valid @RequestBody LoginRequestDTO dto ) {
+    public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO request) {
 
-        LoginResponseDTO res = authService.auth(dto);
-
-        return ResponseEntity
-                .ok(res);
+        return ResponseEntity.ok(authService.login(request));
     }
 
     @PostMapping("/register")
     @Operation(summary = "Cadastro")
-    public ResponseEntity<RegisterResponseDTO> register(@Valid @RequestBody RegisterRequestDTO dto) {
+    public ResponseEntity<RegisterResponseDTO> register(@Valid @RequestBody RegisterRequestDTO request) {
 
-        return ResponseEntity
-                .status(CREATED)
-                .body(authService.create(dto));
+        authService.register(request);
+
+        return ResponseEntity.status(CREATED).build();
     }
 }

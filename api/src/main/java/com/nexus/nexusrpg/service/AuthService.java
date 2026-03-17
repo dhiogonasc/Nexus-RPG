@@ -3,75 +3,58 @@ package com.nexus.nexusrpg.service;
 import com.nexus.nexusrpg.controller.dto.request.LoginRequestDTO;
 import com.nexus.nexusrpg.controller.dto.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.controller.dto.response.LoginResponseDTO;
-import com.nexus.nexusrpg.controller.dto.response.RegisterResponseDTO;
-import com.nexus.nexusrpg.mapper.AuthMapper;
-import com.nexus.nexusrpg.model.entity.Level;
 import com.nexus.nexusrpg.model.entity.User;
-import com.nexus.nexusrpg.model.relation.UserStat;
-import com.nexus.nexusrpg.repository.LevelRepository;
 import com.nexus.nexusrpg.repository.UserRepository;
-import com.nexus.nexusrpg.repository.UserStatRepository;
-import com.nexus.nexusrpg.security.TokenService;
+import com.nexus.nexusrpg.validator.AuthValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
-@Service
 @RequiredArgsConstructor
-@Transactional
+@Service
 public class AuthService {
 
-    private final AuthenticationManager authenticationManager;
-    private final TokenService tokenService;
-    private final PasswordEncoder passwordEncoder;
-
-    private final AuthMapper authMapper;
-
     private final UserRepository userRepository;
-    private final UserStatRepository userStatRepository;
-    private final LevelRepository levelRepository;
+    private final AuthValidator authValidator;
 
-    public LoginResponseDTO auth(LoginRequestDTO dto) {
+    private final BCryptPasswordEncoder encoder;
+    private final JwtEncoder jwtEncoder;
 
-        UsernamePasswordAuthenticationToken authToken =
-                new UsernamePasswordAuthenticationToken(dto.email(), dto.password());
+    public void register(RegisterRequestDTO request) {
 
-        Authentication auth = authenticationManager.authenticate(authToken);
-        LocalDateTime loggedInAt = LocalDateTime.now();
+        authValidator.validateEmailExists(request.email());
 
-        UserStat stats = userStatRepository.findByUserEmailOrThrow(dto.email());
-        stats.setLastAccess(loggedInAt);
-
-        userStatRepository.save(stats);
-
-        return new LoginResponseDTO(
-                tokenService.gerarToken(auth.getName()),
-                loggedInAt
-        );
-    }
-
-    public RegisterResponseDTO create(RegisterRequestDTO dto) {
-
-        User user = authMapper.toEntity(dto);
-        user.setPassword(passwordEncoder.encode(dto.password()));
-
-        userRepository.save(user);
-
-        Level level = levelRepository.findByNumberOrThrow(1);
-
-        UserStat userStat = UserStat.builder()
-                .user(user)
-                .level(level)
+        User user = User.builder()
+                .username(request.username())
+                .email(request.email())
+                .password(encoder.encode(request.password()))
                 .build();
 
-        userStatRepository.save(userStat);
+        userRepository.save(user);
+    }
 
-        return authMapper.toResponse(user);
+    public LoginResponseDTO login(LoginRequestDTO request) {
+
+        User user = authValidator.validateEmailRegistered(request.email());
+        authValidator.validatePassword(request.password(), user.getPassword());
+
+        Instant now = Instant.now();
+        long expiresIn = 3600L;
+
+        var claims = JwtClaimsSet.builder()
+                .issuer("auth")
+                .subject(user.getId().toString())
+                .issuedAt(now)
+                .expiresAt(now.plusSeconds(expiresIn))
+                .build();
+
+        String accessToken = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+
+        return new LoginResponseDTO(accessToken, expiresIn, now);
     }
 }

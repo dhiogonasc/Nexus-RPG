@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.exception;
 
-import com.nexus.nexusrpg.controller.dto.response.ErrorResponseDTO;
+import com.nexus.nexusrpg.controller.dto.ErrorDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,22 +8,34 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<ErrorResponseDTO>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<List<ErrorDTO>> handleBusinessException(BusinessException ex) {
 
-        List<ErrorResponseDTO> erros = ex.getBindingResult()
+        List<ErrorDTO> errorDetails = List.of(
+                new ErrorDTO(
+                        ex.getField(),
+                        ex.getMessage(),
+                        ex.getStatus()
+                )
+        );
+
+        return ResponseEntity.status(ex.getStatus()).body(errorDetails);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<List<ErrorDTO>> handleValidationErrors(MethodArgumentNotValidException ex) {
+
+        List<ErrorDTO> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(erro -> new ErrorResponseDTO(
-                        erro.getField(),
-                        erro.getDefaultMessage()))
+                .map(f -> new ErrorDTO(f.getField(), f.getDefaultMessage(), BAD_REQUEST))
                 .toList();
 
-        return ResponseEntity
-                .badRequest()
-                .body(erros);
+        return ResponseEntity.status(BAD_REQUEST).body(errors);
     }
 }

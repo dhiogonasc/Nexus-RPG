@@ -35,4 +35,7 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 jwt:
-  secret: projeto-integrador-extensionista-5-semestre-matutino-univag
+  public:
+    key: classpath:public.pem
+  private:
+    key: classpath:key.pem
