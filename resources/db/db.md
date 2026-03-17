@@ -104,10 +104,3 @@ As regras abaixo estão aplicadas diretamente na camada de dados via `CHECK`, `U
 ## 5. Diagrama de Entidade-Relacionamento (ER)
 
 ![Diagrama de Entidade-Relacionamento](../assets/dbER.png)
-
-### Como ler o diagrama:
-
-* **`||--||`**: Relacionamento 1 para 1 (Obrigatório).
-* **`||--o{`**: Relacionamento 1 para Muitos (Opcional - pode ser zero).
-* **`||--|{`**: Relacionamento 1 para Muitos (Obrigatório - ao menos um).
-* **`|o--o|`**: Relacionamento opcional de ambos os lados (Auto-referência).
