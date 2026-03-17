@@ -5,8 +5,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.time.LocalDateTime;
 
-@Tag(name = "User Stat DTO")
-public record UserStatDTO(
+@Tag(name = "User Profile DTO")
+public record UserProfileDTO(
 
         @Schema(description = "Identificador do Stat de usuário")
         Long id,
