@@ -18,7 +18,7 @@ spring:
 
 app:
   cors:
-    allowed-origins: ${FRONTEND_URL:http://localhost:3000}
+    allowed-origins: "*"
 
 server:
   error:

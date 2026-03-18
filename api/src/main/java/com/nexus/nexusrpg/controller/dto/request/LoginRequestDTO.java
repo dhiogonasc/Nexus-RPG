@@ -1,6 +1,5 @@
 package com.nexus.nexusrpg.controller.dto.request;
 
-import com.nexus.nexusrpg.validator.EmailUnico;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.*;
@@ -11,7 +10,6 @@ public record LoginRequestDTO(
         @Schema(description = "Endereço de e-mail cadastrado")
         @NotBlank(message = "O e-mail é obrigatório")
         @Email(message = "Formato de e-mail inválido")
-        @EmailUnico(message = "Este e-mail já está sendo utilizado por outro usuário")
         String email,
 
         @Schema(description = "Senha de acesso vinculada ao endereço de email")

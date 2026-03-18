@@ -14,6 +14,8 @@ import { Link } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import EmailInput from '@/components/EmailInput';
 import PasswordInput from '@/components/PasswordInput';
+import { authService } from '@/services';
+import { storage } from '@/services/storage';
 
 export default function index() {
 
@@ -23,13 +25,18 @@ export default function index() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    if (email === '' || password === '') {
-      alert('Por favor, preencha todos os campos.');
-      return;
-    }
-    console.log('Login efetuado com:', email, password);
-  };
+  const handleLogin = async () => {
+  try {
+    const data = await authService.login({ email, password });
+    
+    await storage.saveToken(data.token);
+    
+    console.log("Login realizado com sucesso em:", data.loggedInAt);
+    
+  } catch (error) {
+    console.error("Erro ao logar", error);
+  }
+};
 
   return (
     <KeyboardAvoidingView

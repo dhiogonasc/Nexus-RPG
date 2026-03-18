@@ -16,4 +16,3 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Long> 
                 .orElseThrow(() -> new BusinessException("Profile", "Nenhum usuário encontrado!", HttpStatus.NOT_FOUND));
     }
 }
-

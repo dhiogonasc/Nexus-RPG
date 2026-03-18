@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.controller;
 
+import com.nexus.nexusrpg.controller.dto.UserProfileDTO;
 import com.nexus.nexusrpg.controller.dto.request.LoginRequestDTO;
 import com.nexus.nexusrpg.controller.dto.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.controller.dto.response.LoginResponseDTO;
-import com.nexus.nexusrpg.controller.dto.response.RegisterResponseDTO;
 import com.nexus.nexusrpg.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,10 +31,17 @@ public class AuthController {
 
     @PostMapping("/register")
     @Operation(summary = "Cadastro")
-    public ResponseEntity<RegisterResponseDTO> register(@Valid @RequestBody RegisterRequestDTO request) {
+    public ResponseEntity<Void> register(@Valid @RequestBody RegisterRequestDTO request) {
 
         authService.register(request);
 
         return ResponseEntity.status(CREATED).build();
+    }
+
+    @GetMapping("/me")
+    @Operation(summary = "Perfil de usuário")
+    public ResponseEntity<UserProfileDTO> getMe() {
+
+        return ResponseEntity.ok(authService.getMe());
     }
 }

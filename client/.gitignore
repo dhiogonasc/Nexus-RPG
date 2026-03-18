@@ -45,3 +45,6 @@ app-example
 # Meus guias de estudo locais
 /docs
 **/guia.txt
+
+#Localhost
+**/host.ts
