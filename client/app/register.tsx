@@ -10,25 +10,34 @@ import {
   StatusBar,
   ScrollView,
 } from 'react-native';
+
 import { Link } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import EmailInput from '@/components/EmailInput';
-import PasswordInput from '@/components/PasswordInput';
+import { Alert } from 'react-native';
 
-export default function index() {
+import EmailInput from '@/components/EmailInput';
+import DoublePasswordInput from '@/components/DoublePasswordInput';
+
+export default function RegisterScreen() {
 
   const [email, setEmail] = useState('');
 
   const [password, setPassword] = useState('');
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleLogin = () => {
-    if (email === '' || password === '') {
-      alert('Por favor, preencha todos os campos.');
+
+  const handleRegister = () => {
+    if (password === '' || confirmPassword === '') {
+      Alert.alert('Erro', 'Preencha as duas senhas!');
       return;
     }
-    console.log('Login efetuado com:', email, password);
+    if (password !== confirmPassword) {
+      Alert.alert('Erro', 'As senhas não coincidem!');
+      return;
+    }
+
+    Alert.alert('Sucesso!', 'conta criada!');
   };
 
   return (
@@ -45,7 +54,7 @@ export default function index() {
 
         <View style={styles.imageContainer}>
           <Image
-            source={require('../assets/LoginImg.jpg')}
+            source={require('../assets/RegisterImg.png')}
             style={styles.topImage}
             resizeMode="cover"
           />
@@ -59,45 +68,35 @@ export default function index() {
         </View>
 
         <View style={styles.formContainer}>
-          <Text style={styles.title}>Bem vindo de volta!</Text>
+          <Text style={styles.title}>Crie sua conta agora!</Text>
 
 
-          <View>
-            <EmailInput
-              iconName="mail"
-              placeholder="Digite seu e-mail"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCorrect={false}
-              value={email}
-              onChangeText={setEmail}
-            />
-          </View>
+          <EmailInput
+            iconName="mail"
+            placeholder="Digite seu e-mail"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={email}
+            onChangeText={setEmail}
+          />
 
-          <View>
-            <PasswordInput
-              iconName="lock"
-              placeholder="Digite sua senha"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!showPassword}
-            />
+          <DoublePasswordInput
+            password={password}
+            setPassword={setPassword}
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
+            style={{ marginBottom: 30 }}
+          />
 
-            <TouchableOpacity
-              style={styles.eyeIcon}
-              onPress={() => setShowPassword(!showPassword)}
-            >
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <TouchableOpacity style={styles.button} onPress={handleRegister}>
             <Text style={styles.buttonText}>Entrar</Text>
           </TouchableOpacity>
 
           <View style={styles.registerContainer}>
-            <Text style={styles.registerButton}> Não possui conta? </Text>
-            <Link href="/register" style={styles.registerLink}>
-              Registrar-se
+            <Text style={styles.registerButton}> Já tem uma conta? </Text>
+            <Link href="/" style={styles.registerLink}>
+              Entrar
             </Link>
           </View>
 
@@ -156,27 +155,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#C4C4C4',
   },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#2B2B2B',
-    width: '100%',
-    height: 55,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#C4C4C4',
-    marginBottom: 85,
-  },
-  passwordInput: {
-    flex: 1,
-    height: '100%',
-    paddingHorizontal: 15,
-    fontSize: 16,
-    color: '#FFFFFF',
-  },
-  eyeIcon: {
-    padding: 10,
-  },
   button: {
     backgroundColor: '#D58BE8',
     height: 55,
@@ -206,26 +184,5 @@ const styles = StyleSheet.create({
     color: '#F6D48F',
     fontSize: 18,
     fontWeight: '800',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#2B2B2B',
-    width: '100%',
-    height: 55,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#C4C4C4',
-    marginBottom: 15,
-    paddingHorizontal: 15,
-  },
-  icon: {
-    marginRight: 10,
-  },
-  textInput: {
-    flex: 1,
-    height: '100%',
-    color: '#FFFFFF',
-    fontSize: 16,
   },
 });
