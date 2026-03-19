@@ -36,6 +36,6 @@ public class Mission {
     @Column(name = "difficulty", nullable = false, columnDefinition = "mission_difficulty")
     private MissionDifficulty difficulty;
 
-    @Column(name = "xp_bonus", nullable = false)
+    @Column(name = "xp_bonus", nullable = false, columnDefinition = "xp")
     private long xpBonus;
 }

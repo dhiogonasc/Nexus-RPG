@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS "user_resource" CASCADE;
 DROP TABLE IF EXISTS "user_response" CASCADE;
 DROP TABLE IF EXISTS "user_mission_attempt" CASCADE;
 DROP TABLE IF EXISTS "user_mission" CASCADE;
+DROP TABLE IF EXISTS "user_planet" CASCADE;
 DROP TABLE IF EXISTS "user_achievement" CASCADE;
 DROP TABLE IF EXISTS "user_stat" CASCADE;
 
@@ -27,8 +28,11 @@ DROP DOMAIN IF EXISTS xp CASCADE;
 DROP TYPE IF EXISTS entity_type CASCADE;
 DROP TYPE IF EXISTS achievement_type CASCADE;
 DROP TYPE IF EXISTS achievement_scope CASCADE;
-DROP TYPE IF EXISTS mission_status CASCADE;
-DROP TYPE IF EXISTS difficulty_level CASCADE;
+DROP TYPE IF EXISTS entity_status CASCADE;
+DROP TYPE IF EXISTS mission_difficulty CASCADE;
+DROP TYPE IF EXISTS planet_label CASCADE;
+DROP TYPE IF EXISTS level_label CASCADE;
+
 
 
 -- ====================
@@ -225,6 +229,9 @@ CREATE TABLE "mission" (
     CONSTRAINT uk_mission_planet_name UNIQUE(planet_id, "name"),
     CONSTRAINT uk_mission_planet_order UNIQUE (planet_id, "order")
 );
+
+INSERT INTO "mission" (planet_id, "name", "description", "order", "difficulty", "xp_bonus") VALUES
+(1, 'Variabili tutorial', NULL, 1, 'EASY', 100);
 
 ALTER TABLE "user" ADD CONSTRAINT fk_user_mission FOREIGN KEY (mission_id) REFERENCES "mission"(id);
 

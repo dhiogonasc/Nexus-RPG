@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.model.entity;
 
-import com.nexus.nexusrpg.model.enums.PlanetLabel;
 
+import com.nexus.nexusrpg.model.enums.PlanetLabel;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
