@@ -108,8 +108,6 @@ CREATE TABLE "user" (
     "password" varchar(255) NOT NULL,
 
 	level_id bigint NOT NULL,
-    planet_id bigint,
-    mission_id bigint,
 
 	"xp" xp NOT NULL DEFAULT 0,
 	"oxygen" oxygen NOT NULL DEFAULT 10,
@@ -117,8 +115,6 @@ CREATE TABLE "user" (
     CONSTRAINT pk_user PRIMARY KEY (id),
 
 	CONSTRAINT fk_user_level FOREIGN KEY (level_id) REFERENCES "level"(id),
-	CONSTRAINT fk_user_planet FOREIGN KEY (planet_id) REFERENCES "planet"(id),
-	CONSTRAINT fk_user_mission FOREIGN KEY (mission_id) REFERENCES "mission"(id),
 	
     CONSTRAINT uk_user_email UNIQUE("email")
 );
