@@ -17,6 +17,7 @@ import { Alert } from 'react-native';
 
 import EmailInput from '@/components/EmailInput';
 import DoublePasswordInput from '@/components/DoublePasswordInput';
+import UserInput from '@/components/UserInput';
 
 export default function RegisterScreen() {
 
@@ -70,6 +71,10 @@ export default function RegisterScreen() {
         <View style={styles.formContainer}>
           <Text style={styles.title}>Crie sua conta agora!</Text>
 
+          <UserInput
+            iconName="user"
+            placeholder="Digite seu nome de usuário"
+          />
 
           <EmailInput
             iconName="mail"
