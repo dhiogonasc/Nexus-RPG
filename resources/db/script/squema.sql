@@ -63,7 +63,7 @@ CREATE TYPE achievement_scope
         'GAME'
         );
 
-CREATE TYPE achievement_type 
+CREATE TYPE achievement_type
     AS ENUM (
         'UNLOCK', 
         'COMPLETED', 
