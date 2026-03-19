@@ -10,5 +10,5 @@ public interface PlanetRepository extends JpaRepository<Planet, Long> {
     default Planet findByIdOrElseThrow(Long id){
         return findById(id)
                 .orElseThrow(() -> new BusinessException("Planet", "Planeta não encontrado", HttpStatus.BAD_REQUEST));
-    };
+    }
 }

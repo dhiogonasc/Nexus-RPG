@@ -10,5 +10,5 @@ public interface MissionRepository extends JpaRepository<Mission, Long> {
     default Mission findByIdOrElseThrow(Long id){
         return findById(id)
                 .orElseThrow(() -> new BusinessException("Mission", "Missão não encontrada", HttpStatus.BAD_REQUEST));
-    };
+    }
 }
