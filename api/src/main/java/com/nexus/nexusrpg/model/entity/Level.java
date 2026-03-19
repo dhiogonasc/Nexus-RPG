@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.model.entity;
 
+import com.nexus.nexusrpg.model.enums.LevelName;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,16 +9,23 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "level")
+@Table(name = "\"level\"")
 public class Level {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number", nullable = false, unique = true)
-    int number;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "name", nullable = false, unique = true, columnDefinition = "level_name")
+    private LevelName name;
 
-    @Column(name = "xp_required", nullable = false)
-    int xpRequired;
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "order", nullable = false)
+    private int order;
+
+    @Column(name = "xp_required", nullable = false, columnDefinition = "xp")
+    private long xpRequired;
 }
