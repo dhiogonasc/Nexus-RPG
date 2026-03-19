@@ -1,7 +1,6 @@
 package com.nexus.nexusrpg.mapper;
 
 import com.nexus.nexusrpg.controller.dto.mission.MissionDTO;
-import com.nexus.nexusrpg.controller.dto.mission.MissionReferenceDTO;
 import com.nexus.nexusrpg.model.entity.Mission;
 import org.mapstruct.Mapper;
 
