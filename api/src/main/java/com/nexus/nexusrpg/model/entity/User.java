@@ -30,6 +30,16 @@ public class User implements UserDetails {
     @Column(name = "\"password\"", nullable = false)
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "level_id", nullable = false)
+    private Level level;
+
+    @Column(name = "\"xp\"", nullable = false, columnDefinition = "xp")
+    private int xp;
+
+    @Column(name = "\"oxygen\"", nullable = false, columnDefinition = "oxygen")
+    private int oxygen;
+
 
     @Override
     public String getUsername() { return this.email; }
