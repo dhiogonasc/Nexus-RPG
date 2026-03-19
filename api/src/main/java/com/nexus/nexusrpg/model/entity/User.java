@@ -34,6 +34,32 @@ public class User implements UserDetails {
     @JoinColumn(name = "level_id", nullable = false)
     private Level level;
 
+    @ManyToOne
+    @JoinColumn(name = "planet_id")
+    private Planet planet;
+
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_planet",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "planet_id")
+    )
+    private List<Planet> planets;
+
+    @ManyToOne
+    @JoinColumn(name = "mission_id")
+    private Mission mission;
+
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_mission",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "mission_id")
+    )
+    private List<Mission> missions;
+
     @Builder.Default
     @Column(name = "\"xp\"", nullable = false, columnDefinition = "xp")
     private long xp = 0;
