@@ -23,7 +23,7 @@ import java.time.Instant;
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final UserProfileMapper userMapper;
+    private final UserMapper userMapper;
     private final AuthValidator authValidator;
 
     private final BCryptPasswordEncoder encoder;
