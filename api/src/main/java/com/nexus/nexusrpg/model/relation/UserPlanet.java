@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import static com.nexus.nexusrpg.model.enums.EntityStatus.IN_PROGRESS;
 
@@ -35,6 +37,7 @@ public class UserPlanet {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     @Column(name = "\"status\"", nullable = false, columnDefinition = "entity_status")
     private EntityStatus status = IN_PROGRESS;
 }

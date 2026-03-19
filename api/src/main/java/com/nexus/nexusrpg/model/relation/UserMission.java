@@ -5,6 +5,8 @@ import com.nexus.nexusrpg.model.entity.User;
 import com.nexus.nexusrpg.model.enums.EntityStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 
@@ -32,7 +34,8 @@ public class UserMission {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
-    @Column(name = "\"status\"", nullable = false, columnDefinition = "mission_status")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "\"status\"", nullable = false, columnDefinition = "entity_status")
     private EntityStatus status = EntityStatus.IN_PROGRESS;
 
     @Builder.Default
