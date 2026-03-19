@@ -36,7 +36,7 @@ public class UserMission {
     @Enumerated(EnumType.STRING)
     @JdbcType(PostgreSQLEnumJdbcType.class)
     @Column(name = "\"status\"", nullable = false, columnDefinition = "entity_status")
-    private EntityStatus status = EntityStatus.IN_PROGRESS;
+    private EntityStatus status = EntityStatus.UNLOCKED;
 
     @Builder.Default
     @Column(name = "\"best_result\"", nullable = false, columnDefinition = "score")

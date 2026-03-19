@@ -25,9 +25,6 @@ public record UserDTO(
         @Schema(description = "Planeta onde o usuário se encontra no momento")
         PlanetDTO currentPlanet,
 
-        @Schema(description = "Lista de planetas já visitados/desbloqueados")
-        List<UserPlanetDTO> unlockedPlanets,
-
         @Schema(description = "Missão que o usuário se encontra no momento")
         MissionDTO currentMission,
 

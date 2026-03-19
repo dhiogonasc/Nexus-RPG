@@ -50,9 +50,9 @@ CREATE TYPE level_label AS ENUM (
 
 CREATE TYPE planet_label AS ENUM (
     'VARIABILI', 
-	'BIFURCA-9', 
+	'BIFURCA_9', 
 	'CICLUS',
-    'MATRX-0'
+    'MATRX_0'
 );
 
 CREATE TYPE mission_difficulty
@@ -64,7 +64,8 @@ CREATE TYPE mission_difficulty
 
 CREATE TYPE entity_status 
     AS ENUM (
-        'IN_PROGRESS', 
+        'LOCKED',
+        'UNLOCKED', 
         'COMPLETED'
         );
 
@@ -185,9 +186,9 @@ ALTER TABLE "user" ADD CONSTRAINT fk_user_planet FOREIGN KEY (planet_id) REFEREN
 
 INSERT INTO "planet" ("name", "description", "order", "xp_bonus") VALUES
 ('VARIABILI', NULL, 1, 100),
-('BIFURCA-9', NULL, 2, 250),
+('BIFURCA_9', NULL, 2, 250),
 ('CICLUS',    NULL, 3, 500),
-('MATRX-0',   NULL, 4, 1000);
+('MATRX_0',   NULL, 4, 1000);
 
 
 CREATE TABLE "user_planet"(
@@ -196,7 +197,8 @@ CREATE TABLE "user_planet"(
     user_id bigint NOT NULL,
     planet_id bigint NOT NULL,
 
-	"status" entity_status NOT NULL,
+	"status" entity_status NOT NULL DEFAULT 'LOCKED',
+    "is_locked" boolean NOT NULL DEFAULT true,
 	
     CONSTRAINT pk_user_planet PRIMARY KEY (id),
 

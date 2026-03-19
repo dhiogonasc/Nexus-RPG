@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
-import static com.nexus.nexusrpg.model.enums.EntityStatus.IN_PROGRESS;
+import static com.nexus.nexusrpg.model.enums.EntityStatus.LOCKED;
 
 @Data
 @Builder
@@ -39,5 +39,9 @@ public class UserPlanet {
     @Enumerated(EnumType.STRING)
     @JdbcType(PostgreSQLEnumJdbcType.class)
     @Column(name = "\"status\"", nullable = false, columnDefinition = "entity_status")
-    private EntityStatus status = IN_PROGRESS;
+    private EntityStatus status = LOCKED;
+
+    @Builder.Default
+    @Column(name = "is_locked", nullable = false)
+    private boolean isLocked = true;
 }

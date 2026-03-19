@@ -6,5 +6,6 @@ import com.nexus.nexusrpg.model.enums.EntityStatus;
 public record UserPlanetDTO(
 
         PlanetReferenceDTO planet,
-        EntityStatus status
+        EntityStatus status,
+        boolean isLocked
 ) {}

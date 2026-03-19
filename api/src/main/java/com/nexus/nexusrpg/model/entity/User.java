@@ -2,7 +2,6 @@ package com.nexus.nexusrpg.model.entity;
 
 import com.nexus.nexusrpg.model.enums.EntityStatus;
 import com.nexus.nexusrpg.model.relation.UserMission;
-import com.nexus.nexusrpg.model.relation.UserPlanet;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -49,10 +48,6 @@ public class User implements UserDetails {
 
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserPlanet> unlockedPlanets = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserMission> unlockedMissions = new ArrayList<>();
 
     @Builder.Default
@@ -83,23 +78,12 @@ public class User implements UserDetails {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
-    public void addUnlockedPlanet(Planet planet) {
-
-        UserPlanet relation = UserPlanet.builder()
-                .user(this)
-                .planet(planet)
-                .status(EntityStatus.IN_PROGRESS)
-                .build();
-
-        this.unlockedPlanets.add(relation);
-    }
-
     public void addUnlockedMission(Mission mission) {
 
         UserMission relation = UserMission.builder()
                 .user(this)
                 .mission(mission)
-                .status(EntityStatus.IN_PROGRESS)
+                .status(EntityStatus.UNLOCKED)
                 .bestResult(BigDecimal.ZERO)
                 .build();
 
