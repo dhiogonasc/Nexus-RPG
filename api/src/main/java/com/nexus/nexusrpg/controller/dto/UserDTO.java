@@ -1,11 +1,7 @@
 package com.nexus.nexusrpg.controller.dto;
 
-import com.nexus.nexusrpg.controller.dto.LevelDTO;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
-import java.time.LocalDateTime;
 
 @Tag(name = "User DTO")
 public record UserDTO(
