@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.controller;
 
-import com.nexus.nexusrpg.controller.dto.UserProfileDTO;
+import com.nexus.nexusrpg.controller.dto.UserDTO;
 import com.nexus.nexusrpg.controller.dto.request.LoginRequestDTO;
 import com.nexus.nexusrpg.controller.dto.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.controller.dto.response.LoginResponseDTO;
@@ -40,7 +40,7 @@ public class AuthController {
 
     @GetMapping("/me")
     @Operation(summary = "Perfil de usuário")
-    public ResponseEntity<UserProfileDTO> getMe() {
+    public ResponseEntity<UserDTO> getMe() {
 
         return ResponseEntity.ok(authService.getMe());
     }
