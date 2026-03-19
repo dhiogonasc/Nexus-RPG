@@ -41,4 +41,8 @@ public class UserMission {
     @Builder.Default
     @Column(name = "\"best_result\"", nullable = false, columnDefinition = "score")
     private BigDecimal bestResult = BigDecimal.ZERO;
+
+    @Builder.Default
+    @Column(name = "is_locked", nullable = false)
+    private boolean isLocked = true;
 }

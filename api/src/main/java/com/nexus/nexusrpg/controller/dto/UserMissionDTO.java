@@ -9,5 +9,6 @@ public record UserMissionDTO(
 
         MissionReferenceDTO mission,
         EntityStatus status,
-        BigDecimal bestResult
+        BigDecimal bestResult,
+        boolean isLocked
 ) {}

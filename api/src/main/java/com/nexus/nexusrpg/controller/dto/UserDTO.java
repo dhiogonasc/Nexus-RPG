@@ -28,9 +28,6 @@ public record UserDTO(
         @Schema(description = "Missão que o usuário se encontra no momento")
         MissionDTO currentMission,
 
-        @Schema(description = "Lista de missões já visitados/desbloqueados")
-        List<UserMissionDTO> unlockedMissions,
-
         @Schema(description = "Xp total do usuário")
         long xp,
 

@@ -13,8 +13,4 @@ import org.mapstruct.Mapper;
 })
 public interface UserMapper {
     UserDTO toDTO(User user);
-
-    UserPlanetDTO toUserPlanetDTO(UserPlanet userPlanet);
-
-    UserMissionDTO toUserMissionDTO(UserMission userMission);
 }

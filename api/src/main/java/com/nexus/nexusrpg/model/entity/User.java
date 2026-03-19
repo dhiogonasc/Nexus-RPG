@@ -1,15 +1,11 @@
 package com.nexus.nexusrpg.model.entity;
 
-import com.nexus.nexusrpg.model.enums.EntityStatus;
-import com.nexus.nexusrpg.model.relation.UserMission;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -47,10 +43,6 @@ public class User implements UserDetails {
     private Mission currentMission;
 
     @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserMission> unlockedMissions = new ArrayList<>();
-
-    @Builder.Default
     @Column(name = "\"xp\"", nullable = false, columnDefinition = "xp")
     private long xp = 0;
 
@@ -76,17 +68,5 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    public void addUnlockedMission(Mission mission) {
-
-        UserMission relation = UserMission.builder()
-                .user(this)
-                .mission(mission)
-                .status(EntityStatus.UNLOCKED)
-                .bestResult(BigDecimal.ZERO)
-                .build();
-
-        this.unlockedMissions.add(relation);
     }
 }

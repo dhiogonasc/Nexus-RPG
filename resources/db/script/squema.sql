@@ -244,8 +244,8 @@ CREATE TABLE "user_mission" (
     mission_id bigint NOT NULL,
 
     "best_result" score NOT NULL DEFAULT 0,
-
-    "status" entity_status NOT NULL,
+    "status" entity_status NOT NULL DEFAULT 'LOCKED',
+    "is_locked" boolean NOT NULL DEFAULT true,
 	
     CONSTRAINT pk_user_mission PRIMARY KEY(id),
 	

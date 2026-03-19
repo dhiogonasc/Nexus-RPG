@@ -101,6 +101,5 @@ public class AuthService {
         user.setLevel(level);
         user.setCurrentPlanet(planet);
         user.setCurrentMission(mission);
-        user.addUnlockedMission(mission);
     }
 }
