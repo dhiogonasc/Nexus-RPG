@@ -1,7 +1,6 @@
 package com.nexus.nexusrpg.mapper;
 
 import com.nexus.nexusrpg.controller.dto.planet.PlanetDTO;
-import com.nexus.nexusrpg.controller.dto.planet.PlanetReferenceDTO;
 import com.nexus.nexusrpg.model.entity.Planet;
 import org.mapstruct.Mapper;
 
@@ -9,6 +8,4 @@ import org.mapstruct.Mapper;
 public interface PlanetMapper {
 
     PlanetDTO toDTO(Planet planet);
-
-    PlanetReferenceDTO toReferenceDto(Planet planet);
 }

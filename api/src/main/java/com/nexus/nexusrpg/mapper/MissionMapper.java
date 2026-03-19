@@ -9,6 +9,4 @@ import org.mapstruct.Mapper;
 public interface MissionMapper {
 
     MissionDTO toDTO(Mission mission);
-
-    MissionReferenceDTO toReferenceDto(Mission mission);
 }
