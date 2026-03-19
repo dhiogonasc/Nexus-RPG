@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.model.entity;
 
-import com.nexus.nexusrpg.model.enums.LevelName;
+import com.nexus.nexusrpg.model.enums.LevelLabel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,8 +17,8 @@ public class Level {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "name", nullable = false, unique = true, columnDefinition = "level_name")
-    private LevelName name;
+    @Column(name = "name", nullable = false, unique = true, columnDefinition = "level_label")
+    private LevelLabel name;
 
     @Column(name = "description")
     private String description;
