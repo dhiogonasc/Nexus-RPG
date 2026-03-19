@@ -34,11 +34,13 @@ public class User implements UserDetails {
     @JoinColumn(name = "level_id", nullable = false)
     private Level level;
 
+    @Builder.Default
     @Column(name = "\"xp\"", nullable = false, columnDefinition = "xp")
-    private int xp;
+    private long xp = 0;
 
+    @Builder.Default
     @Column(name = "\"oxygen\"", nullable = false, columnDefinition = "oxygen")
-    private int oxygen;
+    private int oxygen = 10;
 
 
     @Override
