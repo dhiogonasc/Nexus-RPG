@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.controller.dto;
 
-import com.nexus.nexusrpg.model.enums.DifficultyLevel;
+import com.nexus.nexusrpg.model.enums.MissionDifficulty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public record MissionDTO(
@@ -18,7 +18,7 @@ public record MissionDTO(
         int order,
 
         @Schema(description = "Dificuldade")
-        DifficultyLevel difficulty,
+        MissionDifficulty difficulty,
 
         @Schema(description = "XP ganho ao concluir")
         int xpReward

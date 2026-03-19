@@ -1,5 +1,5 @@
 package com.nexus.nexusrpg.model.enums;
 
-public enum DifficultyLevel {
+public enum MissionDifficulty {
     EASY, MEDIUM, HARD
 }

@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.model.entity;
 
-import com.nexus.nexusrpg.model.enums.DifficultyLevel;
+import com.nexus.nexusrpg.model.enums.MissionDifficulty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,9 +33,9 @@ public class Mission {
     private int order;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "difficulty", nullable = false, columnDefinition = "difficulty_level")
-    private DifficultyLevel difficulty;
+    @Column(name = "difficulty", nullable = false, columnDefinition = "mission_difficulty")
+    private MissionDifficulty difficulty;
 
-    @Column(name = "xp_reward", nullable = false)
-    private int xpReward;
+    @Column(name = "xp_bonus", nullable = false)
+    private int xpBonus;
 }
