@@ -136,7 +136,7 @@ CREATE TABLE "user" (
 	"email" varchar(255) NOT NULL,
     "password" varchar(255) NOT NULL,
 
-	level_id bigint NOT NULL,
+	level_id bigint NOT NULL DEFAULT 1,
 
 	"xp" xp NOT NULL DEFAULT 0,
 	"oxygen" oxygen NOT NULL DEFAULT 10,
