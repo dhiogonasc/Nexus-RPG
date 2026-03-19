@@ -23,13 +23,13 @@ public record UserDTO(
         @Schema(description = "Planeta onde o usuário se encontra no momento")
         PlanetDTO currentPlanet,
 
-        @Schema(description = "Lista de nomes dos planetas já visitados/desbloqueados")
+        @Schema(description = "Lista de planetas já visitados/desbloqueados")
         List<PlanetDTO> unlockedPlanets,
 
-        @Schema(description = "Planeta onde o usuário se encontra no momento")
+        @Schema(description = "Missão que o usuário se encontra no momento")
         MissionDTO currentMission,
 
-        @Schema(description = "Lista de nomes dos planetas já visitados/desbloqueados")
+        @Schema(description = "Lista de missões já visitados/desbloqueados")
         List<MissionDTO> unlockedMissions,
 
         @Schema(description = "Xp total do usuário")

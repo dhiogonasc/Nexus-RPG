@@ -21,5 +21,5 @@ public record MissionDTO(
         MissionDifficulty difficulty,
 
         @Schema(description = "XP ganho ao concluir")
-        int xpReward
+        long xpBonus
 ){}

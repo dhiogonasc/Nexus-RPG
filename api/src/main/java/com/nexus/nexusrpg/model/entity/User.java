@@ -36,7 +36,7 @@ public class User implements UserDetails {
 
     @ManyToOne
     @JoinColumn(name = "planet_id")
-    private Planet planet;
+    private Planet currentPlanet;
 
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
@@ -45,11 +45,11 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "planet_id")
     )
-    private List<Planet> planets;
+    private List<Planet> unlockedPlanets;
 
     @ManyToOne
     @JoinColumn(name = "mission_id")
-    private Mission mission;
+    private Mission currentMission;
 
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
@@ -58,7 +58,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "mission_id")
     )
-    private List<Mission> missions;
+    private List<Mission> unlockedMissions;
 
     @Builder.Default
     @Column(name = "\"xp\"", nullable = false, columnDefinition = "xp")

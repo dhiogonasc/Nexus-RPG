@@ -37,5 +37,5 @@ public class Mission {
     private MissionDifficulty difficulty;
 
     @Column(name = "xp_bonus", nullable = false)
-    private int xpBonus;
+    private long xpBonus;
 }
