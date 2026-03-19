@@ -30,6 +30,10 @@ public class User implements UserDetails {
     @Column(name = "\"password\"", nullable = false)
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "level_id")
+    private Level level;
+
 
     @Override
     public String getUsername() { return this.email; }
