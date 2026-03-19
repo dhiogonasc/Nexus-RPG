@@ -1,8 +1,7 @@
 package com.nexus.nexusrpg.controller;
 
 import com.nexus.nexusrpg.controller.dto.mission.MissionDTO;
-import com.nexus.nexusrpg.mapper.MissionMapper;
-import com.nexus.nexusrpg.repository.MissionRepository;
+import com.nexus.nexusrpg.service.MissionService;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,22 +13,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MissionController {
 
-    private final MissionRepository missionRepository;
-    private final MissionMapper missionMapper;
+    private final MissionService missionService;
 
     @GetMapping
-    public ResponseEntity<List<MissionDTO>> listarTodos() {
-        List<MissionDTO> missions = missionRepository.findAll()
-                .stream()
-                .map(missionMapper::toDTO)
-                .toList();
+    public ResponseEntity<List<MissionDTO>> getAll() {
 
-        return ResponseEntity.ok(missions);
+        return ResponseEntity.ok(missionService.getAll());
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<MissionDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(
-                missionMapper.toDTO(missionRepository.findById(id))
-        );
+    public ResponseEntity<MissionDTO> getMission(@PathVariable Long id) {
+
+        return ResponseEntity.ok(missionService.getPlanet(id));
     }
 }
