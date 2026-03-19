@@ -1,5 +1,7 @@
 package com.nexus.nexusrpg.controller.dto;
 
+import com.nexus.nexusrpg.controller.dto.LevelDTO;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -15,6 +17,15 @@ public record UserDTO(
         String username,
 
         @Schema(description = "Endereço de email")
-        String email
+        String email,
+
+        @Schema(description = "Nível atual")
+        LevelDTO level,
+
+        @Schema(description = "Xp total do usuário")
+        int xp,
+
+        @Schema(description = "Quantidade de oxigênio disponível")
+        int oxygen
 ) {
 }
