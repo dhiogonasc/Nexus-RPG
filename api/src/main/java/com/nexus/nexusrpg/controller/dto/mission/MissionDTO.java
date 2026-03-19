@@ -1,7 +1,9 @@
-package com.nexus.nexusrpg.controller.dto;
+package com.nexus.nexusrpg.controller.dto.mission;
 
+import com.nexus.nexusrpg.controller.dto.planet.PlanetReferenceDTO;
 import com.nexus.nexusrpg.model.enums.MissionDifficulty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Positive;
 
 public record MissionDTO(
 
@@ -15,11 +17,15 @@ public record MissionDTO(
         String description,
 
         @Schema(description = "Ordem de acesso")
+        @Positive
         int order,
 
         @Schema(description = "Dificuldade")
         MissionDifficulty difficulty,
 
         @Schema(description = "XP ganho ao concluir")
-        long xpBonus
+        long xpBonus,
+
+        @Schema(description = "Referencia do planeta de origem")
+        PlanetReferenceDTO planet
 ){}

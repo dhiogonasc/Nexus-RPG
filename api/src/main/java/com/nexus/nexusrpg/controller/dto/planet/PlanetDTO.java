@@ -1,5 +1,6 @@
-package com.nexus.nexusrpg.controller.dto;
+package com.nexus.nexusrpg.controller.dto.planet;
 
+import com.nexus.nexusrpg.controller.dto.mission.MissionReferenceDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
@@ -19,5 +20,5 @@ public record PlanetDTO(
         int order,
 
         @Schema(description = "Missões vinculadas ao planetas")
-        List<MissionDTO> missions
+        List<MissionReferenceDTO> missions
 ) {}

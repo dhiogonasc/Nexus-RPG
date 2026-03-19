@@ -1,5 +1,7 @@
 package com.nexus.nexusrpg.controller.dto;
 
+import com.nexus.nexusrpg.controller.dto.mission.MissionDTO;
+import com.nexus.nexusrpg.controller.dto.planet.PlanetDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
