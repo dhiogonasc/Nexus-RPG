@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { storage } from './storage';
-import { LOCALHOST_IP } from './auth/host';
 
 const api = axios.create({
-  baseURL: `http://${LOCALHOST_IP}:8080`,
+  baseURL: `http://localhost:8080`,
 });
 
 api.interceptors.request.use(async (config) => {
