@@ -1,5 +1,5 @@
 package com.nexus.nexusrpg.model.enums;
 
-public enum MissionStatus {
+public enum EntityStatus {
     IN_PROGRESS, COMPLETED
 }

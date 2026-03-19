@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.model.relation;
 
 import com.nexus.nexusrpg.model.entity.Mission;
 import com.nexus.nexusrpg.model.entity.User;
-import com.nexus.nexusrpg.model.enums.MissionStatus;
+import com.nexus.nexusrpg.model.enums.EntityStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,7 +33,7 @@ public class UserMission {
     @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "\"status\"", nullable = false, columnDefinition = "mission_status")
-    private MissionStatus status = MissionStatus.IN_PROGRESS;
+    private EntityStatus status = EntityStatus.IN_PROGRESS;
 
     @Builder.Default
     @Column(name = "\"best_result\"", nullable = false, columnDefinition = "score")
