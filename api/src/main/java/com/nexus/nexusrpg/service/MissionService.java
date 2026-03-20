@@ -2,21 +2,18 @@ package com.nexus.nexusrpg.service;
 
 import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
-import com.nexus.nexusrpg.exception.BusinessException;
 import com.nexus.nexusrpg.mapper.UserMapper;
 import com.nexus.nexusrpg.model.relation.UserMission;
 import com.nexus.nexusrpg.model.relation.UserPlanet;
 import com.nexus.nexusrpg.repository.UserMissionRepository;
 import com.nexus.nexusrpg.repository.UserPlanetRepository;
-import com.nexus.nexusrpg.repository.UserRepository;
 import com.nexus.nexusrpg.validator.MissionValidator;
 import com.nexus.nexusrpg.validator.PlanetValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -25,7 +22,6 @@ public class MissionService {
     private final AuthService authService;
 
     private final UserMapper userMapper;
-    private final UserRepository userRepository;
 
     private final UserMissionRepository userMissionRepository;
     private final UserPlanetRepository userPlanetRepository;
@@ -34,14 +30,11 @@ public class MissionService {
     private final PlanetValidator planetValidator;
 
     @Transactional(readOnly = true)
-    public List<UserMissionReferenceDTO> getMissions() {
+    public Page<UserMissionReferenceDTO> getMissions(Long planetId, Pageable pageable) {
         String email = authService.getAuthenticatedEmail();
 
-        return userRepository.findByEmailWithMissions(email)
-                .map(user -> user.getMissions().stream()
-                        .map(userMapper::toUserMissionReferenceDTO)
-                        .toList())
-                .orElseThrow(() -> new BusinessException("User", "Usuário não encontrado", HttpStatus.NOT_FOUND));
+        return userMissionRepository.findByEmailAndPlanet(email, planetId, pageable)
+                .map(userMapper::toUserMissionReferenceDTO);
     }
 
     public UserMissionDTO getMission(Long missionId) {

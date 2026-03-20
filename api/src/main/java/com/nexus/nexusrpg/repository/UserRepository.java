@@ -2,6 +2,8 @@ package com.nexus.nexusrpg.repository;
 
 import com.nexus.nexusrpg.exception.BusinessException;
 import com.nexus.nexusrpg.model.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.planets WHERE u.email = :email")
     Optional<User> findByEmailWithPlanets(String email);
 
-    @Query("SELECT u FROM User u LEFT JOIN FETCH u.missions WHERE u.email = :email")
-    Optional<User> findByEmailWithMissions(String email);
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.resources WHERE u.email = :email")
+    Optional<User> findByEmailWithResources(String email);
 }

@@ -9,8 +9,6 @@ import com.nexus.nexusrpg.model.relation.UserResource;
 import com.nexus.nexusrpg.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.repository.UserRepository;
 import com.nexus.nexusrpg.repository.UserResourceRepository;
-import com.nexus.nexusrpg.validator.PlanetValidator;
-import com.nexus.nexusrpg.validator.ResourceValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -30,13 +28,11 @@ public class ResourceService {
     private final UserResourceRepository userResourceRepository;
     private final UserPlanetRepository userPlanetRepository;
 
-    private final ResourceValidator resourceValidator;
-
     @Transactional(readOnly = true)
     public List<UserResourceReferenceDTO> getResources() {
         String email = authService.getAuthenticatedEmail();
 
-        return userRepository.findByEmailWithMissions(email)
+        return userRepository.findByEmailWithResources(email)
                 .map(user -> user.getResources().stream()
                         .map(userMapper::toUserResourceReferenceDTO)
                         .toList())
@@ -48,13 +44,6 @@ public class ResourceService {
         Long userId = authService.getAuthenticatedUser().getId();
 
         UserResource userResource = userResourceRepository.findByUserIdAndResourceIdOrThrow(userId, resourceId);
-        UserPlanet userPlanet = userPlanetRepository.findByUserIdAndPlanetIdOrThrow(
-                userId,
-                userResource
-                        .getResource()
-                        .getPlanet()
-                        .getId()
-        );
 
         return userMapper.toUserResourceDTO(userResource);
     }

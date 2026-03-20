@@ -4,10 +4,11 @@ import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.service.MissionService;
 import lombok.*;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/missions")
@@ -17,9 +18,12 @@ public class MissionController {
     private final MissionService missionService;
 
     @GetMapping
-    public ResponseEntity<List<UserMissionReferenceDTO>> getMissions() {
+    public ResponseEntity<Page<UserMissionReferenceDTO>> getMissions(
+            @RequestParam(required = false) Long planetId,
+            @ParameterObject Pageable pageable) {
 
-        return ResponseEntity.ok(missionService.getMissions());
+        Page<UserMissionReferenceDTO> missions = missionService.getMissions(planetId, pageable);
+        return ResponseEntity.ok(missions);
     }
 
     @GetMapping("/{id}")
