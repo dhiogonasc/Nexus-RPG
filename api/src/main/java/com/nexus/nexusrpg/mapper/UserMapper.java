@@ -10,6 +10,9 @@ import com.nexus.nexusrpg.model.relation.UserMission;
 import com.nexus.nexusrpg.model.relation.UserPlanet;
 import org.mapstruct.*;
 
+import java.util.List;
+
+@SuppressWarnings("unused")
 @Mapper(componentModel = "spring", uses = {
         PlanetMapper.class,
         MissionMapper.class,
@@ -21,29 +24,43 @@ public interface UserMapper {
     @Mapping(target = "currentMission", expression = "java(mapCurrentMission(user))")
     UserDTO toDTO(User user);
 
+
     UserPlanetDTO toUserPlanetDTO(UserPlanet userPlanet);
+
     UserMissionDTO toUserMissionDTO(UserMission userMission);
 
     default UserPlanetReferenceDTO mapCurrentPlanet(User user) {
-
-        if (user.getCurrentPlanet() == null) return null;
+        if (user.getCurrentPlanet() == null || user.getPlanets() == null) return null;
 
         return user.getPlanets().stream()
                 .filter(up -> up.getPlanet().getId().equals(user.getCurrentPlanet().getId()))
                 .findFirst()
-                .map(this::toUserPlanetReferenceDTO) // Chama o mapeamento que já existe
+                .map(this::toUserPlanetReferenceDTO)
                 .orElse(null);
     }
 
     default UserMissionReferenceDTO mapCurrentMission(User user) {
-
-        if (user.getCurrentMission() == null) return null;
+        if (user.getCurrentMission() == null || user.getMissions() == null) return null;
 
         return user.getMissions().stream()
-                .filter(up -> up.getMission().getId().equals(user.getCurrentMission().getId()))
+                .filter(um -> um.getMission().getId().equals(user.getCurrentMission().getId()))
                 .findFirst()
                 .map(this::toUserMissionReferenceDTO)
                 .orElse(null);
+    }
+
+    default List<UserMissionReferenceDTO> mapMissions(UserPlanet userPlanet) {
+
+        if (userPlanet == null || userPlanet.getUser() == null || userPlanet.getUser().getMissions() == null) {
+            return List.of();
+        }
+
+        Long planetId = userPlanet.getPlanet().getId();
+
+        return userPlanet.getUser().getMissions().stream()
+                .filter(um -> um.getMission().getPlanet().getId().equals(planetId))
+                .map(this::toUserMissionReferenceDTO)
+                .toList();
     }
 
     UserPlanetReferenceDTO toUserPlanetReferenceDTO(UserPlanet userPlanet);
