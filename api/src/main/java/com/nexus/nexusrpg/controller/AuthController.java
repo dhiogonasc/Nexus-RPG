@@ -37,11 +37,4 @@ public class AuthController {
 
         return ResponseEntity.status(CREATED).build();
     }
-
-    @GetMapping("/me")
-    @Operation(summary = "Perfil de usuário")
-    public ResponseEntity<UserDTO> getMe() {
-
-        return ResponseEntity.ok(authService.getMe());
-    }
 }

@@ -1,11 +1,9 @@
 package com.nexus.nexusrpg.service;
 
-import com.nexus.nexusrpg.controller.dto.UserDTO;
 import com.nexus.nexusrpg.controller.dto.request.LoginRequestDTO;
 import com.nexus.nexusrpg.controller.dto.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.controller.dto.response.LoginResponseDTO;
 import com.nexus.nexusrpg.exception.BusinessException;
-import com.nexus.nexusrpg.mapper.UserMapper;
 import com.nexus.nexusrpg.model.entity.Level;
 import com.nexus.nexusrpg.model.entity.User;
 import com.nexus.nexusrpg.model.enums.EntityStatus;
@@ -33,10 +31,9 @@ import java.util.List;
 @Service
 public class AuthService {
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
     private final AuthValidator authValidator;
 
+    private final UserRepository userRepository;
     private final LevelRepository levelRepository;
     private final PlanetRepository planetRepository;
     private final MissionRepository missionRepository;
@@ -79,15 +76,6 @@ public class AuthService {
         String accessToken = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
         return new LoginResponseDTO(accessToken, expiresIn, now);
-    }
-
-    public UserDTO getMe() {
-
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-
-        User me = userRepository.findByEmailOrThrow(email);
-
-        return userMapper.toDTO(me);
     }
 
     private void setUpNewRegister(User user) {
