@@ -128,6 +128,33 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Lista Planetas",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/planets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "planets"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -161,6 +188,33 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Lista Missões",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/missions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "missions"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -189,62 +243,6 @@
               ],
               "path": [
                 "me"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Progressâo Planetas",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/me/planets",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "me",
-                "planets"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Progressâo Missões",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/me/missions",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "me",
-                "missions"
               ]
             }
           },

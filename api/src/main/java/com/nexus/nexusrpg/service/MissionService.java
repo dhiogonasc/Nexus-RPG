@@ -49,7 +49,13 @@ public class MissionService {
         Long userId = authService.getAuthenticatedUser().getId();
 
         UserMission userMission = userMissionRepository.findByUserIdAndMissionIdOrThrow(userId, missionId);
-        UserPlanet userPlanet = userPlanetRepository.findByUserIdAndPlanetIdOrThrow(userId, userMission.getMission().getPlanet().getId());
+        UserPlanet userPlanet = userPlanetRepository.findByUserIdAndPlanetIdOrThrow(
+                userId,
+                userMission
+                        .getMission()
+                        .getPlanet()
+                        .getId()
+        );
 
         planetValidator.isAccessible(userPlanet);
         missionValidator.isAccessible(userMission);
