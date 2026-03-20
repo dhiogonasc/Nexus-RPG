@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import java.util.Optional;
 
 public interface UserPlanetRepository extends JpaRepository<UserPlanet, Long> {
+
     Optional<UserPlanet> findByUserIdAndPlanetId(Long userId, Long planetId);
 
     default UserPlanet findByUserIdAndPlanetIdOrThrow(Long userId, Long planetId){
