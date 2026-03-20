@@ -6,13 +6,6 @@ ALTER TABLE "user" ADD COLUMN "created_at" timestamp NOT NULL DEFAULT CURRENT_TI
 ALTER TABLE "user" ADD COLUMN "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 -- ====================
--- USER STAT
--- ====================
-
-ALTER TABLE "user_stat" ADD COLUMN "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;
-ALTER TABLE "user_stat" ADD COLUMN "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;
-
--- ====================
 -- USER MISSION
 -- ====================
 
