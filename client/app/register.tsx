@@ -1,63 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
+  Image,
   KeyboardAvoidingView,
   Platform,
-  Image,
-  StatusBar,
   ScrollView,
-} from 'react-native';
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-import { styles } from '@/styles/registerStyles';
+import { styles } from "@/styles/registerStyles";
 
-import { Link } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Alert } from 'react-native';
+import { LinearGradient } from "expo-linear-gradient";
+import { Link, router } from "expo-router";
+import { Alert } from "react-native";
 
-import EmailInput from '@/components/EmailInput';
-import DoublePasswordInput from '@/components/DoublePasswordInput';
-import UserInput from '@/components/UserInput';
+import DoublePasswordInput from "@/components/DoublePasswordInput";
+import EmailInput from "@/components/EmailInput";
+import UserInput from "@/components/UserInput";
+import { authService } from "@/services";
 
 export default function RegisterScreen() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [email, setEmail] = useState('');
-
-  const [password, setPassword] = useState('');
-
-  const [confirmPassword, setConfirmPassword] = useState('');
-
-
-  const handleRegister = () => {
-    if (password === '' || confirmPassword === '') {
-      Alert.alert('Erro', 'Preencha as duas senhas!');
+  const handleRegister = async () => {
+    if (!username || username.length < 3) {
+      Alert.alert("Erro", "O nome deve ter pelo menos 3 caracteres!");
       return;
     }
+
+    if (password.length < 6) {
+      Alert.alert("Erro", "A senha deve ter no mínimo 6 caracteres!");
+      return;
+    }
+
     if (password !== confirmPassword) {
-      Alert.alert('Erro', 'As senhas não coincidem!');
+      Alert.alert("Erro", "As senhas não coincidem!");
       return;
     }
 
-    Alert.alert('Sucesso!', 'conta criada!');
+    try {
+      await authService.register({ username, email, password });
+
+      Alert.alert("Sucesso!", "Conta criada com sucesso!", [
+        {
+          text: "OK",
+          onPress: () => router.replace("/"),
+        },
+      ]);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível realizar o cadastro.");
+      console.error("Erro ao cadastrar usuário", error);
+    }
   };
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}
-        keyboardShouldPersistTaps='handled'
-        showsVerticalScrollIndicator={false}>
-
-
-        <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
+        <StatusBar
+          barStyle="light-content"
+          translucent
+          backgroundColor="transparent"
+        />
 
         <View style={styles.imageContainer}>
           <Image
-            source={require('../assets/RegisterImg.png')}
+            source={require("../assets/RegisterImg.png")}
             style={styles.topImage}
             resizeMode="cover"
           />
@@ -65,7 +84,7 @@ export default function RegisterScreen() {
           {/* Efeito esfumaçado na base da imagem */}
 
           <LinearGradient
-            colors={['transparent', '#000000']}
+            colors={["transparent", "#000000"]}
             style={styles.gradientFade}
           />
         </View>
@@ -76,6 +95,8 @@ export default function RegisterScreen() {
           <UserInput
             iconName="user"
             placeholder="Digite seu nome de usuário"
+            value={username}
+            onChangeText={setUsername}
           />
 
           <EmailInput
@@ -107,11 +128,10 @@ export default function RegisterScreen() {
           </View>
 
           <Image
-            source={require('../assets/LogoNexus.jpg')}
+            source={require("../assets/LogoNexus.jpg")}
             style={styles.bottomLogo}
             resizeMode="cover"
           />
-
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -21,9 +21,17 @@ export const authService = {
 
   register: async (userData: RegisterRequestDTO): Promise<void> => {
     try {
-      await api.post("/auth/register", userData);
+      await api.post("/auth/register", userData, {
+        headers: {
+          Authorization: undefined,
+        },
+      });
     } catch (error: any) {
-      console.error("Erro:", error.response?.status, error.response?.data);
+      console.error(
+        "Erro no Registro:",
+        error.response?.status,
+        error.response?.data,
+      );
       throw error;
     }
   },
