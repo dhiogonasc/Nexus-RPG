@@ -1,0 +1,17 @@
+package com.nexus.nexusrpg.repository;
+
+import com.nexus.nexusrpg.exception.BusinessException;
+import com.nexus.nexusrpg.model.relation.UserPlanet;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
+
+import java.util.Optional;
+
+public interface UserPlanetRepository extends JpaRepository<UserPlanet, Long> {
+    Optional<UserPlanet> findByUserIdAndPlanetId(Long userId, Long planetId);
+
+    default UserPlanet findByUserIdAndPlanetIdOrThrow(Long userId, Long planetId){
+        return findByUserIdAndPlanetId(userId, planetId)
+                .orElseThrow(() -> new BusinessException("User - Planet", "Nenhum registro encontrado", HttpStatus.BAD_REQUEST));
+    }
+}

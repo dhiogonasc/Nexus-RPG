@@ -1,30 +1,24 @@
 package com.nexus.nexusrpg.service;
 
-import com.nexus.nexusrpg.controller.dto.planet.PlanetDTO;
-import com.nexus.nexusrpg.mapper.PlanetMapper;
-import com.nexus.nexusrpg.repository.PlanetRepository;
+import com.nexus.nexusrpg.controller.dto.planet.UserPlanetDTO;
+import com.nexus.nexusrpg.mapper.UserMapper;
+import com.nexus.nexusrpg.repository.UserPlanetRepository;
 import lombok.*;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class PlanetService {
 
-    private final PlanetRepository planetRepository;
-    private final PlanetMapper planetMapper;
+    private final AuthService authService;
+    private final UserPlanetRepository userPlanetRepository;
+    private final UserMapper userMapper;
 
-    public List<PlanetDTO> getAll() {
 
-        return planetRepository.findAll()
-                .stream()
-                .map(planetMapper::toDTO)
-                .toList();
-    }
+    public UserPlanetDTO getPlanet(Long id) {
 
-    public PlanetDTO getPlanet(Long id) {
+        Long myId = authService.getAuthenticatedUser().getId();
 
-        return planetMapper.toDTO(planetRepository.findByIdOrElseThrow(id));
+        return userMapper.toUserPlanetDTO(userPlanetRepository.findByUserIdAndPlanetIdOrThrow(myId, id));
     }
 }

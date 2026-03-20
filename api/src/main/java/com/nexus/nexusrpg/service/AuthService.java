@@ -136,4 +136,12 @@ public class AuthService {
         user.getPlanets().addAll(userPlanets);
         user.getMissions().addAll(userMissions);
     }
+
+    public String getAuthenticatedEmail() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    public User getAuthenticatedUser() {
+        return userRepository.findByEmailOrThrow(getAuthenticatedEmail());
+    }
 }

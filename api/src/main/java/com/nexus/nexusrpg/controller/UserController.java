@@ -3,6 +3,7 @@ package com.nexus.nexusrpg.controller;
 import com.nexus.nexusrpg.controller.dto.UserDTO;
 import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetDTO;
+import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
 import com.nexus.nexusrpg.service.AuthService;
 import com.nexus.nexusrpg.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping("/planets")
-    public ResponseEntity<List<UserPlanetDTO>> getPlanets() {
+    public ResponseEntity<List<UserPlanetReferenceDTO>> getPlanets() {
 
         return ResponseEntity.ok(userService.getPlanets());
     }
