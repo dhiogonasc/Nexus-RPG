@@ -63,7 +63,8 @@ public class PlanetService {
                 userPlanet.planet().description(),
                 userPlanet.planet().order(),
                 userPlanet.planet().xpBonus(),
-                planetMissions
+                planetMissions,
+                userPlanet.planet().resource()
         );
 
         return new UserPlanetDTO(

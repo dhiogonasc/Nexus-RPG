@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.controller.dto.planet;
 
 import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.resource.UserResourceReferenceDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
@@ -23,5 +24,8 @@ public record PlanetDTO(
         long xpBonus,
 
         @Schema(description = "Missões vinculadas ao planetas")
-        List<UserMissionReferenceDTO> missions
+        List<UserMissionReferenceDTO> missions,
+
+        @Schema(description = "Recurso a coletar planetas")
+        UserResourceReferenceDTO resource
 ) {}

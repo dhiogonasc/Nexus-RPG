@@ -33,4 +33,7 @@ public class Planet {
 
     @OneToMany(mappedBy = "planet")
     private List<Mission> missions;
+
+    @OneToOne(mappedBy = "planet")
+    private Resource resource;
 }
