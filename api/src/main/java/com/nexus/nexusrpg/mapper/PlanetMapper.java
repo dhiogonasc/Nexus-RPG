@@ -6,6 +6,5 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface PlanetMapper {
-
     PlanetDTO toDTO(Planet planet);
 }

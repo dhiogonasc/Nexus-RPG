@@ -1,11 +1,9 @@
 package com.nexus.nexusrpg.controller.dto;
 
-import com.nexus.nexusrpg.controller.dto.mission.MissionDTO;
-import com.nexus.nexusrpg.controller.dto.planet.PlanetDTO;
+import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
-import java.util.List;
 
 @Tag(name = "User DTO")
 public record UserDTO(
@@ -23,10 +21,10 @@ public record UserDTO(
         LevelDTO level,
 
         @Schema(description = "Planeta onde o usuário se encontra no momento")
-        PlanetDTO currentPlanet,
+        UserPlanetReferenceDTO currentPlanet,
 
         @Schema(description = "Missão que o usuário se encontra no momento")
-        MissionDTO currentMission,
+        UserMissionReferenceDTO currentMission,
 
         @Schema(description = "Xp total do usuário")
         long xp,
