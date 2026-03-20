@@ -19,6 +19,9 @@ public record PlanetDTO(
         @Schema(description = "Ordem de acesso")
         int order,
 
+        @Schema(description = "XP ganho ao concluir")
+        long xpBonus,
+
         @Schema(description = "Missões vinculadas ao planetas")
         List<UserMissionReferenceDTO> missions
 ) {}

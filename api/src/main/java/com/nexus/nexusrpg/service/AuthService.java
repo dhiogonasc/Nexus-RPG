@@ -9,10 +9,8 @@ import com.nexus.nexusrpg.model.entity.User;
 import com.nexus.nexusrpg.model.enums.EntityStatus;
 import com.nexus.nexusrpg.model.relation.UserMission;
 import com.nexus.nexusrpg.model.relation.UserPlanet;
-import com.nexus.nexusrpg.repository.LevelRepository;
-import com.nexus.nexusrpg.repository.MissionRepository;
-import com.nexus.nexusrpg.repository.PlanetRepository;
-import com.nexus.nexusrpg.repository.UserRepository;
+import com.nexus.nexusrpg.model.relation.UserResource;
+import com.nexus.nexusrpg.repository.*;
 import com.nexus.nexusrpg.validator.AuthValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -37,6 +35,7 @@ public class AuthService {
     private final LevelRepository levelRepository;
     private final PlanetRepository planetRepository;
     private final MissionRepository missionRepository;
+    private final ResourceRepository resourceRepository;
 
     private final BCryptPasswordEncoder encoder;
     private final JwtEncoder jwtEncoder;
@@ -117,12 +116,21 @@ public class AuthService {
                 .findFirst()
                 .orElseThrow(() -> new BusinessException("Mission", "Missão 1 não encontrada", HttpStatus.NOT_FOUND));
 
+        List<UserResource> userResources = resourceRepository.findAll().stream()
+                .map(r -> UserResource.builder()
+                        .user(user)
+                        .resource(r)
+                        .build()
+                )
+                .toList();
+
         user.setLevel(level);
         user.setCurrentPlanet(firstUP.getPlanet());
         user.setCurrentMission(firstUM.getMission());
 
         user.getPlanets().addAll(userPlanets);
         user.getMissions().addAll(userMissions);
+        user.getResources().addAll(userResources);
     }
 
     public String getAuthenticatedEmail() {

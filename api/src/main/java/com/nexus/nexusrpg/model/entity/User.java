@@ -2,6 +2,7 @@ package com.nexus.nexusrpg.model.entity;
 
 import com.nexus.nexusrpg.model.relation.UserMission;
 import com.nexus.nexusrpg.model.relation.UserPlanet;
+import com.nexus.nexusrpg.model.relation.UserResource;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -52,6 +53,10 @@ public class User implements UserDetails {
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserMission> missions = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserResource> resources = new ArrayList<>();
 
     @Builder.Default
     @Column(name = "\"xp\"", nullable = false, columnDefinition = "xp")

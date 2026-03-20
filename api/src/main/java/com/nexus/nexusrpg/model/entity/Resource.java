@@ -24,4 +24,7 @@ public class Resource {
 
     @Column(name = "\"description\"", columnDefinition = "TEXT")
     private String description;
+
+    @Column(name = "xp_bonus", nullable = false, columnDefinition = "xp")
+    private long xpBonus;
 }

@@ -62,6 +62,7 @@ public class PlanetService {
                 userPlanet.planet().name(),
                 userPlanet.planet().description(),
                 userPlanet.planet().order(),
+                userPlanet.planet().xpBonus(),
                 planetMissions
         );
 

@@ -5,9 +5,12 @@ import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.resource.UserResourceDTO;
+import com.nexus.nexusrpg.controller.dto.resource.UserResourceReferenceDTO;
 import com.nexus.nexusrpg.model.entity.User;
 import com.nexus.nexusrpg.model.relation.UserMission;
 import com.nexus.nexusrpg.model.relation.UserPlanet;
+import com.nexus.nexusrpg.model.relation.UserResource;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -28,6 +31,8 @@ public interface UserMapper {
     UserPlanetDTO toUserPlanetDTO(UserPlanet userPlanet);
 
     UserMissionDTO toUserMissionDTO(UserMission userMission);
+
+    UserResourceDTO toUserResourceDTO(UserResource userResource);
 
     default UserPlanetReferenceDTO mapCurrentPlanet(User user) {
         if (user.getCurrentPlanet() == null || user.getPlanets() == null) return null;
@@ -65,4 +70,5 @@ public interface UserMapper {
 
     UserPlanetReferenceDTO toUserPlanetReferenceDTO(UserPlanet userPlanet);
     UserMissionReferenceDTO toUserMissionReferenceDTO(UserMission userMission);
+    UserResourceReferenceDTO toUserResourceReferenceDTO(UserResource userResource);
 }
