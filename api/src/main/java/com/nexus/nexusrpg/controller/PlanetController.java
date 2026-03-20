@@ -18,7 +18,7 @@ public class PlanetController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserPlanetDTO> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<UserPlanetDTO> getPlanet(@PathVariable Long id) {
 
         return ResponseEntity.ok(planetService.getPlanet(id));
     }
