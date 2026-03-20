@@ -10,6 +10,7 @@ import com.nexus.nexusrpg.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.repository.UserRepository;
 import com.nexus.nexusrpg.repository.UserResourceRepository;
 import com.nexus.nexusrpg.validator.PlanetValidator;
+import com.nexus.nexusrpg.validator.ResourceValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class ResourceService {
     private final UserResourceRepository userResourceRepository;
     private final UserPlanetRepository userPlanetRepository;
 
-    private final PlanetValidator planetValidator;
+    private final ResourceValidator resourceValidator;
 
     @Transactional(readOnly = true)
     public List<UserResourceReferenceDTO> getResources() {
@@ -54,8 +55,6 @@ public class ResourceService {
                         .getPlanet()
                         .getId()
         );
-
-        planetValidator.isAccessible(userPlanet);
 
         return userMapper.toUserResourceDTO(userResource);
     }

@@ -4,7 +4,6 @@ import com.nexus.nexusrpg.model.entity.Resource;
 import com.nexus.nexusrpg.model.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +29,10 @@ public class UserResource {
     @JoinColumn(name = "resource_id", nullable = false)
     private Resource resource;
 
-    @CreationTimestamp
-    @Column(name = "\"collected_at\"", nullable = false, updatable = false)
+    @Column(name = "\"collected_at\"", updatable = false)
     private LocalDateTime collectedAt;
+
+    @Builder.Default
+    @Column(name = "\"is_collected\"", nullable = false)
+    private boolean isCollected = false;
 }

@@ -384,7 +384,8 @@ CREATE TABLE "user_resource" (
     user_id bigint NOT NULL,
     resource_id bigint NOT NULL,
 
-    "collected_at" timestamp DEFAULT CURRENT_TIMESTAMP,
+    "is_collected" boolean DEFAULT false,
+    "collected_at" timestamp,
 	
     CONSTRAINT pk_user_resource PRIMARY KEY(id),
 	

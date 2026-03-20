@@ -120,6 +120,7 @@ public class AuthService {
                 .map(r -> UserResource.builder()
                         .user(user)
                         .resource(r)
+                        .isCollected(false)
                         .build()
                 )
                 .toList();
