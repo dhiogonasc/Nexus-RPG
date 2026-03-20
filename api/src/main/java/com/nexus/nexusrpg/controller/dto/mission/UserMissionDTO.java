@@ -1,6 +1,5 @@
-package com.nexus.nexusrpg.controller.dto;
+package com.nexus.nexusrpg.controller.dto.mission;
 
-import com.nexus.nexusrpg.controller.dto.mission.MissionReferenceDTO;
 import com.nexus.nexusrpg.model.enums.EntityStatus;
 
 import java.math.BigDecimal;
@@ -10,5 +9,5 @@ public record UserMissionDTO(
         MissionReferenceDTO mission,
         EntityStatus status,
         BigDecimal bestResult,
-        boolean isLocked
+        Boolean locked
 ) {}

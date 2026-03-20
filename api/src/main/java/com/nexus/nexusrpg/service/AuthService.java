@@ -7,9 +7,10 @@ import com.nexus.nexusrpg.controller.dto.response.LoginResponseDTO;
 import com.nexus.nexusrpg.exception.BusinessException;
 import com.nexus.nexusrpg.mapper.UserMapper;
 import com.nexus.nexusrpg.model.entity.Level;
-import com.nexus.nexusrpg.model.entity.Mission;
-import com.nexus.nexusrpg.model.entity.Planet;
 import com.nexus.nexusrpg.model.entity.User;
+import com.nexus.nexusrpg.model.enums.EntityStatus;
+import com.nexus.nexusrpg.model.relation.UserMission;
+import com.nexus.nexusrpg.model.relation.UserPlanet;
 import com.nexus.nexusrpg.repository.LevelRepository;
 import com.nexus.nexusrpg.repository.MissionRepository;
 import com.nexus.nexusrpg.repository.PlanetRepository;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -88,18 +90,50 @@ public class AuthService {
         return userMapper.toDTO(me);
     }
 
-    private void setUpNewRegister(User user){
+    private void setUpNewRegister(User user) {
         Level level = levelRepository.findById(1L)
-                .orElseThrow(() -> new BusinessException("Level", "Nenhum level encontrado", HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new BusinessException("Level", "Level 1 não encontrado", HttpStatus.BAD_REQUEST));
 
-        Planet planet = planetRepository.findById(1L)
-                .orElseThrow(() -> new BusinessException("Planet", "Nenhum planeta encontrado", HttpStatus.BAD_REQUEST));
+        List<UserPlanet> userPlanets = planetRepository.findAll().stream()
+                .map(p -> {
+                    boolean isFirst = p.getId().equals(1L);
+                    return UserPlanet.builder()
+                            .user(user)
+                            .planet(p)
+                            .status(isFirst ? EntityStatus.UNLOCKED : EntityStatus.LOCKED)
+                            .locked(!isFirst)
+                            .build();
+                })
+                .toList();
 
-        Mission mission = missionRepository.findById(1L)
-                .orElseThrow(() -> new BusinessException("Mission", "Nenhuma missão encontrada", HttpStatus.BAD_REQUEST));
+        UserPlanet firstUP = userPlanets.stream()
+                .filter(up -> up.getPlanet().getId().equals(1L))
+                .findFirst()
+                .orElseThrow(() -> new BusinessException("Planet", "Planeta 1 não encontrado", HttpStatus.NOT_FOUND));
+
+
+        List<UserMission> userMissions = missionRepository.findAll().stream()
+                .map(m -> {
+                    boolean isFirst = m.getId().equals(1L);
+                    return UserMission.builder()
+                            .user(user)
+                            .mission(m)
+                            .status(isFirst ? EntityStatus.UNLOCKED : EntityStatus.LOCKED)
+                            .locked(!isFirst)
+                            .build();
+                })
+                .toList();
+
+        UserMission firstUM = userMissions.stream()
+                .filter(um -> um.getMission().getId().equals(1L))
+                .findFirst()
+                .orElseThrow(() -> new BusinessException("Mission", "Missão 1 não encontrada", HttpStatus.NOT_FOUND));
 
         user.setLevel(level);
-        user.setCurrentPlanet(planet);
-        user.setCurrentMission(mission);
+        user.setCurrentPlanet(firstUP.getPlanet());
+        user.setCurrentMission(firstUM.getMission());
+
+        user.getPlanets().addAll(userPlanets);
+        user.getMissions().addAll(userMissions);
     }
 }

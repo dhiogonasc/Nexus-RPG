@@ -1,11 +1,14 @@
 package com.nexus.nexusrpg.model.entity;
 
+import com.nexus.nexusrpg.model.relation.UserMission;
+import com.nexus.nexusrpg.model.relation.UserPlanet;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,7 +29,7 @@ public class User implements UserDetails {
 
     @Column(name = "\"email\"", nullable = false, unique = true)
     private String email;
-    
+
     @Column(name = "\"password\"", nullable = false)
     private String password;
 
@@ -41,6 +44,14 @@ public class User implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "mission_id")
     private Mission currentMission;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserPlanet> planets = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserMission> missions = new ArrayList<>();
 
     @Builder.Default
     @Column(name = "\"xp\"", nullable = false, columnDefinition = "xp")

@@ -5,6 +5,9 @@ import com.nexus.nexusrpg.model.entity.Planet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 
+import java.util.Arrays;
+import java.util.List;
+
 public interface PlanetRepository extends JpaRepository<Planet, Long> {
 
     default Planet findByIdOrElseThrow(Long id){

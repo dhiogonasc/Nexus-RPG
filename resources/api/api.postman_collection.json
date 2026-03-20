@@ -94,35 +94,6 @@
             "description": "POST /auth/login \\[Login de usuário\\]\n\n- Body request: LoginRequestDTO\n    \n- Body response: LoginResponseDTO"
           },
           "response": []
-        },
-        {
-          "name": "/auth/me Perfil",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/auth/me",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "auth",
-                "me"
-              ]
-            },
-            "description": "GET /usuarios/me \\[Perfil do usuário\\]\n\n- Body request: no content\n    \n- Body response: UsuarioResponseDTO"
-          },
-          "response": []
         }
       ],
       "description": "Endpoitns de autenticação."
@@ -230,6 +201,94 @@
               "path": [
                 "missions",
                 "{{id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Perfil",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Progressâo Planetas",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/me/planets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "me",
+                "planets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Progressâo Missões",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/me/missions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "me",
+                "missions"
               ]
             }
           },

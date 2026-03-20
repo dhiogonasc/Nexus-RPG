@@ -43,5 +43,5 @@ public class UserPlanet {
 
     @Builder.Default
     @Column(name = "is_locked", nullable = false)
-    private boolean isLocked = true;
+    private Boolean locked = true;
 }
