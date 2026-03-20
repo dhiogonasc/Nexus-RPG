@@ -250,7 +250,7 @@
           "response": []
         },
         {
-          "name": "Lista Missões",
+          "name": "Pagina Missões",
           "request": {
             "auth": {
               "type": "bearer",
@@ -265,12 +265,26 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/missions",
+              "raw": "{{baseUrl}}/missions?planetId={{planetId}}&page={{page}}&size={{size}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "missions"
+              ],
+              "query": [
+                {
+                  "key": "planetId",
+                  "value": "{{planetId}}"
+                },
+                {
+                  "key": "page",
+                  "value": "{{page}}"
+                },
+                {
+                  "key": "size",
+                  "value": "{{size}}"
+                }
               ]
             }
           },
