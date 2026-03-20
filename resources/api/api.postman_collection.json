@@ -1,24 +1,24 @@
 {
   "info": {
-    "_postman_id": "ed9c987d-20b3-464f-9e62-5ad9063e37d7",
-    "name": "Nexus API",
-    "description": "Collection para o gerenciamento de endpoints da Nexus API.",
+    "_postman_id": "3e52e11a-136a-4f87-88c3-c05ea79d921d",
+    "name": "Nexus RPG API",
+    "description": "Coleção organizada para o desenvolvimento do Nexus RPG, com herança de autenticação e scripts de automação.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "52573108",
-    "_collection_link": "https://go.postman.co/collection/52573108-ed9c987d-20b3-464f-9e62-5ad9063e37d7?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/52573108-3e52e11a-136a-4f87-88c3-c05ea79d921d?source=collection_link"
   },
   "item": [
     {
-      "name": "Autenticação",
+      "name": "01. Autenticação",
       "item": [
         {
-          "name": "/auth/regiser Cadastro",
+          "name": "Cadastrar Novo Usuário",
           "request": {
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\": \"Nome\",\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "raw": "{\n    \"username\": \"Dhiogo\",\n    \"email\": \"dhiogo@exemplo.com\",\n    \"password\": \"123456\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -34,38 +34,24 @@
                 "auth",
                 "register"
               ]
-            },
-            "description": "POST /auth/register \\[Cadastro de usuário\\]\n\n- Body request: RegisterRequestDTO\n    \n- Body response: RegisterResponseDTO"
+            }
           },
           "response": []
         },
         {
-          "name": "/auth/login Login",
+          "name": "Login",
           "event": [
             {
               "listen": "test",
               "script": {
                 "exec": [
-                  "const response = pm.response.json();\r",
-                  "\r",
-                  "const token = response.token;\r",
-                  "\r",
-                  "pm.environment.set(\"token\", token);"
+                  "const response = pm.response.json();",
+                  "if (response.token) {",
+                  "    pm.environment.set(\"token\", response.token);",
+                  "    console.log(\"Token atualizado com sucesso!\");",
+                  "}"
                 ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
+                "type": "text/javascript"
               }
             }
           ],
@@ -74,7 +60,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "raw": "{\n    \"email\": \"dhiogo@exemplo.com\",\n    \"password\": \"123456\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -90,58 +76,18 @@
                 "auth",
                 "login"
               ]
-            },
-            "description": "POST /auth/login \\[Login de usuário\\]\n\n- Body request: LoginRequestDTO\n    \n- Body response: LoginResponseDTO"
-          },
-          "response": []
-        }
-      ],
-      "description": "Endpoitns de autenticação."
-    },
-    {
-      "name": "Planeta",
-      "item": [
-        {
-          "name": "Acessa planeta",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/planets/{{id}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "planets",
-                "{{id}}"
-              ]
             }
           },
           "response": []
-        },
+        }
+      ]
+    },
+    {
+      "name": "02. Planetas",
+      "item": [
         {
-          "name": "Lista Planetas",
+          "name": "Listar Planetas",
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "GET",
             "header": [],
             "url": {
@@ -155,117 +101,47 @@
             }
           },
           "response": []
-        }
-      ]
-    },
-    {
-      "name": "Recurso",
-      "item": [
-        {
-          "name": "Acessa recurso",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/resources/{{id}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "resources",
-                "{{id}}"
-              ]
-            }
-          },
-          "response": []
         },
         {
-          "name": "Lista Recursos",
+          "name": "Detalhes do Planeta",
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/resources",
+              "raw": "{{baseUrl}}/planets/{{planetId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "resources"
+                "planets",
+                "{{planetId}}"
               ]
             }
           },
           "response": []
         }
-      ]
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{token}}",
+            "type": "string"
+          }
+        ]
+      }
     },
     {
-      "name": "Missão",
+      "name": "03. Missões",
       "item": [
         {
-          "name": "Acessa missão",
+          "name": "Listar Missões (Paginado)",
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/missions/{{id}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "missions",
-                "{{id}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Pagina Missões",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/missions?planetId={{planetId}}&page={{page}}&size={{size}}",
+              "raw": "{{baseUrl}}/missions?planetId={{planetId}}&page=0&size=10",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -279,35 +155,53 @@
                 },
                 {
                   "key": "page",
-                  "value": "{{page}}"
+                  "value": "0"
                 },
                 {
                   "key": "size",
-                  "value": "{{size}}"
+                  "value": "10"
                 }
               ]
             }
           },
           "response": []
+        },
+        {
+          "name": "Detalhes da Missão",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/missions/{{missionId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "missions",
+                "{{missionId}}"
+              ]
+            }
+          },
+          "response": []
         }
-      ]
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{token}}",
+            "type": "string"
+          }
+        ]
+      }
     },
     {
-      "name": "User",
+      "name": "04. Usuário",
       "item": [
         {
-          "name": "Perfil",
+          "name": "Meu Perfil",
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "GET",
             "header": [],
             "url": {
@@ -322,29 +216,15 @@
           },
           "response": []
         }
-      ]
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{token}}",
+            "type": "string"
+          }
         ]
       }
     }
@@ -352,7 +232,18 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": ""
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "planetId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "missionId",
+      "value": "1",
+      "type": "string"
     }
   ]
 }
