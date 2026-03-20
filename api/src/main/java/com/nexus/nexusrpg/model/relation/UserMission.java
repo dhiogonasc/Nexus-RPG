@@ -43,6 +43,6 @@ public class UserMission {
     private BigDecimal bestResult = BigDecimal.ZERO;
 
     @Builder.Default
-    @Column(name = "is_locked", nullable = false)
-    private Boolean locked = true;
+    @Column(name = "is_accessible", nullable = false)
+    private Boolean isAccessible = false;
 }

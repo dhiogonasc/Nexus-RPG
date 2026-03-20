@@ -6,5 +6,5 @@ public record UserPlanetDTO(
 
         PlanetReferenceDTO planet,
         EntityStatus status,
-        boolean locked
+        boolean isAccessible
 ) {}

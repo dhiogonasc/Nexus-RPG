@@ -101,7 +101,7 @@ public class AuthService {
                             .user(user)
                             .planet(p)
                             .status(isFirst ? EntityStatus.UNLOCKED : EntityStatus.LOCKED)
-                            .locked(!isFirst)
+                            .isAccessible(isFirst)
                             .build();
                 })
                 .toList();
@@ -119,7 +119,7 @@ public class AuthService {
                             .user(user)
                             .mission(m)
                             .status(isFirst ? EntityStatus.UNLOCKED : EntityStatus.LOCKED)
-                            .locked(!isFirst)
+                            .isAccessible(isFirst)
                             .build();
                 })
                 .toList();

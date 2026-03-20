@@ -198,7 +198,7 @@ CREATE TABLE "user_planet"(
     planet_id bigint NOT NULL,
 
 	"status" entity_status NOT NULL DEFAULT 'LOCKED',
-    "is_locked" boolean NOT NULL DEFAULT true,
+    "is_accessible" boolean NOT NULL DEFAULT false,
 	
     CONSTRAINT pk_user_planet PRIMARY KEY (id),
 
@@ -244,7 +244,7 @@ INSERT INTO "mission" (planet_id, "name", "description", "order", "difficulty", 
 (3, 'Planet - 3 : Mission - 3 ', NULL, 3, 'HARD', 100),
 (4, 'Planet - 4 : Mission - 1 ', NULL, 1, 'EASY', 100),
 (4, 'Planet - 4 : Mission - 2 ', NULL, 2, 'MEDIUM', 100),
-(4, 'Planet - 4 : Mission - 3 ', NULL, 3, 'HARD', 100),
+(4, 'Planet - 4 : Mission - 3 ', NULL, 3, 'HARD', 100);
 
 
 ALTER TABLE "user" ADD CONSTRAINT fk_user_mission FOREIGN KEY (mission_id) REFERENCES "mission"(id);
@@ -257,7 +257,7 @@ CREATE TABLE "user_mission" (
 
     "best_result" score NOT NULL DEFAULT 0,
     "status" entity_status NOT NULL DEFAULT 'LOCKED',
-    "is_locked" boolean NOT NULL DEFAULT true,
+    "is_accessible" boolean NOT NULL DEFAULT false,
 	
     CONSTRAINT pk_user_mission PRIMARY KEY(id),
 	

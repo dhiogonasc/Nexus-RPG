@@ -42,6 +42,6 @@ public class UserPlanet {
     private EntityStatus status = LOCKED;
 
     @Builder.Default
-    @Column(name = "is_locked", nullable = false)
-    private Boolean locked = true;
+    @Column(name = "is_accessible", nullable = false)
+    private Boolean isAccessible = false;
 }
