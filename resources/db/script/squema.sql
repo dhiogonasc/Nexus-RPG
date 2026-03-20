@@ -233,7 +233,19 @@ CREATE TABLE "mission" (
 );
 
 INSERT INTO "mission" (planet_id, "name", "description", "order", "difficulty", "xp_bonus") VALUES
-(1, 'Variabili tutorial', NULL, 1, 'EASY', 100);
+(1, 'Planet - 1 : Mission - 1 ', NULL, 1, 'EASY', 100),
+(1, 'Planet - 1 : Mission - 2 ', NULL, 2, 'MEDIUM', 100),
+(1, 'Planet - 1 : Mission - 3 ', NULL, 3, 'HARD', 100),
+(2, 'Planet - 2 : Mission - 1 ', NULL, 1, 'EASY', 100),
+(2, 'Planet - 2 : Mission - 2 ', NULL, 2, 'MEDIUM', 100),
+(2, 'Planet - 2 : Mission - 3 ', NULL, 3, 'HARD', 100),
+(3, 'Planet - 3 : Mission - 1 ', NULL, 1, 'EASY', 100),
+(3, 'Planet - 3 : Mission - 2 ', NULL, 2, 'MEDIUM', 100),
+(3, 'Planet - 3 : Mission - 3 ', NULL, 3, 'HARD', 100),
+(4, 'Planet - 4 : Mission - 1 ', NULL, 1, 'EASY', 100),
+(4, 'Planet - 4 : Mission - 2 ', NULL, 2, 'MEDIUM', 100),
+(4, 'Planet - 4 : Mission - 3 ', NULL, 3, 'HARD', 100),
+
 
 ALTER TABLE "user" ADD CONSTRAINT fk_user_mission FOREIGN KEY (mission_id) REFERENCES "mission"(id);
 
