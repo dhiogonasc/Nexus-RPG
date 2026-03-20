@@ -1,8 +1,7 @@
 package com.nexus.nexusrpg.controller;
 
 import com.nexus.nexusrpg.controller.dto.UserDTO;
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
-import com.nexus.nexusrpg.controller.dto.planet.UserPlanetDTO;
+import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
 import com.nexus.nexusrpg.service.AuthService;
 import com.nexus.nexusrpg.service.UserService;
@@ -37,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/missions")
-    public ResponseEntity<List<UserMissionDTO>> getMissions() {
+    public ResponseEntity<List<UserMissionReferenceDTO>> getMissions() {
 
         return ResponseEntity.ok(userService.getMissions());
     }

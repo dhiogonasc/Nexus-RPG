@@ -2,6 +2,7 @@ package com.nexus.nexusrpg.mapper;
 
 import com.nexus.nexusrpg.controller.dto.*;
 import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
+import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
 import com.nexus.nexusrpg.model.entity.User;
@@ -19,7 +20,9 @@ public interface UserMapper {
 
     UserPlanetDTO toUserPlanetDTO(UserPlanet userPlanet);
 
+    UserMissionDTO toUserMissionDTO(UserMission userMission);
+
     UserPlanetReferenceDTO toUserPlanetReferenceDTO(UserPlanet userPlanet);
 
-    UserMissionDTO toUserMissionDTO(UserMission userMission);
+    UserMissionReferenceDTO toUserMissionReferenceDTO(UserMission userMission);
 }

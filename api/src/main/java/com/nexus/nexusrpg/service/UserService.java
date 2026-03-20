@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.service;
 
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
+import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
 import com.nexus.nexusrpg.exception.BusinessException;
 import com.nexus.nexusrpg.mapper.UserMapper;
@@ -32,12 +32,12 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public List<UserMissionDTO> getMissions() {
+    public List<UserMissionReferenceDTO> getMissions() {
         String email = authService.getAuthenticatedEmail();
 
         return userRepository.findByEmailWithMissions(email)
                 .map(user -> user.getMissions().stream()
-                        .map(userMapper::toUserMissionDTO)
+                        .map(userMapper::toUserMissionReferenceDTO)
                         .toList())
                 .orElseThrow(() -> new BusinessException("User", "Usuário não encontrado", HttpStatus.NOT_FOUND));
     }

@@ -4,9 +4,9 @@ import com.nexus.nexusrpg.model.enums.EntityStatus;
 
 import java.math.BigDecimal;
 
-public record UserMissionDTO(
+public record UserMissionReferenceDTO(
 
-        MissionDTO mission,
+        MissionReferenceDTO mission,
         EntityStatus status,
         BigDecimal bestResult,
         Boolean isAccessible
