@@ -1,6 +1,5 @@
 package com.nexus.nexusrpg.controller;
 
-import com.nexus.nexusrpg.controller.dto.UserDTO;
 import com.nexus.nexusrpg.controller.dto.request.LoginRequestDTO;
 import com.nexus.nexusrpg.controller.dto.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.controller.dto.response.LoginResponseDTO;
