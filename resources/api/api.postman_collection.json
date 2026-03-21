@@ -197,7 +197,57 @@
       }
     },
     {
-      "name": "04. Usuário",
+      "name": "04. Recursos",
+      "item": [
+        {
+          "name": "Listar Recursos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/planets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "planets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Detalhes do Recurso",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/planets/{{planetId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "planets",
+                "{{planetId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{token}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "05. Usuário",
       "item": [
         {
           "name": "Meu Perfil",
