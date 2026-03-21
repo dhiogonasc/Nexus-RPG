@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.service;
 
-import com.nexus.nexusrpg.controller.dto.request.LoginRequestDTO;
-import com.nexus.nexusrpg.controller.dto.request.RegisterRequestDTO;
-import com.nexus.nexusrpg.controller.dto.response.LoginResponseDTO;
+import com.nexus.nexusrpg.controller.dto.auth.request.LoginRequestDTO;
+import com.nexus.nexusrpg.controller.dto.auth.request.RegisterRequestDTO;
+import com.nexus.nexusrpg.controller.dto.auth.response.LoginResponseDTO;
 import com.nexus.nexusrpg.exception.BusinessException;
 import com.nexus.nexusrpg.model.entity.Level;
 import com.nexus.nexusrpg.model.entity.User;

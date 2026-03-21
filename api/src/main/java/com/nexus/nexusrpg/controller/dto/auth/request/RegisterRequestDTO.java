@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.controller.dto.request;
+package com.nexus.nexusrpg.controller.dto.auth.request;
 
 import com.nexus.nexusrpg.validator.EmailUnico;
 import io.swagger.v3.oas.annotations.media.Schema;
