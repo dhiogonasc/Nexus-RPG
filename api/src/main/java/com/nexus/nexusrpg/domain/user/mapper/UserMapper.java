@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.user;
+package com.nexus.nexusrpg.domain.user.mapper;
 
 import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionDTO;
 import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionReferenceDTO;

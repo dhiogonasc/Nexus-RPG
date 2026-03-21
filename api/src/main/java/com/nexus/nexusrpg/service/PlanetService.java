@@ -5,7 +5,7 @@ import com.nexus.nexusrpg.controller.dto.global.planet.PlanetDTO;
 import com.nexus.nexusrpg.controller.dto.user.planet.UserPlanetDTO;
 import com.nexus.nexusrpg.controller.dto.user.planet.UserPlanetReferenceDTO;
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.user.UserMapper;
+import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
