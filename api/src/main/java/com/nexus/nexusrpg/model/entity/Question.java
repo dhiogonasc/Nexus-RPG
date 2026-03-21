@@ -24,7 +24,7 @@ public class Question {
     @Column(name = "\"description\"", nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "\"code_snippet\"", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "\"code_snippet\"", columnDefinition = "TEXT")
     private String codeSnippet;
 
     @Column(name = "\"order\"", nullable = false)
