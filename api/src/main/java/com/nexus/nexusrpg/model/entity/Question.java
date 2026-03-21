@@ -3,6 +3,8 @@ package com.nexus.nexusrpg.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -29,4 +31,7 @@ public class Question {
 
     @Column(name = "\"order\"", nullable = false)
     private int order;
+
+    @OneToMany(mappedBy = "question")
+    private List<Alternative> alternatives;
 }

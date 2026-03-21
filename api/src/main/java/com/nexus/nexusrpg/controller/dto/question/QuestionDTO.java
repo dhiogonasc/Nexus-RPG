@@ -1,14 +1,15 @@
 package com.nexus.nexusrpg.controller.dto.question;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import com.nexus.nexusrpg.controller.dto.alternative.AlternativeDTO;
+
+import java.util.List;
 
 public record QuestionDTO(
 
         Long id,
-        Long missionId,
         String description,
         String codeSnippet,
-        Integer order
+        Integer order,
+        List<AlternativeDTO> alternatives
 ) {
 }
