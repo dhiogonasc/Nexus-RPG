@@ -5,6 +5,7 @@ import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.resource.CollectedResourcesDTO;
 import com.nexus.nexusrpg.controller.dto.resource.UserResourceDTO;
 import com.nexus.nexusrpg.controller.dto.resource.UserResourceReferenceDTO;
 import com.nexus.nexusrpg.model.entity.User;
@@ -13,7 +14,11 @@ import com.nexus.nexusrpg.model.relation.UserPlanet;
 import com.nexus.nexusrpg.model.relation.UserResource;
 import org.mapstruct.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
+
+import static java.math.RoundingMode.HALF_UP;
 
 @SuppressWarnings("unused")
 @Mapper(componentModel = "spring", uses = {
@@ -25,7 +30,7 @@ public interface UserMapper {
 
     @Mapping(target = "currentPlanet", expression = "java(mapCurrentPlanet(user))")
     @Mapping(target = "currentMission", expression = "java(mapCurrentMission(user))")
-    @Mapping(target = "collectedResources", expression = "java(mapCollectedResources(user.getResources()))")
+    @Mapping(target = "collectedResources", expression = "java(mapCollectedResources(user))")
     UserDTO toDTO(User user);
 
 
@@ -55,6 +60,22 @@ public interface UserMapper {
                 .orElse(null);
     }
 
+    default CollectedResourcesDTO mapCollectedResources(User user) {
+
+        if (user.getResources() == null) {
+            return new CollectedResourcesDTO(List.of(), BigDecimal.ZERO);
+        }
+
+        List<UserResourceReferenceDTO> collectedList = user.getResources().stream()
+                .filter(com.nexus.nexusrpg.model.relation.UserResource::isCollected)
+                .map(this::toUserResourceReferenceDTO)
+                .toList();
+
+        BigDecimal progress = BigDecimal.ZERO.setScale(2, HALF_UP);;
+
+        return new CollectedResourcesDTO(collectedList, progress);
+    }
+
     default List<UserMissionReferenceDTO> mapMissions(UserPlanet userPlanet) {
 
         if (userPlanet == null || userPlanet.getUser() == null || userPlanet.getUser().getMissions() == null) {
@@ -66,15 +87,6 @@ public interface UserMapper {
         return userPlanet.getUser().getMissions().stream()
                 .filter(um -> um.getMission().getPlanet().getId().equals(planetId))
                 .map(this::toUserMissionReferenceDTO)
-                .toList();
-    }
-
-    default List<UserResourceReferenceDTO> mapCollectedResources(List<UserResource> resources) {
-        if (resources == null) return List.of();
-
-        return resources.stream()
-                .filter(UserResource::isCollected) // O segredo está aqui
-                .map(this::toUserResourceReferenceDTO)
                 .toList();
     }
 

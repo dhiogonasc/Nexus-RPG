@@ -2,6 +2,7 @@ package com.nexus.nexusrpg.controller.dto;
 
 import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.resource.CollectedResourcesDTO;
 import com.nexus.nexusrpg.controller.dto.resource.UserResourceReferenceDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,7 +31,7 @@ public record UserDTO(
         UserMissionReferenceDTO currentMission,
 
         @Schema(description = "Recursos coletados")
-        List<UserResourceReferenceDTO> collectedResources,
+        CollectedResourcesDTO collectedResources,
 
         @Schema(description = "Xp total do usuário")
         long xp,
