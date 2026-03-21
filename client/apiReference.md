@@ -1,11 +1,3 @@
-## 🚀 Configuração Base
-
-* **URL Base:** `http://localhost:8080` (Definida pela variável `{{baseUrl}}`)
-* **Autenticação:** Quase todos os endpoints exigem um token JWT no Header (`Authorization: Bearer {{token}}`).
-* **Formato de Dados:** `application/json`
-
----
-
 ## 01. Autenticação
 Endpoints públicos para criação de conta e obtenção de acesso.
 
@@ -31,7 +23,6 @@ Endpoints públicos para criação de conta e obtenção de acesso.
     "password": "123456"
 }
 ```
-* **Nota:** O script de teste do Postman salvará automaticamente o `token` retornado para uso nas próximas requisições.
 
 ---
 
@@ -99,7 +90,7 @@ Gerenciamento de locais exploráveis.
 
 ---
 
-## 📜 03. Missões
+## 03. Missões
 Sistema de objetivos e progresso.
 
 ### Listar Missões (Paginado)
@@ -163,7 +154,7 @@ Sistema de objetivos e progresso.
 
 ---
 
-## 📦 04. Recursos
+## 04. Recursos
 Acesso a itens e recursos do jogo.
 
 ### Listar Recursos
@@ -227,7 +218,7 @@ Acesso a itens e recursos do jogo.
 
 ---
 
-## 👤 05. Usuário
+## 05. Usuário
 Gerenciamento do perfil do jogador autenticado.
 
 ### Meu Perfil
