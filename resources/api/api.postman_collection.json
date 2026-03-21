@@ -18,7 +18,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"username\": \"Dhiogo\",\n    \"email\": \"dhiogo@exemplo.com\",\n    \"password\": \"123456\"\n}",
+              "raw": "{\n    \"username\": \"username\",\n    \"email\": \"email@email.com\",\n    \"password\": \"123456\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -51,7 +51,9 @@
                   "    console.log(\"Token atualizado com sucesso!\");",
                   "}"
                 ],
-                "type": "text/javascript"
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             }
           ],
@@ -60,7 +62,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"dhiogo@exemplo.com\",\n    \"password\": \"123456\"\n}",
+              "raw": "{\n    \"email\": \"email@email.com\",\n    \"password\": \"123456\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -197,7 +199,40 @@
       }
     },
     {
-      "name": "04. Recursos",
+      "name": "04. Questões",
+      "item": [
+        {
+          "name": "Detalhes da Questão",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/questions/{{questionId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "questions",
+                "{{questionId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{token}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "05. Recursos",
       "item": [
         {
           "name": "Listar Recursos",
@@ -247,7 +282,7 @@
       }
     },
     {
-      "name": "05. Usuário",
+      "name": "06. Usuário",
       "item": [
         {
           "name": "Meu Perfil",
