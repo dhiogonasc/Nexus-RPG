@@ -1,12 +1,13 @@
 package com.nexus.nexusrpg.controller;
 
 import com.nexus.nexusrpg.controller.dto.question.QuestionDTO;
+import com.nexus.nexusrpg.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/missions")
+@RequestMapping("/questions")
 @RequiredArgsConstructor
 public class QuestionController {
 

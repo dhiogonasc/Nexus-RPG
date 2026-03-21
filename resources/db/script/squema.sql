@@ -365,8 +365,6 @@ CREATE TABLE
         CONSTRAINT uk_question_mission_order UNIQUE (mission_id, "order")
     );
 
-TRUNCATE TABLE "question" RESTART IDENTITY CASCADE;
-
 INSERT INTO
     "question" (
         mission_id,
@@ -375,15 +373,222 @@ INSERT INTO
         "order"
     )
 VALUES
-    (1, 'Question 1 - Mission 1', NULL, 1),
-    (1, 'Question 2 - Mission 1', NULL, 2),
-    (1, 'Question 3 - Mission 1', NULL, 3),
-    (2, 'Question 1 - Mission 2', NULL, 1),
-    (2, 'Question 2 - Mission 2', NULL, 2),
-    (2, 'Question 3 - Mission 2', NULL, 3),
-    (3, 'Question 1 - Mission 3', NULL, 1),
-    (3, 'Question 2 - Mission 3', NULL, 2),
-    (3, 'Question 3 - Mission 3', NULL, 3);
+    (
+        1,
+        'Question 1 - Mission 1 - Planet 1',
+        '// snippet',
+        1
+    ),
+    (
+        1,
+        'Question 2 - Mission 1 - Planet 1',
+        '// snippet',
+        2
+    ),
+    (
+        1,
+        'Question 3 - Mission 1 - Planet 1',
+        '// snippet',
+        3
+    ),
+    (
+        2,
+        'Question 1 - Mission 2 - Planet 1',
+        '// snippet',
+        1
+    ),
+    (
+        2,
+        'Question 2 - Mission 2 - Planet 1',
+        '// snippet',
+        2
+    ),
+    (
+        2,
+        'Question 3 - Mission 2 - Planet 1',
+        '// snippet',
+        3
+    ),
+    (
+        3,
+        'Question 1 - Mission 3 - Planet 1',
+        '// snippet',
+        1
+    ),
+    (
+        3,
+        'Question 2 - Mission 3 - Planet 1',
+        '// snippet',
+        2
+    ),
+    (
+        3,
+        'Question 3 - Mission 3 - Planet 1',
+        '// snippet',
+        3
+    ),
+    (
+        4,
+        'Question 1 - Mission 1 - Planet 2',
+        '// snippet',
+        1
+    ),
+    (
+        4,
+        'Question 2 - Mission 1 - Planet 2',
+        '// snippet',
+        2
+    ),
+    (
+        4,
+        'Question 3 - Mission 1 - Planet 2',
+        '// snippet',
+        3
+    ),
+    (
+        5,
+        'Question 1 - Mission 2 - Planet 2',
+        '// snippet',
+        1
+    ),
+    (
+        5,
+        'Question 2 - Mission 2 - Planet 2',
+        '// snippet',
+        2
+    ),
+    (
+        5,
+        'Question 3 - Mission 2 - Planet 2',
+        '// snippet',
+        3
+    ),
+    (
+        6,
+        'Question 1 - Mission 3 - Planet 2',
+        '// snippet',
+        1
+    ),
+    (
+        6,
+        'Question 2 - Mission 3 - Planet 2',
+        '// snippet',
+        2
+    ),
+    (
+        6,
+        'Question 3 - Mission 3 - Planet 2',
+        '// snippet',
+        3
+    ),
+    (
+        7,
+        'Question 1 - Mission 1 - Planet 3',
+        '// snippet',
+        1
+    ),
+    (
+        7,
+        'Question 2 - Mission 1 - Planet 3',
+        '// snippet',
+        2
+    ),
+    (
+        7,
+        'Question 3 - Mission 1 - Planet 3',
+        '// snippet',
+        3
+    ),
+    (
+        8,
+        'Question 1 - Mission 2 - Planet 3',
+        '// snippet',
+        1
+    ),
+    (
+        8,
+        'Question 2 - Mission 2 - Planet 3',
+        '// snippet',
+        2
+    ),
+    (
+        8,
+        'Question 3 - Mission 2 - Planet 3',
+        '// snippet',
+        3
+    ),
+    (
+        9,
+        'Question 1 - Mission 3 - Planet 3',
+        '// snippet',
+        1
+    ),
+    (
+        9,
+        'Question 2 - Mission 3 - Planet 3',
+        '// snippet',
+        2
+    ),
+    (
+        9,
+        'Question 3 - Mission 3 - Planet 3',
+        '// snippet',
+        3
+    ),
+    (
+        10,
+        'Question 1 - Mission 1 - Planet 4',
+        '// snippet',
+        1
+    ),
+    (
+        10,
+        'Question 2 - Mission 1 - Planet 4',
+        '// snippet',
+        2
+    ),
+    (
+        10,
+        'Question 3 - Mission 1 - Planet 4',
+        '// snippet',
+        3
+    ),
+    (
+        11,
+        'Question 1 - Mission 2 - Planet 4',
+        '// snippet',
+        1
+    ),
+    (
+        11,
+        'Question 2 - Mission 2 - Planet 4',
+        '// snippet',
+        2
+    ),
+    (
+        11,
+        'Question 3 - Mission 2 - Planet 4',
+        '// snippet',
+        3
+    ),
+    (
+        12,
+        'Question 1 - Mission 3 - Planet 4',
+        '// snippet',
+        1
+    ),
+    (
+        12,
+        'Question 2 - Mission 3 - Planet 4',
+        '// snippet',
+        2
+    ),
+    (
+        12,
+        'Question 3 - Mission 3 - Planet 4',
+        '// snippet',
+        3
+    );
 
 CREATE TABLE
     "alternative" (
