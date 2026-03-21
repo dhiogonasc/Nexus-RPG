@@ -4,6 +4,8 @@ import com.nexus.nexusrpg.model.enums.MissionDifficulty;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -38,4 +40,7 @@ public class Mission {
 
     @Column(name = "xp_bonus", nullable = false, columnDefinition = "xp")
     private long xpBonus;
+
+    @OneToMany(mappedBy = "mission")
+    private List<Question> questions;
 }
