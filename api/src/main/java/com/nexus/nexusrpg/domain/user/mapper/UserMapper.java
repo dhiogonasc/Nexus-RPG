@@ -73,7 +73,7 @@ public interface UserMapper {
                 .map(this::toUserResourceReferenceDTO)
                 .toList();
 
-        BigDecimal progress = BigDecimal.ZERO.setScale(2, HALF_UP);;
+        BigDecimal progress = BigDecimal.ZERO.setScale(2, HALF_UP);
 
         return new CollectedResourcesDTO(collectedList, progress);
     }
