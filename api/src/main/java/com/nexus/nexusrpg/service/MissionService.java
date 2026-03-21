@@ -2,11 +2,11 @@ package com.nexus.nexusrpg.service;
 
 import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionDTO;
 import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionReferenceDTO;
-import com.nexus.nexusrpg.mapper.UserMapper;
-import com.nexus.nexusrpg.model.relation.UserMission;
-import com.nexus.nexusrpg.model.relation.UserPlanet;
-import com.nexus.nexusrpg.repository.UserMissionRepository;
-import com.nexus.nexusrpg.repository.UserPlanetRepository;
+import com.nexus.nexusrpg.domain.user.UserMapper;
+import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
+import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
 import com.nexus.nexusrpg.validator.MissionValidator;
 import com.nexus.nexusrpg.validator.PlanetValidator;
 import lombok.RequiredArgsConstructor;

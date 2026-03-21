@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.model.relation;
+package com.nexus.nexusrpg.domain.user.model.relation;
 
 import com.nexus.nexusrpg.model.entity.Alternative;
 import com.nexus.nexusrpg.model.entity.Question;

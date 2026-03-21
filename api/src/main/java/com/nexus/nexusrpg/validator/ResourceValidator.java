@@ -2,11 +2,11 @@ package com.nexus.nexusrpg.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.model.entity.Resource;
-import com.nexus.nexusrpg.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.model.enums.EntityStatus;
-import com.nexus.nexusrpg.model.relation.UserPlanet;
-import com.nexus.nexusrpg.model.relation.UserResource;
-import com.nexus.nexusrpg.repository.UserPlanetRepository;
+import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.user.model.relation.UserResource;
+import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

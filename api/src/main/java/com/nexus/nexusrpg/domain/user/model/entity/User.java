@@ -1,8 +1,11 @@
-package com.nexus.nexusrpg.model.entity;
+package com.nexus.nexusrpg.domain.user.model.entity;
 
-import com.nexus.nexusrpg.model.relation.UserMission;
-import com.nexus.nexusrpg.model.relation.UserPlanet;
-import com.nexus.nexusrpg.model.relation.UserResource;
+import com.nexus.nexusrpg.model.entity.Level;
+import com.nexus.nexusrpg.model.entity.Mission;
+import com.nexus.nexusrpg.model.entity.Planet;
+import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.user.model.relation.UserResource;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

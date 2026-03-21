@@ -1,7 +1,7 @@
-package com.nexus.nexusrpg.repository;
+package com.nexus.nexusrpg.domain.user.repository.entity;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;

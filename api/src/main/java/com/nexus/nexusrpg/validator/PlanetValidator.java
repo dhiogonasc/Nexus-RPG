@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 

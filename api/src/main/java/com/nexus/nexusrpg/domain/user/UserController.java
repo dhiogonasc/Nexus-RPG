@@ -1,7 +1,6 @@
-package com.nexus.nexusrpg.controller;
+package com.nexus.nexusrpg.domain.user;
 
 import com.nexus.nexusrpg.controller.dto.user.UserDTO;
-import com.nexus.nexusrpg.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

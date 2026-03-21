@@ -1,7 +1,7 @@
-package com.nexus.nexusrpg.model.relation;
+package com.nexus.nexusrpg.domain.user.model.relation;
 
 import com.nexus.nexusrpg.model.entity.Resource;
-import com.nexus.nexusrpg.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 

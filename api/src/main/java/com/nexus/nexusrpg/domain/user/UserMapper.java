@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.mapper;
+package com.nexus.nexusrpg.domain.user;
 
 import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionDTO;
 import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionReferenceDTO;
@@ -8,10 +8,13 @@ import com.nexus.nexusrpg.controller.dto.global.resource.CollectedResourcesDTO;
 import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceDTO;
 import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceReferenceDTO;
 import com.nexus.nexusrpg.controller.dto.user.UserDTO;
-import com.nexus.nexusrpg.model.entity.User;
-import com.nexus.nexusrpg.model.relation.UserMission;
-import com.nexus.nexusrpg.model.relation.UserPlanet;
-import com.nexus.nexusrpg.model.relation.UserResource;
+import com.nexus.nexusrpg.mapper.LevelMapper;
+import com.nexus.nexusrpg.mapper.MissionMapper;
+import com.nexus.nexusrpg.mapper.PlanetMapper;
+import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.user.model.relation.UserResource;
 import org.mapstruct.*;
 
 import java.math.BigDecimal;
@@ -66,7 +69,7 @@ public interface UserMapper {
         }
 
         List<UserResourceReferenceDTO> collectedList = user.getResources().stream()
-                .filter(com.nexus.nexusrpg.model.relation.UserResource::isCollected)
+                .filter(UserResource::isCollected)
                 .map(this::toUserResourceReferenceDTO)
                 .toList();
 
