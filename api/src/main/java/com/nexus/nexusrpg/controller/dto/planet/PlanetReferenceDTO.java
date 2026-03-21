@@ -10,9 +10,6 @@ public record PlanetReferenceDTO(
         @Schema(description = "Nome")
         String name,
 
-        @Schema(description = "Descrição")
-        String description,
-
         @Schema(description = "Ordem de acesso")
         int order
 ) {}

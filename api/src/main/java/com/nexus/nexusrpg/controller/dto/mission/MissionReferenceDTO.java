@@ -12,9 +12,6 @@ public record MissionReferenceDTO(
         @Schema(description = "Nome")
         String name,
 
-        @Schema(description = "Descrição")
-        String description,
-
         @Schema(description = "Ordem de acesso")
         @Positive
         int order,
