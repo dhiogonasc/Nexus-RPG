@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "\"dto\"", uniqueConstraints = {
+@Table(name = "\"question\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_question_mission_order", columnNames = {"mission_id", "\"order\""})
 })
 public class Question {
@@ -33,6 +33,6 @@ public class Question {
     @Column(name = "\"order\"", nullable = false)
     private int order;
 
-    @OneToMany(mappedBy = "dto")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alternative> alternatives;
 }
