@@ -39,10 +39,14 @@ public class UserMission {
     private EntityStatus status = EntityStatus.UNLOCKED;
 
     @Builder.Default
+    @Column(name = "is_accessible", nullable = false)
+    private Boolean isAccessible = false;
+
+    @Builder.Default
     @Column(name = "\"best_result\"", nullable = false, columnDefinition = "score")
     private BigDecimal bestResult = BigDecimal.ZERO;
 
     @Builder.Default
-    @Column(name = "is_accessible", nullable = false)
-    private Boolean isAccessible = false;
+    @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
+    private BigDecimal progress = BigDecimal.ZERO;
 }

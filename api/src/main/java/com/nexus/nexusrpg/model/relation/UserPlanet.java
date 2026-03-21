@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
+import java.math.BigDecimal;
+
 import static com.nexus.nexusrpg.model.enums.EntityStatus.LOCKED;
 
 @Data
@@ -44,4 +46,8 @@ public class UserPlanet {
     @Builder.Default
     @Column(name = "is_accessible", nullable = false)
     private Boolean isAccessible = false;
+
+    @Builder.Default
+    @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
+    private BigDecimal progress = BigDecimal.ZERO;
 }
