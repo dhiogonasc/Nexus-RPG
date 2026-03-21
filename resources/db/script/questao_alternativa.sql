@@ -1,23 +1,32 @@
-INSERT INTO "question" (question_id, "description", "code_snippet", "order")
-VALUES
-    (1, 'Qual é a forma correta de declarar uma variável inteira em Java?', 'int x = 10;', 1),
-    (2, 'Qual é o tipo de dado adequado para armazenar o valor "true" ou "false"?', 'boolean isActive = true;', 2),
-    (3, 'Qual é o escopo de uma variável declarada dentro de um método em Java?', 'public void example() { int x = 10; }', 3);
+TRUNCATE TABLE "question" RESTART IDENTITY CASCADE;
 
-INSERT INTO "alternative" (question_id, "content", "feedback_tip", "is_correct")
+INSERT INTO "question" (mission_id, "description", "code_snippet", "order")
 VALUES
-    (1, 'int x = 10;', 'Correto! Em Java, variáveis inteiras são declaradas com "int".', true),
-    (1, 'integer x = 10;', 'Errado. O tipo correto para inteiros em Java é "int".', false),
-    (1, 'var x = 10;', 'Errado. "var" é um tipo implícito em Java, mas para int explicitamente usamos "int".', false);
+    (1, 'Question 1 - Mission 1', NULL, 1),
+    (1, 'Question 2 - Mission 1', NULL, 2),
+	(1, 'Question 3 - Mission 1', NULL, 3),
+	(2, 'Question 1 - Mission 2', NULL, 1),
+	(2, 'Question 2 - Mission 2', NULL, 2),
+	(2, 'Question 3 - Mission 2', NULL, 3),
+	(3, 'Question 1 - Mission 3', NULL, 1),
+	(3, 'Question 2 - Mission 3', NULL, 2),
+	(3, 'Question 3 - Mission 3', NULL, 3);
 
-INSERT INTO "alternative" (question_id, "content", "feedback_tip", "is_correct")
-VALUES
-    (2, 'boolean', 'Correto! O tipo "boolean" é usado para valores lógicos como "true" ou "false".', true),
-    (2, 'int', 'Errado. "int" é utilizado para números inteiros, não para valores booleanos.', false),
-    (2, 'char', 'Errado. "char" é usado para armazenar caracteres, não valores booleanos.', false);
-a
-INSERT INTO "alternative" (question_id, "content", "feedback_tip", "is_correct")
-VALUES
-    (3, 'Local', 'Correto! Variáveis dentro de um método têm escopo local e só podem ser acessadas dentro do método.', true),
-    (3, 'Global', 'Errado. Variáveis locais não são globais. Elas são visíveis apenas dentro do método.', false),
-    (3, 'Estático', 'Errado. Variáveis locais não são estáticas, elas pertencem ao escopo do método onde foram declaradas.', false);
+INSERT INTO "alternative" (question_id, "content", "feedback_tip", "is_correct") VALUES
+    (1, 'Content Alt 1 - Question 1', 'Feedback Alt 1 - Question 1', true),
+    (1, 'Content Alt 2 - Question 1', 'Feedback Alt 2 - Question 1', false),
+    (1, 'Content Alt 3 - Question 1', 'Feedback Alt 3 - Question 1', false),
+    (1, 'Content Alt 4 - Question 1', 'Feedback Alt 4 - Question 1', false),
+    (1, 'Content Alt 5 - Question 1', 'Feedback Alt 5 - Question 1', false),
+
+    (2, 'Content Alt 1 - Question 2', 'Feedback Alt 1 - Question 2', true),
+    (2, 'Content Alt 2 - Question 2', 'Feedback Alt 2 - Question 2', false),
+    (2, 'Content Alt 3 - Question 2', 'Feedback Alt 3 - Question 2', false),
+    (2, 'Content Alt 4 - Question 2', 'Feedback Alt 4 - Question 2', false),
+    (2, 'Content Alt 5 - Question 2', 'Feedback Alt 5 - Question 2', false),
+    
+    (3, 'Content Alt 1 - Question 3', 'Feedback Alt 1 - Question 3', true),
+    (3, 'Content Alt 2 - Question 3', 'Feedback Alt 2 - Question 3', false),
+    (3, 'Content Alt 3 - Question 3', 'Feedback Alt 3 - Question 3', false),
+    (3, 'Content Alt 4 - Question 3', 'Feedback Alt 4 - Question 3', false),
+    (3, 'Content Alt 5 - Question 3', 'Feedback Alt 5 - Question 3', false);
