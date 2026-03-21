@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.config;
+package com.nexus.nexusrpg.core.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

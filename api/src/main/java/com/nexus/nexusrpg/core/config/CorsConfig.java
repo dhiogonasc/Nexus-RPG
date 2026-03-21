@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.config;
+package com.nexus.nexusrpg.core.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

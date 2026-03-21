@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.validator;
 
-import com.nexus.nexusrpg.exception.BusinessException;
+import com.nexus.nexusrpg.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;

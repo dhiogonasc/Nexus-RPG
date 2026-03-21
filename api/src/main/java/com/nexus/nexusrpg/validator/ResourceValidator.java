@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.validator;
 
-import com.nexus.nexusrpg.exception.BusinessException;
+import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.model.entity.Resource;
 import com.nexus.nexusrpg.model.entity.User;
 import com.nexus.nexusrpg.model.enums.EntityStatus;

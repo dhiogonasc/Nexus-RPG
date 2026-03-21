@@ -1,9 +1,7 @@
 package com.nexus.nexusrpg.repository;
 
-import com.nexus.nexusrpg.exception.BusinessException;
+import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.model.entity.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;

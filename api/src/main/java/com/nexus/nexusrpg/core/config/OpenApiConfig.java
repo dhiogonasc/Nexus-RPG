@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.config;
+package com.nexus.nexusrpg.core.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.service;
 
 import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceDTO;
 import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceReferenceDTO;
-import com.nexus.nexusrpg.exception.BusinessException;
+import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.mapper.UserMapper;
 import com.nexus.nexusrpg.model.relation.UserResource;
 import com.nexus.nexusrpg.repository.UserPlanetRepository;

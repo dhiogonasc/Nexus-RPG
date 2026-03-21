@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.service;
 import com.nexus.nexusrpg.controller.dto.auth.request.LoginRequestDTO;
 import com.nexus.nexusrpg.controller.dto.auth.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.controller.dto.auth.response.LoginResponseDTO;
-import com.nexus.nexusrpg.exception.BusinessException;
+import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.model.entity.Level;
 import com.nexus.nexusrpg.model.entity.User;
 import com.nexus.nexusrpg.model.enums.EntityStatus;
