@@ -8,6 +8,7 @@ public record UserMissionDTO(
 
         MissionDTO mission,
         EntityStatus status,
+        Boolean isAccessible,
         BigDecimal bestResult,
-        Boolean isAccessible
+        BigDecimal progress
 ) {}

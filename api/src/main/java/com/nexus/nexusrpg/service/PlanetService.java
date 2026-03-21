@@ -70,7 +70,8 @@ public class PlanetService {
         return new UserPlanetDTO(
                 planet,
                 userPlanet.status(),
-                userPlanet.isAccessible()
+                userPlanet.isAccessible(),
+                userPlanet.progress()
         );
     }
 }
