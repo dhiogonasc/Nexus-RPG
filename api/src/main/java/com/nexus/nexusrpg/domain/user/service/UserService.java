@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.user.service;
 
-import com.nexus.nexusrpg.controller.dto.user.UserDTO;
+import com.nexus.nexusrpg.domain.user.controller.dto.UserDTO;
 import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.repository.entity.UserRepository;

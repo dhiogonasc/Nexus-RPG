@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.user.model.relation;
 
-import com.nexus.nexusrpg.model.entity.Mission;
+import com.nexus.nexusrpg.domain.mission.model.Mission;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
-import com.nexus.nexusrpg.model.enums.EntityStatus;
+import com.nexus.nexusrpg.common.enums.EntityStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcType;

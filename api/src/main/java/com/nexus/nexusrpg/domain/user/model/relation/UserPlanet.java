@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.user.model.relation;
 
-import com.nexus.nexusrpg.model.entity.Planet;
+import com.nexus.nexusrpg.domain.planet.model.Planet;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
-import com.nexus.nexusrpg.model.enums.EntityStatus;
+import com.nexus.nexusrpg.common.enums.EntityStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 
-import static com.nexus.nexusrpg.model.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
 
 @Data
 @Builder

@@ -1,16 +1,16 @@
 package com.nexus.nexusrpg.domain.user.mapper;
 
-import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionDTO;
-import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionReferenceDTO;
-import com.nexus.nexusrpg.controller.dto.user.planet.UserPlanetDTO;
-import com.nexus.nexusrpg.controller.dto.user.planet.UserPlanetReferenceDTO;
-import com.nexus.nexusrpg.controller.dto.global.resource.CollectedResourcesDTO;
-import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceDTO;
-import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceReferenceDTO;
-import com.nexus.nexusrpg.controller.dto.user.UserDTO;
-import com.nexus.nexusrpg.mapper.LevelMapper;
-import com.nexus.nexusrpg.mapper.MissionMapper;
-import com.nexus.nexusrpg.mapper.PlanetMapper;
+import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
+import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
+import com.nexus.nexusrpg.domain.user.controller.dto.planet.UserPlanetDTO;
+import com.nexus.nexusrpg.domain.user.controller.dto.planet.UserPlanetReferenceDTO;
+import com.nexus.nexusrpg.domain.resource.controller.dto.CollectedResourcesDTO;
+import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceDTO;
+import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceReferenceDTO;
+import com.nexus.nexusrpg.domain.user.controller.dto.UserDTO;
+import com.nexus.nexusrpg.domain.level.mapper.LevelMapper;
+import com.nexus.nexusrpg.domain.mission.mapper.MissionMapper;
+import com.nexus.nexusrpg.domain.planet.mapper.PlanetMapper;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
