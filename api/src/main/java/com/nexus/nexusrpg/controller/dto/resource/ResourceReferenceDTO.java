@@ -8,8 +8,5 @@ public record ResourceReferenceDTO(
         Long id,
 
         @Schema(description = "Nome")
-        String name,
-
-        @Schema(description = "Descrição")
-        String description
+        String name
 ){}

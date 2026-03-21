@@ -25,6 +25,7 @@ public interface UserMapper {
 
     @Mapping(target = "currentPlanet", expression = "java(mapCurrentPlanet(user))")
     @Mapping(target = "currentMission", expression = "java(mapCurrentMission(user))")
+    @Mapping(target = "collectedResources", expression = "java(mapCollectedResources(user.getResources()))")
     UserDTO toDTO(User user);
 
 
@@ -65,6 +66,15 @@ public interface UserMapper {
         return userPlanet.getUser().getMissions().stream()
                 .filter(um -> um.getMission().getPlanet().getId().equals(planetId))
                 .map(this::toUserMissionReferenceDTO)
+                .toList();
+    }
+
+    default List<UserResourceReferenceDTO> mapCollectedResources(List<UserResource> resources) {
+        if (resources == null) return List.of();
+
+        return resources.stream()
+                .filter(UserResource::isCollected) // O segredo está aqui
+                .map(this::toUserResourceReferenceDTO)
                 .toList();
     }
 
