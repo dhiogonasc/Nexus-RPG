@@ -1,7 +1,7 @@
-package com.nexus.nexusrpg.controller.dto.planet;
+package com.nexus.nexusrpg.controller.dto.global.planet;
 
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
-import com.nexus.nexusrpg.controller.dto.resource.UserResourceReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceReferenceDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;

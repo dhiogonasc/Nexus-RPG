@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.service;
 
-import com.nexus.nexusrpg.controller.dto.question.QuestionDTO;
+import com.nexus.nexusrpg.controller.dto.global.question.QuestionDTO;
 import com.nexus.nexusrpg.mapper.QuestionMapper;
 import com.nexus.nexusrpg.model.entity.Question;
 import com.nexus.nexusrpg.model.relation.UserMission;

@@ -1,5 +1,6 @@
-package com.nexus.nexusrpg.controller.dto.mission;
+package com.nexus.nexusrpg.controller.dto.user.mission;
 
+import com.nexus.nexusrpg.controller.dto.global.mission.MissionReferenceDTO;
 import com.nexus.nexusrpg.model.enums.EntityStatus;
 
 import java.math.BigDecimal;

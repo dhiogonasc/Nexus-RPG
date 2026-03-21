@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.exception;
 
-import com.nexus.nexusrpg.controller.dto.ErrorDTO;
+import com.nexus.nexusrpg.controller.dto.exception.ErrorDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

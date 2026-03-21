@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.controller.dto;
+package com.nexus.nexusrpg.controller.dto.exception;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;

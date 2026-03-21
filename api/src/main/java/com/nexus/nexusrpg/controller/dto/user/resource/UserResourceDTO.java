@@ -1,4 +1,6 @@
-package com.nexus.nexusrpg.controller.dto.resource;
+package com.nexus.nexusrpg.controller.dto.user.resource;
+
+import com.nexus.nexusrpg.controller.dto.global.resource.ResourceDTO;
 
 import java.time.LocalDateTime;
 

@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.service;
 
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
-import com.nexus.nexusrpg.controller.dto.planet.PlanetDTO;
-import com.nexus.nexusrpg.controller.dto.planet.UserPlanetDTO;
-import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.global.planet.PlanetDTO;
+import com.nexus.nexusrpg.controller.dto.user.planet.UserPlanetDTO;
+import com.nexus.nexusrpg.controller.dto.user.planet.UserPlanetReferenceDTO;
 import com.nexus.nexusrpg.exception.BusinessException;
 import com.nexus.nexusrpg.mapper.UserMapper;
 import com.nexus.nexusrpg.model.entity.User;

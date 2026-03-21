@@ -1,6 +1,4 @@
-package com.nexus.nexusrpg.controller.dto.question;
-
-import com.nexus.nexusrpg.controller.dto.alternative.AlternativeDTO;
+package com.nexus.nexusrpg.controller.dto.global.question;
 
 import java.util.List;
 

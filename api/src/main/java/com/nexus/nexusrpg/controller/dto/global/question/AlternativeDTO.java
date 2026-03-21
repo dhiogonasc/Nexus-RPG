@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.controller.dto.alternative;
+package com.nexus.nexusrpg.controller.dto.global.question;
 
 public record AlternativeDTO(
 

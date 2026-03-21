@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.controller.dto.planet;
+package com.nexus.nexusrpg.controller.dto.global.planet;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

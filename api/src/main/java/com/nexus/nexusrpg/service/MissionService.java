@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.service;
 
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionDTO;
+import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.mapper.UserMapper;
 import com.nexus.nexusrpg.model.relation.UserMission;
 import com.nexus.nexusrpg.model.relation.UserPlanet;

@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.controller;
 
-import com.nexus.nexusrpg.controller.dto.resource.UserResourceDTO;
-import com.nexus.nexusrpg.controller.dto.resource.UserResourceReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceDTO;
+import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceReferenceDTO;
 import com.nexus.nexusrpg.service.ResourceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.controller;
 
-import com.nexus.nexusrpg.controller.dto.UserDTO;
+import com.nexus.nexusrpg.controller.dto.user.UserDTO;
 import com.nexus.nexusrpg.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

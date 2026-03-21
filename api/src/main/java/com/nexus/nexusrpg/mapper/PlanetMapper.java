@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.mapper;
 
-import com.nexus.nexusrpg.controller.dto.planet.PlanetDTO;
+import com.nexus.nexusrpg.controller.dto.global.planet.PlanetDTO;
 import com.nexus.nexusrpg.model.entity.Planet;
 import org.mapstruct.Mapper;
 

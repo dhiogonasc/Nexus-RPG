@@ -1,13 +1,13 @@
 package com.nexus.nexusrpg.mapper;
 
-import com.nexus.nexusrpg.controller.dto.*;
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
-import com.nexus.nexusrpg.controller.dto.planet.UserPlanetDTO;
-import com.nexus.nexusrpg.controller.dto.planet.UserPlanetReferenceDTO;
-import com.nexus.nexusrpg.controller.dto.resource.CollectedResourcesDTO;
-import com.nexus.nexusrpg.controller.dto.resource.UserResourceDTO;
-import com.nexus.nexusrpg.controller.dto.resource.UserResourceReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionDTO;
+import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.user.planet.UserPlanetDTO;
+import com.nexus.nexusrpg.controller.dto.user.planet.UserPlanetReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.global.resource.CollectedResourcesDTO;
+import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceDTO;
+import com.nexus.nexusrpg.controller.dto.user.resource.UserResourceReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.user.UserDTO;
 import com.nexus.nexusrpg.model.entity.User;
 import com.nexus.nexusrpg.model.relation.UserMission;
 import com.nexus.nexusrpg.model.relation.UserPlanet;
@@ -15,7 +15,6 @@ import com.nexus.nexusrpg.model.relation.UserResource;
 import org.mapstruct.*;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 import static java.math.RoundingMode.HALF_UP;

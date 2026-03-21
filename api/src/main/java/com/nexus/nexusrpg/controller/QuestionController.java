@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.controller;
 
-import com.nexus.nexusrpg.controller.dto.question.QuestionDTO;
+import com.nexus.nexusrpg.controller.dto.global.question.QuestionDTO;
 import com.nexus.nexusrpg.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

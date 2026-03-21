@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.controller;
 
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionDTO;
-import com.nexus.nexusrpg.controller.dto.mission.UserMissionReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionDTO;
+import com.nexus.nexusrpg.controller.dto.user.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.service.MissionService;
 import lombok.*;
 import org.springdoc.core.annotations.ParameterObject;

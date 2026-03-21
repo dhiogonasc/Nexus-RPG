@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.controller.dto.mission;
+package com.nexus.nexusrpg.controller.dto.global.mission;
 
 import com.nexus.nexusrpg.model.enums.MissionDifficulty;
 import io.swagger.v3.oas.annotations.media.Schema;

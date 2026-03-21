@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.controller.dto;
+package com.nexus.nexusrpg.controller.dto.global.level;
 
 import com.nexus.nexusrpg.model.enums.LevelLabel;
 import io.swagger.v3.oas.annotations.media.Schema;

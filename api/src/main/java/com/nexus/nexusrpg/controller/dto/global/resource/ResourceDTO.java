@@ -1,6 +1,6 @@
-package com.nexus.nexusrpg.controller.dto.resource;
+package com.nexus.nexusrpg.controller.dto.global.resource;
 
-import com.nexus.nexusrpg.controller.dto.planet.PlanetReferenceDTO;
+import com.nexus.nexusrpg.controller.dto.global.planet.PlanetReferenceDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public record ResourceDTO(
