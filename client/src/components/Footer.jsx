@@ -6,8 +6,8 @@ import { styles } from '@/styles/FooterStyle';
 export default function Footer() {
   const handleExit = () => {
     Alert.alert(
-      "Confirmar Saída",
-      "Tem certeza que deseja sair do Nexus-RPG?",
+      "Certeza q vai sair?",
+      "Vai sair pra q mlk, volta!",
       [
         {
           text: "Cancelar",

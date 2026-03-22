@@ -13,7 +13,7 @@ import {
 
 import { styles } from '@/styles/indexStyles';
 
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import EmailInput from '@/components/EmailInput';
 import PasswordInput from '@/components/PasswordInput';
@@ -37,6 +37,8 @@ export default function index() {
     await storage.saveToken(data.token);
     
     console.log("Login realizado com sucesso em:", data.loggedInAt);
+
+    router.replace('/homePage');
     
   } catch (error) {
     console.error("Erro ao logar", error);
@@ -103,9 +105,9 @@ export default function index() {
           </View>
 
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Link href={"/homePage"}>
+            
             <Text style={styles.buttonText}>Entrar</Text>
-            </Link>
+            
           </TouchableOpacity>
 
           <View style={styles.registerContainer}>
