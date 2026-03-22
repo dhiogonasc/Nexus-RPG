@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MissionValidator {
+
     public void isAccessible(UserMission userMission) {
 
         if(!userMission.getIsAccessible()){

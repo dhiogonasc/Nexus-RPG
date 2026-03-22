@@ -31,4 +31,20 @@ public class MissionController {
 
         return ResponseEntity.ok(missionService.getMission(id));
     }
+
+    @PostMapping("/{id}/attempts")
+    public ResponseEntity<Void> start(@PathVariable Long id) {
+
+        missionService.start(id);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("attempts/{id}")
+    public ResponseEntity<Void> finish(@PathVariable Long id) {
+
+        missionService.finish(id);
+
+        return ResponseEntity.ok().build();
+    }
 }
