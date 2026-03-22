@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.mission.service;
 
 import com.nexus.nexusrpg.domain.mission.validator.AttemptValidator;
+import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
@@ -69,7 +70,7 @@ public class MissionService {
     }
 
     @Transactional
-    public void start(Long missionId) {
+    public UserMissionAttemptDTO start(Long missionId) {
 
         UserMission userMission = getUserMission(missionId);
 
@@ -82,11 +83,11 @@ public class MissionService {
                 .startAt(LocalDateTime.now())
                 .build();
 
-        attemptRepository.save(newAttempt);
+        return userMapper.toUserMissionAttemptDTO(attemptRepository.save(newAttempt));
     }
 
     @Transactional
-    public void finish(Long attemptId) {
+    public UserMissionAttemptDTO finish(Long attemptId) {
 
         UserMissionAttempt attempt = attemptRepository.findByIdOrThrow(attemptId);
 
@@ -104,6 +105,8 @@ public class MissionService {
 
         attemptRepository.save(attempt);
         userMissionRepository.save(userMission);
+
+        return userMapper.toUserMissionAttemptDTO(attempt);
     }
 
     private UserMission getUserMission(Long missionId) {

@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.user.mapper;
 
+import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.planet.UserPlanetDTO;
@@ -13,6 +14,7 @@ import com.nexus.nexusrpg.domain.mission.mapper.MissionMapper;
 import com.nexus.nexusrpg.domain.planet.mapper.PlanetMapper;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.user.model.relation.UserMissionAttempt;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.user.model.relation.UserResource;
 import org.mapstruct.*;
@@ -95,4 +97,5 @@ public interface UserMapper {
     UserPlanetReferenceDTO toUserPlanetReferenceDTO(UserPlanet userPlanet);
     UserMissionReferenceDTO toUserMissionReferenceDTO(UserMission userMission);
     UserResourceReferenceDTO toUserResourceReferenceDTO(UserResource userResource);
+    UserMissionAttemptDTO toUserMissionAttemptDTO(UserMissionAttempt attempt);
 }

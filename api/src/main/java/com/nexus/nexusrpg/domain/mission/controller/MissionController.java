@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.mission.controller;
 
+import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.mission.service.MissionService;
@@ -33,18 +34,14 @@ public class MissionController {
     }
 
     @PostMapping("/{id}/attempts")
-    public ResponseEntity<Void> start(@PathVariable Long id) {
+    public ResponseEntity<UserMissionAttemptDTO> start(@PathVariable Long id) {
 
-        missionService.start(id);
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(missionService.start(id));
     }
 
     @PutMapping("attempts/{id}")
-    public ResponseEntity<Void> finish(@PathVariable Long id) {
+    public ResponseEntity<UserMissionAttemptDTO> finish(@PathVariable Long id) {
 
-        missionService.finish(id);
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(missionService.finish(id));
     }
 }
