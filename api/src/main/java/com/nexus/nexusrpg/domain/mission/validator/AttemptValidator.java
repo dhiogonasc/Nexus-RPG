@@ -12,8 +12,8 @@ public class AttemptValidator {
 
     public void isActive(UserMissionAttempt attempt) {
 
-        if(!isNull(attempt.getEndAt())){
-            throw new BusinessException("Attempt", "Tentativa não iniciada ou já finalizada!", HttpStatus.BAD_REQUEST);
+        if(isNull(attempt.getEndAt())){
+            throw new BusinessException("Attempt", "Tentativa não finalizada!", HttpStatus.BAD_REQUEST);
         }
     }
 }

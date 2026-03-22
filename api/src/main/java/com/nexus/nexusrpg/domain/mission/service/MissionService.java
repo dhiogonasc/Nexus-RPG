@@ -73,7 +73,7 @@ public class MissionService {
 
         UserMission userMission = getUserMission(missionId);
 
-        //validar tentativa em curso
+        missionValidator.isAccessible(userMission);
 
         UserMissionAttempt attempt = UserMissionAttempt.builder()
                 .userMission(userMission)
