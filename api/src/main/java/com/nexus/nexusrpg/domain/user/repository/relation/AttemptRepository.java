@@ -26,4 +26,5 @@ public interface AttemptRepository extends JpaRepository<UserMissionAttempt, Lon
                 .orElseThrow(() -> new BusinessException("Attempt", "Nenhum registro encontrado!", HttpStatus.BAD_REQUEST));
     }
 
+    boolean existsByUserMissionIdAndEndAtIsNull(Long id);
 }

@@ -75,12 +75,14 @@ public class MissionService {
 
         missionValidator.isAccessible(userMission);
 
-        UserMissionAttempt attempt = UserMissionAttempt.builder()
+        attemptValidator.hasActiveAttempt(missionId);
+
+        UserMissionAttempt newAttempt = UserMissionAttempt.builder()
                 .userMission(userMission)
                 .startAt(LocalDateTime.now())
                 .build();
 
-        attemptRepository.save(attempt);
+        attemptRepository.save(newAttempt);
     }
 
     @Transactional
