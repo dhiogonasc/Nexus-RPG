@@ -1,5 +1,7 @@
 package com.nexus.nexusrpg.domain.planet.service;
 
+import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.domain.mission.service.MissionService;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.planet.controller.dto.PlanetDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.planet.UserPlanetDTO;
@@ -7,7 +9,9 @@ import com.nexus.nexusrpg.domain.user.controller.dto.planet.UserPlanetReferenceD
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.user.repository.entity.UserRepository;
 import com.nexus.nexusrpg.domain.auth.service.AuthService;
@@ -24,11 +28,13 @@ import java.util.List;
 public class PlanetService {
 
     private final AuthService authService;
+    private final MissionService missionService;
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
 
     private final UserPlanetRepository userPlanetRepository;
+    private final UserMissionRepository userMissionRepository;
 
     private final PlanetValidator planetValidator;
 

@@ -28,4 +28,14 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
             @Param("planetId") Long planetId,
             Pageable pageable
     );
+
+    @Query("SELECT um FROM UserMission um " +
+            "WHERE um.user.id = :userId " +
+            "AND um.mission.planet.id = :planetId " +
+            "AND um.mission.order = :order")
+    Optional<UserMission> findByUserIdAndPlanetIdAndMissionOrder(
+            @Param("userId") Long userId,
+            @Param("planetId") Long planetId,
+            @Param("order") int order
+    );
 }

@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.mission.service;
 
+import com.nexus.nexusrpg.common.service.UnlockService;
 import com.nexus.nexusrpg.domain.mission.validator.AttemptValidator;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
@@ -26,8 +27,10 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Service
 public class MissionService {
+    private final BigDecimal AVG = BigDecimal.valueOf(7.00);
 
     private final AuthService authService;
+    private final UnlockService unlockService;
 
     private final UserMapper userMapper;
 
@@ -72,10 +75,10 @@ public class MissionService {
     @Transactional
     public UserMissionAttemptDTO start(Long missionId) {
 
-        UserMission userMission = getUserMission(missionId);
+        Long userId = authService.getAuthenticatedUser().getId();
+        UserMission userMission = userMissionRepository.findByUserIdAndMissionIdOrThrow(userId, missionId);
 
         missionValidator.isAccessible(userMission);
-
         attemptValidator.hasActiveAttempt(missionId);
 
         UserMissionAttempt newAttempt = UserMissionAttempt.builder()
@@ -94,25 +97,28 @@ public class MissionService {
         attemptValidator.isActive(attempt);
 
         attempt.setEndAt(LocalDateTime.now());
-        BigDecimal currentResult = BigDecimal.valueOf(10); // valor estático temporário
+        BigDecimal currentResult = BigDecimal.valueOf(10);
         attempt.setResult(currentResult);
 
         UserMission userMission = attempt.getUserMission();
+        UserPlanet userPlanet = userPlanetRepository
+                .findByUserIdAndPlanetIdOrThrow(
+                        userMission.getUser().getId(),
+                        userMission.getMission().getPlanet().getId()
+                );
 
-        if(userMission.getBestResult() == null || currentResult.compareTo(userMission.getBestResult()) > 0) {
+        if (userMission.getBestResult() == null || currentResult.compareTo(userMission.getBestResult()) > 0) {
+
             userMission.setBestResult(currentResult);
+
+            if (currentResult.compareTo(AVG) > 0) {
+                unlockService.completeMission(userMission);
+            }
         }
 
-        attemptRepository.save(attempt);
         userMissionRepository.save(userMission);
+        attemptRepository.save(attempt);
 
         return userMapper.toUserMissionAttemptDTO(attempt);
-    }
-
-    private UserMission getUserMission(Long missionId) {
-
-        Long userId = authService.getAuthenticatedUser().getId();
-
-        return userMissionRepository.findByUserIdAndMissionIdOrThrow(userId, missionId);
     }
 }
