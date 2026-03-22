@@ -101,11 +101,6 @@ public class MissionService {
         attempt.setResult(currentResult);
 
         UserMission userMission = attempt.getUserMission();
-        UserPlanet userPlanet = userPlanetRepository
-                .findByUserIdAndPlanetIdOrThrow(
-                        userMission.getUser().getId(),
-                        userMission.getMission().getPlanet().getId()
-                );
 
         if (userMission.getBestResult() == null || currentResult.compareTo(userMission.getBestResult()) > 0) {
 
