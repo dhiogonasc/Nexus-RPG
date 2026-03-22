@@ -1,0 +1,42 @@
+package com.nexus.nexusrpg.validator;
+
+import com.nexus.nexusrpg.exception.BusinessException;
+import com.nexus.nexusrpg.model.entity.Resource;
+import com.nexus.nexusrpg.model.entity.User;
+import com.nexus.nexusrpg.model.enums.EntityStatus;
+import com.nexus.nexusrpg.model.relation.UserPlanet;
+import com.nexus.nexusrpg.model.relation.UserResource;
+import com.nexus.nexusrpg.repository.UserPlanetRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+
+@RequiredArgsConstructor
+@Component
+public class ResourceValidator {
+
+    private final UserPlanetRepository userPlanetRepository;
+
+    public void isCollectable(UserResource userResource) {
+
+        User user = userResource.getUser();
+        Resource resource = userResource.getResource();
+
+        if (user == null || resource == null || resource.getPlanet() == null) {
+            throw new BusinessException("Data", "Dados de vínculo incompletos.", HttpStatus.BAD_REQUEST);
+        }
+
+        UserPlanet userPlanet = userPlanetRepository.findByUserIdAndPlanetIdOrThrow(
+                user.getId(),
+                resource.getPlanet().getId()
+        );
+
+        if (userPlanet.getStatus() != EntityStatus.COMPLETED) {
+            throw new BusinessException("Planet", "Acesso negado: complete o planeta primeiro!", HttpStatus.FORBIDDEN);
+        }
+
+        if (userResource.isCollected()) {
+            throw new BusinessException("Resource", "Este recurso já foi extraído.", HttpStatus.CONFLICT);
+        }
+    }
+}

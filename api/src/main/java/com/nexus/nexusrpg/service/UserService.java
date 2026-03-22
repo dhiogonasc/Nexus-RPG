@@ -1,0 +1,26 @@
+package com.nexus.nexusrpg.service;
+
+import com.nexus.nexusrpg.controller.dto.UserDTO;
+import com.nexus.nexusrpg.mapper.UserMapper;
+import com.nexus.nexusrpg.model.entity.User;
+import com.nexus.nexusrpg.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class UserService {
+
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
+
+    public UserDTO getMe() {
+
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        User me = userRepository.findByEmailOrThrow(email);
+
+        return userMapper.toDTO(me);
+    }
+}
