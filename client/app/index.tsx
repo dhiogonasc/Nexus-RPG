@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   KeyboardAvoidingView,
   Platform,
   Image,
@@ -113,9 +112,15 @@ export default function index() {
           <View style={styles.registerContainer}>
             <Text style={styles.registerButton}> Não possui conta? </Text>
             <Link href="/register" style={styles.registerLink}>
-              Registrar-se
+              Registrar-se 
             </Link>
           </View>
+          
+            <Text style={{ textAlign: 'center', color: '#fff', marginTop: 20 }}>
+              <Link href="/homePage" style={styles.registerLink}>
+                 HOME 
+              </Link>
+            </Text>
 
           <Image
             source={require('../assets/LogoNexus.jpg')}

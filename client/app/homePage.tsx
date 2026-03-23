@@ -1,10 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAreaView, StatusBar, Image, ImageBackground } from 'react-native';
+import { StyleSheet, 
+  Text, 
+  View, 
+  ScrollView, 
+  TouchableOpacity, 
+  StatusBar, 
+  Image, 
+} from 'react-native';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { HomeStyles } from '@/styles/homePageStyles';
 import { LinearGradient } from 'expo-linear-gradient';
+
+
 import PlanetCarousel from '@/components/PlanetCarousel';
-import Footer from '@/components/Footer.jsx';
+import Footer from '@/components/FooterBar.jsx';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
