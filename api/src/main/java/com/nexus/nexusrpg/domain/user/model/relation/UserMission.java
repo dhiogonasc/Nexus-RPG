@@ -10,6 +10,8 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 
+import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -36,7 +38,7 @@ public class UserMission {
     @Enumerated(EnumType.STRING)
     @JdbcType(PostgreSQLEnumJdbcType.class)
     @Column(name = "\"status\"", nullable = false, columnDefinition = "entity_status")
-    private EntityStatus status = EntityStatus.UNLOCKED;
+    private EntityStatus status = LOCKED;
 
     @Builder.Default
     @Column(name = "is_accessible", nullable = false)
