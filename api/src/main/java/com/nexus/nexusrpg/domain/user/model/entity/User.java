@@ -41,14 +41,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "level_id", nullable = false)
     private Level level;
 
-    @ManyToOne
-    @JoinColumn(name = "planet_id")
-    private Planet currentPlanet;
-
-    @ManyToOne
-    @JoinColumn(name = "mission_id")
-    private Mission currentMission;
-
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserPlanet> planets = new ArrayList<>();
@@ -68,7 +60,6 @@ public class User implements UserDetails {
     @Builder.Default
     @Column(name = "\"oxygen\"", nullable = false, columnDefinition = "oxygen")
     private int oxygen = 10;
-
 
     @Override
     public String getUsername() { return this.username; }

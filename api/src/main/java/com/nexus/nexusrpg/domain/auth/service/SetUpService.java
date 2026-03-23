@@ -44,6 +44,7 @@ public class SetUpService {
                             .planet(p)
                             .status(isFirst ? EntityStatus.UNLOCKED : EntityStatus.LOCKED)
                             .isAccessible(isFirst)
+                            .isCurrent(isFirst)
                             .build();
                 })
                 .toList();
@@ -53,7 +54,6 @@ public class SetUpService {
                 .findFirst()
                 .orElseThrow(() -> new BusinessException("Planet", "Planeta 1 não encontrado", HttpStatus.NOT_FOUND));
 
-        user.setCurrentPlanet(firstUP.getPlanet());
         user.getPlanets().addAll(userPlanets);
     }
 
@@ -67,6 +67,7 @@ public class SetUpService {
                             .mission(m)
                             .status(isFirst ? EntityStatus.UNLOCKED : EntityStatus.LOCKED)
                             .isAccessible(isFirst)
+                            .isCurrent(isFirst)
                             .build();
                 })
                 .toList();
@@ -76,7 +77,6 @@ public class SetUpService {
                 .findFirst()
                 .orElseThrow(() -> new BusinessException("Mission", "Missão 1 não encontrada", HttpStatus.NOT_FOUND));
 
-        user.setCurrentMission(firstUM.getMission());
         user.getMissions().addAll(userMissions);
     }
 

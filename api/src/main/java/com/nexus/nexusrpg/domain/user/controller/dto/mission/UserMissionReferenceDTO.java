@@ -10,6 +10,7 @@ public record UserMissionReferenceDTO(
         MissionReferenceDTO mission,
         EntityStatus status,
         Boolean isAccessible,
+        Boolean isCurrent,
         BigDecimal bestResult,
         BigDecimal progress
 ) {}

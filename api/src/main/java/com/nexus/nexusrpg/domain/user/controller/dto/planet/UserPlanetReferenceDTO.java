@@ -10,5 +10,6 @@ public record UserPlanetReferenceDTO(
         PlanetReferenceDTO planet,
         EntityStatus status,
         boolean isAccessible,
+        boolean isCurrent,
         BigDecimal progress
 ) {}

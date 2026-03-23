@@ -109,13 +109,13 @@ public class ProgressService {
                 .findByUserIdAndPlanetIdAndMissionOrder(userId, planetId, missionOrder)
                 .ifPresent(m -> unlockMission(user, m));
 
-        user.setCurrentPlanet(nextPlanet.getPlanet());
+        nextPlanet.setIsCurrent(true);
     }
 
     private void unlockMission(User user, UserMission nextMission) {
 
         nextMission.unlock();
-        user.setCurrentMission(nextMission.getMission());
+        nextMission.setIsCurrent(true);
     }
 
     private void updatePlanetProgress(User user, Planet planet){
@@ -146,28 +146,6 @@ public class ProgressService {
 
         resourceValidator.isCollectable(ur);
         ur.collect();
-
-        updateCollectProgress(user, resource);
-    }
-
-    private void updateCollectProgress(User user, Resource resource){
-
-        Long userId = user.getId();
-        Long resourceId = resource.getId();
-
-        UserResource ur = userResourceRepository
-                .findByUserIdAndResourceIdOrThrow(userId, resourceId);
-
-        long totalResources = userResourceRepository
-                .countByUserId(userId);
-        long collectedResources = userResourceRepository
-                .countCollectedByUserId(userId);
-
-        BigDecimal progress = BigDecimal.valueOf(collectedResources)
-                .divide(BigDecimal.valueOf(totalResources), 2, RoundingMode.HALF_UP)
-                .multiply(BigDecimal.valueOf(100));
-
-        ur.setProgress(progress);
     }
 
     private void updateUserLevel(User user) {

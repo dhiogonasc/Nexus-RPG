@@ -13,8 +13,6 @@ DROP TABLE IF EXISTS "user_planet" CASCADE;
 
 DROP TABLE IF EXISTS "user_achievement" CASCADE;
 
-DROP TABLE IF EXISTS "user_stat" CASCADE;
-
 DROP TABLE IF EXISTS "alternative" CASCADE;
 
 DROP TABLE IF EXISTS "question" CASCADE;
@@ -148,8 +146,6 @@ CREATE TABLE
         "email" varchar(255) NOT NULL,
         "password" varchar(255) NOT NULL,
         level_id bigint NOT NULL DEFAULT 1,
-        planet_id bigint NOT NULL DEFAULT 1,
-        mission_id bigint NOT NULL DEFAULT 1,
         "xp" xp NOT NULL DEFAULT 0,
         "oxygen" oxygen NOT NULL DEFAULT 10,
         CONSTRAINT pk_user PRIMARY KEY (id),
@@ -172,8 +168,6 @@ CREATE TABLE
         CONSTRAINT uk_planet_order UNIQUE ("order")
     );
 
-ALTER TABLE "user" ADD CONSTRAINT fk_user_planet FOREIGN KEY (planet_id) REFERENCES "planet" (id);
-
 INSERT INTO
     "planet" ("name", "description", "order", "xp_bonus")
 VALUES
@@ -189,6 +183,7 @@ CREATE TABLE
         planet_id bigint NOT NULL,
         "status" entity_status NOT NULL DEFAULT 'LOCKED',
         "is_accessible" boolean NOT NULL DEFAULT false,
+        "is_current" boolean NOT NULL DEFAULT false,
         "progress" progress NOT NULL DEFAULT 0,
         CONSTRAINT pk_user_planet PRIMARY KEY (id),
         CONSTRAINT fk_user_planet_user FOREIGN KEY (user_id) REFERENCES "user" (id) ON DELETE CASCADE,
@@ -213,8 +208,6 @@ CREATE TABLE
         CONSTRAINT uk_mission_planet_name UNIQUE (planet_id, "name"),
         CONSTRAINT uk_mission_planet_order UNIQUE (planet_id, "order")
     );
-
-ALTER TABLE "user" ADD CONSTRAINT fk_user_mission FOREIGN KEY (mission_id) REFERENCES "mission" (id);
 
 INSERT INTO
     "mission" (
@@ -330,6 +323,7 @@ CREATE TABLE
         mission_id bigint NOT NULL,
         "status" entity_status NOT NULL DEFAULT 'LOCKED',
         "is_accessible" boolean NOT NULL DEFAULT false,
+        "is_current" boolean NOT NULL DEFAULT false,
         "best_result" score NOT NULL DEFAULT 0,
         "progress" progress NOT NULL DEFAULT 0,
         CONSTRAINT pk_user_mission PRIMARY KEY (id),
@@ -746,7 +740,6 @@ CREATE TABLE
         resource_id bigint NOT NULL,
         "is_collected" boolean DEFAULT false,
         "collected_at" timestamp,
-        "progress" progress NOT NULL DEFAULT 0,
         CONSTRAINT pk_user_resource PRIMARY KEY (id),
         CONSTRAINT fk_user_resource_user FOREIGN KEY (user_id) REFERENCES "user" (id) ON DELETE CASCADE,
         CONSTRAINT fk_user_resource_resource FOREIGN KEY (resource_id) REFERENCES "resource" (id) ON DELETE CASCADE,

@@ -44,8 +44,12 @@ public class UserPlanet {
     private EntityStatus status = LOCKED;
 
     @Builder.Default
-    @Column(name = "is_accessible", nullable = false)
+    @Column(name = "\"is_accessible\"", nullable = false)
     private Boolean isAccessible = false;
+
+    @Builder.Default
+    @Column(name = "\"is_current\"", nullable = false)
+    private Boolean isCurrent = false;
 
     @Builder.Default
     @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
@@ -58,6 +62,7 @@ public class UserPlanet {
 
     public void complete(){
         this.setStatus(COMPLETED);
+        this.setIsAccessible(false);
         this.getUser().setXp(this.getUser().getXp() + this.getPlanet().getXpBonus());
     }
 }

@@ -45,6 +45,10 @@ public class UserMission {
     private Boolean isAccessible = false;
 
     @Builder.Default
+    @Column(name = "\"is_current\"", nullable = false)
+    private Boolean isCurrent = false;
+
+    @Builder.Default
     @Column(name = "\"best_result\"", nullable = false, columnDefinition = "score")
     private BigDecimal bestResult = BigDecimal.ZERO;
 
@@ -59,6 +63,7 @@ public class UserMission {
 
     public void complete(){
         this.setStatus(COMPLETED);
+        this.setIsAccessible(false);
         this.getUser().setXp(this.getUser().getXp() + this.getMission().getXpBonus());
     }
 }

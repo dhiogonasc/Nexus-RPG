@@ -37,10 +37,6 @@ public class UserResource {
     @Column(name = "\"is_collected\"", nullable = false)
     private boolean isCollected = false;
 
-    @Builder.Default
-    @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
-    private BigDecimal progress = BigDecimal.ZERO;
-
     public void collect(){
         this.setCollected(true);
         this.setCollectedAt(LocalDateTime.now());
