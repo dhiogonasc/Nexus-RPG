@@ -88,4 +88,12 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
+
+    public void fillOxygen(){
+        this.oxygen = 10;
+    }
+
+    public void discountOxygen(){
+        this.oxygen -= 1;
+    }
 }

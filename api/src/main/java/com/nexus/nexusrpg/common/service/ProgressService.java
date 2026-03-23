@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.common.service;
 
 import com.nexus.nexusrpg.domain.planet.model.Planet;
+import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
@@ -19,15 +20,15 @@ public class ProgressService {
 
         mission.complete();
 
-        Long userId = mission.getUser().getId();
-        Long planetId = mission.getMission().getPlanet().getId();
+        User user = mission.getUser();
+        Planet planet = mission.getMission().getPlanet();
 
         int nextMissionOrder = mission.getMission().getOrder() + 1;
 
-        userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(userId, planetId, nextMissionOrder)
+        userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(user.getId(), planet.getId(), nextMissionOrder)
                 .ifPresentOrElse(
                         this::unlockMission,
-                        () -> this.completePlanet(userId, mission.getMission().getPlanet())
+                        () -> this.completePlanet(user, planet)
                 );
     }
 
@@ -37,14 +38,16 @@ public class ProgressService {
         userMissionRepository.save(mission);
     }
 
-    private void completePlanet(Long userId, Planet planet) {
+    private void completePlanet(User user, Planet planet) {
 
-        userPlanetRepository.findByUserIdAndPlanetId(userId, planet.getId())
+        userPlanetRepository.findByUserIdAndPlanetId(user.getId(), planet.getId())
                 .ifPresent(UserPlanet::complete);
 
         int nextPlanetOrder = planet.getOrder() + 1;
-        userPlanetRepository.findByUserIdAndPlanetOrder(userId, nextPlanetOrder)
+        userPlanetRepository.findByUserIdAndPlanetOrder(user.getId(), nextPlanetOrder)
                 .ifPresent(this::unlockPlanet);
+
+        user.fillOxygen();
     }
 
     private void unlockPlanet(UserPlanet planet) {

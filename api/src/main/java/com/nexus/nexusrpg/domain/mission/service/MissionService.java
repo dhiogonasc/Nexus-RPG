@@ -92,7 +92,7 @@ public class MissionService {
                 .startAt(LocalDateTime.now())
                 .build();
 
-        updateUserOxygen(user);
+        updateOxygen(user);
 
         return userMapper.toUserMissionAttemptDTO(attemptRepository.save(newAttempt));
     }
@@ -132,10 +132,10 @@ public class MissionService {
         userMissionRepository.save(mission);
     }
 
-    private void updateUserOxygen(User user){
+    private void updateOxygen(User user) {
 
         userValidator.hasEnoughOxygen(user);
-        user.setOxygen(user.getOxygen() - 1);
+        user.discountOxygen();
 
         userRepository.save(user);
     }
