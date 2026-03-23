@@ -34,7 +34,6 @@ public class ProgressService {
     private void unlockMission(UserMission mission) {
 
         mission.unlock();
-
         userMissionRepository.save(mission);
     }
 
@@ -51,7 +50,6 @@ public class ProgressService {
     private void unlockPlanet(UserPlanet planet) {
 
         planet.unlock();
-
         userPlanetRepository.save(planet);
 
         userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(

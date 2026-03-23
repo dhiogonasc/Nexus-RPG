@@ -58,5 +58,6 @@ public class UserPlanet {
 
     public void complete(){
         this.setStatus(COMPLETED);
+        this.getUser().setXp(this.getUser().getXp() + this.getPlanet().getXpBonus());
     }
 }
