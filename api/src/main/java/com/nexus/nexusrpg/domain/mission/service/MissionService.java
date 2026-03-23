@@ -6,15 +6,18 @@ import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptD
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
+import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMissionAttempt;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.user.repository.entity.UserRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.AttemptRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.auth.service.AuthService;
 import com.nexus.nexusrpg.domain.mission.validator.MissionValidator;
 import com.nexus.nexusrpg.domain.planet.validator.PlanetValidator;
+import com.nexus.nexusrpg.domain.user.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,11 +37,13 @@ public class MissionService {
 
     private final UserMapper userMapper;
 
+    private final UserRepository userRepository;
     private final UserMissionRepository userMissionRepository;
     private final AttemptRepository attemptRepository;
     private final AttemptValidator attemptValidator;
     private final UserPlanetRepository userPlanetRepository;
 
+    private final UserValidator userValidator;
     private final MissionValidator missionValidator;
     private final PlanetValidator planetValidator;
 
@@ -75,16 +80,19 @@ public class MissionService {
     @Transactional
     public UserMissionAttemptDTO start(Long missionId) {
 
-        Long userId = authService.getAuthenticatedUser().getId();
-        UserMission userMission = userMissionRepository.findByUserIdAndMissionIdOrThrow(userId, missionId);
+        User user = authService.getAuthenticatedUser();
+        UserMission mission = userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), missionId);
 
-        missionValidator.isAccessible(userMission);
+
+        missionValidator.isAccessible(mission);
         attemptValidator.hasActiveAttempt(missionId);
 
         UserMissionAttempt newAttempt = UserMissionAttempt.builder()
-                .userMission(userMission)
+                .userMission(mission)
                 .startAt(LocalDateTime.now())
                 .build();
+
+        updateUserOxygen(user);
 
         return userMapper.toUserMissionAttemptDTO(attemptRepository.save(newAttempt));
     }
@@ -122,5 +130,13 @@ public class MissionService {
         }
 
         userMissionRepository.save(mission);
+    }
+
+    private void updateUserOxygen(User user){
+
+        userValidator.hasEnoughOxygen(user);
+        user.setOxygen(user.getOxygen() - 1);
+
+        userRepository.save(user);
     }
 }
