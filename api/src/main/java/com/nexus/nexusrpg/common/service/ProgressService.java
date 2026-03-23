@@ -33,7 +33,7 @@ public class ProgressService {
 
     @PostConstruct
     public void init() {
-        this.levels = levelRepository.findAllByXpRequiredAsc();
+        this.levels = levelRepository.findAllByOrderByXpRequiredAsc();
     }
 
     public void completeMission(User user, Mission mission) {
