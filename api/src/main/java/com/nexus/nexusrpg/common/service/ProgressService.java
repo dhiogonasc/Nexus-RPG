@@ -11,6 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import static com.nexus.nexusrpg.common.enums.EntityStatus.COMPLETED;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -44,6 +49,8 @@ public class ProgressService {
                         m -> unlockMission(user, m),
                         () -> completePlanet(user, planet)
                 );
+
+        updatePlanetProgress(user, planet);
     }
 
     private void completePlanet(User user, Planet planet) {
@@ -83,5 +90,23 @@ public class ProgressService {
 
         nextMission.unlock();
         user.setCurrentMission(nextMission.getMission());
+    }
+
+    private void updatePlanetProgress(User user, Planet planet){
+
+        Long userId = user.getId();
+        Long planetId = planet.getId();
+
+        UserPlanet up = userPlanetRepository
+                .findByUserIdAndPlanetIdOrThrow(userId, planetId);
+
+        int totalMissions = planet.getMissions().size();
+        int completedMissions = userMissionRepository
+                .countMissionsByStatus(userId, planetId, COMPLETED);
+
+        BigDecimal progress = BigDecimal.valueOf(completedMissions)
+                .divide(BigDecimal.valueOf(totalMissions), 2, RoundingMode.HALF_UP);
+
+        up.setProgress(progress);
     }
 }

@@ -11,7 +11,6 @@ import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMissionAttempt;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
-import com.nexus.nexusrpg.domain.user.repository.entity.UserRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.AttemptRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
@@ -39,7 +38,6 @@ public class MissionService {
 
     private final UserMapper userMapper;
 
-    private final UserRepository userRepository;
     private final UserMissionRepository userMissionRepository;
     private final AttemptRepository attemptRepository;
     private final AttemptValidator attemptValidator;
@@ -145,7 +143,5 @@ public class MissionService {
 
         userValidator.hasEnoughOxygen(user);
         user.discountOxygen();
-
-        userRepository.save(user);
     }
 }

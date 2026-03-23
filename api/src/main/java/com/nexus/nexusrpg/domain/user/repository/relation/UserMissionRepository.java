@@ -2,6 +2,7 @@ package com.nexus.nexusrpg.domain.user.repository.relation;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
+import com.nexus.nexusrpg.common.enums.EntityStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -37,5 +38,15 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
             @Param("userId") Long userId,
             @Param("planetId") Long planetId,
             @Param("order") int order
+    );
+
+    @Query("SELECT COUNT(um) FROM UserMission um " +
+            "WHERE um.user.id = :userId " +
+            "AND um.mission.planet.id = :planetId " +
+            "AND um.status = :status")
+    int countMissionsByStatus(
+            @Param("userId") Long userId,
+            @Param("planetId") Long planetId,
+            @Param("status") EntityStatus status
     );
 }
