@@ -42,7 +42,7 @@ public class UserResource {
     private BigDecimal progress = BigDecimal.ZERO;
 
     public void collect(){
-        this.isCollected = true;
+        this.setCollected(true);
         this.setCollectedAt(LocalDateTime.now());
     }
 }

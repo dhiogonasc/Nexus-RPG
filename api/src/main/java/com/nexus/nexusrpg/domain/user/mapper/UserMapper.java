@@ -66,23 +66,17 @@ public interface UserMapper {
 
     default CollectedResourcesDTO mapCollectedResources(User user) {
 
-        if (user.getResources() == null) {
-            return new CollectedResourcesDTO(List.of(), BigDecimal.ZERO);
+        if (user.getResources() == null || user.getResources().isEmpty()) {
+            return new CollectedResourcesDTO(List.of(), BigDecimal.ZERO.setScale(2, HALF_UP));
         }
 
-        List<UserResourceReferenceDTO> collectedList = user.getResources().stream()
-                .filter(UserResource::isCollected)
+        List<UserResourceReferenceDTO> resourceList = user.getResources().stream()
                 .map(this::toUserResourceReferenceDTO)
                 .toList();
 
-        long total = user.getResources().size();
-        long collected = user.getResources().stream().filter(UserResource::isCollected).count();
+        BigDecimal progress = user.getResources().get(0).getProgress();
 
-        BigDecimal progress = BigDecimal.valueOf(collected)
-                .divide(BigDecimal.valueOf(total), 2, HALF_UP)
-                .multiply(BigDecimal.valueOf(100));
-
-        return new CollectedResourcesDTO(collectedList, progress);
+        return new CollectedResourcesDTO(resourceList, progress);
     }
 
     default List<UserMissionReferenceDTO> mapMissions(UserPlanet userPlanet) {

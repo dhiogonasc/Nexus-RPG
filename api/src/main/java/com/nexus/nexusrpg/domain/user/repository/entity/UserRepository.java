@@ -22,6 +22,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.planets WHERE u.email = :email")
     Optional<User> findByEmailWithPlanets(String email);
 
-    @Query("SELECT u FROM User u LEFT JOIN FETCH u.resources WHERE u.email = :email")
-    Optional<User> findByEmailWithResources(String email);
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.resources WHERE u.id = :userId")
+    Optional<User> findByUserIdWithResources(Long userId);
 }
