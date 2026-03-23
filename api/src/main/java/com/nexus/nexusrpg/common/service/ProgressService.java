@@ -18,7 +18,7 @@ public class ProgressService {
     private final UserPlanetRepository userPlanetRepository;
     private final UserMissionRepository userMissionRepository;
 
-    public void completeMission(UserMission mission){
+    public void completeMission(UserMission mission) {
 
         mission.complete();
 
@@ -28,49 +28,57 @@ public class ProgressService {
         Planet planet = mission.getMission().getPlanet();
         Long planetId = planet.getId();
 
-        int nextMissionOrder = mission.getMission().getOrder() + 1;
+        int currentOrder = mission.getMission().getOrder();
 
-        userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(userId, planetId, nextMissionOrder)
-                .ifPresentOrElse(m -> {
-                            unlockMission(m);
-                            user.setCurrentMission(m.getMission());
-                        },
-                        () -> this.completePlanet(user, planet)
-                );
-    }
+        int nextOrder = currentOrder + 1;
 
-    private void unlockMission(UserMission mission) {
-
-        mission.unlock();
-        userMissionRepository.save(mission);
+        userMissionRepository
+                .findByUserIdAndPlanetIdAndMissionOrder(
+                        userId,
+                        planetId,
+                        nextOrder
+        ).ifPresentOrElse(
+                m -> unlockMission(user, m),
+                () -> completePlanet(user, mission.getMission().getPlanet())
+        );
     }
 
     private void completePlanet(User user, Planet planet) {
 
-        userPlanetRepository.findByUserIdAndPlanetId(user.getId(), planet.getId())
+        Long userId = user.getId();
+        Long planetId = planet.getId();
+
+        userPlanetRepository
+                .findByUserIdAndPlanetId(userId, planetId)
                 .ifPresent(UserPlanet::complete);
 
-        int nextPlanetOrder = planet.getOrder() + 1;
-        userPlanetRepository.findByUserIdAndPlanetOrder(user.getId(), nextPlanetOrder)
-                .ifPresent(p -> {
-                    unlockPlanet(p);
-                    user.setCurrentPlanet(p.getPlanet());
-                });
+        int nextOrder = planet.getOrder() + 1;
+
+        userPlanetRepository
+                .findByUserIdAndPlanetOrder(userId, nextOrder)
+                .ifPresent(p -> unlockPlanet(user, p));
 
         user.fillOxygen();
     }
 
-    private void unlockPlanet(UserPlanet planet) {
+    private void unlockPlanet(User user, UserPlanet nextPlanet) {
 
-        planet.unlock();
-        userPlanetRepository.save(planet);
+        nextPlanet.unlock();
 
-        Long userId = planet.getUser().getId();
-        Long planetId = planet.getPlanet().getId();
+        Long userId = nextPlanet.getUser().getId();
+        Long planetId = nextPlanet.getPlanet().getId();
         int missionOrder = 1;
 
         userMissionRepository
                 .findByUserIdAndPlanetIdAndMissionOrder(userId, planetId, missionOrder)
-                .ifPresent(this::unlockMission);
+                .ifPresent(m -> unlockMission(user, m));
+
+        user.setCurrentPlanet(nextPlanet.getPlanet());
+    }
+
+    private void unlockMission(User user, UserMission nextMission) {
+
+        nextMission.unlock();
+        user.setCurrentMission(nextMission.getMission());
     }
 }

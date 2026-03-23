@@ -52,8 +52,8 @@ public class MissionService {
     public Page<UserMissionReferenceDTO> getMissions(Long planetId, Pageable pageable) {
 
         Long userId = authService.getAuthenticatedUser().getId();
-
-        return userMissionRepository.findByUserIdAndPlanetId(userId, planetId, pageable)
+        return userMissionRepository
+                .findByUserIdAndPlanetId(userId, planetId, pageable)
                 .map(userMapper::toUserMissionReferenceDTO);
     }
 
@@ -61,15 +61,16 @@ public class MissionService {
     public UserMissionDTO getMission(Long missionId) {
 
         Long userId = authService.getAuthenticatedUser().getId();
+        UserMission userMission = userMissionRepository
+                .findByUserIdAndMissionIdOrThrow(userId, missionId);
 
-        UserMission userMission = userMissionRepository.findByUserIdAndMissionIdOrThrow(userId, missionId);
-
-        UserPlanet userPlanet = userPlanetRepository.findByUserIdAndPlanetIdOrThrow(
-                userId,
-                userMission
-                        .getMission()
-                        .getPlanet()
-                        .getId()
+        UserPlanet userPlanet = userPlanetRepository
+                .findByUserIdAndPlanetIdOrThrow(
+                        userId,
+                        userMission
+                                .getMission()
+                                .getPlanet()
+                                .getId()
         );
 
         planetValidator.isAccessible(userPlanet);
@@ -82,17 +83,20 @@ public class MissionService {
     public UserMissionAttemptDTO start(Long missionId) {
 
         User user = authService.getAuthenticatedUser();
-        UserMission mission = userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), missionId);
+        updateOxygen(user);
+
+        Long userId = user.getId();
+        UserMission mission = userMissionRepository
+                .findByUserIdAndMissionIdOrThrow(userId, missionId);
 
         missionValidator.isAccessible(mission);
         attemptValidator.hasActiveAttempt(missionId);
 
-        UserMissionAttempt attempt = UserMissionAttempt.builder()
+        UserMissionAttempt attempt = UserMissionAttempt
+                .builder()
                 .userMission(mission)
                 .startAt(LocalDateTime.now())
                 .build();
-
-        updateOxygen(user);
 
         return userMapper.toUserMissionAttemptDTO(attemptRepository.save(attempt));
     }
