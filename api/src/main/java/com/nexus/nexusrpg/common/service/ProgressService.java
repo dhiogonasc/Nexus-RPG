@@ -105,7 +105,8 @@ public class ProgressService {
                 .countMissionsByStatus(userId, planetId, COMPLETED);
 
         BigDecimal progress = BigDecimal.valueOf(completedMissions)
-                .divide(BigDecimal.valueOf(totalMissions), 2, RoundingMode.HALF_UP);
+                .divide(BigDecimal.valueOf(totalMissions), 2, RoundingMode.HALF_UP)
+                .multiply(BigDecimal.valueOf(100));
 
         up.setProgress(progress);
     }
