@@ -38,4 +38,10 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
             @Param("planetId") Long planetId,
             @Param("order") int order
     );
+
+    @Query("SELECT COUNT(um) FROM UserMission um " +
+            "WHERE um.user.id = :userId " +
+            "AND um.mission.planet.id = :planetId " +
+            "AND um.status = 'COMPLETED'")
+    int countCompletedMissions(@Param("userId") Long userId, @Param("planetId") Long planetId);
 }

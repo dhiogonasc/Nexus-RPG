@@ -8,9 +8,14 @@ import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProgressService {
 
     private final UserPlanetRepository userPlanetRepository;
@@ -32,6 +37,10 @@ public class ProgressService {
                         },
                         () -> this.completePlanet(user, planet)
                 );
+
+        userMissionRepository.save(mission);
+
+        updatePlanetProgress(user.getId(), planet.getId());
     }
 
     private void unlockMission(UserMission mission) {
@@ -65,5 +74,21 @@ public class ProgressService {
                 planet.getPlanet().getId(),
                 1
         ).ifPresent(this::unlockMission);
+    }
+
+    private void updatePlanetProgress(Long userId, Long planetId){
+
+        UserPlanet planet = userPlanetRepository.findByUserIdAndPlanetIdOrThrow(userId, planetId);
+
+        int totalMissions = planet.getPlanet().getMissions().size();
+        int completedMissions = userMissionRepository.countCompletedMissions(userId, planetId);
+
+        BigDecimal progress = new BigDecimal(completedMissions)
+                .divide(new BigDecimal(totalMissions), RoundingMode.HALF_UP)
+                .multiply(new BigDecimal(100));
+
+        planet.setProgress(progress);
+
+        userPlanetRepository.save(planet);
     }
 }
