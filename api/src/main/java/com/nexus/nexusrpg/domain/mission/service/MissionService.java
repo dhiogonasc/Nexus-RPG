@@ -30,7 +30,7 @@ public class MissionService {
     private final BigDecimal AVG = BigDecimal.valueOf(7.00);
 
     private final AuthService authService;
-    private final ProgressService unlockService;
+    private final ProgressService progressService;
 
     private final UserMapper userMapper;
 
@@ -96,24 +96,31 @@ public class MissionService {
 
         attemptValidator.isActive(attempt);
 
-        attempt.setEndAt(LocalDateTime.now());
         BigDecimal currentResult = BigDecimal.valueOf(10);
+
+        attempt.setEndAt(LocalDateTime.now());
         attempt.setResult(currentResult);
 
-        UserMission userMission = attempt.getUserMission();
+        updateAttemptResult(attempt, currentResult);
 
-        if (userMission.getBestResult() == null || currentResult.compareTo(userMission.getBestResult()) > 0) {
-
-            userMission.setBestResult(currentResult);
-
-            if (currentResult.compareTo(AVG) > 0) {
-                unlockService.completeMission(userMission);
-            }
-        }
-
-        userMissionRepository.save(userMission);
         attemptRepository.save(attempt);
 
         return userMapper.toUserMissionAttemptDTO(attempt);
+    }
+
+    private void updateAttemptResult(UserMissionAttempt attempt, BigDecimal result) {
+
+        UserMission mission = attempt.getUserMission();
+
+        if (mission.getBestResult() == null || result.compareTo(mission.getBestResult()) > 0) {
+
+            mission.setBestResult(result);
+
+            if (result.compareTo(AVG) > 0) {
+                progressService.completeMission(mission);
+            }
+        }
+
+        userMissionRepository.save(mission);
     }
 }
