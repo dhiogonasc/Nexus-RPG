@@ -21,10 +21,10 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
     }
 
     @Query("SELECT um FROM UserMission um " +
-            "WHERE um.user.email = :email " +
+            "WHERE um.user.id = :userId " +
             "AND (:planetId IS NULL OR um.mission.planet.id = :planetId)")
-    Page<UserMission> findByEmailAndPlanet(
-            @Param("email") String email,
+    Page<UserMission> findByUserIdAndPlanetId(
+            @Param("userId") String userId,
             @Param("planetId") Long planetId,
             Pageable pageable
     );
@@ -38,10 +38,4 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
             @Param("planetId") Long planetId,
             @Param("order") int order
     );
-
-    @Query("SELECT COUNT(um) FROM UserMission um " +
-            "WHERE um.user.id = :userId " +
-            "AND um.mission.planet.id = :planetId " +
-            "AND um.status = 'COMPLETED'")
-    int countCompletedMissions(@Param("userId") Long userId, @Param("planetId") Long planetId);
 }

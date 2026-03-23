@@ -53,7 +53,7 @@ public class MissionService {
 
         String email = authService.getAuthenticatedEmail();
 
-        return userMissionRepository.findByEmailAndPlanet(email, planetId, pageable)
+        return userMissionRepository.findByUserIdAndPlanetId(email, planetId, pageable)
                 .map(userMapper::toUserMissionReferenceDTO);
     }
 
@@ -107,7 +107,6 @@ public class MissionService {
         attemptValidator.isActive(attempt);
 
         BigDecimal currentResult = BigDecimal.valueOf(10);
-
         attempt.setEndAt(LocalDateTime.now());
         attempt.setResult(currentResult);
 
@@ -121,8 +120,9 @@ public class MissionService {
     private void updateMission(UserMissionAttempt attempt, BigDecimal result) {
 
         UserMission mission = attempt.getUserMission();
+        BigDecimal bestResult = mission.getBestResult();
 
-        if (mission.getBestResult() == null || result.compareTo(mission.getBestResult()) > 0) {
+        if (bestResult == null || result.compareTo(bestResult) > 0) {
 
             mission.setBestResult(result);
 
