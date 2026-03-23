@@ -1,6 +1,5 @@
 package com.nexus.nexusrpg.common.service;
 
-import com.nexus.nexusrpg.common.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.planet.model.Planet;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
@@ -11,30 +10,30 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UnlockService {
+public class ProgressService {
 
     private final UserPlanetRepository userPlanetRepository;
     private final UserMissionRepository userMissionRepository;
 
-    public void completeMission(UserMission userMission){
+    public void completeMission(UserMission mission){
 
-        userMission.setStatus(EntityStatus.COMPLETED);
+        mission.complete();
 
-        Long userId = userMission.getUser().getId();
-        int nextMissionOrder = userMission.getMission().getOrder() + 1;
-        Long planetId = userMission.getMission().getPlanet().getId();
+        Long userId = mission.getUser().getId();
+        Long planetId = mission.getMission().getPlanet().getId();
+
+        int nextMissionOrder = mission.getMission().getOrder() + 1;
 
         userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(userId, planetId, nextMissionOrder)
                 .ifPresentOrElse(
                         this::unlockMission,
-                        () -> this.completePlanet(userId, userMission.getMission().getPlanet())
+                        () -> this.completePlanet(userId, mission.getMission().getPlanet())
                 );
     }
 
     private void unlockMission(UserMission mission) {
 
-        mission.setStatus(EntityStatus.UNLOCKED);
-        mission.setIsAccessible(true);
+        mission.unlock();
 
         userMissionRepository.save(mission);
     }
@@ -42,7 +41,7 @@ public class UnlockService {
     private void completePlanet(Long userId, Planet planet) {
 
         userPlanetRepository.findByUserIdAndPlanetId(userId, planet.getId())
-                .ifPresent(up -> up.setStatus(EntityStatus.COMPLETED));
+                .ifPresent(UserPlanet::complete);
 
         int nextPlanetOrder = planet.getOrder() + 1;
         userPlanetRepository.findByUserIdAndPlanetOrder(userId, nextPlanetOrder)
@@ -51,8 +50,8 @@ public class UnlockService {
 
     private void unlockPlanet(UserPlanet planet) {
 
-        planet.setStatus(EntityStatus.UNLOCKED);
-        planet.setIsAccessible(true);
+        planet.unlock();
+
         userPlanetRepository.save(planet);
 
         userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(

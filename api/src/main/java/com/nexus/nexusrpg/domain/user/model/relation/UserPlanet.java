@@ -53,6 +53,7 @@ public class UserPlanet {
 
     public void unlock(){
         this.setStatus(UNLOCKED);
+        this.setIsAccessible(true);
     }
 
     public void complete(){

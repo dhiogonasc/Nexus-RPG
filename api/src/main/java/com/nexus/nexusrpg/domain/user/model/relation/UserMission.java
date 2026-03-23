@@ -54,6 +54,7 @@ public class UserMission {
 
     public void unlock(){
         this.setStatus(UNLOCKED);
+        this.setIsAccessible(true);
     }
 
     public void complete(){

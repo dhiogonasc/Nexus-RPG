@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.mission.service;
 
-import com.nexus.nexusrpg.common.service.UnlockService;
+import com.nexus.nexusrpg.common.service.ProgressService;
 import com.nexus.nexusrpg.domain.mission.validator.AttemptValidator;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
@@ -30,7 +30,7 @@ public class MissionService {
     private final BigDecimal AVG = BigDecimal.valueOf(7.00);
 
     private final AuthService authService;
-    private final UnlockService unlockService;
+    private final ProgressService unlockService;
 
     private final UserMapper userMapper;
 
