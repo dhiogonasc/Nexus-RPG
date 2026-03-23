@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.common.service;
 
+import com.nexus.nexusrpg.domain.mission.model.Mission;
 import com.nexus.nexusrpg.domain.planet.model.Planet;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
@@ -18,18 +19,19 @@ public class ProgressService {
     private final UserPlanetRepository userPlanetRepository;
     private final UserMissionRepository userMissionRepository;
 
-    public void completeMission(UserMission mission) {
+    public void completeMission(User user, Mission mission) {
 
-        mission.complete();
-
-        User user = mission.getUser();
+        Long missionId = mission.getId();
         Long userId = user.getId();
 
-        Planet planet = mission.getMission().getPlanet();
+        userMissionRepository
+                .findByUserIdAndMissionId(userId, missionId)
+                .ifPresent(UserMission::complete);
+
+        Planet planet = mission.getPlanet();
         Long planetId = planet.getId();
 
-        int currentOrder = mission.getMission().getOrder();
-
+        int currentOrder = mission.getOrder();
         int nextOrder = currentOrder + 1;
 
         userMissionRepository
@@ -37,10 +39,11 @@ public class ProgressService {
                         userId,
                         planetId,
                         nextOrder
-        ).ifPresentOrElse(
-                m -> unlockMission(user, m),
-                () -> completePlanet(user, mission.getMission().getPlanet())
-        );
+                )
+                .ifPresentOrElse(
+                        m -> unlockMission(user, m),
+                        () -> completePlanet(user, planet)
+                );
     }
 
     private void completePlanet(User user, Planet planet) {

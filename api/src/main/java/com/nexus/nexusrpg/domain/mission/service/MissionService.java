@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.mission.service;
 
 import com.nexus.nexusrpg.common.service.ProgressService;
+import com.nexus.nexusrpg.domain.mission.model.Mission;
 import com.nexus.nexusrpg.domain.mission.validator.AttemptValidator;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
@@ -123,19 +124,21 @@ public class MissionService {
 
     private void updateMission(UserMissionAttempt attempt, BigDecimal result) {
 
-        UserMission mission = attempt.getUserMission();
-        BigDecimal bestResult = mission.getBestResult();
+        UserMission um = attempt.getUserMission();
+        BigDecimal bestResult = um.getBestResult();
 
         if (bestResult == null || result.compareTo(bestResult) > 0) {
 
-            mission.setBestResult(result);
+            um.setBestResult(result);
 
             if (result.compareTo(AVG) > 0) {
-                progressService.completeMission(mission);
+
+                User user = um.getUser();
+                Mission mission = um.getMission();
+
+                progressService.completeMission(user, mission);
             }
         }
-
-        userMissionRepository.save(mission);
     }
 
     private void updateOxygen(User user) {
