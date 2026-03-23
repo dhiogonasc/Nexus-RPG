@@ -63,7 +63,7 @@ public class UserMission {
 
     public void complete(){
         this.setStatus(COMPLETED);
-        this.setIsAccessible(false);
+        this.setIsCurrent(false);
         this.getUser().setXp(this.getUser().getXp() + this.getMission().getXpBonus());
     }
 }
