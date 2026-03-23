@@ -746,6 +746,7 @@ CREATE TABLE
         resource_id bigint NOT NULL,
         "is_collected" boolean DEFAULT false,
         "collected_at" timestamp,
+        "progress" progress NOT NULL DEFAULT 0,
         CONSTRAINT pk_user_resource PRIMARY KEY (id),
         CONSTRAINT fk_user_resource_user FOREIGN KEY (user_id) REFERENCES "user" (id) ON DELETE CASCADE,
         CONSTRAINT fk_user_resource_resource FOREIGN KEY (resource_id) REFERENCES "resource" (id) ON DELETE CASCADE,

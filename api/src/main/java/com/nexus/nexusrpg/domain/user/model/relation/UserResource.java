@@ -5,6 +5,7 @@ import com.nexus.nexusrpg.domain.user.model.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -36,8 +37,12 @@ public class UserResource {
     @Column(name = "\"is_collected\"", nullable = false)
     private boolean isCollected = false;
 
+    @Builder.Default
+    @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
+    private BigDecimal progress = BigDecimal.ZERO;
+
     public void collect(){
-        this.setCollected(true);
+        this.isCollected = true;
         this.setCollectedAt(LocalDateTime.now());
     }
 }

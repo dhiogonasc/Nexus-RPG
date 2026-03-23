@@ -75,7 +75,12 @@ public interface UserMapper {
                 .map(this::toUserResourceReferenceDTO)
                 .toList();
 
-        BigDecimal progress = BigDecimal.ZERO.setScale(2, HALF_UP);
+        long total = user.getResources().size();
+        long collected = user.getResources().stream().filter(UserResource::isCollected).count();
+
+        BigDecimal progress = BigDecimal.valueOf(collected)
+                .divide(BigDecimal.valueOf(total), 2, HALF_UP)
+                .multiply(BigDecimal.valueOf(100));
 
         return new CollectedResourcesDTO(collectedList, progress);
     }
