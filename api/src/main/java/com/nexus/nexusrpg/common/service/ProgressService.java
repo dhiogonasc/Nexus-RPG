@@ -4,11 +4,15 @@ import com.nexus.nexusrpg.domain.level.model.Level;
 import com.nexus.nexusrpg.domain.level.repository.LevelRepository;
 import com.nexus.nexusrpg.domain.mission.model.Mission;
 import com.nexus.nexusrpg.domain.planet.model.Planet;
+import com.nexus.nexusrpg.domain.resource.model.Resource;
+import com.nexus.nexusrpg.domain.resource.validator.ResourceValidator;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.user.model.relation.UserResource;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
+import com.nexus.nexusrpg.domain.user.repository.relation.UserResourceRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +34,9 @@ public class ProgressService {
     private final LevelRepository levelRepository;
     private final UserPlanetRepository userPlanetRepository;
     private final UserMissionRepository userMissionRepository;
+    private final UserResourceRepository userResourceRepository;
+
+    private final ResourceValidator resourceValidator;
 
     @PostConstruct
     public void init() {
@@ -73,7 +80,13 @@ public class ProgressService {
 
         userPlanetRepository
                 .findByUserIdAndPlanetId(userId, planetId)
-                .ifPresent(UserPlanet::complete);
+                .ifPresent(p -> {
+                    p.complete();
+
+                    Resource resource = p.getPlanet().getResource();
+                    collectResource(user, resource);
+                }
+                );
 
         int nextOrder = planet.getOrder() + 1;
 
@@ -122,6 +135,17 @@ public class ProgressService {
                 .multiply(BigDecimal.valueOf(100));
 
         up.setProgress(progress);
+    }
+
+    private void collectResource(User user, Resource resource){
+
+        Long userId = user.getId();
+        Long resourceId = resource.getId();
+
+        UserResource ur = userResourceRepository.findByUserIdAndResourceIdOrThrow(userId, resourceId);
+
+        resourceValidator.isCollectable(ur);
+        ur.collect();
     }
 
     private void updateUserLevel(User user) {

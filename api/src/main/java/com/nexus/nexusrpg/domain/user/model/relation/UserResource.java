@@ -35,4 +35,9 @@ public class UserResource {
     @Builder.Default
     @Column(name = "\"is_collected\"", nullable = false)
     private boolean isCollected = false;
+
+    public void collect(){
+        this.setCollected(true);
+        this.setCollectedAt(LocalDateTime.now());
+    }
 }
