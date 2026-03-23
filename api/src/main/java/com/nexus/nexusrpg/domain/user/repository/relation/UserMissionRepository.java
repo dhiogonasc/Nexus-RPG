@@ -24,7 +24,7 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
             "WHERE um.user.id = :userId " +
             "AND (:planetId IS NULL OR um.mission.planet.id = :planetId)")
     Page<UserMission> findByUserIdAndPlanetId(
-            @Param("userId") String userId,
+            @Param("userId") Long userId,
             @Param("planetId") Long planetId,
             Pageable pageable
     );

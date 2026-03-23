@@ -51,9 +51,9 @@ public class MissionService {
     @Transactional(readOnly = true)
     public Page<UserMissionReferenceDTO> getMissions(Long planetId, Pageable pageable) {
 
-        String email = authService.getAuthenticatedEmail();
+        Long userId = authService.getAuthenticatedUser().getId();
 
-        return userMissionRepository.findByUserIdAndPlanetId(email, planetId, pageable)
+        return userMissionRepository.findByUserIdAndPlanetId(userId, planetId, pageable)
                 .map(userMapper::toUserMissionReferenceDTO);
     }
 
