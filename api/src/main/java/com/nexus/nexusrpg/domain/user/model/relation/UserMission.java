@@ -10,7 +10,7 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 
-import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.*;
 
 @Data
 @Builder
@@ -51,4 +51,12 @@ public class UserMission {
     @Builder.Default
     @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
     private BigDecimal progress = BigDecimal.ZERO;
+
+    public void unlock(){
+        this.setStatus(UNLOCKED);
+    }
+
+    public void complete(){
+        this.setStatus(COMPLETED);
+    }
 }
