@@ -26,8 +26,10 @@ public class ProgressService {
         int nextMissionOrder = mission.getMission().getOrder() + 1;
 
         userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(user.getId(), planet.getId(), nextMissionOrder)
-                .ifPresentOrElse(
-                        this::unlockMission,
+                .ifPresentOrElse(m -> {
+                            unlockMission(m);
+                            user.setCurrentMission(m.getMission());
+                        },
                         () -> this.completePlanet(user, planet)
                 );
     }
@@ -45,7 +47,10 @@ public class ProgressService {
 
         int nextPlanetOrder = planet.getOrder() + 1;
         userPlanetRepository.findByUserIdAndPlanetOrder(user.getId(), nextPlanetOrder)
-                .ifPresent(this::unlockPlanet);
+                .ifPresent(p -> {
+                    unlockPlanet(p);
+                    user.setCurrentPlanet(p.getPlanet());
+                });
 
         user.fillOxygen();
     }

@@ -83,18 +83,17 @@ public class MissionService {
         User user = authService.getAuthenticatedUser();
         UserMission mission = userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), missionId);
 
-
         missionValidator.isAccessible(mission);
         attemptValidator.hasActiveAttempt(missionId);
 
-        UserMissionAttempt newAttempt = UserMissionAttempt.builder()
+        UserMissionAttempt attempt = UserMissionAttempt.builder()
                 .userMission(mission)
                 .startAt(LocalDateTime.now())
                 .build();
 
         updateOxygen(user);
 
-        return userMapper.toUserMissionAttemptDTO(attemptRepository.save(newAttempt));
+        return userMapper.toUserMissionAttemptDTO(attemptRepository.save(attempt));
     }
 
     @Transactional
@@ -109,14 +108,14 @@ public class MissionService {
         attempt.setEndAt(LocalDateTime.now());
         attempt.setResult(currentResult);
 
-        updateAttemptResult(attempt, currentResult);
+        updateMission(attempt, currentResult);
 
         attemptRepository.save(attempt);
 
         return userMapper.toUserMissionAttemptDTO(attempt);
     }
 
-    private void updateAttemptResult(UserMissionAttempt attempt, BigDecimal result) {
+    private void updateMission(UserMissionAttempt attempt, BigDecimal result) {
 
         UserMission mission = attempt.getUserMission();
 
