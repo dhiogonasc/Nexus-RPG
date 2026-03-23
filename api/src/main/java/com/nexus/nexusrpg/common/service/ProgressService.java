@@ -1,5 +1,7 @@
 package com.nexus.nexusrpg.common.service;
 
+import com.nexus.nexusrpg.domain.level.model.Level;
+import com.nexus.nexusrpg.domain.level.repository.LevelRepository;
 import com.nexus.nexusrpg.domain.mission.model.Mission;
 import com.nexus.nexusrpg.domain.planet.model.Planet;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
@@ -7,12 +9,14 @@ import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 import static com.nexus.nexusrpg.common.enums.EntityStatus.COMPLETED;
 
@@ -21,8 +25,16 @@ import static com.nexus.nexusrpg.common.enums.EntityStatus.COMPLETED;
 @Transactional
 public class ProgressService {
 
+    private List<Level> levels;
+
+    private final LevelRepository levelRepository;
     private final UserPlanetRepository userPlanetRepository;
     private final UserMissionRepository userMissionRepository;
+
+    @PostConstruct
+    public void init() {
+        this.levels = levelRepository.findAllByXpRequiredAsc();
+    }
 
     public void completeMission(User user, Mission mission) {
 
@@ -51,6 +63,7 @@ public class ProgressService {
                 );
 
         updatePlanetProgress(user, planet);
+        updateUserLevel(user);
     }
 
     private void completePlanet(User user, Planet planet) {
@@ -109,5 +122,17 @@ public class ProgressService {
                 .multiply(BigDecimal.valueOf(100));
 
         up.setProgress(progress);
+    }
+
+    private void updateUserLevel(User user) {
+
+        long userXp = user.getXp();
+
+        Level currentLevel = levels.stream()
+                .filter(lvl -> userXp >= lvl.getXpRequired())
+                .reduce((first, last) -> last)
+                .orElse(levels.get(0));
+
+        user.setLevel(currentLevel);
     }
 }
