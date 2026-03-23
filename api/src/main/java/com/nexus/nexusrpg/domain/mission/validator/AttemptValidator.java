@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.mission.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
+import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMissionAttempt;
 import com.nexus.nexusrpg.domain.user.repository.relation.AttemptRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,16 @@ public class AttemptValidator {
                     "Tentativa finalizada!",
                     HttpStatus.BAD_REQUEST
             );
+        }
+    }
+
+    public void isUserAuth(User user, UserMissionAttempt attempt) {
+
+        Long currentUserId = user.getId();
+        Long attemptUserId = attempt.getUserMission().getUser().getId();
+
+        if(!currentUserId.equals(attemptUserId)){
+            throw new BusinessException("Attempt", "Finalização proibida!", HttpStatus.UNAUTHORIZED);
         }
     }
 }

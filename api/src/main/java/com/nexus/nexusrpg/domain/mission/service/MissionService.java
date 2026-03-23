@@ -30,6 +30,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Service
 public class MissionService {
+
     private final BigDecimal AVG = BigDecimal.valueOf(7.00);
 
     private final AuthService authService;
@@ -99,8 +100,10 @@ public class MissionService {
     @Transactional
     public UserMissionAttemptDTO finish(Long attemptId) {
 
+        User user = authService.getAuthenticatedUser();
         UserMissionAttempt attempt = attemptRepository.findByIdOrThrow(attemptId);
 
+        attemptValidator.isUserAuth(user, attempt);
         attemptValidator.isActive(attempt);
 
         BigDecimal currentResult = BigDecimal.valueOf(10);

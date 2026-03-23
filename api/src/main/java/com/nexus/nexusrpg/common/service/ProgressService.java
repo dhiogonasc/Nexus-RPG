@@ -37,8 +37,6 @@ public class ProgressService {
                         },
                         () -> this.completePlanet(user, planet)
                 );
-
-        userMissionRepository.save(mission);
     }
 
     private void unlockMission(UserMission mission) {
