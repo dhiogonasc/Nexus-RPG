@@ -10,9 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -26,11 +23,14 @@ public class ProgressService {
         mission.complete();
 
         User user = mission.getUser();
+        Long userId = user.getId();
+
         Planet planet = mission.getMission().getPlanet();
+        Long planetId = planet.getId();
 
         int nextMissionOrder = mission.getMission().getOrder() + 1;
 
-        userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(user.getId(), planet.getId(), nextMissionOrder)
+        userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(userId, planetId, nextMissionOrder)
                 .ifPresentOrElse(m -> {
                             unlockMission(m);
                             user.setCurrentMission(m.getMission());
@@ -39,8 +39,6 @@ public class ProgressService {
                 );
 
         userMissionRepository.save(mission);
-
-        updatePlanetProgress(user.getId(), planet.getId());
     }
 
     private void unlockMission(UserMission mission) {
@@ -69,26 +67,12 @@ public class ProgressService {
         planet.unlock();
         userPlanetRepository.save(planet);
 
-        userMissionRepository.findByUserIdAndPlanetIdAndMissionOrder(
-                planet.getUser().getId(),
-                planet.getPlanet().getId(),
-                1
-        ).ifPresent(this::unlockMission);
-    }
+        Long userId = planet.getUser().getId();
+        Long planetId = planet.getPlanet().getId();
+        int missionOrder = 1;
 
-    private void updatePlanetProgress(Long userId, Long planetId){
-
-        UserPlanet planet = userPlanetRepository.findByUserIdAndPlanetIdOrThrow(userId, planetId);
-
-        int totalMissions = planet.getPlanet().getMissions().size();
-        int completedMissions = userMissionRepository.countCompletedMissions(userId, planetId);
-
-        BigDecimal progress = new BigDecimal(completedMissions)
-                .divide(new BigDecimal(totalMissions), RoundingMode.HALF_UP)
-                .multiply(new BigDecimal(100));
-
-        planet.setProgress(progress);
-
-        userPlanetRepository.save(planet);
+        userMissionRepository
+                .findByUserIdAndPlanetIdAndMissionOrder(userId, planetId, missionOrder)
+                .ifPresent(this::unlockMission);
     }
 }
