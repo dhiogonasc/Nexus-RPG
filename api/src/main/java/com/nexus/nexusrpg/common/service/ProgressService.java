@@ -65,7 +65,7 @@ public class ProgressService {
                         nextOrder
                 )
                 .ifPresentOrElse(
-                        m -> unlockMission(user, m),
+                        this::unlockMission,
                         () -> completePlanet(user, planet)
                 );
 
@@ -85,19 +85,18 @@ public class ProgressService {
 
                     Resource resource = p.getPlanet().getResource();
                     collectResource(user, resource);
-                }
-                );
+                });
 
         int nextOrder = planet.getOrder() + 1;
 
         userPlanetRepository
                 .findByUserIdAndPlanetOrder(userId, nextOrder)
-                .ifPresent(p -> unlockPlanet(user, p));
+                .ifPresent(this::unlockPlanet);
 
         user.fillOxygen();
     }
 
-    private void unlockPlanet(User user, UserPlanet nextPlanet) {
+    private void unlockPlanet(UserPlanet nextPlanet) {
 
         nextPlanet.unlock();
 
@@ -107,12 +106,12 @@ public class ProgressService {
 
         userMissionRepository
                 .findByUserIdAndPlanetIdAndMissionOrder(userId, planetId, missionOrder)
-                .ifPresent(m -> unlockMission(user, m));
+                .ifPresent(this::unlockMission);
 
         nextPlanet.setIsCurrent(true);
     }
 
-    private void unlockMission(User user, UserMission nextMission) {
+    private void unlockMission(UserMission nextMission) {
 
         nextMission.unlock();
         nextMission.setIsCurrent(true);
@@ -143,6 +142,10 @@ public class ProgressService {
         Long resourceId = resource.getId();
 
         UserResource ur = userResourceRepository.findByUserIdAndResourceIdOrThrow(userId, resourceId);
+
+        if(ur.isCollected()){
+            return;
+        }
 
         resourceValidator.isCollectable(ur);
         ur.collect();

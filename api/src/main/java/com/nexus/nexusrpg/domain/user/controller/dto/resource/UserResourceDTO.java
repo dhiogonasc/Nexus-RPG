@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 public record UserResourceDTO(
 
         ResourceDTO resource,
-        boolean isCollected,
+        boolean collected,
         LocalDateTime collectedAt
 ) {}

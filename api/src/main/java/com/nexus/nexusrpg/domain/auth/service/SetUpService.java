@@ -49,11 +49,6 @@ public class SetUpService {
                 })
                 .toList();
 
-        UserPlanet firstUP = userPlanets.stream()
-                .filter(up -> up.getPlanet().getId().equals(1L))
-                .findFirst()
-                .orElseThrow(() -> new BusinessException("Planet", "Planeta 1 não encontrado", HttpStatus.NOT_FOUND));
-
         user.getPlanets().addAll(userPlanets);
     }
 
@@ -72,11 +67,6 @@ public class SetUpService {
                 })
                 .toList();
 
-        UserMission firstUM = userMissions.stream()
-                .filter(um -> um.getMission().getId().equals(1L))
-                .findFirst()
-                .orElseThrow(() -> new BusinessException("Mission", "Missão 1 não encontrada", HttpStatus.NOT_FOUND));
-
         user.getMissions().addAll(userMissions);
     }
 
@@ -86,7 +76,7 @@ public class SetUpService {
                 .map(r -> UserResource.builder()
                         .user(user)
                         .resource(r)
-                        .isCollected(false)
+                        .collected(false)
                         .build()
                 )
                 .toList();

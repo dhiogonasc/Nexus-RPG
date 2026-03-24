@@ -5,7 +5,6 @@ import com.nexus.nexusrpg.domain.user.model.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -30,12 +29,12 @@ public class UserResource {
     @JoinColumn(name = "resource_id", nullable = false)
     private Resource resource;
 
-    @Column(name = "\"collected_at\"", updatable = false)
+    @Column(name = "\"collected_at\"")
     private LocalDateTime collectedAt;
 
     @Builder.Default
     @Column(name = "\"is_collected\"", nullable = false)
-    private boolean isCollected = false;
+    private boolean collected = false;
 
     public void collect(){
         this.setCollected(true);

@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.user.mapper;
 
+import com.nexus.nexusrpg.domain.resource.mapper.ResourceMapper;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
@@ -24,6 +25,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {
         PlanetMapper.class,
         MissionMapper.class,
+        ResourceMapper.class,
         LevelMapper.class
 })
 public interface UserMapper {
@@ -51,7 +53,11 @@ public interface UserMapper {
     }
 
     UserPlanetReferenceDTO toUserPlanetReferenceDTO(UserPlanet userPlanet);
+
+    @Mapping(source = "mission", target = "mission")
     UserMissionReferenceDTO toUserMissionReferenceDTO(UserMission userMission);
+
     UserResourceReferenceDTO toUserResourceReferenceDTO(UserResource userResource);
+
     UserMissionAttemptDTO toUserMissionAttemptDTO(UserMissionAttempt attempt);
 }

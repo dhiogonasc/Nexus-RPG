@@ -21,9 +21,8 @@ public interface UserResourceRepository extends JpaRepository<UserResource, Long
     @Query("SELECT COUNT(ur) FROM UserResource ur WHERE ur.user.id = :userId")
     long countByUserId(@Param("userId") Long userId);
 
-    // Conta quantos desse total o usuário já marcou como coletado
     @Query("SELECT COUNT(ur) FROM UserResource ur " +
             "WHERE ur.user.id = :userId " +
-            "AND ur.isCollected = true")
+            "AND ur.collected = true")
     long countCollectedByUserId(@Param("userId") Long userId);
 }
