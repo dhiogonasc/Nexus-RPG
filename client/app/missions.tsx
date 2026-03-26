@@ -33,7 +33,7 @@ export default function missions() {
             resizeMode="cover"
           />
 
-        <Text style={styles.title}>Missões!!! teste</Text>
+        <Text style={styles.title}>Missões!!! testeee</Text>
 
           <LinearGradient
             colors={['transparent', '#000000']}
