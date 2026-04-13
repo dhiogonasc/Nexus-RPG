@@ -83,4 +83,12 @@ public class SetUpService {
 
         user.getResources().addAll(userResources);
     }
+
+    public void initialStats(User user) {
+
+        long INITIAL_XP = 0;
+
+        user.fillOxygen();
+        user.setXp(INITIAL_XP);
+    }
 }

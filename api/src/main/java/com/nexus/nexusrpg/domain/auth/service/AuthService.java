@@ -22,64 +22,61 @@ import java.time.Instant;
 public class AuthService {
 
     private final SetUpService setUpService;
-
     private final AuthValidator authValidator;
-
     private final UserRepository userRepository;
-
     private final BCryptPasswordEncoder encoder;
     private final JwtEncoder jwtEncoder;
 
     @Transactional
     public void register(RegisterRequestDTO request) {
 
-        User user = User.builder()
+        var user = User.builder()
                 .username(request.username())
                 .email(request.email())
                 .password(encoder.encode(request.password()))
-                .xp(0)
-                .oxygen(10)
                 .build();
 
         setUpNewRegister(user);
-
         userRepository.save(user);
     }
 
     public LoginResponseDTO login(LoginRequestDTO request) {
 
-        User me = userRepository.findByEmailOrThrow(request.email());
+        var user = userRepository.findByEmailOrThrow(request.email());
 
-        authValidator.validatePassword(request.password(), me.getPassword());
+        authValidator.validatePassword(request.password(), user.getPassword());
 
-        Instant now = Instant.now();
-        long expiresIn = 3600L;
+        var expiresIn = 3600L;
+        var loggedInAt = Instant.now();
 
         var claims = JwtClaimsSet.builder()
                 .issuer("dto")
-                .subject(me.getEmail())
-                .issuedAt(now)
-                .expiresAt(now.plusSeconds(expiresIn))
+                .subject(user.getEmail())
+                .issuedAt(loggedInAt)
+                .expiresAt(loggedInAt.plusSeconds(expiresIn))
                 .build();
 
         String accessToken = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
-        return new LoginResponseDTO(accessToken, expiresIn, now);
+        return new LoginResponseDTO(
+                accessToken,
+                expiresIn,
+                loggedInAt
+        );
     }
 
     private void setUpNewRegister(User user) {
 
+        setUpService.initialStats(user);
         setUpService.setUpInitialLevel(user);
         setUpService.setUpInitialUserPlanets(user);
         setUpService.setUpInitialUserMissions(user);
         setUpService.setUpInitialUserResources(user);
     }
 
-    public String getAuthenticatedEmail() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
-
     public User getAuthenticatedUser() {
-        return userRepository.findByEmailOrThrow(getAuthenticatedEmail());
+
+        String authenticatedEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByEmailOrThrow(authenticatedEmail);
     }
 }
