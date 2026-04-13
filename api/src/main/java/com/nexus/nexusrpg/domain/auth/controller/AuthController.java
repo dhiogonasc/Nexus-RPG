@@ -4,8 +4,6 @@ import com.nexus.nexusrpg.domain.auth.controller.dto.request.LoginRequestDTO;
 import com.nexus.nexusrpg.domain.auth.controller.dto.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.domain.auth.controller.dto.response.LoginResponseDTO;
 import com.nexus.nexusrpg.domain.auth.service.AuthService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +14,10 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-@Tag(name = "Auth", description = "Endpoints para gerenciamento de sessão de usuário")
 public class AuthController {
 
     private final AuthService authService;
 
-    @Operation(summary = "Login")
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO request) {
 
@@ -29,11 +25,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    @Operation(summary = "Cadastro")
     public ResponseEntity<Void> register(@Valid @RequestBody RegisterRequestDTO request) {
 
         authService.register(request);
-
         return ResponseEntity.status(CREATED).build();
     }
 }
