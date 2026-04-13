@@ -1,8 +1,6 @@
 package com.nexus.nexusrpg.domain.auth.service;
 
-import com.nexus.nexusrpg.common.enums.EntityStatus;
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.level.model.Level;
 import com.nexus.nexusrpg.domain.level.repository.LevelRepository;
 import com.nexus.nexusrpg.domain.mission.repository.MissionRepository;
 import com.nexus.nexusrpg.domain.planet.repository.PlanetRepository;
@@ -17,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.UNLOCKED;
+
 @Service
 @RequiredArgsConstructor
 public class SetUpService {
@@ -28,7 +29,7 @@ public class SetUpService {
 
     public void setUpInitialLevel(User user){
 
-        Level level = levelRepository.findById(1L)
+        var level = levelRepository.findById(1L)
                 .orElseThrow(() -> new BusinessException("Level", "Level 1 não encontrado", HttpStatus.BAD_REQUEST));
 
         user.setLevel(level);
@@ -42,7 +43,7 @@ public class SetUpService {
                     return UserPlanet.builder()
                             .user(user)
                             .planet(p)
-                            .status(isFirst ? EntityStatus.UNLOCKED : EntityStatus.LOCKED)
+                            .status(isFirst ? UNLOCKED : LOCKED)
                             .isAccessible(isFirst)
                             .isCurrent(isFirst)
                             .build();
@@ -60,7 +61,7 @@ public class SetUpService {
                     return UserMission.builder()
                             .user(user)
                             .mission(m)
-                            .status(isFirst ? EntityStatus.UNLOCKED : EntityStatus.LOCKED)
+                            .status(isFirst ? UNLOCKED : LOCKED)
                             .isAccessible(isFirst)
                             .isCurrent(isFirst)
                             .build();
@@ -86,9 +87,7 @@ public class SetUpService {
 
     public void initialStats(User user) {
 
-        long INITIAL_XP = 0;
-
         user.fillOxygen();
-        user.setXp(INITIAL_XP);
+        user.setXp(0);
     }
 }
