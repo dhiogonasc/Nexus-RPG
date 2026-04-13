@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 import static org.springframework.http.HttpStatus.*;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class AuthValidator {
 
     private final BCryptPasswordEncoder encoder;
@@ -16,7 +16,7 @@ public class AuthValidator {
     public void validatePassword(String password, String hash) {
 
         if (!encoder.matches(password, hash)) {
-            throw new BusinessException("dto", "Usuário ou senha incorretos", BAD_REQUEST);
+            throw new BusinessException("Login", "Usuário ou senha incorretos", BAD_REQUEST);
         }
     }
 }
