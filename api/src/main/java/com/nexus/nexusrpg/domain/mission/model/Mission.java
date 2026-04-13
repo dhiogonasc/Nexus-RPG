@@ -1,12 +1,9 @@
 package com.nexus.nexusrpg.domain.mission.model;
 
 import com.nexus.nexusrpg.domain.planet.model.Planet;
-import com.nexus.nexusrpg.domain.question.model.Question;
 import com.nexus.nexusrpg.domain.mission.model.enums.MissionDifficulty;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Data
 @Builder
@@ -42,7 +39,4 @@ public class Mission {
 
     @Column(name = "xp_bonus", nullable = false, columnDefinition = "xp")
     private long xpBonus;
-
-    @OneToMany(mappedBy = "mission")
-    private List<Question> questions;
 }

@@ -1,12 +1,9 @@
 package com.nexus.nexusrpg.domain.mission.controller.dto;
 
 import com.nexus.nexusrpg.domain.planet.controller.dto.PlanetReferenceDTO;
-import com.nexus.nexusrpg.domain.question.controller.dto.QuestionReferenceDTO;
 import com.nexus.nexusrpg.domain.mission.model.enums.MissionDifficulty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Positive;
-
-import java.util.List;
 
 public record MissionDTO(
 
@@ -30,8 +27,5 @@ public record MissionDTO(
         long xpBonus,
 
         @Schema(description = "Referencia do planeta de origem")
-        PlanetReferenceDTO planet,
-
-        @Schema(description = "Questões da missão")
-        List<QuestionReferenceDTO> questions
+        PlanetReferenceDTO planet
 ){}

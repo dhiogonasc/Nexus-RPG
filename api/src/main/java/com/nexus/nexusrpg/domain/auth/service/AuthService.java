@@ -76,7 +76,12 @@ public class AuthService {
 
     public User getAuthenticatedUser() {
 
-        String authenticatedEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByEmailOrThrow(authenticatedEmail);
+
+        return userRepository.findByEmailOrThrow(getAuthenticatedEmail());
+    }
+
+    public String getAuthenticatedEmail() {
+
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
