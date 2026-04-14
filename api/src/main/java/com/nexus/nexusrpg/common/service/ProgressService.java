@@ -73,6 +73,12 @@ public class ProgressService {
         updateUserLevel(user);
     }
 
+    private void unlockMission(UserMission nextMission) {
+
+        nextMission.unlock();
+        nextMission.setIsCurrent(true);
+    }
+
     private void completePlanet(User user, Planet planet) {
 
         Long userId = user.getId();
@@ -109,12 +115,6 @@ public class ProgressService {
                 .ifPresent(this::unlockMission);
 
         nextPlanet.setIsCurrent(true);
-    }
-
-    private void unlockMission(UserMission nextMission) {
-
-        nextMission.unlock();
-        nextMission.setIsCurrent(true);
     }
 
     private void updatePlanetProgress(User user, Planet planet){
