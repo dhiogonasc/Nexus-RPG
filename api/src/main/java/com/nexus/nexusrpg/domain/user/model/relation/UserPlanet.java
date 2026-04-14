@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.user.model.relation;
 
 import com.nexus.nexusrpg.domain.planet.model.Planet;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.common.enums.EntityStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 import java.math.BigDecimal;
 
 import static com.nexus.nexusrpg.common.enums.EntityStatus.*;
+import static java.math.RoundingMode.HALF_UP;
 
 @Data
 @Builder
@@ -55,14 +56,34 @@ public class UserPlanet {
     @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
     private BigDecimal progress = BigDecimal.ZERO;
 
-    public void unlock(){
-        this.setStatus(UNLOCKED);
-        this.setIsAccessible(true);
+    public static UserPlanet initialize(User user, Planet planet){
+
+        boolean isFirst = planet.getOrder() == 1;
+
+        return UserPlanet.builder()
+                .user(user)
+                .planet(planet)
+                .status(isFirst ? UNLOCKED : LOCKED)
+                .isAccessible(isFirst)
+                .isCurrent(isFirst)
+                .build();
     }
 
-    public void complete(){
-        this.setStatus(COMPLETED);
-        this.setIsCurrent(false);
-        this.getUser().setXp(this.getUser().getXp() + this.getPlanet().getXpBonus());
+    public void unlock() {
+        this.status = EntityStatus.UNLOCKED;
+        this.isAccessible = true;
+        this.isCurrent = true;
+    }
+
+    public void complete() {
+        this.status = EntityStatus.COMPLETED;
+        this.isCurrent = false;
+    }
+
+    public void updateProgress(int completedMissions, int totalMissions) {
+        if (totalMissions == 0) return;
+        this.progress = BigDecimal.valueOf(completedMissions)
+                .divide(BigDecimal.valueOf(totalMissions), 2, HALF_UP)
+                .multiply(BigDecimal.valueOf(100));
     }
 }

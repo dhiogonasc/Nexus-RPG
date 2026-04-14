@@ -1,15 +1,16 @@
-package com.nexus.nexusrpg.domain.user.service;
+package com.nexus.nexusrpg.common.service;
 
 import com.nexus.nexusrpg.domain.user.controller.dto.UserDTO;
 import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.User;
+import com.nexus.nexusrpg.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserFacade {
+public class UserContextService {
 
     private final UserService userService;
     private final UserMapper userMapper;
@@ -20,7 +21,7 @@ public class UserFacade {
         return userService.findByEmail(authenticatedEmail);
     }
 
-    public UserDTO getAuthenticatedUserDTO() {
+    public UserDTO getProfile() {
 
         return userMapper.toDTO(getAuthenticatedUser());
     }

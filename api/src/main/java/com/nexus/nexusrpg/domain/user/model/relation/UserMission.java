@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.user.model.relation;
 
 import com.nexus.nexusrpg.domain.mission.model.Mission;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.common.enums.EntityStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -56,14 +56,27 @@ public class UserMission {
     @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
     private BigDecimal progress = BigDecimal.ZERO;
 
-    public void unlock(){
-        this.setStatus(UNLOCKED);
-        this.setIsAccessible(true);
+    public static UserMission initialize(User user, Mission mission) {
+
+            boolean isFirst = mission.getOrder() == 1;
+
+            return UserMission.builder()
+                    .user(user)
+                    .mission(mission)
+                    .status(isFirst ? UNLOCKED : LOCKED)
+                    .isAccessible(isFirst)
+                    .isCurrent(isFirst)
+                    .build();
     }
 
-    public void complete(){
-        this.setStatus(COMPLETED);
-        this.setIsCurrent(false);
-        this.getUser().setXp(this.getUser().getXp() + this.getMission().getXpBonus());
+    public void unlock() {
+        this.status = UNLOCKED;
+        this.isAccessible = true;
+        this.isCurrent = true;
+    }
+
+    public void complete() {
+        this.status = EntityStatus.COMPLETED;
+        this.isCurrent = false;
     }
 }

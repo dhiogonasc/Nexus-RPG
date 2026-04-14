@@ -1,17 +1,12 @@
 package com.nexus.nexusrpg.domain.resource.service;
 
-import com.nexus.nexusrpg.domain.auth.service.AuthService;
+import com.nexus.nexusrpg.common.service.UserContextService;
 import com.nexus.nexusrpg.domain.resource.repository.ResourceRepository;
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceReferenceDTO;
-import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
-import com.nexus.nexusrpg.domain.user.model.relation.UserResource;
-import com.nexus.nexusrpg.domain.user.repository.entity.UserRepository;
+import com.nexus.nexusrpg.domain.user.mapper.relation.UserResourceMapper;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserResourceRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,46 +16,29 @@ import java.util.List;
 @Service
 public class ResourceService {
 
-    private final AuthService authService;
-
-    private final UserMapper userMapper;
-    private final UserRepository userRepository;
-
+    private final UserContextService userContextService;
     private final ResourceRepository resourceRepository;
     private final UserResourceRepository userResourceRepository;
+    private final UserResourceMapper userResourceMapper;
 
     @Transactional(readOnly = true)
     public List<UserResourceReferenceDTO> getResources() {
 
-        User user = authService.getAuthenticatedUser();
-        Long userId = user.getId();
+        var user = userContextService.getAuthenticatedUser();
 
-        return userRepository
-                .findByUserIdWithResources(userId)
-                .map(u -> u.getResources().stream()
-                        .map(userMapper::toUserResourceReferenceDTO)
-                        .toList())
-                .orElseThrow(() -> new BusinessException("User", "Usuário não encontrado", HttpStatus.NOT_FOUND));
+        return userResourceRepository
+                .findByUserId(user.getId()).stream()
+                .map(userResourceMapper::toReferenceDTO)
+                .toList();
     }
 
     public UserResourceDTO getResource(Long resourceId) {
 
-        Long userId = authService.getAuthenticatedUser().getId();
+        var userId = userContextService.getAuthenticatedUser().getId();
 
-        UserResource userResource = userResourceRepository.findByUserIdAndResourceIdOrThrow(userId, resourceId);
+        var userResource = userResourceRepository
+                .findByUserIdAndResourceIdOrThrow(userId, resourceId);
 
-        return userMapper.toUserResourceDTO(userResource);
-    }
-
-    public List<UserResource> initialResources(User user){
-
-         return resourceRepository.findAll().stream()
-                .map(r -> UserResource.builder()
-                        .user(user)
-                        .resource(r)
-                        .collected(false)
-                        .build()
-                )
-                .toList();
+        return userResourceMapper.toDTO(userResource);
     }
 }

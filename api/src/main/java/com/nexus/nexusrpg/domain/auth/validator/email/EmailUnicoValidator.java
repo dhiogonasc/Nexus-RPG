@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.auth.validator.email;
 
-import com.nexus.nexusrpg.domain.user.repository.entity.UserRepository;
+import com.nexus.nexusrpg.domain.user.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;

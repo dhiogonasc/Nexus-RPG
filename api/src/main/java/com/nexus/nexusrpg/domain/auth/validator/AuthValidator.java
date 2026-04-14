@@ -3,6 +3,7 @@ package com.nexus.nexusrpg.domain.auth.validator;
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import static org.springframework.http.HttpStatus.*;
@@ -11,7 +12,7 @@ import static org.springframework.http.HttpStatus.*;
 @RequiredArgsConstructor
 public class AuthValidator {
 
-    private final BCryptPasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
     public void validatePassword(String password, String hash) {
 

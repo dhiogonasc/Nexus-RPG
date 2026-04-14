@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.mission.service;
 
 import com.nexus.nexusrpg.common.service.ProgressService;
+import com.nexus.nexusrpg.common.service.UserContextService;
 import com.nexus.nexusrpg.domain.mission.model.Mission;
 import com.nexus.nexusrpg.domain.mission.repository.MissionRepository;
 import com.nexus.nexusrpg.domain.mission.validator.AttemptValidator;
@@ -8,14 +9,13 @@ import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptD
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMissionAttempt;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.user.repository.relation.AttemptRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
-import com.nexus.nexusrpg.domain.auth.service.AuthService;
 import com.nexus.nexusrpg.domain.mission.validator.MissionValidator;
 import com.nexus.nexusrpg.domain.planet.validator.PlanetValidator;
 import com.nexus.nexusrpg.domain.user.validator.UserValidator;
@@ -27,10 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
-
-import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
-import static com.nexus.nexusrpg.common.enums.EntityStatus.UNLOCKED;
 
 @RequiredArgsConstructor
 @Service
@@ -38,7 +34,7 @@ public class MissionService {
 
     private final BigDecimal AVG = BigDecimal.valueOf(7.00);
 
-    private final AuthService authService;
+    private final UserContextService userContextService;
     private final ProgressService progressService;
 
     private final UserMapper userMapper;
@@ -56,7 +52,7 @@ public class MissionService {
     @Transactional(readOnly = true)
     public Page<UserMissionReferenceDTO> getMissions(Long planetId, Pageable pageable) {
 
-        var user = authService.getAuthenticatedUser();
+        var user = userContextService.getAuthenticatedUser();
 
         return userMissionRepository
                 .findByUserIdAndPlanetId(user.getId(), planetId, pageable)
@@ -66,7 +62,7 @@ public class MissionService {
     @Transactional(readOnly = true)
     public UserMissionDTO getMission(Long missionId) {
 
-        Long userId = authService.getAuthenticatedUser().getId();
+        Long userId = userContextService.getAuthenticatedUser().getId();
         UserMission userMission = userMissionRepository
                 .findByUserIdAndMissionIdOrThrow(userId, missionId);
 
@@ -88,7 +84,7 @@ public class MissionService {
     @Transactional
     public UserMissionAttemptDTO start(Long missionId) {
 
-        User user = authService.getAuthenticatedUser();
+        User user = userContextService.getAuthenticatedUser();
         updateOxygen(user);
 
         Long userId = user.getId();
@@ -110,7 +106,7 @@ public class MissionService {
     @Transactional
     public UserMissionAttemptDTO finish(Long attemptId) {
 
-        User user = authService.getAuthenticatedUser();
+        User user = userContextService.getAuthenticatedUser();
         UserMissionAttempt attempt = attemptRepository.findByIdOrThrow(attemptId);
 
         attemptValidator.isUserAuth(user, attempt);
@@ -125,22 +121,6 @@ public class MissionService {
         attemptRepository.save(attempt);
 
         return userMapper.toUserMissionAttemptDTO(attempt);
-    }
-
-    public List<UserMission> initialMissions(User user){
-
-         return missionRepository.findAll().stream()
-                .map(m -> {
-                    boolean isFirst = m.getId().equals(1L);
-                    return UserMission.builder()
-                            .user(user)
-                            .mission(m)
-                            .status(isFirst ? UNLOCKED : LOCKED)
-                            .isAccessible(isFirst)
-                            .isCurrent(isFirst)
-                            .build();
-                })
-                .toList();
     }
 
     private void updateMission(UserMissionAttempt attempt, BigDecimal result) {

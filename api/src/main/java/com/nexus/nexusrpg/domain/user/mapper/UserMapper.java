@@ -12,7 +12,7 @@ import com.nexus.nexusrpg.domain.user.controller.dto.UserDTO;
 import com.nexus.nexusrpg.domain.level.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.mission.mapper.MissionMapper;
 import com.nexus.nexusrpg.domain.planet.mapper.PlanetMapper;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMissionAttempt;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;

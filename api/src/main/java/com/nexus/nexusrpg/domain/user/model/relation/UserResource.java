@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.user.model.relation;
 
 import com.nexus.nexusrpg.domain.resource.model.Resource;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,6 +35,15 @@ public class UserResource {
     @Builder.Default
     @Column(name = "\"is_collected\"", nullable = false)
     private boolean collected = false;
+
+    public static UserResource initialize(User user, Resource resource){
+
+        return UserResource.builder()
+                .user(user)
+                .resource(resource)
+                .collected(false)
+                .build();
+    }
 
     public void collect(){
         this.setCollected(true);

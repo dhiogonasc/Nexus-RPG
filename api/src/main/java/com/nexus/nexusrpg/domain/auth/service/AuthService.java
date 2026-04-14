@@ -3,9 +3,7 @@ package com.nexus.nexusrpg.domain.auth.service;
 import com.nexus.nexusrpg.domain.auth.controller.dto.request.LoginRequestDTO;
 import com.nexus.nexusrpg.domain.auth.controller.dto.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.domain.auth.controller.dto.response.LoginResponseDTO;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.auth.validator.AuthValidator;
-import com.nexus.nexusrpg.domain.user.service.UserFacade;
 import com.nexus.nexusrpg.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,10 +20,7 @@ import java.time.Instant;
 public class AuthService {
 
     private final UserService userService;
-    private final UserFacade userFacade;
-
     private final AuthValidator authValidator;
-
     private final PasswordEncoder passwordEncoder;
     private final JwtEncoder jwtEncoder;
 
@@ -62,10 +57,5 @@ public class AuthService {
                 expiresIn,
                 loggedInAt
         );
-    }
-
-    public User getAuthenticatedUser() {
-
-        return userFacade.getAuthenticatedUser();
     }
 }

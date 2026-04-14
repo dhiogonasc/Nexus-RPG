@@ -1,10 +1,11 @@
 package com.nexus.nexusrpg.common.service;
 
+import com.nexus.nexusrpg.domain.level.model.Level;
 import com.nexus.nexusrpg.domain.level.service.LevelService;
-import com.nexus.nexusrpg.domain.mission.service.MissionService;
-import com.nexus.nexusrpg.domain.planet.service.PlanetService;
-import com.nexus.nexusrpg.domain.resource.service.ResourceService;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.mission.service.InitMissionService;
+import com.nexus.nexusrpg.domain.planet.service.InitPlanetService;
+import com.nexus.nexusrpg.domain.resource.service.InitResourceService;
+import com.nexus.nexusrpg.domain.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,22 +14,26 @@ import org.springframework.stereotype.Service;
 public class InitApplicationService {
 
     private final LevelService levelService;
-    private final PlanetService planetService;
-    private final MissionService missionService;
-    private final ResourceService resourceService;
+
+    private final InitPlanetService initPlanetService;
+    private final InitMissionService initMissionService;
+    private final InitResourceService initResourceService;
 
     public void initUser(User user) {
 
-        var initialLevel = levelService.initialLevel(user);
-        var initialPlanets = planetService.initialPlanets(user);
-        var initialMissions = missionService.initialMissions(user);
-        var initialResources = resourceService.initialResources(user);
+        var initialPlanets = initPlanetService.initialize(user);
+        var initialMissions = initMissionService.initialize(user);
+        var initialResources = initResourceService.initialize(user);
 
         user.initialize(
-                initialLevel,
                 initialPlanets,
                 initialMissions,
                 initialResources
         );
+    }
+
+    public Level initialLevel() {
+
+        return levelService.initialLevel();
     }
 }

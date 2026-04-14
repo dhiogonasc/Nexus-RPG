@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.mission.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.user.model.entity.User;
+import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMissionAttempt;
 import com.nexus.nexusrpg.domain.user.repository.relation.AttemptRepository;
 import lombok.RequiredArgsConstructor;

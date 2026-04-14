@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.user.model.entity;
+package com.nexus.nexusrpg.domain.user.model;
 
 import com.nexus.nexusrpg.domain.level.model.Level;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
@@ -64,15 +64,12 @@ public class User {
     }
 
     public void initialize(
-            Level initialLevel,
             List<UserPlanet> initialPlanets,
             List<UserMission> initialMissions,
             List<UserResource> initialResources
     ){
         this.oxygen = 10;
         this.xp = 0;
-
-        this.level = initialLevel;
 
         this.planets.clear();
         this.planets.addAll(initialPlanets);
