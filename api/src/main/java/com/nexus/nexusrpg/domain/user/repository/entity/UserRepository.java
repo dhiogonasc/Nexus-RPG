@@ -19,8 +19,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 .orElseThrow(() -> new BusinessException("User", "Nenhum usuário encontrado!", HttpStatus.NOT_FOUND));
     }
 
-    @Query("SELECT u FROM User u LEFT JOIN FETCH u.planets WHERE u.email = :email")
-    Optional<User> findByEmailWithPlanets(String email);
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.planets WHERE u.id = :userId")
+    Optional<User> findByUserIdWithPlanets(Long userId);
 
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.resources WHERE u.id = :userId")
     Optional<User> findByUserIdWithResources(Long userId);

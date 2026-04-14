@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.planet.service;
 
-import com.nexus.nexusrpg.domain.mission.service.MissionService;
+import com.nexus.nexusrpg.domain.planet.repository.PlanetRepository;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.planet.controller.dto.PlanetDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.planet.UserPlanetDTO;
@@ -9,40 +9,43 @@ import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
 import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
-import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.repository.relation.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.user.repository.entity.UserRepository;
 import com.nexus.nexusrpg.domain.auth.service.AuthService;
 import com.nexus.nexusrpg.domain.planet.validator.PlanetValidator;
 import lombok.*;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.UNLOCKED;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 @RequiredArgsConstructor
 @Service
 public class PlanetService {
 
-    private final AuthService authService;
+    private final PlanetRepository planetRepository;
+    private final UserPlanetRepository userPlanetRepository;
 
+    private final AuthService authService;
     private final UserMapper userMapper;
     private final UserRepository userRepository;
-
-    private final UserPlanetRepository userPlanetRepository;
 
     private final PlanetValidator planetValidator;
 
     @Transactional(readOnly = true)
     public List<UserPlanetReferenceDTO> getPlanets() {
-        String email = authService.getAuthenticatedEmail();
 
-        return userRepository.findByEmailWithPlanets(email)
-                .map(user -> user.getPlanets().stream()
+        var user = authService.getAuthenticatedUser();
+
+        return userRepository.findByUserIdWithPlanets(user.getId())
+                .map(u -> u.getPlanets().stream()
                         .map(userMapper::toUserPlanetReferenceDTO)
                         .toList())
-                .orElseThrow(() -> new BusinessException("User", "Usuário não encontrado", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new BusinessException("User", "Usuário não encontrado", NOT_FOUND));
     }
 
 
@@ -77,5 +80,21 @@ public class PlanetService {
                 userPlanet.isCurrent(),
                 userPlanet.progress()
         );
+    }
+
+    public List<UserPlanet> initialPlanets(User user){
+
+        return planetRepository.findAll().stream()
+                .map(p -> {
+                    boolean isFirst = p.getId().equals(1L);
+                    return UserPlanet.builder()
+                            .user(user)
+                            .planet(p)
+                            .status(isFirst ? UNLOCKED : LOCKED)
+                            .isAccessible(isFirst)
+                            .isCurrent(isFirst)
+                            .build();
+                })
+                .toList();
     }
 }

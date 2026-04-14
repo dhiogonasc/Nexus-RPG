@@ -1,19 +1,13 @@
 package com.nexus.nexusrpg.domain.user.model.entity;
 
 import com.nexus.nexusrpg.domain.level.model.Level;
-import com.nexus.nexusrpg.domain.mission.model.Mission;
-import com.nexus.nexusrpg.domain.planet.model.Planet;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.user.model.relation.UserResource;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Data
@@ -22,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "\"user\"")
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,30 +55,32 @@ public class User implements UserDetails {
     @Column(name = "\"oxygen\"", nullable = false, columnDefinition = "oxygen")
     private int oxygen = 10;
 
-    @Override
-    public String getUsername() { return this.username; }
-
-    @Override
-    public String getPassword() { return this.password; }
-
-    @Override public boolean isAccountNonExpired() { return true; }
-
-    @Override public boolean isAccountNonLocked() { return true; }
-
-    @Override public boolean isCredentialsNonExpired() { return true; }
-
-    @Override public boolean isEnabled() { return true; }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
     public void fillOxygen(){
         this.oxygen = 10;
     }
 
-    public void discountOxygen(){
+    public void consumeOxygen(){
         this.oxygen -= 1;
+    }
+
+    public void initialize(
+            Level initialLevel,
+            List<UserPlanet> initialPlanets,
+            List<UserMission> initialMissions,
+            List<UserResource> initialResources
+    ){
+        this.oxygen = 10;
+        this.xp = 0;
+
+        this.level = initialLevel;
+
+        this.planets.clear();
+        this.planets.addAll(initialPlanets);
+
+        this.missions.clear();
+        this.missions.addAll(initialMissions);
+
+        this.resources.clear();
+        this.resources.addAll(initialResources);
     }
 }

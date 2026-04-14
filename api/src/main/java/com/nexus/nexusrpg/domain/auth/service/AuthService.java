@@ -8,7 +8,7 @@ import com.nexus.nexusrpg.domain.user.model.entity.User;
 import com.nexus.nexusrpg.domain.auth.validator.AuthValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -21,10 +21,10 @@ import java.time.Instant;
 @Service
 public class AuthService {
 
-    private final SetUpService setUpService;
+    private final InitApplicationService initApplicationService;
     private final AuthValidator authValidator;
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder;
+    private final PasswordEncoder encoder;
     private final JwtEncoder jwtEncoder;
 
     @Transactional
@@ -36,7 +36,7 @@ public class AuthService {
                 .password(encoder.encode(request.password()))
                 .build();
 
-        setUpNewRegister(user);
+        initApplicationService.initUser(user);
         userRepository.save(user);
     }
 
@@ -65,23 +65,9 @@ public class AuthService {
         );
     }
 
-    private void setUpNewRegister(User user) {
-
-        setUpService.initialStats(user);
-        setUpService.setUpInitialLevel(user);
-        setUpService.setUpInitialUserPlanets(user);
-        setUpService.setUpInitialUserMissions(user);
-        setUpService.setUpInitialUserResources(user);
-    }
-
     public User getAuthenticatedUser() {
 
-
-        return userRepository.findByEmailOrThrow(getAuthenticatedEmail());
-    }
-
-    public String getAuthenticatedEmail() {
-
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+        String authenticatedEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByEmailOrThrow(authenticatedEmail);
     }
 }
