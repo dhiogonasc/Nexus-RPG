@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.auth.service;
+package com.nexus.nexusrpg.common.service;
 
 import com.nexus.nexusrpg.domain.level.service.LevelService;
 import com.nexus.nexusrpg.domain.mission.service.MissionService;

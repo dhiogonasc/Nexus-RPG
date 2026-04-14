@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.auth.service;
 
+import com.nexus.nexusrpg.common.service.InitApplicationService;
 import com.nexus.nexusrpg.domain.auth.controller.dto.request.LoginRequestDTO;
 import com.nexus.nexusrpg.domain.auth.controller.dto.request.RegisterRequestDTO;
 import com.nexus.nexusrpg.domain.auth.controller.dto.response.LoginResponseDTO;
@@ -24,7 +25,7 @@ public class AuthService {
     private final InitApplicationService initApplicationService;
     private final AuthValidator authValidator;
     private final UserRepository userRepository;
-    private final PasswordEncoder encoder;
+    private final PasswordEncoder passwordEncoder;
     private final JwtEncoder jwtEncoder;
 
     @Transactional
@@ -33,7 +34,7 @@ public class AuthService {
         var user = User.builder()
                 .username(request.username())
                 .email(request.email())
-                .password(encoder.encode(request.password()))
+                .password(passwordEncoder.encode(request.password()))
                 .build();
 
         initApplicationService.initUser(user);
