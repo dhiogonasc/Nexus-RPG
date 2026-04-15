@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.planet.controller.dto;
 
-import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
-import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceReferenceDTO;
+import com.nexus.nexusrpg.domain.mission.controller.dto.MissionReferenceDTO;
+import com.nexus.nexusrpg.domain.resource.controller.dto.ResourceReferenceDTO;
 
 import java.util.List;
 
@@ -12,6 +12,6 @@ public record PlanetDTO(
         String description,
         int order,
         long xpBonus,
-        List<UserMissionReferenceDTO> missions,
-        UserResourceReferenceDTO resource
+        List<ResourceReferenceDTO> resources,
+        List<MissionReferenceDTO> missions
 ) {}

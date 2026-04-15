@@ -1,8 +1,6 @@
-package com.nexus.nexusrpg.common.interfaces;
+package com.nexus.nexusrpg.common.init;
 
 import com.nexus.nexusrpg.domain.user.model.User;
-
-import java.util.List;
 
 public interface Initializable {
 

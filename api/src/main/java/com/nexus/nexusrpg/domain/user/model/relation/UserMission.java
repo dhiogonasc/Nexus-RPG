@@ -58,7 +58,7 @@ public class UserMission {
 
     public static UserMission initialize(User user, Mission mission) {
 
-            boolean isFirst = mission.getOrder() == 1;
+            boolean isFirst = mission.getOrder() == 1 & mission.getPlanet().getOrder() == 1;
 
             return UserMission.builder()
                     .user(user)

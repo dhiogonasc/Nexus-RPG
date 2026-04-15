@@ -1,6 +1,5 @@
-package com.nexus.nexusrpg.common.service;
+package com.nexus.nexusrpg.common.init;
 
-import com.nexus.nexusrpg.common.interfaces.Initializable;
 import com.nexus.nexusrpg.domain.level.model.Level;
 import com.nexus.nexusrpg.domain.level.service.LevelService;
 import com.nexus.nexusrpg.domain.user.model.User;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class InitService {
+public class InitApplication {
 
     private final LevelService levelService;
     private final List<Initializable> initializers;
