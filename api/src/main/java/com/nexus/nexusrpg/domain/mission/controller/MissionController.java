@@ -23,14 +23,13 @@ public class MissionController {
             @RequestParam(required = false) Long planetId,
             @ParameterObject Pageable pageable) {
 
-        Page<UserMissionReferenceDTO> missions = missionService.getMissions(planetId, pageable);
-        return ResponseEntity.ok(missions);
+        return ResponseEntity.ok(missionService.getAll(planetId, pageable));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserMissionDTO> getMission(@PathVariable Long id) {
 
-        return ResponseEntity.ok(missionService.getMission(id));
+        return ResponseEntity.ok(missionService.getById(id));
     }
 
     @PostMapping("/{id}/attempts")

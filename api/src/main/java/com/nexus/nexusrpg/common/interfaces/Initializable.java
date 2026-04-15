@@ -4,7 +4,7 @@ import com.nexus.nexusrpg.domain.user.model.User;
 
 import java.util.List;
 
-public interface Initializable<T> {
+public interface Initializable {
 
-    List<T> initialize(User user);
+    void initialize(User user);
 }

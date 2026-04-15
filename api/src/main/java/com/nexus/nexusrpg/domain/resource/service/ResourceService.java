@@ -1,7 +1,6 @@
 package com.nexus.nexusrpg.domain.resource.service;
 
 import com.nexus.nexusrpg.common.service.UserContextService;
-import com.nexus.nexusrpg.domain.resource.repository.ResourceRepository;
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceReferenceDTO;
 import com.nexus.nexusrpg.domain.user.mapper.relation.UserResourceMapper;
@@ -17,12 +16,11 @@ import java.util.List;
 public class ResourceService {
 
     private final UserContextService userContextService;
-    private final ResourceRepository resourceRepository;
     private final UserResourceRepository userResourceRepository;
     private final UserResourceMapper userResourceMapper;
 
     @Transactional(readOnly = true)
-    public List<UserResourceReferenceDTO> getResources() {
+    public List<UserResourceReferenceDTO> getAll() {
 
         var user = userContextService.getAuthenticatedUser();
 
@@ -32,7 +30,8 @@ public class ResourceService {
                 .toList();
     }
 
-    public UserResourceDTO getResource(Long resourceId) {
+    @Transactional(readOnly = true)
+    public UserResourceDTO getById(Long resourceId) {
 
         var userId = userContextService.getAuthenticatedUser().getId();
 

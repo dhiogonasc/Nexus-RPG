@@ -19,12 +19,12 @@ public class PlanetController {
     @GetMapping
     public ResponseEntity<List<UserPlanetReferenceDTO>> getPlanets() {
 
-        return ResponseEntity.ok(planetService.getPlanets());
+        return ResponseEntity.ok(planetService.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserPlanetDTO> getPlanet(@PathVariable Long id) {
 
-        return ResponseEntity.ok(planetService.getPlanet(id));
+        return ResponseEntity.ok(planetService.getById(id));
     }
 }

@@ -28,7 +28,7 @@ public class PlanetService {
     private final UserMapper userMapper;
 
     @Transactional(readOnly = true)
-    public List<UserPlanetReferenceDTO> getPlanets() {
+    public List<UserPlanetReferenceDTO> getAll() {
 
         var userId = userContextService.getAuthenticatedUser().getId();
 
@@ -37,8 +37,8 @@ public class PlanetService {
                 .toList();
     }
 
-
-    public UserPlanetDTO getPlanet(Long planetId) {
+    @Transactional(readOnly = true)
+    public UserPlanetDTO getById(Long planetId) {
 
         var user = userContextService.getAuthenticatedUser();
 

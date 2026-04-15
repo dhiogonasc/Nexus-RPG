@@ -62,22 +62,4 @@ public class User {
     public void consumeOxygen(){
         this.oxygen -= 1;
     }
-
-    public void initialize(
-            List<UserPlanet> initialPlanets,
-            List<UserMission> initialMissions,
-            List<UserResource> initialResources
-    ){
-        this.oxygen = 10;
-        this.xp = 0;
-
-        this.planets.clear();
-        this.planets.addAll(initialPlanets);
-
-        this.missions.clear();
-        this.missions.addAll(initialMissions);
-
-        this.resources.clear();
-        this.resources.addAll(initialResources);
-    }
 }

@@ -22,12 +22,12 @@ public class ResourceController {
     @GetMapping
     public ResponseEntity<List<UserResourceReferenceDTO>> getResources() {
 
-        return ResponseEntity.ok(resourceService.getResources());
+        return ResponseEntity.ok(resourceService.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResourceDTO> getResource(@PathVariable Long id) {
 
-        return ResponseEntity.ok(resourceService.getResource(id));
+        return ResponseEntity.ok(resourceService.getById(id));
     }
 }

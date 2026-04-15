@@ -11,10 +11,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class InitApplicationService {
+public class InitService {
 
     private final LevelService levelService;
-    private final List<Initializable<?>> initializers;
+    private final List<Initializable> initializers;
 
     public void initUser(User user) {
         initializers.forEach(initializer -> initializer.initialize(user));
