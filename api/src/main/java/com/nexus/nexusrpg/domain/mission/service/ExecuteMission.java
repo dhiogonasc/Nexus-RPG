@@ -9,7 +9,7 @@ import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMissionAttempt;
 import com.nexus.nexusrpg.domain.user.repository.relation.AttemptRepository;
-import com.nexus.nexusrpg.domain.user.repository.relation.UserMissionRepository;
+import com.nexus.nexusrpg.domain.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

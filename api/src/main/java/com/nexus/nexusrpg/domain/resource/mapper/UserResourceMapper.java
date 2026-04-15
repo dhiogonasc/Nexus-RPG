@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.user.mapper.relation;
+package com.nexus.nexusrpg.domain.resource.mapper;
 
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceReferenceDTO;

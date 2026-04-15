@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.user.repository.relation;
+package com.nexus.nexusrpg.domain.mission.repository;
 
 import com.nexus.nexusrpg.common.entity.RelationRepository;
 import com.nexus.nexusrpg.core.exception.BusinessException;

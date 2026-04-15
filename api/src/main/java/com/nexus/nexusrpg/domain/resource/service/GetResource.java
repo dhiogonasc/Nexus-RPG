@@ -4,9 +4,9 @@ import com.nexus.nexusrpg.common.entity.GetEntity;
 import com.nexus.nexusrpg.common.context.UserContext;
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceReferenceDTO;
-import com.nexus.nexusrpg.domain.user.mapper.relation.UserResourceMapper;
+import com.nexus.nexusrpg.domain.resource.mapper.UserResourceMapper;
 import com.nexus.nexusrpg.domain.user.model.relation.UserResource;
-import com.nexus.nexusrpg.domain.user.repository.relation.UserResourceRepository;
+import com.nexus.nexusrpg.domain.resource.repository.UserResourceRepository;
 import org.springframework.stereotype.Service;
 
 @Service
