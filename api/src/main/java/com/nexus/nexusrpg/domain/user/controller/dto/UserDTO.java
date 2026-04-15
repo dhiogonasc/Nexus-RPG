@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.user.controller.dto;
 
-import com.nexus.nexusrpg.domain.level.controller.dto.LevelDTO;
+import com.nexus.nexusrpg.domain.entity.level.mapper.dto.LevelDTO;
 
 public record UserDTO(
 

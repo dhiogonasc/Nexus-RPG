@@ -9,7 +9,7 @@ api.interceptors.request.use(
   async (config) => {
     const token = await storage.getToken();
 
-    if (token && !config.url?.includes("/auth/")) {
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
 

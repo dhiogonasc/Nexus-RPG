@@ -721,7 +721,6 @@ CREATE TABLE
         "xp_bonus" xp NOT NULL,
         CONSTRAINT pk_resource PRIMARY KEY (id),
         CONSTRAINT fk_resource_planet FOREIGN KEY (planet_id) REFERENCES "planet" (id) ON DELETE CASCADE,
-        CONSTRAINT uk_resource_planet UNIQUE (planet_id),
         CONSTRAINT uk_resource_name UNIQUE ("name")
     );
 

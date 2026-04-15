@@ -1,15 +1,15 @@
-import { Stack } from 'expo-router';
+import { Stack } from "expo-router";
 
 export default function Layout() {
   return (
     <Stack
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: '#000000' }, 
+        contentStyle: { backgroundColor: "#000000" },
       }}
     >
       <Stack.Screen name="index" />
-      <Stack.Screen name="mission" />
+      <Stack.Screen name="profile" />
     </Stack>
   );
 }

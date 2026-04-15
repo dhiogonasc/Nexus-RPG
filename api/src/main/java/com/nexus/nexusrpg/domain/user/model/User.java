@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.user.model;
 
-import com.nexus.nexusrpg.domain.level.model.Level;
+import com.nexus.nexusrpg.domain.entity.level.model.Level;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.user.model.relation.UserResource;

@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.user.model.relation;
 
-import com.nexus.nexusrpg.domain.resource.model.Resource;
+import com.nexus.nexusrpg.domain.entity.resource.model.Resource;
 import com.nexus.nexusrpg.domain.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;

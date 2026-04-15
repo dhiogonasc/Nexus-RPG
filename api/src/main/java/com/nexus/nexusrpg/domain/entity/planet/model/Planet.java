@@ -1,0 +1,41 @@
+package com.nexus.nexusrpg.domain.entity.planet.model;
+
+
+import com.nexus.nexusrpg.domain.entity.mission.model.Mission;
+import com.nexus.nexusrpg.domain.entity.resource.model.Resource;
+import com.nexus.nexusrpg.domain.entity.planet.model.enums.PlanetLabel;
+import jakarta.persistence.*;
+import lombok.*;
+import java.util.List;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "\"planet\"")
+public class Planet {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "\"name\"", nullable = false, unique = true, columnDefinition = "planet_label")
+    private PlanetLabel name;
+
+    @Column(name = "\"description\"", columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "\"order\"", nullable = false, unique = true)
+    private int order;
+
+    @Column(name = "xp_bonus", nullable = false, columnDefinition = "xp")
+    private long xpBonus; 
+
+    @OneToMany(mappedBy = "planet")
+    private List<Mission> missions;
+
+    @OneToMany(mappedBy = "planet")
+    private List<Resource> resources;
+}

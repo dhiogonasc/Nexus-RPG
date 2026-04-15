@@ -1,0 +1,16 @@
+package com.nexus.nexusrpg.domain.entity.achievement.model.serials;
+
+import com.nexus.nexusrpg.common.entity.enums.EntityType;
+import lombok.*;
+
+import java.io.Serializable;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AchievementTargetId implements Serializable {
+
+    private Long achievement;
+    private EntityType entity;
+    private Long entityId;
+}

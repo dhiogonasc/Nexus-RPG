@@ -1,63 +1,67 @@
-import React, { useState } from 'react';
+import { styles } from "@/styles/indexStyles";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
+  Image,
   KeyboardAvoidingView,
   Platform,
-  Image,
-  StatusBar,
   ScrollView,
-} from 'react-native';
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-import { styles } from '@/styles/indexStyles';
-
-import { Link } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
-import EmailInput from '@/components/EmailInput';
-import PasswordInput from '@/components/PasswordInput';
-import { authService } from '@/services';
-import { storage } from '@/services/storage';
-
-
+import EmailInput from "@/components/EmailInput";
+import PasswordInput from "@/components/PasswordInput";
+import { authService } from "@/services";
+import { storage } from "@/services/storage";
+import { LinearGradient } from "expo-linear-gradient";
+import { Link } from "expo-router";
 
 export default function index() {
-
-  const [email, setEmail] = useState('');
-
-  const [password, setPassword] = useState('');
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const router = useRouter();
+
   const handleLogin = async () => {
-  try {
-    const data = await authService.login({ email, password });
-    
-    await storage.saveToken(data.token);
-    
-    console.log("Login realizado com sucesso em:", data.loggedInAt);
-    
-  } catch (error) {
-    console.error("Erro ao logar", error);
-  }
-};
+    try {
+      const data = await authService.login({ email, password });
+
+      if (data.accessToken) {
+        await storage.saveToken(data.accessToken);
+        console.log("Login realizado com sucesso! Token salvo.");
+
+        router.replace("/profile");
+      } else {
+        console.error("Token não encontrado na resposta do servidor");
+      }
+    } catch (error) {
+      console.error("Erro ao logar", error);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}
-        keyboardShouldPersistTaps='handled'
-        showsVerticalScrollIndicator={false}>
-
-
-        <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
+        <StatusBar
+          barStyle="light-content"
+          translucent
+          backgroundColor="transparent"
+        />
 
         <View style={styles.imageContainer}>
           <Image
-            source={require('../assets/LoginImg.jpg')}
+            source={require("../assets/LoginImg.jpg")}
             style={styles.topImage}
             resizeMode="cover"
           />
@@ -65,14 +69,13 @@ export default function index() {
           {/* Efeito esfumaçado na base da imagem */}
 
           <LinearGradient
-            colors={['transparent', '#000000']}
+            colors={["transparent", "#000000"]}
             style={styles.gradientFade}
           />
         </View>
 
         <View style={styles.formContainer}>
           <Text style={styles.title}>Bem vindo de volta!</Text>
-
 
           <View>
             <EmailInput
@@ -98,8 +101,7 @@ export default function index() {
             <TouchableOpacity
               style={styles.eyeIcon}
               onPress={() => setShowPassword(!showPassword)}
-            >
-            </TouchableOpacity>
+            ></TouchableOpacity>
           </View>
 
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
@@ -114,11 +116,10 @@ export default function index() {
           </View>
 
           <Image
-            source={require('../assets/LogoNexus.jpg')}
+            source={require("../assets/LogoNexus.jpg")}
             style={styles.bottomLogo}
             resizeMode="cover"
           />
-
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

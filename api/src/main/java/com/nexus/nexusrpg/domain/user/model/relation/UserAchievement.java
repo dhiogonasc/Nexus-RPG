@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.user.model.relation;
 
-import com.nexus.nexusrpg.domain.achievement.model.Achievement;
+import com.nexus.nexusrpg.domain.entity.achievement.model.Achievement;
 import com.nexus.nexusrpg.domain.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;

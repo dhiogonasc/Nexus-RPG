@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.user.model.relation;
 
-import com.nexus.nexusrpg.domain.mission.model.Mission;
+import com.nexus.nexusrpg.domain.entity.mission.model.Mission;
 import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 import jakarta.persistence.*;
