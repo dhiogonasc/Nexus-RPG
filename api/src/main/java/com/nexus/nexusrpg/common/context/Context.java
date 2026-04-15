@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserContext {
+public class Context {
 
     private final UserService userService;
     private final UserMapper userMapper;

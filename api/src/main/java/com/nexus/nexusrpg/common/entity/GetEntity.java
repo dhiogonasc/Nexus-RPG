@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.common.entity;
 
-import com.nexus.nexusrpg.common.context.UserContext;
+import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,14 +12,14 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RequiredArgsConstructor
 public abstract class GetEntity<A, B, C> {
 
-    protected final UserContext userContext;
+    protected final Context context;
     protected final String domainName;
     protected final RelationRepository<A> repository;
 
     @Transactional(readOnly = true)
     public B getById(Long id) {
 
-        var userId = userContext.getAuthenticatedUser().getId();
+        var userId = context.getAuthenticatedUser().getId();
 
         A entity = repository.findByUserIdAndBaseId(userId, id)
                 .orElseThrow(() -> new BusinessException(domainName, "Registro não encontrado", NOT_FOUND));
@@ -31,7 +31,7 @@ public abstract class GetEntity<A, B, C> {
     @Transactional(readOnly = true)
     public List<C> getAll() {
 
-        var userId = userContext.getAuthenticatedUser().getId();
+        var userId = context.getAuthenticatedUser().getId();
 
         return repository.findByUserId(userId).stream()
                 .map(this::mapToReferenceDTO)

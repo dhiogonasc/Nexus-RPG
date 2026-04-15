@@ -6,7 +6,7 @@ import com.nexus.nexusrpg.domain.user.controller.dto.planet.UserPlanetReferenceD
 import com.nexus.nexusrpg.domain.planet.mapper.UserPlanetMapper;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.planet.repository.UserPlanetRepository;
-import com.nexus.nexusrpg.common.context.UserContext;
+import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.planet.validator.PlanetValidator;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +18,14 @@ public class GetPlanet extends GetEntity<UserPlanet, UserPlanetDTO, UserPlanetRe
 
 
     public GetPlanet(
-            UserContext userContext,
+            Context context,
             UserPlanetRepository userPlanetRepository,
             UserPlanetMapper userPlanetMapper,
             PlanetValidator planetValidator
     ) {
 
         super(
-                userContext,
+                context,
                 "Planet",
                 userPlanetRepository
         );

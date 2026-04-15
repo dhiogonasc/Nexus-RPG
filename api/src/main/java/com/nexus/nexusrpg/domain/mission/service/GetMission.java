@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.mission.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
-import com.nexus.nexusrpg.common.context.UserContext;
+import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.mission.mapper.UserMissionMapper;
@@ -21,7 +21,7 @@ public class GetMission extends GetEntity<UserMission, UserMissionDTO, UserMissi
     private final PlanetValidator planetValidator;
 
     public GetMission(
-            UserContext userContext,
+            Context context,
             UserMissionRepository userMissionRepository,
             UserPlanetRepository userPlanetRepository,
             UserMissionMapper userMissionMapper,
@@ -30,7 +30,7 @@ public class GetMission extends GetEntity<UserMission, UserMissionDTO, UserMissi
     ) {
 
         super(
-                userContext,
+                context,
                 "Mission",
                 userMissionRepository
         );

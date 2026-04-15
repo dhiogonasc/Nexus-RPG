@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.mission.service;
 
-import com.nexus.nexusrpg.common.context.UserContext;
+import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.mission.validator.AttemptValidator;
 import com.nexus.nexusrpg.domain.mission.validator.MissionValidator;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionAttemptDTO;
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ExecuteMission {
 
-    private final UserContext userContext;
+    private final Context context;
     private final UserMissionRepository userMissionRepository;
     private final AttemptRepository attemptRepository;
     private final AttemptValidator attemptValidator;
@@ -33,7 +33,7 @@ public class ExecuteMission {
     @Transactional
     public UserMissionAttemptDTO start(Long missionId) {
 
-        User user = userContext.getAuthenticatedUser();
+        User user = context.getAuthenticatedUser();
         updateOxygen(user);
 
         Long userId = user.getId();
@@ -55,7 +55,7 @@ public class ExecuteMission {
     @Transactional
     public UserMissionAttemptDTO finish(Long attemptId) {
 
-        User user = userContext.getAuthenticatedUser();
+        User user = context.getAuthenticatedUser();
         UserMissionAttempt attempt = attemptRepository.findByIdOrThrow(attemptId);
 
         attemptValidator.isUserAuth(user, attempt);

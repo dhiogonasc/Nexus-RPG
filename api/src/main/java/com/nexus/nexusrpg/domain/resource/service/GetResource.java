@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.resource.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
-import com.nexus.nexusrpg.common.context.UserContext;
+import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.resource.UserResourceReferenceDTO;
 import com.nexus.nexusrpg.domain.resource.mapper.UserResourceMapper;
@@ -15,13 +15,13 @@ public class GetResource extends GetEntity<UserResource, UserResourceDTO, UserRe
     private final UserResourceMapper userResourceMapper;
 
     public GetResource(
-            UserContext userContext,
+            Context context,
             UserResourceRepository userResourceRepository,
             UserResourceMapper userResourceMapper
     ) {
 
         super(
-                userContext,
+                context,
                 "Resource",
                 userResourceRepository
         );
