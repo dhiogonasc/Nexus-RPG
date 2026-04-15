@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.resource.service;
 
-import com.nexus.nexusrpg.common.init.InitEntity;
+import com.nexus.nexusrpg.common.entity.InitEntity;
 import com.nexus.nexusrpg.domain.resource.model.Resource;
 import com.nexus.nexusrpg.domain.resource.repository.ResourceRepository;
 import com.nexus.nexusrpg.domain.user.model.User;

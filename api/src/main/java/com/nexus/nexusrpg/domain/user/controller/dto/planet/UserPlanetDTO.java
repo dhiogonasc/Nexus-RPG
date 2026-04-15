@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.user.controller.dto.planet;
 
 import com.nexus.nexusrpg.domain.planet.controller.dto.PlanetDTO;
-import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 
 import java.math.BigDecimal;
 

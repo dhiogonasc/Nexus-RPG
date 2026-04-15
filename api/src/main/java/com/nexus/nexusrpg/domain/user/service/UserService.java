@@ -1,6 +1,5 @@
 package com.nexus.nexusrpg.domain.user.service;
 
-import com.nexus.nexusrpg.common.init.InitApplication;
 import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final InitApplication initApplication;
+    private final InitUser initUser;
     private final UserRepository userRepository;
 
     public void createUser(
@@ -18,7 +17,7 @@ public class UserService {
             String email,
             String password
     ){
-        var level = initApplication.initialLevel();
+        var level = initUser.initialLevel();
 
         var user = User.builder()
                 .username(username)
@@ -28,7 +27,7 @@ public class UserService {
                 .build();
 
         userRepository.save(user);
-        initApplication.initUser(user);
+        initUser.initialize(user);
     }
 
     public User findByEmail(String email) {

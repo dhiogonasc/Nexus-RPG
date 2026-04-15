@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.mission.service;
 
-import com.nexus.nexusrpg.common.service.GetEntity;
-import com.nexus.nexusrpg.common.service.UserContextService;
+import com.nexus.nexusrpg.common.entity.GetEntity;
+import com.nexus.nexusrpg.common.context.UserContext;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionDTO;
 import com.nexus.nexusrpg.domain.user.controller.dto.mission.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.user.mapper.relation.UserMissionMapper;
@@ -12,36 +12,33 @@ import com.nexus.nexusrpg.domain.mission.validator.MissionValidator;
 import com.nexus.nexusrpg.domain.planet.validator.PlanetValidator;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class GetMission extends GetEntity<UserMission, UserMissionDTO, UserMissionReferenceDTO> {
 
-    private final UserMissionRepository userMissionRepository;
     private final UserPlanetRepository userPlanetRepository;
     private final UserMissionMapper userMissionMapper;
     private final MissionValidator missionValidator;
     private final PlanetValidator planetValidator;
 
-    public GetMission(UserContextService userContextService, UserMissionRepository userMissionRepository,
-                          UserPlanetRepository userPlanetRepository, UserMissionMapper userMapper,
-                          MissionValidator missionValidator, PlanetValidator planetValidator) {
-        super(userContextService);
-        this.userMissionRepository = userMissionRepository;
+    public GetMission(
+            UserContext userContext,
+            UserMissionRepository userMissionRepository,
+            UserPlanetRepository userPlanetRepository,
+            UserMissionMapper userMissionMapper,
+            MissionValidator missionValidator,
+            PlanetValidator planetValidator
+    ) {
+
+        super(
+                userContext,
+                "Mission",
+                userMissionRepository
+        );
+
         this.userPlanetRepository = userPlanetRepository;
-        this.userMissionMapper = userMapper;
+        this.userMissionMapper = userMissionMapper;
         this.missionValidator = missionValidator;
         this.planetValidator = planetValidator;
-    }
-
-    @Override
-    protected List<UserMission> findAll(Long userId) {
-        return userMissionRepository.findByUserId(userId);
-    }
-
-    @Override
-    protected UserMission findById(Long userId, Long missionId) {
-        return userMissionRepository.findByUserIdAndMissionIdOrThrow(userId, missionId);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.achievement.model.serials;
 
-import com.nexus.nexusrpg.common.enums.EntityType;
+import com.nexus.nexusrpg.common.entity.enums.EntityType;
 import lombok.*;
 
 import java.io.Serializable;

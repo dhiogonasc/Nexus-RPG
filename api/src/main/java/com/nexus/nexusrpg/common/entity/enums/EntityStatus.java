@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.enums;
+package com.nexus.nexusrpg.common.entity.enums;
 
 public enum EntityStatus {
     LOCKED, UNLOCKED, COMPLETED

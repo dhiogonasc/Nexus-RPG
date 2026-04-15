@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.user.controller;
 
 import com.nexus.nexusrpg.domain.user.controller.dto.UserDTO;
-import com.nexus.nexusrpg.common.service.UserContextService;
+import com.nexus.nexusrpg.common.context.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserContextService userContextService;
+    private final UserContext userContext;
 
     @GetMapping
     public ResponseEntity<UserDTO> getMe() {
 
-        return ResponseEntity.ok(userContextService.getProfile());
+        return ResponseEntity.ok(userContext.getProfile());
     }
 }

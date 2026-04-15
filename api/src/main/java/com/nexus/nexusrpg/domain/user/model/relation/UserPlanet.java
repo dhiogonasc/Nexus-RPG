@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.user.model.relation;
 
 import com.nexus.nexusrpg.domain.planet.model.Planet;
 import com.nexus.nexusrpg.domain.user.model.User;
-import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,8 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 
-import static com.nexus.nexusrpg.common.enums.EntityStatus.*;
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 import static java.math.RoundingMode.HALF_UP;
 
 @Data
@@ -70,7 +71,7 @@ public class UserPlanet {
     }
 
     public void unlock() {
-        this.status = EntityStatus.UNLOCKED;
+        this.status = UNLOCKED;
         this.isAccessible = true;
         this.isCurrent = true;
     }

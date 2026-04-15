@@ -11,16 +11,6 @@ import java.util.Optional;
 
 public interface AttemptRepository extends JpaRepository<UserMissionAttempt, Long> {
 
-    @Query("SELECT uma FROM UserMissionAttempt uma " +
-            "WHERE uma.userMission.user.id = :userId " +
-            "AND uma.userMission.mission.id = :missionId " +
-            "AND uma.endAt IS NULL " +
-            "ORDER BY uma.startAt DESC")
-    Optional<UserMissionAttempt> findActiveAttempt(
-            @Param("userId") Long userId,
-            @Param("missionId") Long missionId
-    );
-
     default UserMissionAttempt findByIdOrThrow(Long id) {
         return findById(id)
                 .orElseThrow(() -> new BusinessException("Attempt", "Nenhum registro encontrado!", HttpStatus.BAD_REQUEST));

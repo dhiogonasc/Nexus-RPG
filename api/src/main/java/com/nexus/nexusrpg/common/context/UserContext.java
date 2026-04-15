@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.service;
+package com.nexus.nexusrpg.common.context;
 
 import com.nexus.nexusrpg.domain.user.controller.dto.UserDTO;
 import com.nexus.nexusrpg.domain.user.mapper.UserMapper;
@@ -6,11 +6,11 @@ import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @RequiredArgsConstructor
-public class UserContextService {
+public class UserContext {
 
     private final UserService userService;
     private final UserMapper userMapper;

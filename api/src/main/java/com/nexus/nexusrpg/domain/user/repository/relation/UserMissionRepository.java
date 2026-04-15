@@ -1,44 +1,27 @@
 package com.nexus.nexusrpg.domain.user.repository.relation;
 
+import com.nexus.nexusrpg.common.entity.RelationRepository;
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
-import com.nexus.nexusrpg.common.enums.EntityStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserMissionRepository extends JpaRepository<UserMission, Long> {
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
-    Optional<UserMission> findByUserIdAndMissionId(Long userId, Long missionId);
-
-    default UserMission findByUserIdAndMissionIdOrThrow(Long userId, Long missionId){
-        return findByUserIdAndMissionId(userId, missionId)
-                .orElseThrow(() -> new BusinessException("User - Mission", "Nenhum registro encontrado", HttpStatus.BAD_REQUEST));
-    }
-
-    @Query("SELECT um FROM UserMission um " +
-            "WHERE um.user.id = :userId " +
-            "AND um.mission.planet.id = :planetId " +
-            "AND um.mission.order = :order")
-    Optional<UserMission> findByUserIdAndPlanetIdAndMissionOrder(
-            @Param("userId") Long userId,
-            @Param("planetId") Long planetId,
-            @Param("order") int order
-    );
-
-    @Query("SELECT COUNT(um) FROM UserMission um " +
-            "WHERE um.user.id = :userId " +
-            "AND um.mission.planet.id = :planetId " +
-            "AND um.status = :status")
-    int countMissionsByStatus(
-            @Param("userId") Long userId,
-            @Param("planetId") Long planetId,
-            @Param("status") EntityStatus status
-    );
+public interface UserMissionRepository extends JpaRepository<UserMission, Long>, RelationRepository<UserMission> {
 
     List<UserMission> findByUserId(Long userId);
+
+    @Override
+    @Query("SELECT um FROM UserMission um WHERE um.user.id = :userId AND um.mission.id = :baseId")
+    Optional<UserMission> findByUserIdAndBaseId(@Param("userId") Long userId, @Param("baseId") Long baseId);
+
+    default UserMission findByUserIdAndMissionIdOrThrow(Long userId, Long missionId) {
+        return findByUserIdAndBaseId(userId, missionId)
+                .orElseThrow(() -> new BusinessException("Mission", "Nenhum registro encontrado", NOT_FOUND));
+    }
 }

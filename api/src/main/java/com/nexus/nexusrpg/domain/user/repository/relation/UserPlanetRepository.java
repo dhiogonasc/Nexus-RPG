@@ -1,23 +1,27 @@
 package com.nexus.nexusrpg.domain.user.repository.relation;
 
+import com.nexus.nexusrpg.common.entity.RelationRepository;
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserPlanetRepository extends JpaRepository<UserPlanet, Long> {
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
-    Optional<UserPlanet> findByUserIdAndPlanetId(Long userId, Long planetId);
-
-    default UserPlanet findByUserIdAndPlanetIdOrThrow(Long userId, Long planetId){
-        return findByUserIdAndPlanetId(userId, planetId)
-                .orElseThrow(() -> new BusinessException("User - Planet", "Nenhum registro encontrado", HttpStatus.BAD_REQUEST));
-    }
-
-    Optional<UserPlanet> findByUserIdAndPlanetOrder(Long userId, int nextPlanetOrder);
+public interface UserPlanetRepository extends JpaRepository<UserPlanet, Long>, RelationRepository<UserPlanet> {
 
     List<UserPlanet> findByUserId(Long userId);
+
+    @Override
+    @Query("SELECT up FROM UserPlanet up WHERE up.user.id = :userId AND up.planet.id = :baseId")
+    Optional<UserPlanet> findByUserIdAndBaseId(@Param("userId") Long userId, @Param("baseId") Long baseId);
+
+    default UserPlanet findByUserIdAndPlanetIdOrThrow(Long userId, Long planetId) {
+        return findByUserIdAndBaseId(userId, planetId)
+                .orElseThrow(() -> new BusinessException("Planet", "Nenhum registro encontrado", NOT_FOUND));
+    }
 }
