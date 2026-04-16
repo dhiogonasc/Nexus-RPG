@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.planet.model;
 
+import com.nexus.nexusrpg.common.entity.interfaces.Statable;
 import com.nexus.nexusrpg.domain.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_planet\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_planet", columnNames = {"user_id", "planet_id"})
 })
-public class UserPlanet {
+public class UserPlanet implements Statable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

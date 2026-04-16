@@ -1,5 +1,7 @@
 package com.nexus.nexusrpg.domain.entity.mission.model;
 
+import com.nexus.nexusrpg.common.entity.interfaces.Progressable;
+import com.nexus.nexusrpg.common.entity.interfaces.Statable;
 import com.nexus.nexusrpg.domain.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +17,7 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_mission\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_mission", columnNames = {"user_id", "mission_id"})
 })
-public class UserMission {
+public class UserMission implements Statable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

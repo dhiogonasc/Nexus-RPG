@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.entity;
+package com.nexus.nexusrpg.common.entity.interfaces;
 
 import com.nexus.nexusrpg.domain.user.model.User;
 

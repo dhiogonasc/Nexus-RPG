@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "relation", uniqueConstraints = {
+@Table(name = "mission", uniqueConstraints = {
         @UniqueConstraint(name = "uk_mission_planet_name", columnNames = {"planet_id", "\"name\""}),
         @UniqueConstraint(name = "uk_mission_planet_order", columnNames = {"planet_id", "\"order\""})
 })

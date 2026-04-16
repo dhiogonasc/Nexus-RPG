@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.entity.planet.model;
 
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
+import com.nexus.nexusrpg.common.entity.interfaces.Progressable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
@@ -23,7 +24,7 @@ import static java.math.RoundingMode.HALF_UP;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UserPlanetStats {
+public class UserPlanetStats implements Progressable {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)

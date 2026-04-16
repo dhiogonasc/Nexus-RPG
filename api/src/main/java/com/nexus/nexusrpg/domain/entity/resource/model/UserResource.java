@@ -1,8 +1,12 @@
 package com.nexus.nexusrpg.domain.entity.resource.model;
 
+import com.nexus.nexusrpg.common.entity.interfaces.Statable;
 import com.nexus.nexusrpg.domain.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
+
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 
 @Data
 @Builder
@@ -12,7 +16,7 @@ import lombok.*;
 @Table(name = "\"user_resource\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_resource", columnNames = {"user_id", "resource_id"})
 })
-public class UserResource {
+public class UserResource implements Statable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +36,12 @@ public class UserResource {
 
     public static UserResource initialize(User user, Resource resource){
 
+        boolean isFirst = resource.getPlanet().getOrder() == 1;
+
         var initialStats = UserResourceStats.builder()
-                .collected(false)
+                .status(isFirst ? UNLOCKED : LOCKED)
+                .isAccessible(isFirst)
+                .isCurrent(isFirst)
                 .build();
 
         return UserResource.builder()

@@ -1,6 +1,8 @@
 package com.nexus.nexusrpg.domain.entity.mission.model;
 
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
+import com.nexus.nexusrpg.common.entity.interfaces.Progressable;
+import com.nexus.nexusrpg.common.entity.interfaces.Statable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
@@ -22,7 +24,7 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UserMissionStats {
+public class UserMissionStats implements Progressable {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)

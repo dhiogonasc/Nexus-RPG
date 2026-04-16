@@ -5,6 +5,7 @@ import com.nexus.nexusrpg.domain.entity.resource.model.UserResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
 import static org.springframework.http.HttpStatus.CONFLICT;
 
 @RequiredArgsConstructor
@@ -15,7 +16,7 @@ public class ResourceValidator {
 
         var resourceStats = resource.getStats();
 
-        if (resourceStats.isCollected()) {
+        if (resourceStats.getStatus() == COMPLETED) {
             throw new BusinessException(
                     "Resource",
                     "Este recurso já foi extraído.",
