@@ -1,6 +1,8 @@
 package com.nexus.nexusrpg.domain.entity.mission.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
+import com.nexus.nexusrpg.domain.entity.alternative.model.Alternative;
+import com.nexus.nexusrpg.domain.entity.question.model.Question;
 import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import static java.util.Objects.isNull;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @Component
 @RequiredArgsConstructor
@@ -50,6 +53,13 @@ public class AttemptValidator {
 
         if(!currentUserId.equals(attemptUserId)){
             throw new BusinessException("Attempt", "Finalização proibida!", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    public void isAnswerValid(Alternative alternative, Question question) {
+
+        if (!alternative.getQuestion().getId().equals(question.getId())) {
+            throw new BusinessException("Attempt", "Alternativa inválida para esta questão", BAD_REQUEST);
         }
     }
 }
