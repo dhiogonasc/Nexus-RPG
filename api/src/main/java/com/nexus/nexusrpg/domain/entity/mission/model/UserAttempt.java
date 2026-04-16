@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
 
@@ -35,6 +36,9 @@ public class UserAttempt {
     @Builder.Default
     @Column(name = "\"result\"", nullable = false, columnDefinition = "score")
     private BigDecimal result = BigDecimal.ZERO;
+
+    @OneToMany(mappedBy = "attempt", cascade = CascadeType.ALL)
+    private List<UserResponse> responses;
 
     public void finish(BigDecimal currentResult) {
 

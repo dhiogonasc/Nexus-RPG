@@ -2,8 +2,11 @@ package com.nexus.nexusrpg.domain.entity.mission.model;
 
 import com.nexus.nexusrpg.domain.entity.planet.model.Planet;
 import com.nexus.nexusrpg.domain.entity.mission.model.enums.MissionDifficulty;
+import com.nexus.nexusrpg.domain.entity.question.Question;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -39,4 +42,8 @@ public class Mission {
 
     @Column(name = "xp_bonus", nullable = false, columnDefinition = "xp")
     private long xpBonus;
+
+    @OneToMany(mappedBy = "mission", fetch = FetchType.LAZY)
+    @OrderBy("order ASC")
+    private List<Question> questions;
 }

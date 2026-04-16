@@ -1,6 +1,5 @@
 package com.nexus.nexusrpg.domain.entity.mission.model;
 
-import com.nexus.nexusrpg.common.entity.interfaces.Progressable;
 import com.nexus.nexusrpg.common.entity.interfaces.Statable;
 import com.nexus.nexusrpg.domain.user.model.User;
 import jakarta.persistence.*;
