@@ -2,7 +2,6 @@ package com.nexus.nexusrpg.domain.entity.mission.model;
 
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 import com.nexus.nexusrpg.common.entity.interfaces.Progressable;
-import com.nexus.nexusrpg.common.entity.interfaces.Statable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
@@ -25,6 +24,8 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 @AllArgsConstructor
 @Embeddable
 public class UserMissionStats implements Progressable {
+
+    private static final BigDecimal MISSION_COMPLETION_THRESHOLD = BigDecimal.valueOf(7);
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
@@ -57,5 +58,18 @@ public class UserMissionStats implements Progressable {
     public void complete() {
         this.status = EntityStatus.COMPLETED;
         this.isCurrent = false;
+    }
+
+    public void updateBestResult(BigDecimal currentResult) {
+
+        if (currentResult == null) return;
+
+        if (this.bestResult == null || currentResult.compareTo(this.bestResult) > 0) {
+            this.bestResult = currentResult;
+        }
+
+        if (this.status == UNLOCKED && currentResult.compareTo(MISSION_COMPLETION_THRESHOLD) >= 0) {
+            this.complete();
+        }
     }
 }

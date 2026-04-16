@@ -2,11 +2,9 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.mission.mapper.UserAttemptMapper;
-import com.nexus.nexusrpg.domain.entity.mission.model.UserMissionStats;
 import com.nexus.nexusrpg.domain.entity.mission.validator.AttemptValidator;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserAttemptDTO;
-import com.nexus.nexusrpg.domain.user.model.User;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
@@ -23,9 +21,11 @@ import java.time.LocalDateTime;
 public class ExecuteMission {
 
     private final Context context;
+
     private final UserMissionRepository userMissionRepository;
     private final UserAttemptRepository userAttemptRepository;
     private final UserAttemptMapper userAttemptMapper;
+
     private final UserValidator userValidator;
     private final MissionValidator missionValidator;
     private final AttemptValidator attemptValidator;
@@ -34,15 +34,13 @@ public class ExecuteMission {
     public UserAttemptDTO start(Long missionId) {
 
         var user = context.getAuthenticatedUser();
-        Long userId = user.getId();
-
-        var userMission = userMissionRepository
-                .findByUserIdAndMissionIdOrThrow(userId, missionId);
+        var userMission = userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), missionId);
 
         missionValidator.isAccessible(userMission);
         attemptValidator.hasActiveAttempt(userMission);
+        userValidator.hasEnoughOxygen(user);
 
-        updateOxygen(user);
+        user.consumeOxygen();
 
         var attempt = UserAttempt.builder()
                 .userMission(userMission)
@@ -55,35 +53,15 @@ public class ExecuteMission {
     @Transactional
     public UserAttemptDTO finish(Long attemptId) {
 
-        User user = context.getAuthenticatedUser();
-        UserAttempt attempt = userAttemptRepository.findByIdOrThrow(attemptId);
+        var user = context.getAuthenticatedUser();
+        var attempt = userAttemptRepository.findByIdOrThrow(attemptId);
 
         attemptValidator.isUserAuth(user, attempt);
         attemptValidator.isActive(attempt);
 
-        var currentResult = BigDecimal.valueOf(10);
-        attempt.setEndAt(LocalDateTime.now());
-        attempt.setResult(currentResult);
-
-        updateMission(attempt, currentResult);
+        var currentResult = BigDecimal.valueOf(10); //temporário
+        attempt.finish(currentResult);
 
         return userAttemptMapper.toDTO(userAttemptRepository.save(attempt));
-    }
-
-    private void updateMission(UserAttempt attempt, BigDecimal result) {
-
-        UserMissionStats ums = attempt.getUserMission().getStats();
-        BigDecimal bestResult = ums.getBestResult();
-
-        if (bestResult == null || result.compareTo(bestResult) > 0) {
-
-            ums.setBestResult(result);
-        }
-    }
-
-    private void updateOxygen(User user) {
-
-        userValidator.hasEnoughOxygen(user);
-        user.consumeOxygen();
     }
 }

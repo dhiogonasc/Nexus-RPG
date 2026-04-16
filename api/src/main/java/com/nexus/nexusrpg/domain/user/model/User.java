@@ -55,6 +55,11 @@ public class User {
     @Column(name = "\"oxygen\"", nullable = false, columnDefinition = "oxygen")
     private int oxygen = 10;
 
+    public void addXp(long xp) {
+        if (xp <= 0) return;
+        this.xp += xp;
+    }
+
     public void fillOxygen(){
         this.oxygen = 10;
     }

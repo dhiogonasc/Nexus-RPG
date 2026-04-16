@@ -7,6 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -33,4 +35,21 @@ public class UserAttempt {
     @Builder.Default
     @Column(name = "\"result\"", nullable = false, columnDefinition = "score")
     private BigDecimal result = BigDecimal.ZERO;
+
+    public void finish(BigDecimal currentResult) {
+
+        this.endAt = LocalDateTime.now();
+        this.result = currentResult;
+
+        if (this.userMission != null) {
+            UserMissionStats stats = this.userMission.getStats();
+
+            stats.updateBestResult(currentResult);
+
+            if (stats.getStatus() == COMPLETED) {
+                long xpBonus = this.userMission.getMission().getXpBonus();
+                this.userMission.getUser().addXp(xpBonus);
+            }
+        }
+    }
 }
