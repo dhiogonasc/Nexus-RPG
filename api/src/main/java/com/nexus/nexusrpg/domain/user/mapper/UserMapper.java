@@ -34,7 +34,6 @@ public abstract class UserMapper implements CurrentEntityMapper{
 
     @Mapping(target = "current.level", source = "level")
     @Mapping(target = "current.planet", source = "planets")
-    @Mapping(target = "current.planet.stats", ignore = true)
     @Mapping(target = "current.mission", source = "missions")
     @Mapping(target = "current.resource", source = "resources")
     public abstract UserDTO toDTO(User user);
