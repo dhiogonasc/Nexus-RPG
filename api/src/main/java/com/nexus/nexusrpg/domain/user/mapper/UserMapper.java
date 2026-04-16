@@ -8,6 +8,7 @@ import com.nexus.nexusrpg.domain.entity.planet.mapper.UserPlanetMapper;
 import com.nexus.nexusrpg.domain.entity.planet.model.UserPlanet;
 import com.nexus.nexusrpg.domain.entity.resource.controller.dto.UserResourceReferenceDTO;
 import com.nexus.nexusrpg.domain.entity.resource.mapper.UserResourceMapper;
+import com.nexus.nexusrpg.domain.entity.resource.model.UserResource;
 import com.nexus.nexusrpg.domain.user.controller.dto.UserDTO;
 import com.nexus.nexusrpg.domain.entity.level.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.user.model.User;
@@ -27,8 +28,10 @@ public abstract class UserMapper implements CurrentEntityMapper{
 
     @Autowired
     protected UserPlanetMapper planetMapper;
+
     @Autowired
     protected UserMissionMapper missionMapper;
+
     @Autowired
     protected UserResourceMapper resourceMapper;
 
@@ -46,6 +49,7 @@ public abstract class UserMapper implements CurrentEntityMapper{
         return mapCurrent(missions, missionMapper::toReferenceDTO);
     }
 
-    protected UserResourceReferenceDTO mapCurrentResource(List<com.nexus.nexusrpg.domain.entity.resource.model.UserResource> resources) {
+    protected UserResourceReferenceDTO mapCurrentResource(List<UserResource> resources) {
         return mapCurrent(resources, resourceMapper::toReferenceDTO);
-    }}
+    }
+}

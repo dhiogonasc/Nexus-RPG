@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.*;
@@ -38,10 +37,6 @@ public class UserResourceStats implements Progressable {
     @Builder.Default
     @Column(name = "\"is_current\"", nullable = false)
     private Boolean isCurrent = false;
-
-    @Builder.Default
-    @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
-    private BigDecimal progress = BigDecimal.ZERO;
 
     @Column(name = "\"collected_at\"")
     private LocalDateTime collectedAt;
