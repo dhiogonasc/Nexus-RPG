@@ -5,7 +5,7 @@ import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserMissionDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.entity.mission.mapper.UserMissionMapper;
-import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.entity.mission.model.UserMission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.entity.mission.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;
-import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.entity.mission.model.UserMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,9 @@ public class MissionValidator {
 
         planetValidator.isAccessibleByMission(userMission);
 
-        if(!userMission.getIsAccessible()){
+        var missionStats = userMission.getStats();
+
+        if(!missionStats.getIsAccessible()){
             throw new BusinessException(
                     "Missão",
                     "Bloqueado! Complete a missão anterior!",

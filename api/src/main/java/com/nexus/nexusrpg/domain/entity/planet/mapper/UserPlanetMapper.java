@@ -2,7 +2,9 @@ package com.nexus.nexusrpg.domain.entity.planet.mapper;
 
 import com.nexus.nexusrpg.domain.entity.planet.controller.dto.UserPlanetDTO;
 import com.nexus.nexusrpg.domain.entity.planet.controller.dto.UserPlanetReferenceDTO;
-import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.entity.planet.controller.dto.UserPlanetStatsDTO;
+import com.nexus.nexusrpg.domain.entity.planet.model.UserPlanet;
+import com.nexus.nexusrpg.domain.entity.planet.model.UserPlanetStats;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = {
@@ -12,4 +14,5 @@ public interface UserPlanetMapper {
 
     UserPlanetDTO toDTO(UserPlanet userPlanet);
     UserPlanetReferenceDTO toReferenceDTO(UserPlanet userPlanet);
+    UserPlanetStatsDTO toStatsDTO(UserPlanetStats stats);
 }

@@ -4,7 +4,7 @@ import com.nexus.nexusrpg.common.entity.InitEntity;
 import com.nexus.nexusrpg.domain.entity.planet.model.Planet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.PlanetRepository;
 import com.nexus.nexusrpg.domain.user.model.User;
-import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.entity.planet.model.UserPlanet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import org.springframework.stereotype.Service;
 

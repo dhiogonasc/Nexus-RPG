@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.domain.user.model;
 
 import com.nexus.nexusrpg.domain.entity.level.model.Level;
-import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
-import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
-import com.nexus.nexusrpg.domain.user.model.relation.UserResource;
+import com.nexus.nexusrpg.domain.entity.mission.model.UserMission;
+import com.nexus.nexusrpg.domain.entity.planet.model.UserPlanet;
+import com.nexus.nexusrpg.domain.entity.resource.model.UserResource;
 import jakarta.persistence.*;
 import lombok.*;
 

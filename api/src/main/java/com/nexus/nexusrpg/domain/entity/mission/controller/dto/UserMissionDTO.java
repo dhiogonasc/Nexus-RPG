@@ -7,9 +7,5 @@ import java.math.BigDecimal;
 public record UserMissionDTO(
 
         MissionDTO mission,
-        EntityStatus status,
-        Boolean isAccessible,
-        Boolean isCurrent,
-        BigDecimal bestResult,
-        BigDecimal progress
+        UserMissionStatsDTO stats
 ) {}

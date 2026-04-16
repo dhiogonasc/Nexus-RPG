@@ -1,15 +1,9 @@
 package com.nexus.nexusrpg.domain.entity.mission.controller.dto;
 
-import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
-
-import java.math.BigDecimal;
+import com.nexus.nexusrpg.domain.entity.planet.controller.dto.UserPlanetStatsDTO;
 
 public record UserMissionReferenceDTO(
 
         MissionReferenceDTO mission,
-        EntityStatus status,
-        Boolean isAccessible,
-        Boolean isCurrent,
-        BigDecimal bestResult,
-        BigDecimal progress
+        UserPlanetStatsDTO stats
 ) {}

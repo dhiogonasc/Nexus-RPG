@@ -2,8 +2,8 @@ package com.nexus.nexusrpg.domain.entity.planet.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
-import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
-import com.nexus.nexusrpg.domain.user.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.entity.mission.model.UserMission;
+import com.nexus.nexusrpg.domain.entity.planet.model.UserPlanet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,9 @@ public class PlanetValidator {
 
     public void isAccessible(UserPlanet userPlanet) {
 
-        if(!userPlanet.getIsAccessible()){
+        var planetStats =  userPlanet.getStats();
+
+        if(!planetStats.getIsAccessible()){
 
             throw new BusinessException(
                     "Planet",

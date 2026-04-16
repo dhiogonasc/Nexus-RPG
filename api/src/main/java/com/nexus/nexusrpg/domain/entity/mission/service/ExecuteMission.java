@@ -2,12 +2,12 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.mission.mapper.UserAttemptMapper;
+import com.nexus.nexusrpg.domain.entity.mission.model.UserMissionStats;
 import com.nexus.nexusrpg.domain.entity.mission.validator.AttemptValidator;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserAttemptDTO;
 import com.nexus.nexusrpg.domain.user.model.User;
-import com.nexus.nexusrpg.domain.user.model.relation.UserMission;
-import com.nexus.nexusrpg.domain.user.model.relation.UserAttempt;
+import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.user.validator.UserValidator;
@@ -72,12 +72,12 @@ public class ExecuteMission {
 
     private void updateMission(UserAttempt attempt, BigDecimal result) {
 
-        UserMission um = attempt.getUserMission();
-        BigDecimal bestResult = um.getBestResult();
+        UserMissionStats ums = attempt.getUserMission().getStats();
+        BigDecimal bestResult = ums.getBestResult();
 
         if (bestResult == null || result.compareTo(bestResult) > 0) {
 
-            um.setBestResult(result);
+            ums.setBestResult(result);
         }
     }
 
