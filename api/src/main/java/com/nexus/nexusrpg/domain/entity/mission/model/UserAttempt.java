@@ -42,13 +42,16 @@ public class UserAttempt {
         this.result = currentResult;
 
         if (this.userMission != null) {
-            UserMissionStats stats = this.userMission.getStats();
+            var user = this.userMission.getUser();
+            var stats = this.userMission.getStats();
+
+            var missionCompleted = stats.getStatus() == COMPLETED;
 
             stats.updateBestResult(currentResult);
 
-            if (stats.getStatus() == COMPLETED) {
+            if (!missionCompleted && stats.getStatus() == COMPLETED) {
                 long xpBonus = this.userMission.getMission().getXpBonus();
-                this.userMission.getUser().addXp(xpBonus);
+                user.addXp(xpBonus);
             }
         }
     }

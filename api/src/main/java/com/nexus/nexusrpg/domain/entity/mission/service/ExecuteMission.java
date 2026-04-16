@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.entity.mission.service;
 
 import com.nexus.nexusrpg.common.context.Context;
+import com.nexus.nexusrpg.domain.entity.level.service.LevelService;
 import com.nexus.nexusrpg.domain.entity.mission.mapper.UserAttemptMapper;
 import com.nexus.nexusrpg.domain.entity.mission.validator.AttemptValidator;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
@@ -21,6 +22,8 @@ import java.time.LocalDateTime;
 public class ExecuteMission {
 
     private final Context context;
+
+    private final LevelService levelService;
 
     private final UserMissionRepository userMissionRepository;
     private final UserAttemptRepository userAttemptRepository;
@@ -61,6 +64,10 @@ public class ExecuteMission {
 
         var currentResult = BigDecimal.valueOf(10); //temporário
         attempt.finish(currentResult);
+
+        levelService
+                .findNextLevel(user.getLevel())
+                .ifPresent(user::levelUp);
 
         return userAttemptMapper.toDTO(userAttemptRepository.save(attempt));
     }

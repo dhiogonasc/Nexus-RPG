@@ -7,6 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 @Service
 @RequiredArgsConstructor
 public class LevelService {
@@ -14,8 +18,15 @@ public class LevelService {
     private final LevelRepository levelRepository;
 
     public Level initialLevel(){
+        return levelRepository.findById(1L)
+                .orElseThrow(() -> new BusinessException(
+                        "Level",
+                        "Level 1 não encontrado",
+                        NOT_FOUND
+                ));
+    }
 
-        return  levelRepository.findById(1L)
-                .orElseThrow(() -> new BusinessException("Level", "Level 1 não encontrado", HttpStatus.BAD_REQUEST));
+    public Optional<Level> findNextLevel(Level currentLevel) {
+        return levelRepository.findByOrder(currentLevel.getOrder() + 1);
     }
 }

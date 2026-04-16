@@ -56,15 +56,19 @@ public class User {
     private int oxygen = 10;
 
     public void addXp(long xp) {
-        if (xp <= 0) return;
         this.xp += xp;
-    }
-
-    public void fillOxygen(){
-        this.oxygen = 10;
     }
 
     public void consumeOxygen(){
         this.oxygen -= 1;
+    }
+
+    public void levelUp(Level nextLevel) {
+        if (nextLevel == null) return;
+
+        if (this.xp >= this.level.getXpRequired()) {
+            this.level = nextLevel;
+            this.oxygen = 10;
+        }
     }
 }
