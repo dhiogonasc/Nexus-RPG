@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
-import static java.math.RoundingMode.HALF_UP;
 
 @Data
 @Builder
@@ -55,12 +54,5 @@ public class UserPlanetStats implements Progressable {
         this.isCurrent = false;
     }
 
-    public void updateProgress(int completedMissions, int totalMissions) {
-
-        if (totalMissions == 0) return;
-
-        this.progress = BigDecimal.valueOf(completedMissions)
-                .divide(BigDecimal.valueOf(totalMissions), 2, HALF_UP)
-                .multiply(BigDecimal.valueOf(100));
-    }
+    public void updateProgress(long itens, long totalItens) {}
 }

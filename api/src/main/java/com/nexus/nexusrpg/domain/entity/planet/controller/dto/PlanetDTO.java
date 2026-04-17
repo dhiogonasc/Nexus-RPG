@@ -14,4 +14,5 @@ public record PlanetDTO(
         long xpBonus,
         List<ResourceReferenceDTO> resources,
         List<MissionReferenceDTO> missions
+
 ) {}

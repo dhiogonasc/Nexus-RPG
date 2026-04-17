@@ -23,7 +23,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
-import static java.math.RoundingMode.HALF_UP;
 
 @Service
 @RequiredArgsConstructor
@@ -110,16 +109,9 @@ public class ExecuteMission {
         long totalQuestions = questionRepository.countByMissionId(mission.getId());
         long answeredQuestions = userResponseRepository.countByAttemptId(attempt.getId());
 
-        if (totalQuestions > 0) {
+        userMission.getStats().updateProgress(answeredQuestions, totalQuestions);
 
-            var progressValue = BigDecimal.valueOf(answeredQuestions)
-                    .divide(BigDecimal.valueOf(totalQuestions), 2, HALF_UP)
-                    .multiply(BigDecimal.valueOf(100));
-
-            userMission.getStats().setProgress(progressValue);
-
-            userMissionRepository.save(userMission);
-        }
+        userMissionRepository.save(userMission);
     }
 
     @Transactional

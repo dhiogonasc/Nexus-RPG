@@ -52,4 +52,6 @@ public class UserResourceStats implements Progressable {
         this.isCurrent = false;
         this.collectedAt = LocalDateTime.now();
     }
+
+    public void updateProgress(long itens, long totalItens) {}
 }

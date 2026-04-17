@@ -16,6 +16,7 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 import java.math.BigDecimal;
 
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.*;
+import static java.math.RoundingMode.HALF_UP;
 
 @Data
 @Builder
@@ -57,6 +58,15 @@ public class UserMissionStats implements Progressable {
     public void complete() {
         this.status = COMPLETED;
         this.isCurrent = false;
+    }
+
+    public void updateProgress(long answeredQuestions, long totalQuestions) {
+
+        if (totalQuestions == 0) return;
+
+        this.progress = BigDecimal.valueOf(answeredQuestions)
+                .divide(BigDecimal.valueOf(totalQuestions), 2, HALF_UP)
+                .multiply(BigDecimal.valueOf(100));
     }
 
     public void updateBestResult(BigDecimal currentResult) {
