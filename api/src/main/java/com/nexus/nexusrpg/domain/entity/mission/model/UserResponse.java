@@ -24,13 +24,13 @@ public class UserResponse {
     private UserAttempt attempt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id", nullable = false)
+    @JoinColumn(name = "question_id", nullable = false, insertable = false, updatable = false)
     private Question question;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "question_id", referencedColumnName = "question_id", insertable = false, updatable = false),
-            @JoinColumn(name = "alternative_id", referencedColumnName = "id")
+            @JoinColumn(name = "question_id", referencedColumnName = "question_id", nullable = false),
+            @JoinColumn(name = "alternative_id", referencedColumnName = "id", nullable = false)
     })
     private Alternative alternative;
 

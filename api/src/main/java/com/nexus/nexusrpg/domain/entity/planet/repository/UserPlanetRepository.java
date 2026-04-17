@@ -24,4 +24,6 @@ public interface UserPlanetRepository extends JpaRepository<UserPlanet, Long>, R
         return findByUserIdAndBaseId(userId, planetId)
                 .orElseThrow(() -> new BusinessException("Planet", "Nenhum registro encontrado", NOT_FOUND));
     }
+
+    Optional<UserPlanet> findByUserIdAndPlanetOrder(Long userId, int nextPlanetOrder);
 }

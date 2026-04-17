@@ -3,6 +3,7 @@ package com.nexus.nexusrpg.domain.entity.mission.repository;
 import com.nexus.nexusrpg.common.entity.RelationRepository;
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserMission;
+import com.nexus.nexusrpg.domain.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,4 +25,6 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long>,
         return findByUserIdAndBaseId(userId, missionId)
                 .orElseThrow(() -> new BusinessException("Mission", "Nenhum registro encontrado", NOT_FOUND));
     }
+
+    Optional<UserMission> findByUserIdAndMissionPlanetIdAndMissionOrder(Long userId, Long missionId, int nextMissionOrder);
 }

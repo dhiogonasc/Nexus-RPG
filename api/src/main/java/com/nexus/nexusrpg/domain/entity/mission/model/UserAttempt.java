@@ -41,21 +41,19 @@ public class UserAttempt {
     private List<UserResponse> responses;
 
     public void finish(BigDecimal currentResult) {
-
         this.endAt = LocalDateTime.now();
         this.result = currentResult;
 
         if (this.userMission != null) {
-            var user = this.userMission.getUser();
             var stats = this.userMission.getStats();
-
-            var missionCompleted = stats.getStatus() == COMPLETED;
+            var completed = stats.getStatus() == COMPLETED;
 
             stats.updateBestResult(currentResult);
 
-            if (!missionCompleted && stats.getStatus() == COMPLETED) {
-                long xpBonus = this.userMission.getMission().getXpBonus();
-                user.addXp(xpBonus);
+            if (!completed && stats.getStatus() == COMPLETED) {
+                var user = this.userMission.getUser();
+                var mission = this.userMission.getMission();
+                user.addXp(mission.getXpBonus());
             }
         }
     }

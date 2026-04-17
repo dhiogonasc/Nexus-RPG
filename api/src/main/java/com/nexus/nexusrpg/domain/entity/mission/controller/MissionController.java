@@ -6,6 +6,7 @@ import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserMissionDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserMissionReferenceDTO;
 import com.nexus.nexusrpg.domain.entity.mission.service.GetMission;
+import jakarta.validation.Valid;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,19 +33,20 @@ public class MissionController {
         return ResponseEntity.ok(getMission.getById(id));
     }
 
-    @PostMapping("/{id}/attempts")
+    @PostMapping("/{id}/start")
     public ResponseEntity<UserAttemptDTO> start(@PathVariable Long id) {
 
         return ResponseEntity.ok(executeMission.start(id));
     }
 
-    @PutMapping("attempts/{id}/answer")
-    public ResponseEntity<Void> finish(@PathVariable Long id, UserResponseDTO request) {
+    @PostMapping("attempts/{id}/answer")
+    public ResponseEntity<Void> answer(@PathVariable Long id, @Valid @RequestBody UserResponseDTO request) {
 
-        return ResponseEntity.ok(executeMission.answer(id, request));
+        executeMission.answer(id, request);
+        return ResponseEntity.ok().build();
     }
 
-    @PutMapping("attempts/{id}")
+    @PutMapping("attempts/{id}/finish")
     public ResponseEntity<UserAttemptDTO> finish(@PathVariable Long id) {
 
         return ResponseEntity.ok(executeMission.finish(id));

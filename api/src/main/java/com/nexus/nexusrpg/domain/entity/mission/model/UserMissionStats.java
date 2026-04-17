@@ -15,8 +15,7 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.*;
 
 @Data
 @Builder
@@ -56,7 +55,7 @@ public class UserMissionStats implements Progressable {
     }
 
     public void complete() {
-        this.status = EntityStatus.COMPLETED;
+        this.status = COMPLETED;
         this.isCurrent = false;
     }
 
@@ -68,7 +67,7 @@ public class UserMissionStats implements Progressable {
             this.bestResult = currentResult;
         }
 
-        if (this.status == UNLOCKED && currentResult.compareTo(MISSION_COMPLETION_THRESHOLD) >= 0) {
+        if (this.status != COMPLETED && currentResult.compareTo(MISSION_COMPLETION_THRESHOLD) >= 0) {
             this.complete();
         }
     }

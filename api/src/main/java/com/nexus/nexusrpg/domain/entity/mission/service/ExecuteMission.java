@@ -19,11 +19,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
-import static java.math.RoundingMode.HALF_UP;
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +30,8 @@ public class ExecuteMission {
     private final Context context;
 
     private final LevelService levelService;
+    private final ScoreService scoreService;
+    private final ProgressionService progressionService;
 
     private final QuestionRepository questionRepository;
     private final AlternativeRepository alternativeRepository;
@@ -67,6 +67,7 @@ public class ExecuteMission {
 
     @Transactional
     public void answer(Long attemptId, UserResponseDTO request) {
+
         var user = context.getAuthenticatedUser();
         var attempt = userAttemptRepository.findByIdOrThrow(attemptId);
 
@@ -102,29 +103,16 @@ public class ExecuteMission {
         attemptValidator.isActive(attempt);
 
         var responses = userResponseRepository.findByAttemptId(attemptId);
-        var finalResult = calculateScore(attempt, responses);
+        var result = scoreService.calculateResult(attempt, responses);
 
-        attempt.finish(finalResult);
+        attempt.finish(result);
 
-        levelService
-                .findNextLevel(user.getLevel())
-                .ifPresent(user::levelUp);
+        if (attempt.getUserMission().getStats().getStatus() == COMPLETED) {
+            progressionService.unlockNextMission(user, attempt.getUserMission().getMission());
+        }
+
+        levelService.findNextLevel(user.getLevel()).ifPresent(user::levelUp);
 
         return userAttemptMapper.toDTO(userAttemptRepository.save(attempt));
-    }
-
-    private BigDecimal calculateScore(UserAttempt attempt, List<UserResponse> responses) {
-
-        var totalQuestions = attempt.getUserMission().getMission().getQuestions().size();
-
-        if (totalQuestions == 0) return BigDecimal.ZERO;
-
-        var hits = responses.stream()
-                .filter(UserResponse::isHit)
-                .count();
-
-        return BigDecimal.valueOf(hits)
-                .divide(BigDecimal.valueOf(totalQuestions), 2, HALF_UP)
-                .multiply(BigDecimal.valueOf(10));
     }
 }

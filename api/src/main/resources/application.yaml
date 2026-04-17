@@ -16,6 +16,7 @@ spring:
     hibernate:
       ddl-auto: validate
 
+
 app:
   cors:
     allowed-origins: "*"
@@ -26,13 +27,14 @@ server:
     include-binding-errors: always
 
 logging:
-  pattern:
-    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
-
   level:
     root: INFO
+    org.hibernate.orm.model.mapping.creation: TRACE
     org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.boot.model.internal: TRACE
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
 
 jwt:
   public:
