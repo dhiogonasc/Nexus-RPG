@@ -19,9 +19,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
+import static java.math.RoundingMode.HALF_UP;
 
 @Service
 @RequiredArgsConstructor
@@ -50,6 +52,7 @@ public class ExecuteMission {
 
         var user = context.getAuthenticatedUser();
         var userMission = userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), missionId);
+        userMission.getStats().setProgress(BigDecimal.ZERO);
 
         missionValidator.isAccessible(userMission);
         attemptValidator.hasActiveAttempt(userMission);
@@ -74,6 +77,12 @@ public class ExecuteMission {
         attemptValidator.isUserAuth(user, attempt);
         attemptValidator.isActive(attempt);
 
+        registerAnswer(attempt, request);
+        updateMissionProgress(attempt);
+    }
+
+    private void registerAnswer(UserAttempt attempt, UserResponseDTO request) {
+
         var questionId = request.questionId();
         var question = questionRepository.findByIdOrThrow(questionId);
 
@@ -83,7 +92,7 @@ public class ExecuteMission {
         attemptValidator.isAnswerValid(alternative, question);
 
         var response = userResponseRepository
-                .findByAttemptIdAndQuestionId(attemptId, questionId)
+                .findByAttemptIdAndQuestionId(attempt.getId(), questionId)
                 .orElseGet(() -> UserResponse.builder()
                         .attempt(attempt)
                         .question(question)
@@ -91,6 +100,26 @@ public class ExecuteMission {
 
         response.setAlternative(alternative);
         userResponseRepository.save(response);
+    }
+
+    private void updateMissionProgress(UserAttempt attempt) {
+
+        var userMission = attempt.getUserMission();
+        var mission = userMission.getMission();
+
+        long totalQuestions = questionRepository.countByMissionId(mission.getId());
+        long answeredQuestions = userResponseRepository.countByAttemptId(attempt.getId());
+
+        if (totalQuestions > 0) {
+
+            var progressValue = BigDecimal.valueOf(answeredQuestions)
+                    .divide(BigDecimal.valueOf(totalQuestions), 2, HALF_UP)
+                    .multiply(BigDecimal.valueOf(100));
+
+            userMission.getStats().setProgress(progressValue);
+
+            userMissionRepository.save(userMission);
+        }
     }
 
     @Transactional
@@ -101,6 +130,7 @@ public class ExecuteMission {
 
         attemptValidator.isUserAuth(user, attempt);
         attemptValidator.isActive(attempt);
+        attemptValidator.isCompleted(attempt);
 
         var responses = userResponseRepository.findByAttemptId(attemptId);
         var result = scoreService.calculateResult(attempt, responses);

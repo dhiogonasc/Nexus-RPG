@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.Objects;
+
 import static java.util.Objects.isNull;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
@@ -61,5 +64,9 @@ public class AttemptValidator {
         if (!alternative.getQuestion().getId().equals(question.getId())) {
             throw new BusinessException("Attempt", "Alternativa inválida para esta questão", BAD_REQUEST);
         }
+    }
+
+    public void isCompleted(UserAttempt attempt) {
+
     }
 }

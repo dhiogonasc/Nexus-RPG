@@ -16,4 +16,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
                         NOT_FOUND)
                 );
     }
+
+    long countByMissionId(Long id);
 }
