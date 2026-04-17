@@ -1,8 +1,9 @@
 package com.nexus.nexusrpg.common.entity.interfaces;
 
-import java.math.BigDecimal;
-
 public interface Progressable {
     Boolean getIsCurrent();
-    void updateProgress(long itens, long totalItens);
+
+    void unlock();
+    void complete();
+    void update(long itens, long totalItens);
 }

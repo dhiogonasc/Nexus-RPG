@@ -60,7 +60,7 @@ public class UserMissionStats implements Progressable {
         this.isCurrent = false;
     }
 
-    public void updateProgress(long answeredQuestions, long totalQuestions) {
+    public void update(long answeredQuestions, long totalQuestions) {
 
         if (totalQuestions == 0) return;
 

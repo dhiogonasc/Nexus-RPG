@@ -109,7 +109,7 @@ public class ExecuteMission {
         long totalQuestions = questionRepository.countByMissionId(mission.getId());
         long answeredQuestions = userResponseRepository.countByAttemptId(attempt.getId());
 
-        userMission.getStats().updateProgress(answeredQuestions, totalQuestions);
+        userMission.getStats().update(answeredQuestions, totalQuestions);
 
         userMissionRepository.save(userMission);
     }

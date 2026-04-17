@@ -63,12 +63,14 @@ public class ProgressionService {
 
     private void completePlanet(Long userId, Long planetId) {
 
-        userPlanetRepository.findByUserIdAndBaseId(userId, planetId)
+        userPlanetRepository
+                .findByUserIdAndBaseId(userId, planetId)
                 .ifPresent(up -> {
                     if (up.getStats().getStatus() == UNLOCKED) {
                         up.getStats().complete();
                     }
                 });
+
     }
 
     private void unlockPlanet(UserPlanet up) {

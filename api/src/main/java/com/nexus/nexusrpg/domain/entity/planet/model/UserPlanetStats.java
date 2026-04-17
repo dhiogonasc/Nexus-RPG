@@ -54,5 +54,5 @@ public class UserPlanetStats implements Progressable {
         this.isCurrent = false;
     }
 
-    public void updateProgress(long itens, long totalItens) {}
+    public void update(long itens, long totalItens) {}
 }
