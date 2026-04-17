@@ -32,13 +32,13 @@ public class UserMission implements Statable {
 
     @Embedded
     @Builder.Default
-    private UserMissionStats stats = new UserMissionStats();
+    private UserMissionExecution execution = new UserMissionExecution();
 
     public static UserMission initialize(User user, Mission mission) {
 
         boolean isFirst = mission.getOrder() == 1 & mission.getPlanet().getOrder() == 1;
 
-        var initialStats = UserMissionStats.builder()
+        var initialStats = UserMissionExecution.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
                 .isAccessible(isFirst)
                 .isCurrent(isFirst)
@@ -47,7 +47,7 @@ public class UserMission implements Statable {
         return UserMission.builder()
                 .user(user)
                 .mission(mission)
-                .stats(initialStats)
+                .execution(initialStats)
                 .build();
     }
 }

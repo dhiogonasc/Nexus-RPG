@@ -45,7 +45,7 @@ public class UserAttempt {
         this.result = currentResult;
 
         if (this.userMission != null) {
-            var stats = this.userMission.getStats();
+            var stats = this.userMission.getExecution();
             var completed = stats.getStatus() == COMPLETED;
 
             stats.updateBestResult(currentResult);

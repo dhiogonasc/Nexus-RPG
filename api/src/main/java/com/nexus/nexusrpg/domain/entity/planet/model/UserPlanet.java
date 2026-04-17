@@ -35,13 +35,13 @@ public class UserPlanet implements Statable {
 
     @Embedded
     @Builder.Default
-    private UserPlanetStats stats = new UserPlanetStats();
+    private UserPlanetExecution execution = new UserPlanetExecution();
 
     public static UserPlanet initialize(User user, Planet planet) {
 
         boolean isFirst = planet.getOrder() == 1;
 
-        var initialStats = UserPlanetStats.builder()
+        var initialStats = UserPlanetExecution.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
                 .isAccessible(isFirst)
                 .isCurrent(isFirst)
@@ -50,7 +50,7 @@ public class UserPlanet implements Statable {
         return UserPlanet.builder()
                 .user(user)
                 .planet(planet)
-                .stats(initialStats)
+                .execution(initialStats)
                 .build();
     }
 }

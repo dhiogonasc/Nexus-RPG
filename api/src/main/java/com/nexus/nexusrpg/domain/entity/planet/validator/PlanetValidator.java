@@ -17,7 +17,7 @@ public class PlanetValidator {
 
     public void isAccessible(UserPlanet userPlanet) {
 
-        var planetStats =  userPlanet.getStats();
+        var planetStats =  userPlanet.getExecution();
 
         if(!planetStats.getIsAccessible()){
 

@@ -23,7 +23,7 @@ import static java.math.RoundingMode.HALF_UP;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UserMissionStats implements Progressable {
+public class UserMissionExecution implements Progressable {
 
     private static final BigDecimal MISSION_COMPLETION_THRESHOLD = BigDecimal.valueOf(7);
 

@@ -6,13 +6,14 @@ import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository
 import com.nexus.nexusrpg.domain.entity.planet.model.Planet;
 import com.nexus.nexusrpg.domain.entity.planet.model.UserPlanet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
+import com.nexus.nexusrpg.domain.entity.resource.model.Resource;
+import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;
 import com.nexus.nexusrpg.domain.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.*;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ public class ProgressionService {
 
     private final UserMissionRepository userMissionRepository;
     private final UserPlanetRepository userPlanetRepository;
+    private final UserResourceRepository userResourceRepository;
 
     @Transactional
     public void unlockNextMission(User user, Mission currentMission) {
@@ -32,53 +34,84 @@ public class ProgressionService {
                 )
                 .ifPresentOrElse(
                         this::unlockMission,
-                        () -> unlockNextPlanet(user, currentMission.getPlanet())
+                        () -> unlockNextPlanet(user.getId(), currentMission.getPlanet())
                 );
     }
 
     private void unlockMission(UserMission um) {
 
-        if (um.getStats().getStatus() == LOCKED) {
-            um.getStats().unlock();
+        if (um.getExecution().getStatus() == LOCKED) {
+            um.getExecution().unlock();
             userMissionRepository.save(um);
         }
     }
 
-    private void unlockNextPlanet(User user, Planet currentPlanet) {
-
-        completePlanet(user.getId(), currentPlanet.getId());
+    private void unlockNextPlanet(Long userId, Planet currentPlanet) {
 
         userPlanetRepository
                 .findByUserIdAndPlanetOrder(
-                        user.getId(),
+                        userId,
+                        currentPlanet.getOrder()
+                )
+                .ifPresent(up -> {
+                    this.completePlanet(up);
+                    this.completeResource(userId, up.getPlanet().getResources().get(0));
+                });
+
+        userPlanetRepository
+                .findByUserIdAndPlanetOrder(
+                        userId,
                         currentPlanet.getOrder() + 1
                 )
                 .ifPresent(up -> {
-                    if (up.getStats().getStatus() == LOCKED) {
-                        this.unlockPlanet(up);
-                        unlockFirstMissionOfPlanet(user.getId(), up.getPlanet().getId());
-                    }
+                    this.unlockPlanet(up);
+                    this.unlockResource(userId, up.getPlanet().getResources().get(0));
+                    unlockFirstMissionOfPlanet(userId, up.getPlanet().getId());
                 });
     }
 
-    private void completePlanet(Long userId, Long planetId) {
-
-        userPlanetRepository
-                .findByUserIdAndBaseId(userId, planetId)
-                .ifPresent(up -> {
-                    if (up.getStats().getStatus() == UNLOCKED) {
-                        up.getStats().complete();
-                    }
-                });
-
-    }
-
-    private void unlockPlanet(UserPlanet up) {
-
-        if (up.getStats().getStatus() == LOCKED) {
-            up.getStats().unlock();
+    private void unlockPlanet(UserPlanet up){
+        if (up.getExecution().getStatus() == LOCKED) {
+            up.getExecution().unlock();
             userPlanetRepository.save(up);
         }
+    }
+
+    private void completePlanet(UserPlanet up){
+        if (up.getExecution().getStatus() == UNLOCKED) {
+            up.getExecution().complete();
+            userPlanetRepository.save(up);
+        }
+    }
+
+    private void completeResource(Long userId, Resource currentResource){
+
+        userResourceRepository
+                .findByUserIdAndBaseId(
+                        userId,
+                        currentResource.getId()
+                )
+                .ifPresent(ur -> {
+                    if (ur.getExecution().getStatus() == UNLOCKED) {
+                        ur.getExecution().complete();
+                        userResourceRepository.save(ur);
+                    }
+                });
+    }
+
+    private void unlockResource(Long userId, Resource currentResource){
+
+        userResourceRepository
+                .findByUserIdAndBaseId(
+                        userId,
+                        currentResource.getId()
+                )
+                .ifPresent(ur -> {
+                    if (ur.getExecution().getStatus() == LOCKED) {
+                        ur.getExecution().unlock();
+                        userResourceRepository.save(ur);
+                    }
+                });
     }
 
     private void unlockFirstMissionOfPlanet(Long userId, Long planetId) {

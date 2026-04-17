@@ -14,9 +14,9 @@ public class ResourceValidator {
 
     public void isCollectable(UserResource resource) {
 
-        var resourceStats = resource.getStats();
+        var resourceStatus = resource.getExecution().getStatus();
 
-        if (resourceStats.getStatus() == COMPLETED) {
+        if (resourceStatus == COMPLETED) {
             throw new BusinessException(
                     "Resource",
                     "Este recurso já foi extraído.",

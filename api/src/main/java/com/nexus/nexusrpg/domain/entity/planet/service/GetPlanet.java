@@ -9,14 +9,12 @@ import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class GetPlanet extends GetEntity<UserPlanet, UserPlanetDTO, UserPlanetReferenceDTO> {
 
     private final UserPlanetMapper userPlanetMapper;
     private final PlanetValidator planetValidator;
-
 
     public GetPlanet(
             Context context,

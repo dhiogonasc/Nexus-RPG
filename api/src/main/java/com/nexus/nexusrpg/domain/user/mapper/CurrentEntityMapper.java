@@ -13,7 +13,7 @@ public interface CurrentEntityMapper {
         }
 
         return entities.stream()
-                .filter(e -> e.getStats() != null && Boolean.TRUE.equals(e.getStats().getIsCurrent()))
+                .filter(e -> e.getExecution() != null && Boolean.TRUE.equals(e.getExecution().getIsCurrent()))
                 .findFirst()
                 .map(mapperFunction)
                 .orElse(null);

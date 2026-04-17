@@ -32,13 +32,13 @@ public class UserResource implements Statable {
 
     @Embedded
     @Builder.Default
-    private UserResourceStats stats = new UserResourceStats();
+    private UserResourceExecution execution = new UserResourceExecution();
 
     public static UserResource initialize(User user, Resource resource){
 
         boolean isFirst = resource.getPlanet().getOrder() == 1;
 
-        var initialStats = UserResourceStats.builder()
+        var initialStats = UserResourceExecution.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
                 .isAccessible(isFirst)
                 .isCurrent(isFirst)
@@ -47,7 +47,7 @@ public class UserResource implements Statable {
         return UserResource.builder()
                 .user(user)
                 .resource(resource)
-                .stats(initialStats)
+                .execution(initialStats)
                 .build();
     }
 }

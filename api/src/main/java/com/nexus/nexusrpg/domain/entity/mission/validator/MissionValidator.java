@@ -18,7 +18,7 @@ public class MissionValidator {
 
         planetValidator.isAccessibleByMission(userMission);
 
-        var missionStats = userMission.getStats();
+        var missionStats = userMission.getExecution();
 
         if(!missionStats.getIsAccessible()){
             throw new BusinessException(

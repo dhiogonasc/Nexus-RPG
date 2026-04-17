@@ -4,7 +4,7 @@ import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 
 import java.math.BigDecimal;
 
-public record UserPlanetStatsReferenceDTO(
+public record UPExecutionRefDTO(
 
         EntityStatus status,
         BigDecimal progress

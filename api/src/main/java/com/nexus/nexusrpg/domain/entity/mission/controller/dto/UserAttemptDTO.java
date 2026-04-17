@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public record UserAttemptDTO(
 
         Long id,
-        UserMissionReferenceDTO userMission,
+        UserMissionRefDTO userMission,
         LocalDateTime startAt,
         LocalDateTime endAt,
         BigDecimal result

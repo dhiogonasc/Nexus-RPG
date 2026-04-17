@@ -51,7 +51,7 @@ public class ExecuteMission {
 
         var user = context.getAuthenticatedUser();
         var userMission = userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), missionId);
-        userMission.getStats().setProgress(BigDecimal.ZERO);
+        userMission.getExecution().setProgress(BigDecimal.ZERO);
 
         missionValidator.isAccessible(userMission);
         attemptValidator.hasActiveAttempt(userMission);
@@ -109,7 +109,7 @@ public class ExecuteMission {
         long totalQuestions = questionRepository.countByMissionId(mission.getId());
         long answeredQuestions = userResponseRepository.countByAttemptId(attempt.getId());
 
-        userMission.getStats().update(answeredQuestions, totalQuestions);
+        userMission.getExecution().update(answeredQuestions, totalQuestions);
 
         userMissionRepository.save(userMission);
     }
@@ -129,7 +129,7 @@ public class ExecuteMission {
 
         attempt.finish(result);
 
-        if (attempt.getUserMission().getStats().getStatus() == COMPLETED) {
+        if (attempt.getUserMission().getExecution().getStatus() == COMPLETED) {
             progressionService.unlockNextMission(user, attempt.getUserMission().getMission());
         }
 

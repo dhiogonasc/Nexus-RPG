@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.entity.resource.model;
+package com.nexus.nexusrpg.domain.entity.planet.model;
 
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 import com.nexus.nexusrpg.common.entity.interfaces.Progressable;
@@ -13,16 +13,17 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.*;
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UserResourceStats implements Progressable {
+public class UserPlanetExecution implements Progressable {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
@@ -38,8 +39,9 @@ public class UserResourceStats implements Progressable {
     @Column(name = "\"is_current\"", nullable = false)
     private Boolean isCurrent = false;
 
-    @Column(name = "\"collected_at\"")
-    private LocalDateTime collectedAt;
+    @Builder.Default
+    @Column(name = "\"progress\"", nullable = false, columnDefinition = "progress")
+    private BigDecimal progress = BigDecimal.ZERO;
 
     public void unlock() {
         this.status = UNLOCKED;
@@ -47,10 +49,9 @@ public class UserResourceStats implements Progressable {
         this.isCurrent = true;
     }
 
-    public void complete(){
-        this.status = COMPLETED;
+    public void complete() {
+        this.status = EntityStatus.COMPLETED;
         this.isCurrent = false;
-        this.collectedAt = LocalDateTime.now();
     }
 
     public void update(long itens, long totalItens) {}

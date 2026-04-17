@@ -4,7 +4,7 @@ import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 
 import java.math.BigDecimal;
 
-public record UserMissionStatsDTO(
+public record URExecutionDTO(
 
         EntityStatus status,
         Boolean isAccessible,
