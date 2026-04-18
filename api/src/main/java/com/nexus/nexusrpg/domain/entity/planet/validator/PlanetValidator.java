@@ -2,11 +2,12 @@ package com.nexus.nexusrpg.domain.entity.planet.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
-import com.nexus.nexusrpg.domain.entity.mission.model.UserMission;
-import com.nexus.nexusrpg.domain.entity.planet.model.UserPlanet;
+import com.nexus.nexusrpg.domain.model.UserMission;
+import com.nexus.nexusrpg.domain.model.UserPlanet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 @Component
@@ -17,9 +18,9 @@ public class PlanetValidator {
 
     public void isAccessible(UserPlanet userPlanet) {
 
-        var planetStats =  userPlanet.getExecution();
+        var planetStatus =  userPlanet.getStatus();
 
-        if(!planetStats.getIsAccessible()){
+        if(planetStatus == LOCKED){
 
             throw new BusinessException(
                     "Planet",

@@ -3,16 +3,13 @@ package com.nexus.nexusrpg.domain.entity.mission.validator;
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.entity.alternative.model.Alternative;
 import com.nexus.nexusrpg.domain.entity.question.model.Question;
-import com.nexus.nexusrpg.domain.user.model.User;
+import com.nexus.nexusrpg.user.model.User;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
-import com.nexus.nexusrpg.domain.entity.mission.model.UserMission;
+import com.nexus.nexusrpg.domain.model.UserMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
-import java.util.Objects;
 
 import static java.util.Objects.isNull;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;

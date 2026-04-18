@@ -2,10 +2,11 @@ package com.nexus.nexusrpg.domain.entity.mission.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;
-import com.nexus.nexusrpg.domain.entity.mission.model.UserMission;
+import com.nexus.nexusrpg.domain.model.UserMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Component
@@ -18,9 +19,10 @@ public class MissionValidator {
 
         planetValidator.isAccessibleByMission(userMission);
 
-        var missionStats = userMission.getExecution();
+        var missionStatus = userMission.getStatus();
 
-        if(!missionStats.getIsAccessible()){
+        if(missionStatus == LOCKED){
+
             throw new BusinessException(
                     "Missão",
                     "Bloqueado! Complete a missão anterior!",

@@ -1,25 +1,25 @@
 package com.nexus.nexusrpg.domain.entity.planet.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
-import com.nexus.nexusrpg.domain.entity.planet.controller.dto.UserPlanetDTO;
-import com.nexus.nexusrpg.domain.entity.planet.controller.dto.UserPlanetReferenceDTO;
-import com.nexus.nexusrpg.domain.entity.planet.mapper.UserPlanetMapper;
-import com.nexus.nexusrpg.domain.entity.planet.model.UserPlanet;
+import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
+import com.nexus.nexusrpg.domain.controller.dto.PlanetRefDTO;
+import com.nexus.nexusrpg.domain.model.UserPlanet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;
 import org.springframework.stereotype.Component;
 
-@Component
-public class GetPlanet extends GetEntity<UserPlanet, UserPlanetDTO, UserPlanetReferenceDTO> {
+import static com.nexus.nexusrpg.domain.mapper.PlanetMapper.toDTO;
+import static com.nexus.nexusrpg.domain.mapper.PlanetMapper.toRefDTO;
 
-    private final UserPlanetMapper userPlanetMapper;
+@Component
+public class GetPlanet extends GetEntity<UserPlanet, PlanetDTO, PlanetRefDTO> {
+
     private final PlanetValidator planetValidator;
 
     public GetPlanet(
             Context context,
             UserPlanetRepository userPlanetRepository,
-            UserPlanetMapper userPlanetMapper,
             PlanetValidator planetValidator
     ) {
 
@@ -29,18 +29,17 @@ public class GetPlanet extends GetEntity<UserPlanet, UserPlanetDTO, UserPlanetRe
                 userPlanetRepository
         );
 
-        this.userPlanetMapper = userPlanetMapper;
         this.planetValidator = planetValidator;
     }
 
     @Override
-    protected UserPlanetDTO mapToDTO(UserPlanet userPlanet) {
-        return userPlanetMapper.toDTO(userPlanet);
+    protected PlanetDTO mapToDTO(UserPlanet userPlanet) {
+        return toDTO(userPlanet);
     }
 
     @Override
-    protected UserPlanetReferenceDTO mapToReferenceDTO(UserPlanet userPlanet) {
-        return userPlanetMapper.toReferenceDTO(userPlanet);
+    protected PlanetRefDTO mapToReferenceDTO(UserPlanet userPlanet) {
+        return toRefDTO(userPlanet);
     }
 
     @Override

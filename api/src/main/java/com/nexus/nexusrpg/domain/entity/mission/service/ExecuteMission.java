@@ -14,7 +14,7 @@ import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.entity.question.repository.QuestionRepository;
-import com.nexus.nexusrpg.domain.user.validator.UserValidator;
+import com.nexus.nexusrpg.user.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +51,6 @@ public class ExecuteMission {
 
         var user = context.getAuthenticatedUser();
         var userMission = userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), missionId);
-        userMission.getExecution().setProgress(BigDecimal.ZERO);
 
         missionValidator.isAccessible(userMission);
         attemptValidator.hasActiveAttempt(userMission);

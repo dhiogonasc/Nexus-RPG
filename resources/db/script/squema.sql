@@ -11,17 +11,11 @@ DROP TABLE IF EXISTS "user_mission" CASCADE;
 
 DROP TABLE IF EXISTS "user_planet" CASCADE;
 
-DROP TABLE IF EXISTS "user_achievement" CASCADE;
-
 DROP TABLE IF EXISTS "alternative" CASCADE;
 
 DROP TABLE IF EXISTS "question" CASCADE;
 
 DROP TABLE IF EXISTS "resource" CASCADE;
-
-DROP TABLE IF EXISTS "achievement_target" CASCADE;
-
-DROP TABLE IF EXISTS "achievement" CASCADE;
 
 DROP TABLE IF EXISTS "mission" CASCADE;
 
@@ -31,7 +25,7 @@ DROP TABLE IF EXISTS "user" CASCADE;
 
 DROP TABLE IF EXISTS "level" CASCADE;
 
-DROP DOMAIN IF EXISTS entity_progress CASCADE;
+DROP DOMAIN IF EXISTS progress CASCADE;
 
 DROP DOMAIN IF EXISTS score CASCADE;
 
@@ -39,15 +33,7 @@ DROP DOMAIN IF EXISTS oxygen CASCADE;
 
 DROP DOMAIN IF EXISTS xp CASCADE;
 
-DROP TYPE IF EXISTS entity_type CASCADE;
-
-DROP TYPE IF EXISTS achievement_type CASCADE;
-
-DROP TYPE IF EXISTS achievement_scope CASCADE;
-
 DROP TYPE IF EXISTS entity_status CASCADE;
-
-DROP TYPE IF EXISTS mission_difficulty CASCADE;
 
 DROP TYPE IF EXISTS planet_label CASCADE;
 
@@ -73,17 +59,7 @@ CREATE TYPE level_label AS ENUM (
 
 CREATE TYPE planet_label AS ENUM ('VARIABILI', 'BIFURCA_9', 'CICLUS', 'MATRX_0');
 
-CREATE TYPE mission_difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
-
 CREATE TYPE entity_status AS ENUM ('LOCKED', 'UNLOCKED', 'COMPLETED');
-
-CREATE DOMAIN entity_progress AS ENUM ('IN_PROGRESS', 'COMPLETED');
-
-CREATE TYPE achievement_scope AS ENUM ('ENTITY', 'GAME');
-
-CREATE TYPE achievement_type AS ENUM ('UNLOCK', 'COMPLETED', 'COLLECTED');
-
-CREATE TYPE entity_type AS ENUM ('LEVEL', 'MISSION', 'PLANET');
 
 -- ====================
 -- DOMAINS
@@ -103,38 +79,24 @@ CREATE TABLE
         "name" level_label NOT NULL,
         "description" text,
         "order" int NOT NULL,
+        "xp_bonus" xp NOT NULL,
         "xp_required" xp NOT NULL,
         CONSTRAINT pk_level PRIMARY KEY (id),
-        CONSTRAINT uk_level_number UNIQUE ("name")
+        CONSTRAINT uk_level_label UNIQUE ("name"),
+        CONSTRAINT uk_level_order UNIQUE ("order")
     );
 
 INSERT INTO
-    "level" ("name", "description", "order", "xp_required")
+    "level" (
+        "name",
+        "description",
+        "order",
+        "xp_bonus",
+        "xp_required"
+    )
 VALUES
-    ('ALUMINIUM_I', NULL, 1, 0),
-    ('ALUMINIUM_II', NULL, 2, 250),
-    ('ALUMINIUM_III', NULL, 3, 500);
-
-INSERT INTO
-    "level" ("name", "description", "order", "xp_required")
-VALUES
-    ('IRON_I', NULL, 4, 1000),
-    ('IRON_II', NULL, 5, 1250),
-    ('IRON_III', NULL, 6, 1500);
-
-INSERT INTO
-    "level" ("name", "description", "order", "xp_required")
-VALUES
-    ('NICKEL_I', NULL, 7, 3000),
-    ('NICKEL_II', NULL, 8, 3250),
-    ('NICKEL_III', NULL, 9, 3500);
-
-INSERT INTO
-    "level" ("name", "description", "order", "xp_required")
-VALUES
-    ('PALLADIUM_I', NULL, 10, 7000),
-    ('PALLADIUM_II', NULL, 11, 7250),
-    ('PALLADIUM_III', NULL, 12, 7500);
+    ('ALUMINIUM_I', NULL, 1, 0, 0),
+    ('ALUMINIUM_II', NULL, 2, 10, 500);
 
 -- ====================
 -- USER
@@ -171,10 +133,8 @@ CREATE TABLE
 INSERT INTO
     "planet" ("name", "description", "order", "xp_bonus")
 VALUES
-    ('VARIABILI', NULL, 1, 100),
-    ('BIFURCA_9', NULL, 2, 250),
-    ('CICLUS', NULL, 3, 500),
-    ('MATRX_0', NULL, 4, 1000);
+    ('VARIABILI', NULL, 1, 10),
+    ('BIFURCA_9', NULL, 2, 10);
 
 CREATE TABLE
     "user_planet" (
@@ -182,9 +142,7 @@ CREATE TABLE
         user_id bigint NOT NULL,
         planet_id bigint NOT NULL,
         "status" entity_status NOT NULL DEFAULT 'LOCKED',
-        "is_accessible" boolean NOT NULL DEFAULT false,
         "is_current" boolean NOT NULL DEFAULT false,
-        "progress" entity_progress,
         CONSTRAINT pk_user_planet PRIMARY KEY (id),
         CONSTRAINT fk_user_planet_user FOREIGN KEY (user_id) REFERENCES "user" (id) ON DELETE CASCADE,
         CONSTRAINT fk_user_planet_planet FOREIGN KEY (planet_id) REFERENCES "planet" (id) ON DELETE CASCADE,
@@ -201,7 +159,6 @@ CREATE TABLE
         "name" varchar(255) NOT NULL,
         "description" text,
         "order" int NOT NULL,
-        "difficulty" mission_difficulty NOT NULL,
         "xp_bonus" xp NOT NULL,
         CONSTRAINT pk_mission PRIMARY KEY (id),
         CONSTRAINT fk_mission_planet FOREIGN KEY (planet_id) REFERENCES "planet" (id) ON DELETE CASCADE,
@@ -215,106 +172,13 @@ INSERT INTO
         "name",
         "description",
         "order",
-        "difficulty",
         "xp_bonus"
     )
 VALUES
-    (
-        1,
-        'Planet - 1 : Mission - 1 ',
-        NULL,
-        1,
-        'EASY',
-        100
-    ),
-    (
-        1,
-        'Planet - 1 : Mission - 2 ',
-        NULL,
-        2,
-        'MEDIUM',
-        100
-    ),
-    (
-        1,
-        'Planet - 1 : Mission - 3 ',
-        NULL,
-        3,
-        'HARD',
-        100
-    ),
-    (
-        2,
-        'Planet - 2 : Mission - 1 ',
-        NULL,
-        1,
-        'EASY',
-        100
-    ),
-    (
-        2,
-        'Planet - 2 : Mission - 2 ',
-        NULL,
-        2,
-        'MEDIUM',
-        100
-    ),
-    (
-        2,
-        'Planet - 2 : Mission - 3 ',
-        NULL,
-        3,
-        'HARD',
-        100
-    ),
-    (
-        3,
-        'Planet - 3 : Mission - 1 ',
-        NULL,
-        1,
-        'EASY',
-        100
-    ),
-    (
-        3,
-        'Planet - 3 : Mission - 2 ',
-        NULL,
-        2,
-        'MEDIUM',
-        100
-    ),
-    (
-        3,
-        'Planet - 3 : Mission - 3 ',
-        NULL,
-        3,
-        'HARD',
-        100
-    ),
-    (
-        4,
-        'Planet - 4 : Mission - 1 ',
-        NULL,
-        1,
-        'EASY',
-        100
-    ),
-    (
-        4,
-        'Planet - 4 : Mission - 2 ',
-        NULL,
-        2,
-        'MEDIUM',
-        100
-    ),
-    (
-        4,
-        'Planet - 4 : Mission - 3 ',
-        NULL,
-        3,
-        'HARD',
-        100
-    );
+    (1, 'Planet - 1 : Mission - 1 ', NULL, 1, 10),
+    (1, 'Planet - 1 : Mission - 2 ', NULL, 2, 10),
+    (2, 'Planet - 2 : Mission - 3 ', NULL, 1, 10),
+    (2, 'Planet - 2 : Mission - 1 ', NULL, 2, 10);
 
 CREATE TABLE
     "user_mission" (
@@ -322,10 +186,8 @@ CREATE TABLE
         user_id bigint NOT NULL,
         mission_id bigint NOT NULL,
         "status" entity_status NOT NULL DEFAULT 'LOCKED',
-        "is_accessible" boolean NOT NULL DEFAULT false,
         "is_current" boolean NOT NULL DEFAULT false,
         "best_result" score NOT NULL DEFAULT 0,
-        "entity_progress" entity_progress NOT NULL DEFAULT 0,
         CONSTRAINT pk_user_mission PRIMARY KEY (id),
         CONSTRAINT fk_user_mission_user FOREIGN KEY (user_id) REFERENCES "user" (id) ON DELETE CASCADE,
         CONSTRAINT fk_user_mission_mission FOREIGN KEY (mission_id) REFERENCES "mission" (id) ON DELETE CASCADE,
@@ -351,9 +213,10 @@ CREATE TABLE
     "question" (
         id bigint GENERATED BY DEFAULT AS IDENTITY,
         mission_id bigint NOT NULL,
+        "name" varchar(50) NOT NULL,
         "description" text NOT NULL,
-        "code_snippet" text,
         "order" int NOT NULL,
+        "code_snippet" text,
         CONSTRAINT pk_question PRIMARY KEY (id),
         CONSTRAINT fk_question_mission FOREIGN KEY (mission_id) REFERENCES "mission" (id) ON DELETE CASCADE,
         CONSTRAINT uk_question_mission_order UNIQUE (mission_id, "order")
@@ -362,227 +225,20 @@ CREATE TABLE
 INSERT INTO
     "question" (
         mission_id,
+        "name",
         "description",
-        "code_snippet",
-        "order"
+        "order",
+        "code_snippet"
     )
 VALUES
-    (
-        1,
-        'Question 1 - Mission 1 - Planet 1',
-        '// snippet',
-        1
-    ),
-    (
-        1,
-        'Question 2 - Mission 1 - Planet 1',
-        '// snippet',
-        2
-    ),
-    (
-        1,
-        'Question 3 - Mission 1 - Planet 1',
-        '// snippet',
-        3
-    ),
-    (
-        2,
-        'Question 1 - Mission 2 - Planet 1',
-        '// snippet',
-        1
-    ),
-    (
-        2,
-        'Question 2 - Mission 2 - Planet 1',
-        '// snippet',
-        2
-    ),
-    (
-        2,
-        'Question 3 - Mission 2 - Planet 1',
-        '// snippet',
-        3
-    ),
-    (
-        3,
-        'Question 1 - Mission 3 - Planet 1',
-        '// snippet',
-        1
-    ),
-    (
-        3,
-        'Question 2 - Mission 3 - Planet 1',
-        '// snippet',
-        2
-    ),
-    (
-        3,
-        'Question 3 - Mission 3 - Planet 1',
-        '// snippet',
-        3
-    ),
-    (
-        4,
-        'Question 1 - Mission 1 - Planet 2',
-        '// snippet',
-        1
-    ),
-    (
-        4,
-        'Question 2 - Mission 1 - Planet 2',
-        '// snippet',
-        2
-    ),
-    (
-        4,
-        'Question 3 - Mission 1 - Planet 2',
-        '// snippet',
-        3
-    ),
-    (
-        5,
-        'Question 1 - Mission 2 - Planet 2',
-        '// snippet',
-        1
-    ),
-    (
-        5,
-        'Question 2 - Mission 2 - Planet 2',
-        '// snippet',
-        2
-    ),
-    (
-        5,
-        'Question 3 - Mission 2 - Planet 2',
-        '// snippet',
-        3
-    ),
-    (
-        6,
-        'Question 1 - Mission 3 - Planet 2',
-        '// snippet',
-        1
-    ),
-    (
-        6,
-        'Question 2 - Mission 3 - Planet 2',
-        '// snippet',
-        2
-    ),
-    (
-        6,
-        'Question 3 - Mission 3 - Planet 2',
-        '// snippet',
-        3
-    ),
-    (
-        7,
-        'Question 1 - Mission 1 - Planet 3',
-        '// snippet',
-        1
-    ),
-    (
-        7,
-        'Question 2 - Mission 1 - Planet 3',
-        '// snippet',
-        2
-    ),
-    (
-        7,
-        'Question 3 - Mission 1 - Planet 3',
-        '// snippet',
-        3
-    ),
-    (
-        8,
-        'Question 1 - Mission 2 - Planet 3',
-        '// snippet',
-        1
-    ),
-    (
-        8,
-        'Question 2 - Mission 2 - Planet 3',
-        '// snippet',
-        2
-    ),
-    (
-        8,
-        'Question 3 - Mission 2 - Planet 3',
-        '// snippet',
-        3
-    ),
-    (
-        9,
-        'Question 1 - Mission 3 - Planet 3',
-        '// snippet',
-        1
-    ),
-    (
-        9,
-        'Question 2 - Mission 3 - Planet 3',
-        '// snippet',
-        2
-    ),
-    (
-        9,
-        'Question 3 - Mission 3 - Planet 3',
-        '// snippet',
-        3
-    ),
-    (
-        10,
-        'Question 1 - Mission 1 - Planet 4',
-        '// snippet',
-        1
-    ),
-    (
-        10,
-        'Question 2 - Mission 1 - Planet 4',
-        '// snippet',
-        2
-    ),
-    (
-        10,
-        'Question 3 - Mission 1 - Planet 4',
-        '// snippet',
-        3
-    ),
-    (
-        11,
-        'Question 1 - Mission 2 - Planet 4',
-        '// snippet',
-        1
-    ),
-    (
-        11,
-        'Question 2 - Mission 2 - Planet 4',
-        '// snippet',
-        2
-    ),
-    (
-        11,
-        'Question 3 - Mission 2 - Planet 4',
-        '// snippet',
-        3
-    ),
-    (
-        12,
-        'Question 1 - Mission 3 - Planet 4',
-        '// snippet',
-        1
-    ),
-    (
-        12,
-        'Question 2 - Mission 3 - Planet 4',
-        '// snippet',
-        2
-    ),
-    (
-        12,
-        'Question 3 - Mission 3 - Planet 4',
-        '// snippet',
-        3
-    );
+    (1, 'Question 1', 'Mission 1 - Planet 1', 1, NULL),
+    (1, 'Question 2', 'Mission 1 - Planet 1', 2, NULL),
+    (2, 'Question 1', 'Mission 2 - Planet 1', 1, NULL),
+    (2, 'Question 2', 'Mission 2 - Planet 1', 2, NULL),
+    (3, 'Question 1', 'Mission 1 - Planet 2', 1, NULL),
+    (3, 'Question 2', 'Mission 1 - Planet 2', 2, NULL),
+    (4, 'Question 1', 'Mission 2 - Planet 2', 1, NULL),
+    (4, 'Question 2', 'Mission 2 - Planet 2', 2, NULL);
 
 CREATE TABLE
     "alternative" (
@@ -605,94 +261,108 @@ INSERT INTO
         "is_correct"
     )
 VALUES
+    -- Questão 1 - Missão 1 - Planet 1
     (
         1,
-        'Content Alt 1 - Question 1',
-        'Feedback Alt 1 - Question 1',
+        'Content Alt 1 - Question 1 - Mission 1 - Planet 1',
+        'Feedback Alt 1 - Question 1 - Mission 1 - Planet 1',
         true
     ),
     (
         1,
-        'Content Alt 2 - Question 1',
-        'Feedback Alt 2 - Question 1',
+        'Content Alt 2 - Question 1 - Mission 1 - Planet 1',
+        'Feedback Alt 2 - Question 1 - Mission 1 - Planet 1',
         false
     ),
-    (
-        1,
-        'Content Alt 3 - Question 1',
-        'Feedback Alt 3 - Question 1',
-        false
-    ),
-    (
-        1,
-        'Content Alt 4 - Question 1',
-        'Feedback Alt 4 - Question 1',
-        false
-    ),
-    (
-        1,
-        'Content Alt 5 - Question 1',
-        'Feedback Alt 5 - Question 1',
-        false
-    ),
+    -- Questão 2 - Missão 1 - Planet 1
     (
         2,
-        'Content Alt 1 - Question 2',
-        'Feedback Alt 1 - Question 2',
+        'Content Alt 1 - Question 2 - Mission 1 - Planet 1',
+        'Feedback Alt 1 - Question 2 - Mission 1 - Planet 1',
         true
     ),
     (
         2,
-        'Content Alt 2 - Question 2',
-        'Feedback Alt 2 - Question 2',
+        'Content Alt 2 - Question 2 - Mission 1 - Planet 1',
+        'Feedback Alt 2 - Question 2 - Mission 1 - Planet 1',
         false
     ),
-    (
-        2,
-        'Content Alt 3 - Question 2',
-        'Feedback Alt 3 - Question 2',
-        false
-    ),
-    (
-        2,
-        'Content Alt 4 - Question 2',
-        'Feedback Alt 4 - Question 2',
-        false
-    ),
-    (
-        2,
-        'Content Alt 5 - Question 2',
-        'Feedback Alt 5 - Question 2',
-        false
-    ),
+    -- Questão 1 - Missão 2 - Planet 1
     (
         3,
-        'Content Alt 1 - Question 3',
-        'Feedback Alt 1 - Question 3',
+        'Content Alt 1 - Question 1 - Mission 2 - Planet 1',
+        'Feedback Alt 1 - Question 1 - Mission 2 - Planet 1',
         true
     ),
     (
         3,
-        'Content Alt 2 - Question 3',
-        'Feedback Alt 2 - Question 3',
+        'Content Alt 2 - Question 1 - Mission 2 - Planet 1',
+        'Feedback Alt 2 - Question 1 - Mission 2 - Planet 1',
         false
     ),
+    -- Questão 2 - Missão 2 - Planet 1
     (
-        3,
-        'Content Alt 3 - Question 3',
-        'Feedback Alt 3 - Question 3',
-        false
+        4,
+        'Content Alt 1 - Question 2 - Mission 2 - Planet 1',
+        'Feedback Alt 1 - Question 2 - Mission 2 - Planet 1',
+        true
     ),
     (
-        3,
-        'Content Alt 4 - Question 3',
-        'Feedback Alt 4 - Question 3',
+        4,
+        'Content Alt 2 - Question 2 - Mission 2 - Planet 1',
+        'Feedback Alt 2 - Question 2 - Mission 2 - Planet 1',
         false
     ),
+    -- Questão 1 - Missão 1 - Planet 2
     (
-        3,
-        'Content Alt 5 - Question 3',
-        'Feedback Alt 5 - Question 3',
+        5,
+        'Content Alt 1 - Question 1 - Mission 1 - Planet 2',
+        'Feedback Alt 1 - Question 1 - Mission 1 - Planet 2',
+        true
+    ),
+    (
+        5,
+        'Content Alt 2 - Question 1 - Mission 1 - Planet 2',
+        'Feedback Alt 2 - Question 1 - Mission 1 - Planet 2',
+        false
+    ),
+    -- Questão 2 - Missão 1 - Planet 2
+    (
+        6,
+        'Content Alt 1 - Question 2 - Mission 1 - Planet 2',
+        'Feedback Alt 1 - Question 2 - Mission 1 - Planet 2',
+        true
+    ),
+    (
+        6,
+        'Content Alt 2 - Question 2 - Mission 1 - Planet 2',
+        'Feedback Alt 2 - Question 2 - Mission 1 - Planet 2',
+        false
+    ),
+    -- Questão 1 - Missão 2 - Planet 2
+    (
+        7,
+        'Content Alt 1 - Question 1 - Mission 2 - Planet 2',
+        'Feedback Alt 1 - Question 1 - Mission 2 - Planet 2',
+        true
+    ),
+    (
+        7,
+        'Content Alt 2 - Question 1 - Mission 2 - Planet 2',
+        'Feedback Alt 2 - Question 1 - Mission 2 - Planet 2',
+        false
+    ),
+    -- Questão 2 - Missão 2 - Planet 2
+    (
+        8,
+        'Content Alt 1 - Question 2 - Mission 2 - Planet 2',
+        'Feedback Alt 1 - Question 2 - Mission 2 - Planet 2',
+        true
+    ),
+    (
+        8,
+        'Content Alt 2 - Question 2 - Mission 2 - Planet 2',
+        'Feedback Alt 2 - Question 2 - Mission 2 - Planet 2',
         false
     );
 
@@ -718,67 +388,34 @@ CREATE TABLE
         planet_id bigint NOT NULL,
         "name" varchar(255) NOT NULL,
         "description" text,
+        "order" int NOT NULL,
         "xp_bonus" xp NOT NULL,
         CONSTRAINT pk_resource PRIMARY KEY (id),
         CONSTRAINT fk_resource_planet FOREIGN KEY (planet_id) REFERENCES "planet" (id) ON DELETE CASCADE,
-        CONSTRAINT uk_resource_name UNIQUE ("name")
+        CONSTRAINT uk_resource_name UNIQUE ("name"),
+        CONSTRAINT uk_resource_order UNIQUE (planet_id, "order")
     );
 
 INSERT INTO
-    "resource" (planet_id, "name", "description", "xp_bonus")
+    "resource" (
+        planet_id,
+        "name",
+        "description",
+        "order",
+        "xp_bonus"
+    )
 VALUES
-    (1, 'Planet - 1 : Resource', NULL, 100),
-    (2, 'Planet - 2 : Resource', NULL, 100),
-    (3, 'Planet - 3 : Resource', NULL, 100),
-    (4, 'Planet - 4 : Resource', NULL, 100);
+    (1, 'Planet - 1 : Resource', NULL, 1, 10),
+    (2, 'Planet - 2 : Resource', NULL, 1, 10);
 
 CREATE TABLE
     "user_resource" (
         id bigint GENERATED BY DEFAULT AS IDENTITY,
         user_id bigint NOT NULL,
         resource_id bigint NOT NULL,
-		"status" entity_status NOT NULL DEFAULT 'LOCKED',
-        "is_accessible" boolean NOT NULL DEFAULT false,
-        "is_current" boolean NOT NULL DEFAULT false,
-        "collected_at" timestamp,
+        "status" entity_status NOT NULL DEFAULT 'LOCKED',
         CONSTRAINT pk_user_resource PRIMARY KEY (id),
         CONSTRAINT fk_user_resource_user FOREIGN KEY (user_id) REFERENCES "user" (id) ON DELETE CASCADE,
         CONSTRAINT fk_user_resource_resource FOREIGN KEY (resource_id) REFERENCES "resource" (id) ON DELETE CASCADE,
         CONSTRAINT uk_user_resource UNIQUE (user_id, resource_id)
-    );
-
--- ====================
--- ACHIEVEMENT
--- ====================
-CREATE TABLE
-    "achievement" (
-        id bigint GENERATED BY DEFAULT AS IDENTITY,
-        "name" varchar(255) NOT NULL,
-        "description" text,
-        "type" achievement_type NOT NULL,
-        "scope" achievement_scope NOT NULL,
-        "bonus_xp" int NOT NULL DEFAULT 0,
-        CONSTRAINT pk_achievement PRIMARY KEY (id),
-        CONSTRAINT ck_achievement_bonus_xp CHECK (bonus_xp >= 0)
-    );
-
-CREATE TABLE
-    "achievement_target" (
-        achievement_id bigint NOT NULL,
-        entity_id bigint NOT NULL,
-        "entity" entity_type NOT NULL,
-        CONSTRAINT pk_achievement_target PRIMARY KEY (achievement_id, entity, entity_id),
-        CONSTRAINT fk_achievement_target_achievement FOREIGN KEY (achievement_id) REFERENCES "achievement" (id) ON DELETE CASCADE
-    );
-
-CREATE TABLE
-    "user_achievement" (
-        id bigint GENERATED BY DEFAULT AS IDENTITY,
-        user_id bigint NOT NULL,
-        achievement_id bigint NOT NULL,
-        "collected_at" timestamp DEFAULT CURRENT_TIMESTAMP,
-        CONSTRAINT pk_user_achievement PRIMARY KEY (id),
-        CONSTRAINT fk_user_achievement_user FOREIGN KEY (user_id) REFERENCES "user" (id) ON DELETE CASCADE,
-        CONSTRAINT fk_user_achievement_achievement FOREIGN KEY (achievement_id) REFERENCES "achievement" (id) ON DELETE CASCADE,
-        CONSTRAINT uk_user_achievement_pair UNIQUE (user_id, achievement_id)
     );

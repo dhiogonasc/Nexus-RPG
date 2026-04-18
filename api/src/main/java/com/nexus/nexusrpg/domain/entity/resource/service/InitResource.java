@@ -1,10 +1,10 @@
 package com.nexus.nexusrpg.domain.entity.resource.service;
 
 import com.nexus.nexusrpg.common.entity.InitEntity;
-import com.nexus.nexusrpg.domain.entity.resource.model.Resource;
+import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.entity.resource.repository.ResourceRepository;
-import com.nexus.nexusrpg.domain.user.model.User;
-import com.nexus.nexusrpg.domain.entity.resource.model.UserResource;
+import com.nexus.nexusrpg.user.model.User;
+import com.nexus.nexusrpg.domain.model.UserResource;
 import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;
 import org.springframework.stereotype.Service;
 

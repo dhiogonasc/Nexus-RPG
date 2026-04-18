@@ -2,22 +2,21 @@ package com.nexus.nexusrpg.domain.entity.resource.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.entity.resource.controller.dto.UserResourceDTO;
-import com.nexus.nexusrpg.domain.entity.resource.controller.dto.UserResourceRefDTO;
-import com.nexus.nexusrpg.domain.entity.resource.mapper.UserResourceMapper;
-import com.nexus.nexusrpg.domain.entity.resource.model.UserResource;
+import com.nexus.nexusrpg.domain.controller.dto.ResourceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.ResourceRefDTO;
+import com.nexus.nexusrpg.domain.model.UserResource;
 import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;
 import org.springframework.stereotype.Service;
 
-@Service
-public class GetResource extends GetEntity<UserResource, UserResourceDTO, UserResourceRefDTO> {
+import static com.nexus.nexusrpg.domain.mapper.ResourceMapper.toDTO;
+import static com.nexus.nexusrpg.domain.mapper.ResourceMapper.toRefDTO;
 
-    private final UserResourceMapper userResourceMapper;
+@Service
+public class GetResource extends GetEntity<UserResource, ResourceDTO, ResourceRefDTO> {
 
     public GetResource(
             Context context,
-            UserResourceRepository userResourceRepository,
-            UserResourceMapper userResourceMapper
+            UserResourceRepository userResourceRepository
     ) {
 
         super(
@@ -25,18 +24,16 @@ public class GetResource extends GetEntity<UserResource, UserResourceDTO, UserRe
                 "Resource",
                 userResourceRepository
         );
-
-        this.userResourceMapper = userResourceMapper;
     }
 
     @Override
-    protected UserResourceDTO mapToDTO(UserResource userResource) {
-        return userResourceMapper.toDTO(userResource);
+    protected ResourceDTO mapToDTO(UserResource userResource) {
+        return toDTO(userResource);
     }
 
     @Override
-    protected UserResourceRefDTO mapToReferenceDTO(UserResource userResource) {
-        return userResourceMapper.toReferenceDTO(userResource);
+    protected ResourceRefDTO mapToReferenceDTO(UserResource userResource) {
+        return toRefDTO(userResource);
     }
 
     @Override

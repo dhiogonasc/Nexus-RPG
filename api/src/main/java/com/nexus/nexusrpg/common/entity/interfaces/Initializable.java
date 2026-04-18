@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.common.entity.interfaces;
 
-import com.nexus.nexusrpg.domain.user.model.User;
+import com.nexus.nexusrpg.user.model.User;
 
 public interface Initializable {
 

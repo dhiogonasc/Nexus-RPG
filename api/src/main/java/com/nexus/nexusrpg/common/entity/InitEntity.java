@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.common.entity;
 
 import com.nexus.nexusrpg.common.entity.interfaces.Initializable;
-import com.nexus.nexusrpg.domain.user.model.User;
+import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 

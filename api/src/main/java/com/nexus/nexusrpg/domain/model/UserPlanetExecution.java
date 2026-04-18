@@ -1,0 +1,47 @@
+package com.nexus.nexusrpg.domain.model;
+
+import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
+import com.nexus.nexusrpg.common.entity.interfaces.Progressable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
+
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Embeddable
+public class UserPlanetExecution implements Progressable {
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "\"status\"", nullable = false, columnDefinition = "entity_status")
+    private EntityStatus status = LOCKED;
+
+    @Builder.Default
+    @Column(name = "\"is_current\"", nullable = false)
+    private Boolean isCurrent = false;
+
+    public void unlock() {
+        this.status = UNLOCKED;
+        this.isCurrent = true;
+    }
+
+    public void complete() {
+        this.status = EntityStatus.COMPLETED;
+        this.isCurrent = false;
+    }
+
+    public void update(long itens, long totalItens) {}
+}
