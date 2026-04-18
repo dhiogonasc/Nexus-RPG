@@ -6,7 +6,7 @@ import com.nexus.nexusrpg.domain.entity.question.model.Question;
 import com.nexus.nexusrpg.user.model.User;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
-import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class AttemptValidator {
 
     private final UserAttemptRepository userAttemptRepository;
 
-    public void hasActiveAttempt(UserMission mission) {
+    public void hasActiveAttempt(UMission mission) {
 
         boolean hasActive = userAttemptRepository.existsByUserMissionIdAndEndAtIsNull(mission.getId());
 
@@ -49,7 +49,7 @@ public class AttemptValidator {
     public void isUserAuth(User user, UserAttempt attempt) {
 
         Long currentUserId = user.getId();
-        Long attemptUserId = attempt.getUserMission().getUser().getId();
+        Long attemptUserId = attempt.getUMission().getUser().getId();
 
         if(!currentUserId.equals(attemptUserId)){
             throw new BusinessException("Attempt", "Finalização proibida!", HttpStatus.UNAUTHORIZED);

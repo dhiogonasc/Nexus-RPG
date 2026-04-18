@@ -14,7 +14,7 @@ public class ScoreService {
 
     public BigDecimal calculateResult(UserAttempt attempt, List<UserResponse> responses) {
 
-        var totalQuestions = attempt.getUserMission().getMission().getQuestions().size();
+        var totalQuestions = attempt.getUMission().getMission().getQuestions().size();
         if (totalQuestions == 0) return BigDecimal.ZERO;
 
         var hits = responses.stream()

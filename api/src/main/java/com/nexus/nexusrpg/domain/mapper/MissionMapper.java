@@ -3,17 +3,17 @@ package com.nexus.nexusrpg.domain.mapper;
 import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.*;
 import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
-import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MissionMapper implements Mapper<UserMission, MissionDTO> {
+public class MissionMapper implements Mapper<UMission, MissionDTO> {
 
     private final PlanetRefMapper planetRefMapper;
 
-    public MissionDTO toDTO(UserMission um){
+    public MissionDTO toDTO(UMission um){
 
         var user =  um.getUser();
         var mission = um.getMission();

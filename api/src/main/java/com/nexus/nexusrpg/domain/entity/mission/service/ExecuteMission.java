@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
@@ -59,7 +58,7 @@ public class ExecuteMission {
         user.consumeOxygen();
 
         var attempt = UserAttempt.builder()
-                .userMission(userMission)
+                .uMission(userMission)
                 .startAt(LocalDateTime.now())
                 .build();
 
@@ -102,7 +101,7 @@ public class ExecuteMission {
 
     private void updateMissionProgress(UserAttempt attempt) {
 
-        var userMission = attempt.getUserMission();
+        var userMission = attempt.getUMission();
         var mission = userMission.getMission();
 
         long totalQuestions = questionRepository.countByMissionId(mission.getId());
@@ -128,8 +127,8 @@ public class ExecuteMission {
 
         attempt.finish(result);
 
-        if (attempt.getUserMission().getExecution().getStatus() == COMPLETED) {
-            progressionService.unlockNextMission(user, attempt.getUserMission().getMission());
+        if (attempt.getUMission().getExecution().getStatus() == COMPLETED) {
+            progressionService.unlockNextMission(user, attempt.getUMission().getMission());
         }
 
         levelService.findNextLevel(user.getLevel()).ifPresent(user::levelUp);

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public interface UserAttemptRepository extends JpaRepository<UserAttempt, Long> {
 
-    @EntityGraph(attributePaths = {"userMission.mission.questions"})
+    @EntityGraph(attributePaths = {"uMission.mission.questions"})
     @Query("SELECT ua FROM UserAttempt ua WHERE ua.id = :id")
     Optional<UserAttempt> findByIdWithDetails(@Param("id") Long id);
 

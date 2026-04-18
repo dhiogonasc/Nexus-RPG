@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.mission.model;
 
-import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UMission;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,7 +25,7 @@ public class UserAttempt {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_mission_id", nullable = false)
-    private UserMission userMission;
+    private UMission uMission;
 
     @CreationTimestamp
     @Column(name = "start_at", nullable = false, updatable = false)
@@ -45,15 +45,15 @@ public class UserAttempt {
         this.endAt = LocalDateTime.now();
         this.result = currentResult;
 
-        if (this.userMission != null) {
-            var stats = this.userMission.getExecution();
+        if (this.uMission != null) {
+            var stats = this.uMission.getExecution();
             var completed = stats.getStatus() == COMPLETED;
 
             stats.updateBestResult(currentResult);
 
             if (!completed && stats.getStatus() == COMPLETED) {
-                var user = this.userMission.getUser();
-                var mission = this.userMission.getMission();
+                var user = this.uMission.getUser();
+                var mission = this.uMission.getMission();
                 user.addXp(mission.getXpBonus());
             }
         }

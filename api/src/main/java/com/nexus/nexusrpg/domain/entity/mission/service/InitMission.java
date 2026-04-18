@@ -3,13 +3,13 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 import com.nexus.nexusrpg.common.entity.InitEntity;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.MissionRepository;
+import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.user.model.User;
-import com.nexus.nexusrpg.domain.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InitMission extends InitEntity<Mission, UserMission> {
+public class InitMission extends InitEntity<Mission, UMission> {
 
     public InitMission(
             MissionRepository missionRepository,
@@ -20,8 +20,8 @@ public class InitMission extends InitEntity<Mission, UserMission> {
     }
 
     @Override
-    protected UserMission initRelation(User user, Mission mission) {
+    protected UMission initRelation(User user, Mission mission) {
 
-        return UserMission.initialize(user, mission);
+        return UMission.initialize(user, mission);
     }
 }

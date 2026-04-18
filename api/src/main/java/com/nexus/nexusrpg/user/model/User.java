@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.user.model;
 
 import com.nexus.nexusrpg.domain.model.Level;
-import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import jakarta.persistence.*;
 import lombok.*;
@@ -45,7 +45,7 @@ public class User {
     List<UPlanet> planets;
 
     @OneToMany(mappedBy = "user")
-    List<UserMission> missions;
+    List<UMission> missions;
 
     public void addXp(long xp) {
         this.xp += xp;

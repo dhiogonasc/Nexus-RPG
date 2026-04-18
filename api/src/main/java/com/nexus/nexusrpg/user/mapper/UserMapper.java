@@ -4,7 +4,7 @@ import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
-import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.user.controller.dto.CurrentDTO;
 import com.nexus.nexusrpg.user.controller.dto.UserDTO;
@@ -51,7 +51,7 @@ public class UserMapper implements Mapper<User, UserDTO> {
                 .orElse(null);
 
         var currentMission = user.getMissions().stream()
-                .filter(UserMission::isCurrent)
+                .filter(UMission::isCurrent)
                 .findFirst()
                 .map(missionRefMapper::toRefDTO)
                 .orElse(null);

@@ -7,7 +7,7 @@ import com.nexus.nexusrpg.domain.controller.dto.mission.MissionRefDTO;
 import com.nexus.nexusrpg.domain.mapper.MissionMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
 import com.nexus.nexusrpg.domain.model.Mission;
-import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GetMission extends GetEntity<
         Mission,
-        UserMission,
+        UMission,
         MissionDTO,
         MissionRefDTO
         > {
@@ -42,7 +42,7 @@ public class GetMission extends GetEntity<
     }
 
     @Override
-    protected void validateAccess(UserMission userMission) {
-        validator.isAccessible(userMission);
+    protected void validateAccess(UMission uMission) {
+        validator.isAccessible(uMission);
     }
 }

@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.entity.mission.service;
 
 import com.nexus.nexusrpg.domain.model.Mission;
-import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
@@ -38,7 +38,7 @@ public class ProgressionService {
                 );
     }
 
-    private void unlockMission(UserMission um) {
+    private void unlockMission(UMission um) {
 
         if (um.getExecution().getStatus() == LOCKED) {
             um.unlock();

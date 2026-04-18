@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.model.relation;
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 import com.nexus.nexusrpg.common.entity.interfaces.State;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExecution;
+import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExec;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,7 +37,7 @@ public class UPlanet implements State {
     private Planet planet;
 
     @Embedded @Builder.Default
-    private UPlanetExecution execution = new UPlanetExecution();
+    private UPlanetExec execution = new UPlanetExec();
 
     @Override
     public void unlock() {
@@ -62,7 +62,7 @@ public class UPlanet implements State {
 
         boolean isFirst = planet.getOrder() == 1;
 
-        var initialStats = UPlanetExecution.builder()
+        var initialStats = UPlanetExec.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
                 .isCurrent(isFirst)
                 .build();
