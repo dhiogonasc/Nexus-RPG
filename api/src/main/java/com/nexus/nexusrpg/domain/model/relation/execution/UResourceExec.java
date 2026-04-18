@@ -20,7 +20,7 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UserResourceExecution implements Progression {
+public class UResourceExec implements Progression {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
@@ -35,6 +35,4 @@ public class UserResourceExecution implements Progression {
     public void complete(){
         this.status = COMPLETED;
     }
-
-    public void update(long itens, long totalItens) {}
 }

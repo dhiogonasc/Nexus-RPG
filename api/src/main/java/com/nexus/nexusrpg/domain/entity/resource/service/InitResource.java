@@ -4,12 +4,12 @@ import com.nexus.nexusrpg.common.entity.InitEntity;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.entity.resource.repository.ResourceRepository;
 import com.nexus.nexusrpg.user.model.User;
-import com.nexus.nexusrpg.domain.model.relation.UserResource;
+import com.nexus.nexusrpg.domain.model.relation.UResource;
 import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InitResource extends InitEntity<Resource, UserResource> {
+public class InitResource extends InitEntity<Resource, UResource> {
 
 
     public InitResource(
@@ -21,8 +21,8 @@ public class InitResource extends InitEntity<Resource, UserResource> {
     }
 
     @Override
-    protected UserResource initRelation(User user, Resource resource) {
+    protected UResource initRelation(User user, Resource resource) {
 
-        return UserResource.initialize(user, resource);
+        return UResource.initialize(user, resource);
     }
 }

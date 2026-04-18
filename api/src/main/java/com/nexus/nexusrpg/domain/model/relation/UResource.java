@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.model.relation;
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 import com.nexus.nexusrpg.common.entity.interfaces.State;
 import com.nexus.nexusrpg.domain.model.Resource;
-import com.nexus.nexusrpg.domain.model.relation.execution.UserResourceExecution;
+import com.nexus.nexusrpg.domain.model.relation.execution.UResourceExec;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,7 +19,7 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_resource\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_resource", columnNames = {"user_id", "resource_id"})
 })
-public class UserResource implements State {
+public class UResource implements State {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,25 +35,35 @@ public class UserResource implements State {
 
     @Embedded
     @Builder.Default
-    private UserResourceExecution execution = new UserResourceExecution();
+    private UResourceExec execution = new UResourceExec();
 
-    public static UserResource initialize(User user, Resource resource){
+    @Override
+    public void unlock() {
+        this.execution.unlock();
+    }
 
-        boolean isFirst = resource.getPlanet().getOrder() == 1;
-
-        var initialStats = UserResourceExecution.builder()
-                .status(isFirst ? UNLOCKED : LOCKED)
-                .build();
-
-        return UserResource.builder()
-                .user(user)
-                .resource(resource)
-                .execution(initialStats)
-                .build();
+    @Override
+    public void complete() {
+        this.execution.complete();
     }
 
     @Override
     public EntityStatus getStatus() {
         return this.execution.getStatus();
+    }
+
+    public static UResource initialize(User user, Resource resource){
+
+        boolean isFirst = resource.getPlanet().getOrder() == 1;
+
+        var initialStats = UResourceExec.builder()
+                .status(isFirst ? UNLOCKED : LOCKED)
+                .build();
+
+        return UResource.builder()
+                .user(user)
+                .resource(resource)
+                .execution(initialStats)
+                .build();
     }
 }
