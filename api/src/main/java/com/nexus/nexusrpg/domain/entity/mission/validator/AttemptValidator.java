@@ -6,7 +6,7 @@ import com.nexus.nexusrpg.domain.entity.question.model.Question;
 import com.nexus.nexusrpg.user.model.User;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
-import com.nexus.nexusrpg.domain.model.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UserMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

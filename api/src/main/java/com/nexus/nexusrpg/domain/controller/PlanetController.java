@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.controller;
 
 import com.nexus.nexusrpg.domain.entity.planet.service.GetPlanet;
-import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
-import com.nexus.nexusrpg.domain.controller.dto.PlanetRefDTO;
+import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetDTO;
+import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
 
 import lombok.*;
 import org.springframework.http.ResponseEntity;

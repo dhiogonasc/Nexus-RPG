@@ -2,8 +2,8 @@ package com.nexus.nexusrpg.domain.entity.planet.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
-import com.nexus.nexusrpg.domain.model.UserMission;
-import com.nexus.nexusrpg.domain.model.UserPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

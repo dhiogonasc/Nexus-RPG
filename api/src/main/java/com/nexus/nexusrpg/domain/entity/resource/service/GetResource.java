@@ -2,9 +2,9 @@ package com.nexus.nexusrpg.domain.entity.resource.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.controller.dto.ResourceDTO;
-import com.nexus.nexusrpg.domain.controller.dto.ResourceRefDTO;
-import com.nexus.nexusrpg.domain.model.UserResource;
+import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceRefDTO;
+import com.nexus.nexusrpg.domain.model.relation.UserResource;
 import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;
 import org.springframework.stereotype.Service;
 

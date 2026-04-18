@@ -1,10 +1,10 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.MissionRefDTO;
-import com.nexus.nexusrpg.domain.controller.dto.UMExecutionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.UMExecutionRefDTO;
-import com.nexus.nexusrpg.domain.model.UserMission;
+import com.nexus.nexusrpg.domain.controller.dto.mission.MissionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.MissionRefDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMExecutionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMExecutionRefDTO;
+import com.nexus.nexusrpg.domain.model.relation.UserMission;
 
 public class MissionMapper {
 

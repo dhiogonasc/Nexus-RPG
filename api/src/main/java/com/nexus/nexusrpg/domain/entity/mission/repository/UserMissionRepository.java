@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.entity.mission.repository;
 
 import com.nexus.nexusrpg.common.entity.RelationRepository;
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.model.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UserMission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

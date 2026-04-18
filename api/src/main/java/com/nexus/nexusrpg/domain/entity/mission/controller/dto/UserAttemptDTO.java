@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.mission.controller.dto;
 
-import com.nexus.nexusrpg.domain.controller.dto.MissionRefDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.MissionRefDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

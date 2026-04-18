@@ -2,9 +2,9 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.MissionRefDTO;
-import com.nexus.nexusrpg.domain.model.UserMission;
+import com.nexus.nexusrpg.domain.controller.dto.mission.MissionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.MissionRefDTO;
+import com.nexus.nexusrpg.domain.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import org.springframework.stereotype.Service;

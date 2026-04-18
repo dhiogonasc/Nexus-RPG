@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.domain.controller.dto.ResourceDTO;
-import com.nexus.nexusrpg.domain.controller.dto.URExecutionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.ResourceRefDTO;
-import com.nexus.nexusrpg.domain.model.UserResource;
+import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.resource.URExecutionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceRefDTO;
+import com.nexus.nexusrpg.domain.model.relation.UserResource;
 
 public class ResourceMapper {
 

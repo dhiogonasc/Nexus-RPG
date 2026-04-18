@@ -1,10 +1,10 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
-import com.nexus.nexusrpg.domain.controller.dto.PlanetRefDTO;
-import com.nexus.nexusrpg.domain.controller.dto.UPExecutionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.UPExecutionRefDTO;
-import com.nexus.nexusrpg.domain.model.UserPlanet;
+import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetDTO;
+import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPExecutionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPExecutionRefDTO;
+import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
 
 public class PlanetMapper {
 

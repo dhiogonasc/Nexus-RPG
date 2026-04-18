@@ -1,10 +1,10 @@
 package com.nexus.nexusrpg.domain.entity.mission.service;
 
 import com.nexus.nexusrpg.domain.model.Mission;
-import com.nexus.nexusrpg.domain.model.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.model.UserPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;

@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.domain.entity.planet.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
-import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
-import com.nexus.nexusrpg.domain.controller.dto.PlanetRefDTO;
-import com.nexus.nexusrpg.domain.model.UserPlanet;
+import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetDTO;
+import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
+import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;

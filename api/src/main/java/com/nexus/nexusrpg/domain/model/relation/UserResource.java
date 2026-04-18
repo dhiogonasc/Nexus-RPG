@@ -1,7 +1,9 @@
-package com.nexus.nexusrpg.domain.model;
+package com.nexus.nexusrpg.domain.model.relation;
 
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 import com.nexus.nexusrpg.common.entity.interfaces.State;
+import com.nexus.nexusrpg.domain.model.Resource;
+import com.nexus.nexusrpg.domain.model.relation.execution.UserResourceExecution;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;

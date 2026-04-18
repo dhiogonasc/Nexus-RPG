@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.controller.dto;
+package com.nexus.nexusrpg.domain.controller.dto.resource;
 
 public record ResourceDTO(
 

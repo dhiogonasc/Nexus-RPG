@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.mission.model;
 
-import com.nexus.nexusrpg.domain.model.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UserMission;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

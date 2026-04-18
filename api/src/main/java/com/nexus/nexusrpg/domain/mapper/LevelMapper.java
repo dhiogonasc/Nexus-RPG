@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.domain.controller.dto.LevelDTO;
-import com.nexus.nexusrpg.domain.controller.dto.LevelReferenceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.level.LevelDTO;
+import com.nexus.nexusrpg.domain.controller.dto.level.LevelReferenceDTO;
 import com.nexus.nexusrpg.domain.model.Level;
 
 public class LevelMapper {
