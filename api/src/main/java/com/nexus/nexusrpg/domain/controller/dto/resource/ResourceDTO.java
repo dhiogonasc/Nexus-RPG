@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.controller.dto.resource;
 
-import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
 
 public record ResourceDTO(
 
@@ -10,7 +10,7 @@ public record ResourceDTO(
         int order,
         long xpBonus,
 
-        PlanetRefDTO planet,
+        UPlanetDTOR planet,
 
         URExecutionDTO execution
 ) {}

@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.user.mapper;
 import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.user.controller.dto.CurrentDTO;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class UserMapper implements Mapper<User, UserDTO> {
 
     private final LevelMapper levelMapper;
-    private final PlanetRefMapper planetRefMapper;
+    private final UPlanetRefMapper UPlanetRefMapper;
     private final MissionRefMapper missionRefMapper;
 
     @Override
@@ -47,7 +47,7 @@ public class UserMapper implements Mapper<User, UserDTO> {
         var currentPlanet = user.getPlanets().stream()
                 .filter(UPlanet::isCurrent)
                 .findFirst()
-                .map(planetRefMapper::toRefDTO)
+                .map(UPlanetRefMapper::toRefDTO)
                 .orElse(null);
 
         var currentMission = user.getMissions().stream()

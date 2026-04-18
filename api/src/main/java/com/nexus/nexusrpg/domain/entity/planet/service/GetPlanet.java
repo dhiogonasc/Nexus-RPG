@@ -1,12 +1,11 @@
 package com.nexus.nexusrpg.domain.entity.planet.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
-import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetDTO;
-import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
-import com.nexus.nexusrpg.domain.mapper.PlanetMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
+import com.nexus.nexusrpg.domain.mapper.UPlanetMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;
@@ -15,9 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetPlanet extends GetEntity<
         Planet,
-        UPlanet,
-        PlanetDTO,
-        PlanetRefDTO
+        com.nexus.nexusrpg.domain.model.relation.UPlanet,
+        UPlanetDTO,
+        UPlanetDTOR
         > {
 
     private final PlanetValidator validator;
@@ -25,8 +24,8 @@ public class GetPlanet extends GetEntity<
     public GetPlanet(
             Context context,
             UserPlanetRepository repository,
-            PlanetMapper mapper,
-            PlanetRefMapper refMapper,
+            UPlanetMapper mapper,
+            UPlanetRefMapper refMapper,
             PlanetValidator validator
     ) {
 
@@ -42,7 +41,7 @@ public class GetPlanet extends GetEntity<
     }
 
     @Override
-    protected void validateAccess(UPlanet uPlanet) {
+    protected void validateAccess(com.nexus.nexusrpg.domain.model.relation.UPlanet uPlanet) {
         validator.isAccessible(uPlanet);
     }
 }

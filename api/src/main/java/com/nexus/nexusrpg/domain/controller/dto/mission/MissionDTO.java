@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.controller.dto.mission;
 
-import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
 
 public record MissionDTO(
 
@@ -9,6 +9,6 @@ public record MissionDTO(
         String description,
         int order,
         long xpBonus,
-        PlanetRefDTO planet,
+        UPlanetDTOR planet,
         UMExecutionDTO execution
 ) {}

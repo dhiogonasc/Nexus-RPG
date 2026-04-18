@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.*;
-import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MissionMapper implements Mapper<UMission, MissionDTO> {
 
-    private final PlanetRefMapper planetRefMapper;
+    private final UPlanetRefMapper UPlanetRefMapper;
 
     public MissionDTO toDTO(UMission um){
 
@@ -24,7 +24,7 @@ public class MissionMapper implements Mapper<UMission, MissionDTO> {
                 um.getResult()
         );
 
-        var missionPlanet = planetRefMapper.map(user, mission.getPlanet());
+        var missionPlanet = UPlanetRefMapper.map(user, mission.getPlanet());
 
         return new MissionDTO(
                 mission.getId(),
