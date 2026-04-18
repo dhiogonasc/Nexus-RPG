@@ -2,10 +2,10 @@ package com.nexus.nexusrpg.domain.entity.resource.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceDTO;
-import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceRefDTO;
-import com.nexus.nexusrpg.domain.mapper.ResourceMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.ResourceRefMapper;
+import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTOR;
+import com.nexus.nexusrpg.domain.mapper.UResourceMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
 import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;
@@ -15,15 +15,15 @@ import org.springframework.stereotype.Service;
 public class GetResource extends GetEntity<
         Resource,
         UResource,
-        ResourceDTO,
-        ResourceRefDTO
+        UResourceDTO,
+        UResourceDTOR
         > {
 
     public GetResource(
             Context context,
             UserResourceRepository repository,
-            ResourceMapper mapper,
-            ResourceRefMapper refMapper
+            UResourceMapper mapper,
+            UResourceRefMapper refMapper
     ) {
 
         super(

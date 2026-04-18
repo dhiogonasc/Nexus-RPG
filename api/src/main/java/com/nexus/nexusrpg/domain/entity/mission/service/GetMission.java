@@ -2,10 +2,10 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 
 import com.nexus.nexusrpg.common.entity.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.controller.dto.mission.MissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.MissionRefDTO;
-import com.nexus.nexusrpg.domain.mapper.MissionMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
+import com.nexus.nexusrpg.domain.mapper.UMissionMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 public class GetMission extends GetEntity<
         Mission,
         UMission,
-        MissionDTO,
-        MissionRefDTO
+        UMissionDTO,
+        UMissionDTOR
         > {
 
     private final MissionValidator validator;
@@ -25,8 +25,8 @@ public class GetMission extends GetEntity<
     public GetMission(
             Context context,
             UserMissionRepository repository,
-            MissionMapper mapper,
-            MissionRefMapper refMapper,
+            UMissionMapper mapper,
+            UMissionRefMapper refMapper,
             MissionValidator validator
     ) {
 

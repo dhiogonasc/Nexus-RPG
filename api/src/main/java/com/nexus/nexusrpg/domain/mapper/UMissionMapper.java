@@ -9,31 +9,30 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MissionMapper implements Mapper<UMission, MissionDTO> {
+public class UMissionMapper implements Mapper<UMission, UMissionDTO> {
 
-    private final UPlanetRefMapper UPlanetRefMapper;
+    private final UPlanetRefMapper uPlanetRefMapper;
 
-    public MissionDTO toDTO(UMission um){
+    public UMissionDTO toDTO(UMission uMission){
 
-        var user =  um.getUser();
-        var mission = um.getMission();
+        var user =  uMission.getUser();
+        var mission = uMission.getMission();
 
-        var missionExecution = new UMExecutionDTO(
-                um.getStatus(),
-                um.isCurrent(),
-                um.getResult()
+        var planet = uPlanetRefMapper.map(user, mission.getPlanet());
+        var execution = new UMissionExecDTO(
+                uMission.getStatus(),
+                uMission.isCurrent(),
+                uMission.getResult()
         );
 
-        var missionPlanet = UPlanetRefMapper.map(user, mission.getPlanet());
-
-        return new MissionDTO(
+        return new UMissionDTO(
                 mission.getId(),
                 mission.getName(),
                 mission.getDescription(),
                 mission.getOrder(),
                 mission.getXpBonus(),
-                missionPlanet,
-                missionExecution
+                planet,
+                execution
         );
     }
 }

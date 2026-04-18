@@ -4,8 +4,7 @@ import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 
 import java.math.BigDecimal;
 
-public record UMExecutionDTO(
-
+public record UMissionExecDTO(
         EntityStatus status,
         Boolean isCurrent,
         BigDecimal bestResult

@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.controller;
 
-import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceDTO;
-import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceRefDTO;
+import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTOR;
 import com.nexus.nexusrpg.domain.entity.resource.service.GetResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +20,12 @@ public class ResourceController {
     private final GetResource getResource;
 
     @GetMapping
-    public ResponseEntity<List<ResourceRefDTO>> getResources() {
-
+    public ResponseEntity<List<UResourceDTOR>> getResources() {
         return ResponseEntity.ok(getResource.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResourceDTO> getResource(@PathVariable Long id) {
-
+    public ResponseEntity<UResourceDTO> getResource(@PathVariable Long id) {
         return ResponseEntity.ok(getResource.getById(id));
     }
 }

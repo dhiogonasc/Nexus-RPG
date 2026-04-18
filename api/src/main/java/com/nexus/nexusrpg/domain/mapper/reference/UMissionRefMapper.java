@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
 import com.nexus.nexusrpg.common.entity.RefMapper;
-import com.nexus.nexusrpg.domain.controller.dto.mission.MissionRefDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMExecutionRefDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionExecDTOR;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
@@ -12,17 +12,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MissionRefMapper extends RefMapper<Mission, UMission, MissionRefDTO> {
+public class UMissionRefMapper extends RefMapper<Mission, UMission, UMissionDTOR> {
 
-    private final UserMissionRepository repository;
+    private final UserMissionRepository userMissionRepository;
 
     @Override
-    public MissionRefDTO toRefDTO(UMission um) {
+    public UMissionDTOR toRefDTO(UMission um) {
 
         var mission =  um.getMission();
-        var execution = new UMExecutionRefDTO(um.getStatus());
+        var execution = new UMissionExecDTOR(um.getStatus());
 
-        return new MissionRefDTO(
+        return new UMissionDTOR(
                 mission.getId(),
                 mission.getName(),
                 execution
@@ -31,6 +31,6 @@ public class MissionRefMapper extends RefMapper<Mission, UMission, MissionRefDTO
 
     @Override
     protected UMission findRelation(User user, Mission mission) {
-        return repository.findByUserIdAndMissionIdOrThrow(user.getId(), mission.getId());
+        return userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), mission.getId());
     }
 }

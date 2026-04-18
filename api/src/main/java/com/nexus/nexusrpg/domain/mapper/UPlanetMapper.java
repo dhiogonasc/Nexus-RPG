@@ -4,8 +4,8 @@ import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetExecDTO;
 import com.nexus.nexusrpg.domain.entity.planet.service.PlanetProgress;
-import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.ResourceRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;
 
@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UPlanetMapper implements Mapper<UPlanet, UPlanetDTO> {
 
-    private final ResourceRefMapper resourceRefMapper;
-    private final MissionRefMapper missionRefMapper;
+    private final UResourceRefMapper uResourceRefMapper;
+    private final UMissionRefMapper uMissionRefMapper;
     private final PlanetProgress planetProgress;
 
     @Override
@@ -25,14 +25,16 @@ public class UPlanetMapper implements Mapper<UPlanet, UPlanetDTO> {
         var user =  uPlanet.getUser();
         var planet = uPlanet.getPlanet();
 
-        var planetResources = resourceRefMapper.map(user, planet.getResources());
-        var planetMissions = missionRefMapper.map(user, planet.getMissions());
+        var resources = uResourceRefMapper
+                .map(user, planet.getResources());
+        var missions = uMissionRefMapper
+                .map(user, planet.getMissions());
 
-        var uPlanetProgress = planetProgress.calculate(uPlanet);
-        var uPlanetExecution = new UPlanetExecDTO(
+        var progress = planetProgress.calculate(uPlanet);
+        var execution = new UPlanetExecDTO(
                 uPlanet.getStatus(),
                 uPlanet.isCurrent(),
-                uPlanetProgress
+                progress
         );
 
         return new UPlanetDTO(
@@ -41,9 +43,9 @@ public class UPlanetMapper implements Mapper<UPlanet, UPlanetDTO> {
                 planet.getDescription(),
                 planet.getOrder(),
                 planet.getXpBonus(),
-                planetResources,
-                planetMissions,
-                uPlanetExecution
+                resources,
+                missions,
+                execution
         );
     }
 }

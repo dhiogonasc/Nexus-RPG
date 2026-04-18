@@ -19,13 +19,11 @@ public class PlanetController {
 
     @GetMapping
     public ResponseEntity<List<UPlanetDTOR>> getPlanets() {
-
         return ResponseEntity.ok(getPlanet.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UPlanetDTO> getPlanet(@PathVariable Long id) {
-
         return ResponseEntity.ok(getPlanet.getById(id));
     }
 }

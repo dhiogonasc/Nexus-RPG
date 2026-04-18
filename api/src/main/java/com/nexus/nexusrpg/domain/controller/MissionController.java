@@ -3,8 +3,8 @@ package com.nexus.nexusrpg.domain.controller;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserResponseDTO;
 import com.nexus.nexusrpg.domain.entity.mission.service.ExecuteMission;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserAttemptDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.MissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.MissionRefDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
 import com.nexus.nexusrpg.domain.entity.mission.service.GetMission;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -22,33 +22,31 @@ public class MissionController {
     private final ExecuteMission executeMission;
 
     @GetMapping
-    public ResponseEntity<List<MissionRefDTO>> getMissions() {
-
+    public ResponseEntity<List<UMissionDTOR>> getMissions() {
         return ResponseEntity.ok(getMission.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MissionDTO> getMission(@PathVariable Long id) {
-
+    public ResponseEntity<UMissionDTO> getMission(@PathVariable Long id) {
         return ResponseEntity.ok(getMission.getById(id));
     }
 
     @PostMapping("/{id}/start")
     public ResponseEntity<UserAttemptDTO> start(@PathVariable Long id) {
-
         return ResponseEntity.ok(executeMission.start(id));
     }
 
     @PostMapping("attempts/{id}/answer")
-    public ResponseEntity<Void> answer(@PathVariable Long id, @Valid @RequestBody UserResponseDTO request) {
-
+    public ResponseEntity<Void> answer(
+            @PathVariable Long id,
+            @Valid @RequestBody UserResponseDTO request
+    ) {
         executeMission.answer(id, request);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("attempts/{id}/finish")
     public ResponseEntity<UserAttemptDTO> finish(@PathVariable Long id) {
-
         return ResponseEntity.ok(executeMission.finish(id));
     }
 }

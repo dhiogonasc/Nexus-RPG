@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
 import com.nexus.nexusrpg.common.entity.RefMapper;
-import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceRefDTO;
-import com.nexus.nexusrpg.domain.controller.dto.resource.URExecutionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceExecDTO;
 import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
@@ -12,25 +12,25 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ResourceRefMapper extends RefMapper<Resource, UResource, ResourceRefDTO> {
+public class UResourceRefMapper extends RefMapper<Resource, UResource, UResourceDTOR> {
 
-    private final UserResourceRepository repository;
+    private final UserResourceRepository userResourceRepository;
 
     @Override
-    public ResourceRefDTO toRefDTO(UResource ur){
+    public UResourceDTOR toRefDTO(UResource ur){
 
         var resource = ur.getResource();
-        var resourceExecution = new URExecutionDTO(ur.getStatus());
+        var execution = new UResourceExecDTO(ur.getStatus());
 
-        return new ResourceRefDTO(
+        return new UResourceDTOR(
                 resource.getId(),
                 resource.getName(),
-                resourceExecution
+                execution
         );
     }
 
     @Override
     protected UResource findRelation(User user, Resource resource) {
-        return repository.findByUserIdAndResourceIdOrThrow(user.getId(), resource.getId());
+        return userResourceRepository.findByUserIdAndResourceIdOrThrow(user.getId(), resource.getId());
     }
 }

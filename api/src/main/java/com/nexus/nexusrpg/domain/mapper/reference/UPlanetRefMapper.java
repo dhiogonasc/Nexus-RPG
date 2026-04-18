@@ -14,23 +14,23 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UPlanetRefMapper extends RefMapper<Planet, UPlanet, UPlanetDTOR> {
 
-    private final UserPlanetRepository repository;
+    private final UserPlanetRepository userPlanetRepository;
 
     @Override
     public UPlanetDTOR toRefDTO(UPlanet uPlanet){
 
         var planet = uPlanet.getPlanet();
-        var uPlanetExecution = new UPlanetExecDTOR(uPlanet.getStatus());
+        var execution = new UPlanetExecDTOR(uPlanet.getStatus());
 
         return new UPlanetDTOR(
                 planet.getId(),
                 planet.getName(),
-                uPlanetExecution
+                execution
         );
     }
 
     @Override
     protected UPlanet findRelation(User user, Planet planet) {
-        return repository.findByUserIdAndPlanetIdOrThrow(user.getId(), planet.getId());
+        return userPlanetRepository.findByUserIdAndPlanetIdOrThrow(user.getId(), planet.getId());
     }
 }

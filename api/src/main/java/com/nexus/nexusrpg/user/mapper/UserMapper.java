@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.user.mapper;
 
 import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
@@ -18,7 +18,7 @@ public class UserMapper implements Mapper<User, UserDTO> {
 
     private final LevelMapper levelMapper;
     private final UPlanetRefMapper UPlanetRefMapper;
-    private final MissionRefMapper missionRefMapper;
+    private final UMissionRefMapper UMissionRefMapper;
 
     @Override
     public UserDTO toDTO(User user){
@@ -53,7 +53,7 @@ public class UserMapper implements Mapper<User, UserDTO> {
         var currentMission = user.getMissions().stream()
                 .filter(UMission::isCurrent)
                 .findFirst()
-                .map(missionRefMapper::toRefDTO)
+                .map(UMissionRefMapper::toRefDTO)
                 .orElse(null);
 
         return new CurrentDTO(

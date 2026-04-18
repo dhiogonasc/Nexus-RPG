@@ -1,9 +1,8 @@
-package com.nexus.nexusrpg.domain.controller.dto.resource;
+package com.nexus.nexusrpg.domain.controller.dto.mission;
 
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 
-public record URExecutionDTO(
-
+public record UMissionExecDTOR(
         EntityStatus status
 ) {
 }

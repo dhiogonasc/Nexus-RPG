@@ -1,9 +1,7 @@
 package com.nexus.nexusrpg.domain.controller.dto.resource;
 
-public record ResourceRefDTO(
-
+public record UResourceDTOR(
         Long id,
         String name,
-
-        URExecutionDTO execution
+        UResourceExecDTO execution
 ) {}
