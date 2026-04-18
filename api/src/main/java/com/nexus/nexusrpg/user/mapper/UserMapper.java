@@ -35,11 +35,6 @@ public class UserMapper implements Mapper<User, UserDTO> {
         );
     }
 
-    @Override
-    public User toEntity(UserDTO userDTO) {
-        return null;
-    }
-
     private CurrentDTO mapCurrent(User user){
 
         var currentLevel = levelMapper.toReferenceDTO(user.getLevel());

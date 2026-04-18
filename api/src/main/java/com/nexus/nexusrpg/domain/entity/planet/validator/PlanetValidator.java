@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.entity.planet.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
+import com.nexus.nexusrpg.domain.repository.UPlanetRepository;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RequiredArgsConstructor
 public class PlanetValidator {
 
-    private final UserPlanetRepository userPlanetRepository;
+    private final UPlanetRepository uPlanetRepository;
 
     public void isAccessible(UPlanet uPlanet) {
 
@@ -34,7 +34,7 @@ public class PlanetValidator {
 
         var userId = uMission.getUser().getId();
         var planetId = uMission.getMission().getPlanet().getId();
-        var userPlanet = userPlanetRepository.findByUserIdAndPlanetIdOrThrow(userId, planetId);
+        var userPlanet = uPlanetRepository.findByUserIdAndEntityId(userId, planetId);
 
         isAccessible(userPlanet);
     }

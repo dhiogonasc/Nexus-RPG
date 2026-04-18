@@ -12,7 +12,7 @@ import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
-import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
+import com.nexus.nexusrpg.domain.repository.UMissionRepository;
 import com.nexus.nexusrpg.domain.entity.question.repository.QuestionRepository;
 import com.nexus.nexusrpg.user.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,7 @@ public class ExecuteMission {
     private final QuestionRepository questionRepository;
     private final AlternativeRepository alternativeRepository;
 
-    private final UserMissionRepository userMissionRepository;
+    private final UMissionRepository uMissionRepository;
     private final UserResponseRepository userResponseRepository;
     private final UserAttemptRepository userAttemptRepository;
     private final UserAttemptMapper userAttemptMapper;
@@ -49,7 +49,7 @@ public class ExecuteMission {
     public UserAttemptDTO start(Long missionId) {
 
         var user = context.getAuthenticatedUser();
-        var userMission = userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), missionId);
+        var userMission = uMissionRepository.findByUserIdAndEntityId(user.getId(), missionId);
 
         missionValidator.isAccessible(userMission);
         attemptValidator.hasActiveAttempt(userMission);
@@ -75,7 +75,6 @@ public class ExecuteMission {
         attemptValidator.isActive(attempt);
 
         registerAnswer(attempt, request);
-        updateMissionProgress(attempt);
     }
 
     private void registerAnswer(UserAttempt attempt, UserResponseDTO request) {
@@ -97,19 +96,6 @@ public class ExecuteMission {
 
         response.setAlternative(alternative);
         userResponseRepository.save(response);
-    }
-
-    private void updateMissionProgress(UserAttempt attempt) {
-
-        var userMission = attempt.getUMission();
-        var mission = userMission.getMission();
-
-        long totalQuestions = questionRepository.countByMissionId(mission.getId());
-        long answeredQuestions = userResponseRepository.countByAttemptId(attempt.getId());
-
-        userMission.getExecution().update(answeredQuestions, totalQuestions);
-
-        userMissionRepository.save(userMission);
     }
 
     @Transactional

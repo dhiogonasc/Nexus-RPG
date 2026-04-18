@@ -8,7 +8,7 @@ import com.nexus.nexusrpg.domain.mapper.UMissionMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
-import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
+import com.nexus.nexusrpg.domain.repository.UMissionRepository;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class GetMission extends GetEntity<
 
     public GetMission(
             Context context,
-            UserMissionRepository repository,
+            UMissionRepository repository,
             UMissionMapper mapper,
             UMissionRefMapper refMapper,
             MissionValidator validator
@@ -32,7 +32,6 @@ public class GetMission extends GetEntity<
 
         super(
                 context,
-                "Mission",
                 repository,
                 mapper,
                 refMapper

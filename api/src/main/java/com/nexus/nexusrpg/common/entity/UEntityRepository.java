@@ -6,5 +6,5 @@ import java.util.Optional;
 public interface UEntityRepository<UEntity> {
 
     List<UEntity> findByUserId(Long userId);
-    Optional<UEntity> findByUserIdAndEntityId(Long userId, Long entityId);
+    UEntity findByUserIdAndEntityId(Long userId, Long entityId);
 }

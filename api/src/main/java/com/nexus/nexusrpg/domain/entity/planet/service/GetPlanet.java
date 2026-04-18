@@ -6,7 +6,7 @@ import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
 import com.nexus.nexusrpg.domain.mapper.UPlanetMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
+import com.nexus.nexusrpg.domain.repository.UPlanetRepository;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class GetPlanet extends GetEntity<
 
     public GetPlanet(
             Context context,
-            UserPlanetRepository repository,
+            UPlanetRepository repository,
             UPlanetMapper mapper,
             UPlanetRefMapper refMapper,
             PlanetValidator validator
@@ -31,7 +31,6 @@ public class GetPlanet extends GetEntity<
 
         super(
                 context,
-                "Planet",
                 repository,
                 mapper,
                 refMapper

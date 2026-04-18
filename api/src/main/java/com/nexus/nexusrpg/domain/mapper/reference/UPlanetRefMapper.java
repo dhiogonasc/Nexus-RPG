@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.mapper.reference;
 import com.nexus.nexusrpg.common.entity.RefMapper;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetExecDTOR;
-import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
+import com.nexus.nexusrpg.domain.repository.UPlanetRepository;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.user.model.User;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UPlanetRefMapper extends RefMapper<Planet, UPlanet, UPlanetDTOR> {
 
-    private final UserPlanetRepository userPlanetRepository;
+    private final UPlanetRepository uPlanetRepository;
 
     @Override
     public UPlanetDTOR toRefDTO(UPlanet uPlanet){
@@ -31,6 +31,6 @@ public class UPlanetRefMapper extends RefMapper<Planet, UPlanet, UPlanetDTOR> {
 
     @Override
     protected UPlanet findRelation(User user, Planet planet) {
-        return userPlanetRepository.findByUserIdAndPlanetIdOrThrow(user.getId(), planet.getId());
+        return uPlanetRepository.findByUserIdAndEntityId(user.getId(), planet.getId());
     }
 }

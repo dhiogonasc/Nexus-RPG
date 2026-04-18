@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.mapper.reference;
 import com.nexus.nexusrpg.common.entity.RefMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionExecDTOR;
-import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
+import com.nexus.nexusrpg.domain.repository.UMissionRepository;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.user.model.User;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UMissionRefMapper extends RefMapper<Mission, UMission, UMissionDTOR> {
 
-    private final UserMissionRepository userMissionRepository;
+    private final UMissionRepository uMissionRepository;
 
     @Override
     public UMissionDTOR toRefDTO(UMission um) {
@@ -31,6 +31,6 @@ public class UMissionRefMapper extends RefMapper<Mission, UMission, UMissionDTOR
 
     @Override
     protected UMission findRelation(User user, Mission mission) {
-        return userMissionRepository.findByUserIdAndMissionIdOrThrow(user.getId(), mission.getId());
+        return uMissionRepository.findByUserIdAndEntityId(user.getId(), mission.getId());
     }
 }

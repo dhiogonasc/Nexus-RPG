@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.entity.mission.repository;
+package com.nexus.nexusrpg.domain.repository;
 
 import com.nexus.nexusrpg.domain.model.Mission;
 import org.springframework.data.jpa.repository.JpaRepository;

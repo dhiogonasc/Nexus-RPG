@@ -8,7 +8,7 @@ import com.nexus.nexusrpg.domain.mapper.UResourceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
-import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;
+import com.nexus.nexusrpg.domain.repository.UResourceRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,14 +21,13 @@ public class GetResource extends GetEntity<
 
     public GetResource(
             Context context,
-            UserResourceRepository repository,
+            UResourceRepository repository,
             UResourceMapper mapper,
             UResourceRefMapper refMapper
     ) {
 
         super(
                 context,
-                "Resource",
                 repository,
                 mapper,
                 refMapper

@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.entity.mission.repository;
+package com.nexus.nexusrpg.domain.repository;
 
 import com.nexus.nexusrpg.common.entity.UEntityRepository;
 import com.nexus.nexusrpg.core.exception.BusinessException;
@@ -12,24 +12,31 @@ import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
-public interface UserMissionRepository extends JpaRepository<UMission, Long>, UEntityRepository<UMission> {
+public interface UMissionRepository extends JpaRepository<UMission, Long>, UEntityRepository<UMission> {
 
+    @Override
     List<UMission> findByUserId(Long userId);
 
     @Override
-    @Query("SELECT um FROM UserMission um WHERE um.user.id = :userId AND um.mission.id = :baseId")
-    Optional<UMission> findByUserIdAndEntityId(@Param("userId") Long userId, @Param("baseId") Long baseId);
-
-    default UMission findByUserIdAndMissionIdOrThrow(Long userId, Long missionId) {
-        return findByUserIdAndEntityId(userId, missionId)
-                .orElseThrow(() -> new BusinessException("Mission", "Nenhum registro encontrado", NOT_FOUND));
+    default UMission findByUserIdAndEntityId(Long userId, Long entityId){
+        return findUEntity(userId, entityId)
+                .orElseThrow(() -> new BusinessException(
+                        "Mission",
+                        "Nenhum registro encontrado",
+                        NOT_FOUND)
+                );
     }
+
+    @Query("SELECT um " +
+            "FROM UMission um " +
+            "JOIN FETCH um.planet " +
+            "WHERE ur.user.id = :userId " +
+            "AND ur.planet.id = :entityId")
+    Optional<UMission> findUEntity(@Param("userId") Long userId, @Param("entityId") Long entityId);
 
     Optional<UMission> findByUserIdAndMissionPlanetIdAndMissionOrder(Long userId, Long missionId, int nextMissionOrder);
     Optional<List<UMission>> findByUserIdAndMissionPlanetId(Long userId, Long planetId);
-
     default List<UMission> findByUserIdAndMissionPlanetIdOrThrow(Long userId, Long planetId){
-
         return findByUserIdAndMissionPlanetId(userId, planetId)
                 .orElseThrow(() -> new BusinessException("Mission", "Nenhum registro encontrado", NOT_FOUND));
     }
