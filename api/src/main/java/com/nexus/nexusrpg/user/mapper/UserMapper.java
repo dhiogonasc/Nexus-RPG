@@ -1,10 +1,11 @@
 package com.nexus.nexusrpg.user.mapper;
 
+import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UserMission;
-import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.user.controller.dto.CurrentDTO;
 import com.nexus.nexusrpg.user.controller.dto.UserDTO;
 import com.nexus.nexusrpg.user.model.User;
@@ -13,12 +14,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserMapper{
+public class UserMapper implements Mapper<User, UserDTO> {
 
     private final LevelMapper levelMapper;
     private final PlanetRefMapper planetRefMapper;
     private final MissionRefMapper missionRefMapper;
 
+    @Override
     public UserDTO toDTO(User user){
 
         var current = mapCurrent(user);
@@ -33,12 +35,17 @@ public class UserMapper{
         );
     }
 
+    @Override
+    public User toEntity(UserDTO userDTO) {
+        return null;
+    }
+
     private CurrentDTO mapCurrent(User user){
 
         var currentLevel = levelMapper.toReferenceDTO(user.getLevel());
 
         var currentPlanet = user.getPlanets().stream()
-                .filter(UserPlanet::isCurrent)
+                .filter(UPlanet::isCurrent)
                 .findFirst()
                 .map(planetRefMapper::toRefDTO)
                 .orElse(null);

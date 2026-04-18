@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.common.entity.interfaces;
 
-public interface Mapper<UserEntity, UserEntityDTO> {
+public interface Mapper<Entity, EntityDTO> {
 
-    UserEntityDTO toDTO(UserEntity userEntity);
+    EntityDTO toDTO(Entity entity);
 }

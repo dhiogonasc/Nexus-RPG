@@ -5,19 +5,19 @@ import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPExecutionRefDTO;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class PlanetRefMapper extends RefMapper<Planet, UserPlanet, PlanetRefDTO> {
+public class PlanetRefMapper extends RefMapper<Planet, UPlanet, PlanetRefDTO> {
 
     private final UserPlanetRepository repository;
 
     @Override
-    public PlanetRefDTO toRefDTO(UserPlanet up){
+    public PlanetRefDTO toRefDTO(UPlanet up){
         var planet = up.getPlanet();
         var planetExecution = new UPExecutionRefDTO(up.getStatus());
 
@@ -29,7 +29,7 @@ public class PlanetRefMapper extends RefMapper<Planet, UserPlanet, PlanetRefDTO>
     }
 
     @Override
-    protected UserPlanet findRelation(User user, Planet planet) {
+    protected UPlanet findRelation(User user, Planet planet) {
         return repository.findByUserIdAndPlanetIdOrThrow(user.getId(), planet.getId());
     }
 }

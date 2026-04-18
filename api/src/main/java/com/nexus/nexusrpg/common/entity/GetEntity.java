@@ -11,34 +11,34 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RequiredArgsConstructor
-public abstract class GetEntity<Entity, UserEntity, UserEntityDTO, UserEntityRefDTO> {
+public abstract class GetEntity<Entity, UEntity, UEntityDTO, UEntityRefDTO> {
 
     protected final Context context;
     protected final String domainName;
-    protected final RelationRepository<UserEntity> userEntityRepository;
-    protected final Mapper<UserEntity, UserEntityDTO> mapper;
-    protected final RefMapper<Entity, UserEntity, UserEntityRefDTO> refMapper;
+    protected final UEntityRepository<UEntity> userEntityRepository;
+    protected final Mapper<UEntity, UEntityDTO> mapper;
+    protected final RefMapper<Entity, UEntity, UEntityRefDTO> refMapper;
 
     @Transactional(readOnly = true)
-    public UserEntityDTO getById(Long id) {
+    public UEntityDTO getById(Long id) {
 
         var userId = context.getAuthenticatedUser().getId();
 
-        UserEntity userEntity = userEntityRepository
-                .findByUserIdAndBaseId(userId, id)
+        UEntity uEntity = userEntityRepository
+                .findByUserIdAndEntityId(userId, id)
                 .orElseThrow(() -> new BusinessException(
                         domainName,
                         "Registro não encontrado",
                         NOT_FOUND
                 ));
 
-        validateAccess(userEntity);
+        validateAccess(uEntity);
 
-        return mapper.toDTO(userEntity);
+        return mapper.toDTO(uEntity);
     }
 
     @Transactional(readOnly = true)
-    public List<UserEntityRefDTO> getAll() {
+    public List<UEntityRefDTO> getAll() {
 
         var userId = context.getAuthenticatedUser().getId();
 
@@ -48,5 +48,5 @@ public abstract class GetEntity<Entity, UserEntity, UserEntityDTO, UserEntityRef
                 .toList();
     }
 
-    protected abstract void validateAccess(UserEntity userEntity);
+    protected abstract void validateAccess(UEntity uEntity);
 }

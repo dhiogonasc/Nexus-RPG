@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.entity.planet.validator;
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.model.relation.UserMission;
-import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +16,9 @@ public class PlanetValidator {
 
     private final UserPlanetRepository userPlanetRepository;
 
-    public void isAccessible(UserPlanet userPlanet) {
+    public void isAccessible(UPlanet uPlanet) {
 
-        var planetStatus =  userPlanet.getStatus();
+        var planetStatus =  uPlanet.getStatus();
 
         if(planetStatus == LOCKED){
 

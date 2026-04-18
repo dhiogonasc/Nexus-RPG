@@ -1,8 +1,7 @@
 package com.nexus.nexusrpg.common.entity.interfaces;
 
-public interface Progressable {
+public interface Progression {
 
     void unlock();
     void complete();
-    void update(long itens, long totalItens);
 }

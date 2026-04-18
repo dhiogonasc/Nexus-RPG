@@ -6,7 +6,7 @@ import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
 import com.nexus.nexusrpg.domain.mapper.PlanetMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetPlanet extends GetEntity<
         Planet,
-        UserPlanet,
+        UPlanet,
         PlanetDTO,
         PlanetRefDTO
         > {
@@ -42,7 +42,7 @@ public class GetPlanet extends GetEntity<
     }
 
     @Override
-    protected void validateAccess(UserPlanet userPlanet) {
-        validator.isAccessible(userPlanet);
+    protected void validateAccess(UPlanet uPlanet) {
+        validator.isAccessible(uPlanet);
     }
 }

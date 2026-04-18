@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.model.relation.execution;
 
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
-import com.nexus.nexusrpg.common.entity.interfaces.Progressable;
+import com.nexus.nexusrpg.common.entity.interfaces.Progression;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
-import java.util.List;
-
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 
@@ -23,7 +21,7 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UserPlanetExecution implements Progressable {
+public class UPlanetExecution implements Progression {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
@@ -44,6 +42,4 @@ public class UserPlanetExecution implements Progressable {
         this.status = EntityStatus.COMPLETED;
         this.isCurrent = false;
     }
-
-    public void update(long itens, long totalItens) {}
 }

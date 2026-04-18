@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.model.relation.execution;
 
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
-import com.nexus.nexusrpg.common.entity.interfaces.Progressable;
+import com.nexus.nexusrpg.common.entity.interfaces.Progression;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
@@ -22,7 +22,7 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UserMissionExecution implements Progressable {
+public class UserMissionExecution implements Progression {
 
     private static final BigDecimal MISSION_COMPLETION_THRESHOLD = BigDecimal.valueOf(7);
 

@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.entity.planet.service;
 import com.nexus.nexusrpg.common.entity.dto.ProgressDTO;
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
-import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class PlanetProgress {
 
     private final UserMissionRepository userMissionRepository;
 
-    public ProgressDTO calculate(UserPlanet up){
+    public ProgressDTO calculate(UPlanet up){
 
         var user = up.getUser();
         var missions =  userMissionRepository.findByUserIdAndMissionPlanetIdOrThrow(user.getId(), up.getPlanet().getId());

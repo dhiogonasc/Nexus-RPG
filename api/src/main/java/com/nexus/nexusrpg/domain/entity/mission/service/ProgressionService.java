@@ -4,7 +4,7 @@ import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.entity.resource.repository.UserResourceRepository;
@@ -41,7 +41,7 @@ public class ProgressionService {
     private void unlockMission(UserMission um) {
 
         if (um.getExecution().getStatus() == LOCKED) {
-            um.getExecution().unlock();
+            um.unlock();
             userMissionRepository.save(um);
         }
     }
@@ -70,14 +70,14 @@ public class ProgressionService {
                 });
     }
 
-    private void unlockPlanet(UserPlanet up){
+    private void unlockPlanet(UPlanet up){
         if (up.getExecution().getStatus() == LOCKED) {
             up.getExecution().unlock();
             userPlanetRepository.save(up);
         }
     }
 
-    private void completePlanet(UserPlanet up){
+    private void completePlanet(UPlanet up){
         if (up.getExecution().getStatus() == UNLOCKED) {
             up.getExecution().complete();
             userPlanetRepository.save(up);
@@ -87,7 +87,7 @@ public class ProgressionService {
     private void completeResource(Long userId, Resource currentResource){
 
         userResourceRepository
-                .findByUserIdAndBaseId(
+                .findByUserIdAndEntityId(
                         userId,
                         currentResource.getId()
                 )
@@ -102,7 +102,7 @@ public class ProgressionService {
     private void unlockResource(Long userId, Resource currentResource){
 
         userResourceRepository
-                .findByUserIdAndBaseId(
+                .findByUserIdAndEntityId(
                         userId,
                         currentResource.getId()
                 )

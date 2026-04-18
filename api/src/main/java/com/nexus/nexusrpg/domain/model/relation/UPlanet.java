@@ -3,15 +3,13 @@ package com.nexus.nexusrpg.domain.model.relation;
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
 import com.nexus.nexusrpg.common.entity.interfaces.State;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.model.relation.execution.UserPlanetExecution;
+import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExecution;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
@@ -24,7 +22,7 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_planet\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_planet", columnNames = {"user_id", "planet_id"})
 })
-public class UserPlanet implements State {
+public class UPlanet implements State {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,31 +36,41 @@ public class UserPlanet implements State {
     @JoinColumn(name = "planet_id", nullable = false)
     private Planet planet;
 
-    @Embedded
-    @Builder.Default
-    private UserPlanetExecution execution = new UserPlanetExecution();
+    @Embedded @Builder.Default
+    private UPlanetExecution execution = new UPlanetExecution();
 
-    public static UserPlanet initialize(User user, Planet planet) {
+    @Override
+    public void unlock() {
+        this.execution.unlock();
+    }
+
+    @Override
+    public void complete() {
+        this.execution.complete();
+    }
+
+    @Override
+    public EntityStatus getStatus(){
+        return this.execution.getStatus();
+    }
+
+    public boolean isCurrent() {
+        return this.execution.getIsCurrent();
+    }
+
+    public static UPlanet initialize(User user, Planet planet) {
 
         boolean isFirst = planet.getOrder() == 1;
 
-        var initialStats = UserPlanetExecution.builder()
+        var initialStats = UPlanetExecution.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
                 .isCurrent(isFirst)
                 .build();
 
-        return UserPlanet.builder()
+        return UPlanet.builder()
                 .user(user)
                 .planet(planet)
                 .execution(initialStats)
                 .build();
-    }
-
-    public EntityStatus getStatus(){
-        return this.getExecution().getStatus();
-    }
-
-    public boolean isCurrent() {
-        return this.getExecution().getIsCurrent();
     }
 }

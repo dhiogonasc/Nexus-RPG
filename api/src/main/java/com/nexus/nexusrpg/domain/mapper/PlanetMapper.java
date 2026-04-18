@@ -6,28 +6,27 @@ import com.nexus.nexusrpg.domain.controller.dto.planet.UPExecutionDTO;
 import com.nexus.nexusrpg.domain.entity.planet.service.PlanetProgress;
 import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.ResourceRefMapper;
-import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class PlanetMapper implements Mapper<UserPlanet, PlanetDTO> {
+public class PlanetMapper implements Mapper<UPlanet, PlanetDTO> {
 
     private final ResourceRefMapper resourceRefMapper;
     private final MissionRefMapper missionRefMapper;
-
     private final PlanetProgress planetProgress;
 
-    public PlanetDTO toDTO(UserPlanet up){
+    @Override
+    public PlanetDTO toDTO(UPlanet up){
 
         var user =  up.getUser();
         var planet = up.getPlanet();
 
         var planetResources = resourceRefMapper.map(user, planet.getResources());
         var planetMissions = missionRefMapper.map(user, planet.getMissions());
-
 
         var progress = planetProgress.calculate(up);
         var planetExecution = new UPExecutionDTO(
