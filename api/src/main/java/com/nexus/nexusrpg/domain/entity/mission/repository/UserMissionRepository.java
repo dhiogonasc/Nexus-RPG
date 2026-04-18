@@ -26,4 +26,12 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long>,
     }
 
     Optional<UserMission> findByUserIdAndMissionPlanetIdAndMissionOrder(Long userId, Long missionId, int nextMissionOrder);
+    Optional<List<UserMission>> findByUserIdAndMissionPlanetId(Long userId, Long planetId);
+
+    default List<UserMission> findByUserIdAndMissionPlanetIdOrThrow(Long userId, Long planetId){
+
+        return findByUserIdAndMissionPlanetId(userId, planetId)
+                .orElseThrow(() -> new BusinessException("Mission", "Nenhum registro encontrado", NOT_FOUND));
+    }
+
 }

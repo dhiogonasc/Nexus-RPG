@@ -29,7 +29,7 @@ public class Planet {
     private int order;
 
     @Column(name = "xp_bonus", nullable = false, columnDefinition = "xp")
-    private long xpBonus; 
+    private long xpBonus;
 
     @OneToMany(mappedBy = "planet")
     private List<Mission> missions;

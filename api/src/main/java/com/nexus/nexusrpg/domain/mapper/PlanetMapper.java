@@ -3,6 +3,7 @@ package com.nexus.nexusrpg.domain.mapper;
 import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPExecutionDTO;
+import com.nexus.nexusrpg.domain.entity.planet.service.PlanetProgress;
 import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.ResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
@@ -17,6 +18,8 @@ public class PlanetMapper implements Mapper<UserPlanet, PlanetDTO> {
     private final ResourceRefMapper resourceRefMapper;
     private final MissionRefMapper missionRefMapper;
 
+    private final PlanetProgress planetProgress;
+
     public PlanetDTO toDTO(UserPlanet up){
 
         var user =  up.getUser();
@@ -25,9 +28,12 @@ public class PlanetMapper implements Mapper<UserPlanet, PlanetDTO> {
         var planetResources = resourceRefMapper.map(user, planet.getResources());
         var planetMissions = missionRefMapper.map(user, planet.getMissions());
 
+
+        var progress = planetProgress.calculate(up);
         var planetExecution = new UPExecutionDTO(
                 up.getStatus(),
-                up.isCurrent()
+                up.isCurrent(),
+                progress
         );
 
         return new PlanetDTO(

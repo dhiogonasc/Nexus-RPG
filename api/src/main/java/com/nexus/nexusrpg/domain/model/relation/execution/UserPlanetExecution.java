@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
+import java.util.List;
+
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 

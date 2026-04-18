@@ -11,6 +11,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
 
