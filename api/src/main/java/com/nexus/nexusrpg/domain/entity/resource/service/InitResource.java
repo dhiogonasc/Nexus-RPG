@@ -5,7 +5,7 @@ import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.repository.ResourceRepository;
 import com.nexus.nexusrpg.user.model.User;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
-import com.nexus.nexusrpg.domain.repository.UResourceRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UResourceRepository;
 import org.springframework.stereotype.Service;
 
 @Service

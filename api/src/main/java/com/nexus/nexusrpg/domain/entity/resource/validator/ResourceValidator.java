@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
 import static org.springframework.http.HttpStatus.CONFLICT;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class ResourceValidator {
 
     public void isCollectable(UResource resource) {

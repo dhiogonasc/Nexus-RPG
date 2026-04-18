@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.entity.planet.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.repository.UPlanetRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UPlanetRepository;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;

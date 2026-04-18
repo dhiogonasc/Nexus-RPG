@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.mapper.reference;
 import com.nexus.nexusrpg.common.entity.RefMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionExecDTOR;
-import com.nexus.nexusrpg.domain.repository.UMissionRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.user.model.User;

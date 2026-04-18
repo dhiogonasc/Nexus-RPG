@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.mapper.reference;
 import com.nexus.nexusrpg.common.entity.RefMapper;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetExecDTOR;
-import com.nexus.nexusrpg.domain.repository.UPlanetRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UPlanetRepository;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.user.model.User;

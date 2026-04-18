@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.entity.planet.service;
 
 import com.nexus.nexusrpg.common.entity.dto.ProgressDTO;
 import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
-import com.nexus.nexusrpg.domain.repository.UMissionRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +24,5 @@ public class PlanetProgress {
                 .count();
 
         return new ProgressDTO(completed, total);
-
     }
 }

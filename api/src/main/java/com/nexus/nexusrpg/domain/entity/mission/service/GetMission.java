@@ -8,7 +8,7 @@ import com.nexus.nexusrpg.domain.mapper.UMissionMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
-import com.nexus.nexusrpg.domain.repository.UMissionRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import org.springframework.stereotype.Service;
 

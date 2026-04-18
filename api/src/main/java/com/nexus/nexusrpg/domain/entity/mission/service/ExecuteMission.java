@@ -12,7 +12,7 @@ import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
-import com.nexus.nexusrpg.domain.repository.UMissionRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
 import com.nexus.nexusrpg.domain.entity.question.repository.QuestionRepository;
 import com.nexus.nexusrpg.user.validator.UserValidator;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.entity.level.repository;
+package com.nexus.nexusrpg.domain.repository;
 
 import com.nexus.nexusrpg.domain.model.Level;
 import org.springframework.data.jpa.repository.JpaRepository;

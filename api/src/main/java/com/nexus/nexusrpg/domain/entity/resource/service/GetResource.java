@@ -8,7 +8,7 @@ import com.nexus.nexusrpg.domain.mapper.UResourceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
-import com.nexus.nexusrpg.domain.repository.UResourceRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UResourceRepository;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -2,12 +2,12 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
-import com.nexus.nexusrpg.domain.repository.UMissionRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
-import com.nexus.nexusrpg.domain.repository.UPlanetRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UPlanetRepository;
 import com.nexus.nexusrpg.domain.model.Resource;
-import com.nexus.nexusrpg.domain.repository.UResourceRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UResourceRepository;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

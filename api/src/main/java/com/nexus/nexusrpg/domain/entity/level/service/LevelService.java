@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.entity.level.service;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.model.Level;
-import com.nexus.nexusrpg.domain.entity.level.repository.LevelRepository;
+import com.nexus.nexusrpg.domain.repository.LevelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
