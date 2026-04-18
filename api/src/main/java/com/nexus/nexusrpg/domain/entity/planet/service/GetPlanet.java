@@ -3,47 +3,46 @@ package com.nexus.nexusrpg.domain.entity.planet.service;
 import com.nexus.nexusrpg.common.entity.GetEntity;
 import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
+import com.nexus.nexusrpg.domain.mapper.PlanetMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
+import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
 import com.nexus.nexusrpg.domain.entity.planet.repository.UserPlanetRepository;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;
 import org.springframework.stereotype.Component;
 
-import static com.nexus.nexusrpg.domain.mapper.PlanetMapper.toDTO;
-import static com.nexus.nexusrpg.domain.mapper.PlanetMapper.toRefDTO;
-
 @Component
-public class GetPlanet extends GetEntity<UserPlanet, PlanetDTO, PlanetRefDTO> {
+public class GetPlanet extends GetEntity<
+        Planet,
+        UserPlanet,
+        PlanetDTO,
+        PlanetRefDTO
+        > {
 
-    private final PlanetValidator planetValidator;
+    private final PlanetValidator validator;
 
     public GetPlanet(
             Context context,
-            UserPlanetRepository userPlanetRepository,
-            PlanetValidator planetValidator
+            UserPlanetRepository repository,
+            PlanetMapper mapper,
+            PlanetRefMapper refMapper,
+            PlanetValidator validator
     ) {
 
         super(
                 context,
                 "Planet",
-                userPlanetRepository
+                repository,
+                mapper,
+                refMapper
         );
 
-        this.planetValidator = planetValidator;
-    }
-
-    @Override
-    protected PlanetDTO mapToDTO(UserPlanet userPlanet) {
-        return toDTO(userPlanet);
-    }
-
-    @Override
-    protected PlanetRefDTO mapToReferenceDTO(UserPlanet userPlanet) {
-        return toRefDTO(userPlanet);
+        this.validator = validator;
     }
 
     @Override
     protected void validateAccess(UserPlanet userPlanet) {
-        planetValidator.isAccessible(userPlanet);
+        validator.isAccessible(userPlanet);
     }
 }

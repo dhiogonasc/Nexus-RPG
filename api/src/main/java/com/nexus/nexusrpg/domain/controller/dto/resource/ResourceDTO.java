@@ -1,5 +1,7 @@
 package com.nexus.nexusrpg.domain.controller.dto.resource;
 
+import com.nexus.nexusrpg.domain.controller.dto.planet.PlanetRefDTO;
+
 public record ResourceDTO(
 
         Long id,
@@ -7,6 +9,8 @@ public record ResourceDTO(
         String description,
         int order,
         long xpBonus,
+
+        PlanetRefDTO planet,
 
         URExecutionDTO execution
 ) {}

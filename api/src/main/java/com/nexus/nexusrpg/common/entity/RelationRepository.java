@@ -3,8 +3,8 @@ package com.nexus.nexusrpg.common.entity;
 import java.util.List;
 import java.util.Optional;
 
-public interface RelationRepository<E> {
+public interface RelationRepository<UserEntity> {
 
-    List<E> findByUserId(Long userId);
-    Optional<E> findByUserIdAndBaseId(Long userId, Long baseId);
+    List<UserEntity> findByUserId(Long userId);
+    Optional<UserEntity> findByUserIdAndBaseId(Long userId, Long baseId);
 }

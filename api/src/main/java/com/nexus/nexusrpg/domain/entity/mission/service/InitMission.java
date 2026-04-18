@@ -20,7 +20,7 @@ public class InitMission extends InitEntity<Mission, UserMission> {
     }
 
     @Override
-    protected UserMission mapToRelation(User user, Mission mission) {
+    protected UserMission initRelation(User user, Mission mission) {
 
         return UserMission.initialize(user, mission);
     }

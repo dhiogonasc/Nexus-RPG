@@ -20,7 +20,7 @@ public class InitPlanet extends InitEntity<Planet, UserPlanet> {
     }
 
     @Override
-    protected UserPlanet mapToRelation(User user, Planet planet) {
+    protected UserPlanet initRelation(User user, Planet planet) {
 
         return UserPlanet.initialize(user, planet);
     }

@@ -1,16 +1,26 @@
 package com.nexus.nexusrpg.domain.mapper;
 
+import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.URExecutionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.resource.ResourceRefDTO;
+import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UserResource;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-public class ResourceMapper {
+@Component
+@RequiredArgsConstructor
+public class ResourceMapper implements Mapper<UserResource, ResourceDTO> {
 
-    public static ResourceDTO toDTO(UserResource ur){
+    private final PlanetRefMapper planetRefMapper;
 
+    public ResourceDTO toDTO(UserResource ur){
+
+        var user =  ur.getUser();
         var resource = ur.getResource();
         var resourceExecution = new URExecutionDTO(ur.getStatus());
+
+        var resourcePlanet = planetRefMapper.map(user, resource.getPlanet());
 
         return new ResourceDTO(
                 resource.getId(),
@@ -18,18 +28,7 @@ public class ResourceMapper {
                 resource.getDescription(),
                 resource.getOrder(),
                 resource.getXpBonus(),
-                resourceExecution
-        );
-    }
-
-    public static ResourceRefDTO toRefDTO(UserResource ur){
-
-        var resource = ur.getResource();
-        var resourceExecution = new URExecutionDTO(ur.getStatus());
-
-        return new ResourceRefDTO(
-                resource.getId(),
-                resource.getName(),
+                resourcePlanet,
                 resourceExecution
         );
     }

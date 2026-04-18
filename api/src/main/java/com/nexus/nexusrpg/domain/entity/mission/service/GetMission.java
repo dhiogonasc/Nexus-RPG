@@ -4,46 +4,45 @@ import com.nexus.nexusrpg.common.entity.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.mission.MissionDTO;
 import com.nexus.nexusrpg.domain.controller.dto.mission.MissionRefDTO;
+import com.nexus.nexusrpg.domain.mapper.MissionMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.MissionRefMapper;
+import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UserMission;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserMissionRepository;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
 import org.springframework.stereotype.Service;
 
-import static com.nexus.nexusrpg.domain.mapper.MissionMapper.toDTO;
-import static com.nexus.nexusrpg.domain.mapper.MissionMapper.toRefDTO;
-
 @Service
-public class GetMission extends GetEntity<UserMission, MissionDTO, MissionRefDTO> {
+public class GetMission extends GetEntity<
+        Mission,
+        UserMission,
+        MissionDTO,
+        MissionRefDTO
+        > {
 
-    private final MissionValidator missionValidator;
+    private final MissionValidator validator;
 
     public GetMission(
             Context context,
-            UserMissionRepository userMissionRepository,
-            MissionValidator missionValidator
+            UserMissionRepository repository,
+            MissionMapper mapper,
+            MissionRefMapper refMapper,
+            MissionValidator validator
     ) {
 
         super(
                 context,
                 "Mission",
-                userMissionRepository
+                repository,
+                mapper,
+                refMapper
         );
 
-        this.missionValidator = missionValidator;
-    }
-
-    @Override
-    protected MissionDTO mapToDTO(UserMission userMission) {
-        return toDTO(userMission);
-    }
-
-    @Override
-    protected MissionRefDTO mapToReferenceDTO(UserMission userMission) {
-        return toRefDTO(userMission);
+        this.validator = validator;
     }
 
     @Override
     protected void validateAccess(UserMission userMission) {
-        missionValidator.isAccessible(userMission);
+        validator.isAccessible(userMission);
     }
 }

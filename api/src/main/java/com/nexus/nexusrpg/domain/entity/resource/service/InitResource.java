@@ -21,7 +21,7 @@ public class InitResource extends InitEntity<Resource, UserResource> {
     }
 
     @Override
-    protected UserResource mapToRelation(User user, Resource resource) {
+    protected UserResource initRelation(User user, Resource resource) {
 
         return UserResource.initialize(user, resource);
     }

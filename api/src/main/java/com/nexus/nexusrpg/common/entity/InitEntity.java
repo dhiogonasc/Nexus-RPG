@@ -6,10 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @RequiredArgsConstructor
-public abstract class InitEntity<A, B> implements Initializable {
+public abstract class InitEntity<Entity, UserEntity> implements Initializable {
 
-    private final JpaRepository<A, ?> baseRepository;
-    private final JpaRepository<B, ?> relationRepository;
+    private final JpaRepository<Entity, Long> baseRepository;
+    private final JpaRepository<UserEntity, Long> relationRepository;
 
     @Override
     public void initialize(User user) {
@@ -17,11 +17,11 @@ public abstract class InitEntity<A, B> implements Initializable {
         var baseEntities = baseRepository.findAll();
 
         var relations = baseEntities.stream()
-                .map(base -> mapToRelation(user, base))
+                .map(base -> initRelation(user, base))
                 .toList();
 
         relationRepository.saveAll(relations);
     }
 
-    protected abstract B mapToRelation(User user, A baseEntity);
+    protected abstract UserEntity initRelation(User user, Entity baseEntity);
 }

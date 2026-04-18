@@ -1,12 +1,14 @@
 package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.domain.controller.dto.level.LevelDTO;
-import com.nexus.nexusrpg.domain.controller.dto.level.LevelReferenceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.level.LevelRefDTO;
 import com.nexus.nexusrpg.domain.model.Level;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LevelMapper {
 
-    public static LevelDTO toDTO(Level level) {
+    public LevelDTO toDTO(Level level) {
 
         return new LevelDTO(
                 level.getId(),
@@ -18,9 +20,9 @@ public class LevelMapper {
         );
     }
 
-    public static LevelReferenceDTO toReferenceDTO(Level level){
+    public LevelRefDTO toReferenceDTO(Level level){
 
-        return new LevelReferenceDTO(
+        return new LevelRefDTO(
                 level.getId(),
                 level.getName()
         );

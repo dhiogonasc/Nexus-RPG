@@ -6,6 +6,7 @@ public record UserDTO(
         String username,
         String email,
         long xp,
-        int oxygen
+        int oxygen,
+        CurrentDTO current
 ) {
 }

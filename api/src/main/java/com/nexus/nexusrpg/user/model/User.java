@@ -1,8 +1,12 @@
 package com.nexus.nexusrpg.user.model;
 
 import com.nexus.nexusrpg.domain.model.Level;
+import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import com.nexus.nexusrpg.domain.model.relation.UserPlanet;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -36,6 +40,12 @@ public class User {
     @Builder.Default
     @Column(name = "\"oxygen\"", nullable = false, columnDefinition = "oxygen")
     private int oxygen = 10;
+
+    @OneToMany(mappedBy = "user")
+    List<UserPlanet> planets;
+
+    @OneToMany(mappedBy = "user")
+    List<UserMission> missions;
 
     public void addXp(long xp) {
         this.xp += xp;

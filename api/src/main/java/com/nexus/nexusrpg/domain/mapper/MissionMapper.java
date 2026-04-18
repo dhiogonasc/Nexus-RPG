@@ -1,15 +1,21 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.domain.controller.dto.mission.MissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.MissionRefDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMExecutionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMExecutionRefDTO;
+import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
+import com.nexus.nexusrpg.domain.controller.dto.mission.*;
+import com.nexus.nexusrpg.domain.mapper.reference.PlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UserMission;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-public class MissionMapper {
+@Component
+@RequiredArgsConstructor
+public class MissionMapper implements Mapper<UserMission, MissionDTO> {
 
-    public static MissionDTO toDTO(UserMission um){
+    private final PlanetRefMapper planetRefMapper;
 
+    public MissionDTO toDTO(UserMission um){
+
+        var user =  um.getUser();
         var mission = um.getMission();
 
         var missionExecution = new UMExecutionDTO(
@@ -18,24 +24,15 @@ public class MissionMapper {
                 um.getResult()
         );
 
+        var missionPlanet = planetRefMapper.map(user, mission.getPlanet());
+
         return new MissionDTO(
                 mission.getId(),
                 mission.getName(),
                 mission.getDescription(),
                 mission.getOrder(),
                 mission.getXpBonus(),
-                missionExecution
-        );
-    }
-
-    public static MissionRefDTO toRefDTO(UserMission um){
-
-        var mission = um.getMission();
-        var missionExecution = new UMExecutionRefDTO(um.getStatus());
-
-        return new MissionRefDTO(
-                mission.getId(),
-                mission.getName(),
+                missionPlanet,
                 missionExecution
         );
     }
