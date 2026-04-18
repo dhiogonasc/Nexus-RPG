@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.entity;
+package com.nexus.nexusrpg.common.entity.mapper;
 
 import com.nexus.nexusrpg.user.model.User;
 
@@ -18,6 +18,6 @@ public abstract class RefMapper<Entity, UserEntity, UserEntityRefDTO> {
                 .toList();
     }
 
-    protected abstract UserEntityRefDTO toRefDTO(UserEntity userEntity);
+    public abstract UserEntityRefDTO toRefDTO(UserEntity userEntity);
     protected abstract UserEntity findRelation(User user, Entity entity);
 }

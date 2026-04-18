@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.user.mapper;
 
-import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
+import com.nexus.nexusrpg.common.entity.mapper.Mapper;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;

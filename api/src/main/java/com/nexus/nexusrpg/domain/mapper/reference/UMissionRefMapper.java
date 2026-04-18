@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
-import com.nexus.nexusrpg.common.entity.RefMapper;
+import com.nexus.nexusrpg.common.entity.mapper.RefMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionExecDTOR;
 import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;

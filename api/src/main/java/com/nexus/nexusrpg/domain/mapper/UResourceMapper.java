@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
+import com.nexus.nexusrpg.common.entity.mapper.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceExecDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;

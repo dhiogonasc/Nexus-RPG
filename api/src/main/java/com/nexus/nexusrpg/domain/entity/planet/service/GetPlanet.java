@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.planet.service;
 
-import com.nexus.nexusrpg.common.entity.GetEntity;
+import com.nexus.nexusrpg.common.entity.service.GetEntity;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
 import com.nexus.nexusrpg.domain.mapper.UPlanetMapper;

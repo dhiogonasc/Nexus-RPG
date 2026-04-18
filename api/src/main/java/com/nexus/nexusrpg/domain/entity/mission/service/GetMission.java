@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.mission.service;
 
-import com.nexus.nexusrpg.common.entity.GetEntity;
+import com.nexus.nexusrpg.common.entity.service.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTO;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;

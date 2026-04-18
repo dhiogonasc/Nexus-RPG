@@ -1,7 +1,9 @@
-package com.nexus.nexusrpg.common.entity;
+package com.nexus.nexusrpg.common.entity.service;
 
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.common.entity.interfaces.Mapper;
+import com.nexus.nexusrpg.common.entity.mapper.RefMapper;
+import com.nexus.nexusrpg.common.entity.repository.UEntityRepository;
+import com.nexus.nexusrpg.common.entity.mapper.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
