@@ -14,6 +14,4 @@ public interface UserResponseRepository extends JpaRepository<UserResponse, Long
     List<UserResponse> findByAttemptId(@Param("attemptId") Long attemptId);
 
     Optional<UserResponse> findByAttemptIdAndQuestionId(Long attemptId, Long questionId);
-
-    long countByAttemptId(Long id);
 }
