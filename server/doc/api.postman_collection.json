@@ -144,13 +144,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{server.url}}/planets/{{planetId}}",
+              "raw": "{{server.url}}/planets/{{planet.id}}",
               "host": [
                 "{{server.url}}"
               ],
               "path": [
                 "planets",
-                "{{planetId}}"
+                "{{planet.id}}"
               ]
             }
           },

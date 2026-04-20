@@ -5,7 +5,7 @@ import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record UserAttemptDTO(
+public record UAttemptDTO(
 
         Long id,
         UMissionDTOR mission,

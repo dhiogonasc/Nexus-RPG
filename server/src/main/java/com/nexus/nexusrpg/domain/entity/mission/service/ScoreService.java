@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.mission.service;
 
-import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
+import com.nexus.nexusrpg.domain.entity.mission.model.UAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserResponse;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import static java.math.RoundingMode.HALF_UP;
 @Component
 public class ScoreService {
 
-    public BigDecimal calculateResult(UserAttempt attempt, List<UserResponse> responses) {
+    public BigDecimal calculateResult(UAttempt attempt, List<UserResponse> responses) {
 
         var totalQuestions = attempt.getUMission().getMission().getQuestions().size();
         if (totalQuestions == 0) return BigDecimal.ZERO;

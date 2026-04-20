@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.mission.model;
 
+import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +18,7 @@ import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
 @AllArgsConstructor
 @Entity
 @Table(name = "\"user_mission_attempt\"")
-public class UserAttempt {
+public class UAttempt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

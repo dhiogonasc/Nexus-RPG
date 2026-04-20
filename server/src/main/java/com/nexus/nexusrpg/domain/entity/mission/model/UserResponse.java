@@ -21,7 +21,7 @@ public class UserResponse {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attempt_id", nullable = false)
-    private UserAttempt attempt;
+    private UAttempt attempt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", nullable = false, insertable = false, updatable = false)

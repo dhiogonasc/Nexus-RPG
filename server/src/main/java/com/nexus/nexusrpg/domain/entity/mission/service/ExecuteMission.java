@@ -3,15 +3,15 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.alternative.repository.AlternativeRepository;
 import com.nexus.nexusrpg.domain.entity.level.service.LevelService;
+import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserResponseDTO;
-import com.nexus.nexusrpg.domain.entity.mission.mapper.UserAttemptMapper;
+import com.nexus.nexusrpg.domain.entity.mission.mapper.UAttemptMapper;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserResponse;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserResponseRepository;
 import com.nexus.nexusrpg.domain.entity.mission.validator.AttemptValidator;
 import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
-import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserAttemptDTO;
-import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
-import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
+import com.nexus.nexusrpg.domain.entity.mission.model.UAttempt;
+import com.nexus.nexusrpg.domain.entity.mission.repository.UAttemptRepository;
 import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
 import com.nexus.nexusrpg.domain.entity.question.repository.QuestionRepository;
 import com.nexus.nexusrpg.user.validator.UserValidator;
@@ -38,15 +38,15 @@ public class ExecuteMission {
 
     private final UMissionRepository uMissionRepository;
     private final UserResponseRepository userResponseRepository;
-    private final UserAttemptRepository userAttemptRepository;
-    private final UserAttemptMapper userAttemptMapper;
+    private final UAttemptRepository uAttemptRepository;
+    private final UAttemptMapper uAttemptMapper;
 
     private final UserValidator userValidator;
     private final MissionValidator missionValidator;
     private final AttemptValidator attemptValidator;
 
     @Transactional
-    public UserAttemptDTO start(Long missionId) {
+    public UAttemptDTO start(Long missionId) {
 
         var user = context.getAuthenticatedUser();
         var uMission = uMissionRepository.findByUserIdAndEntityId(user.getId(), missionId);
@@ -57,19 +57,19 @@ public class ExecuteMission {
 
         user.consumeOxygen();
 
-        var attempt = UserAttempt.builder()
+        var attempt = UAttempt.builder()
                 .uMission(uMission)
                 .startAt(LocalDateTime.now())
                 .build();
 
-        return userAttemptMapper.toDTO(userAttemptRepository.save(attempt));
+        return uAttemptMapper.toDTO(uAttemptRepository.save(attempt));
     }
 
     @Transactional
     public void answer(Long attemptId, UserResponseDTO request) {
 
         var user = context.getAuthenticatedUser();
-        var attempt = userAttemptRepository.findByIdOrThrow(attemptId);
+        var attempt = uAttemptRepository.findByIdOrThrow(attemptId);
 
         attemptValidator.isUserAuth(user, attempt);
         attemptValidator.isActive(attempt);
@@ -77,7 +77,7 @@ public class ExecuteMission {
         registerAnswer(attempt, request);
     }
 
-    private void registerAnswer(UserAttempt attempt, UserResponseDTO request) {
+    private void registerAnswer(UAttempt attempt, UserResponseDTO request) {
 
         var questionId = request.questionId();
         var question = questionRepository.findByIdOrThrow(questionId);
@@ -99,10 +99,10 @@ public class ExecuteMission {
     }
 
     @Transactional
-    public UserAttemptDTO finish(Long attemptId) {
+    public UAttemptDTO finish(Long attemptId) {
 
         var user = context.getAuthenticatedUser();
-        var attempt = userAttemptRepository.findByIdOrThrow(attemptId);
+        var attempt = uAttemptRepository.findByIdOrThrow(attemptId);
 
         attemptValidator.isUserAuth(user, attempt);
         attemptValidator.isActive(attempt);
@@ -119,6 +119,6 @@ public class ExecuteMission {
 
         levelService.findNextLevel(user.getLevel()).ifPresent(user::levelUp);
 
-        return userAttemptMapper.toDTO(userAttemptRepository.save(attempt));
+        return uAttemptMapper.toDTO(uAttemptRepository.save(attempt));
     }
 }

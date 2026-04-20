@@ -2,10 +2,10 @@ package com.nexus.nexusrpg.domain.entity.mission.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.entity.alternative.model.Alternative;
+import com.nexus.nexusrpg.domain.entity.mission.model.UAttempt;
 import com.nexus.nexusrpg.domain.entity.question.model.Question;
 import com.nexus.nexusrpg.user.model.User;
-import com.nexus.nexusrpg.domain.entity.mission.model.UserAttempt;
-import com.nexus.nexusrpg.domain.entity.mission.repository.UserAttemptRepository;
+import com.nexus.nexusrpg.domain.entity.mission.repository.UAttemptRepository;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,11 +18,11 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @RequiredArgsConstructor
 public class AttemptValidator {
 
-    private final UserAttemptRepository userAttemptRepository;
+    private final UAttemptRepository uAttemptRepository;
 
     public void hasActiveAttempt(UMission mission) {
 
-        boolean hasActive = userAttemptRepository.existsActiveAttempt(mission.getId());
+        boolean hasActive = uAttemptRepository.existsActiveAttempt(mission.getId());
 
         if (hasActive) {
 
@@ -34,7 +34,7 @@ public class AttemptValidator {
         }
     }
 
-    public void isActive(UserAttempt attempt) {
+    public void isActive(UAttempt attempt) {
 
         if(!isNull(attempt.getEndAt())){
 
@@ -46,7 +46,7 @@ public class AttemptValidator {
         }
     }
 
-    public void isUserAuth(User user, UserAttempt attempt) {
+    public void isUserAuth(User user, UAttempt attempt) {
 
         Long currentUserId = user.getId();
         Long attemptUserId = attempt.getUMission().getUser().getId();
@@ -63,7 +63,7 @@ public class AttemptValidator {
         }
     }
 
-    public void isCompleted(UserAttempt attempt) {
+    public void isCompleted(UAttempt attempt) {
 
     }
 }
