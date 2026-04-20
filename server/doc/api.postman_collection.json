@@ -1,18 +1,18 @@
 {
   "info": {
-    "_postman_id": "3e52e11a-136a-4f87-88c3-c05ea79d921d",
+    "_postman_id": "72643b3c-1a21-42b6-8175-9808a33649d2",
     "name": "Nexus RPG API",
     "description": "Coleção organizada para o desenvolvimento do Nexus RPG, com herança de autenticação e scripts de automação.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "52573108",
-    "_collection_link": "https://go.postman.co/collection/52573108-3e52e11a-136a-4f87-88c3-c05ea79d921d?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/52573108-72643b3c-1a21-42b6-8175-9808a33649d2?source=collection_link"
   },
   "item": [
     {
       "name": "01. Autenticação",
       "item": [
         {
-          "name": "Cadastrar Novo Usuário",
+          "name": "Cadastrar Usuário",
           "request": {
             "method": "POST",
             "header": [],
@@ -46,10 +46,7 @@
               "script": {
                 "exec": [
                   "const response = pm.response.json();",
-                  "if (response.token) {",
-                  "    pm.environment.set(\"token\", response.token);",
-                  "    console.log(\"Token atualizado com sucesso!\");",
-                  "}"
+                  "pm.environment.set(\"accessToken\", response.accessToken);"
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -82,6 +79,33 @@
           },
           "response": []
         }
+      ],
+      "auth": {
+        "type": "noauth"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
       ]
     },
     {
@@ -90,6 +114,16 @@
         {
           "name": "Listar Planetas",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJuZXh1cy1ycGciLCJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJleHAiOjE3NzYzNTc5NTUsImlhdCI6MTc3NjM1NDM1NX0.twMKyVj68Vry2vJdOOhtpzc77ilve-GNpuXE4WOYenjHSHwVehd87MSmMIJDvBD-k1H2TajhtuNe-P3GeeByukXnwDqe2LCFnoyxtWQm7fz7yFls3yq_hVhx6ScBNGNtEdJ5TUKyjH5VEF4P9W7r2uxMuoUwCGgaTSZ38sQOUytOen35X_FMiET6zusViJMsW1cv29VwofMYKUUGbtH3PeGD05nLUiqAGHNE6WXRpTY3U_dLx1NQh4QeAzZVUiCQNu11aVU3HdKbCv-f9rVaE66hy8WlXRtmCJJO2xaA7KcWVuqzn-PjM_tV3m6bETnfs7CbpeSaz2cfuU9z5dit5Q",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -128,41 +162,51 @@
         "bearer": [
           {
             "key": "token",
-            "value": "{{token}}",
+            "value": "{{accessToken}}",
             "type": "string"
           }
         ]
-      }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "03. Missões",
       "item": [
         {
-          "name": "Listar Missões (Paginado)",
+          "name": "Listar Missões",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/missions?planetId={{planetId}}&page=0&size=10",
+              "raw": "{{baseUrl}}/missions",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "missions"
-              ],
-              "query": [
-                {
-                  "key": "planetId",
-                  "value": "{{planetId}}"
-                },
-                {
-                  "key": "page",
-                  "value": "0"
-                },
-                {
-                  "key": "size",
-                  "value": "10"
-                }
               ]
             }
           },
@@ -185,35 +229,70 @@
             }
           },
           "response": []
-        }
-      ],
-      "auth": {
-        "type": "bearer",
-        "bearer": [
-          {
-            "key": "token",
-            "value": "{{token}}",
-            "type": "string"
-          }
-        ]
-      }
-    },
-    {
-      "name": "04. Questões",
-      "item": [
+        },
         {
-          "name": "Detalhes da Questão",
+          "name": "Iniciar tentativa",
           "request": {
-            "method": "GET",
+            "method": "POST",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/questions/{{questionId}}",
+              "raw": "{{baseUrl}}/missions/{{missionId}}/start",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "questions",
-                "{{questionId}}"
+                "missions",
+                "{{missionId}}",
+                "start"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Responder",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"questionId\": 1,\r\n    \"alternativeId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/missions/attempts/{{attemptId}}/answer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "missions",
+                "attempts",
+                "{{attemptId}}",
+                "answer"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Finalizar tentativa",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/missions/attempts/{{attemptId}}/finish",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "missions",
+                "attempts",
+                "{{attemptId}}",
+                "finish"
               ]
             }
           },
@@ -225,14 +304,38 @@
         "bearer": [
           {
             "key": "token",
-            "value": "{{token}}",
+            "value": "{{accessToken}}",
             "type": "string"
           }
         ]
-      }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
     },
     {
-      "name": "05. Recursos",
+      "name": "04. Recursos",
       "item": [
         {
           "name": "Listar Recursos",
@@ -270,19 +373,33 @@
           "response": []
         }
       ],
-      "auth": {
-        "type": "bearer",
-        "bearer": [
-          {
-            "key": "token",
-            "value": "{{token}}",
-            "type": "string"
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
           }
-        ]
-      }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
     },
     {
-      "name": "06. Usuário",
+      "name": "05. Usuário",
       "item": [
         {
           "name": "Meu Perfil",
@@ -307,9 +424,67 @@
         "bearer": [
           {
             "key": "token",
-            "value": "{{token}}",
+            "value": "{{accessToken}}",
             "type": "string"
           }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
         ]
       }
     }
@@ -317,18 +492,15 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:8080",
-      "type": "string"
+      "value": "http://localhost:8080"
     },
     {
       "key": "planetId",
-      "value": "1",
-      "type": "string"
+      "value": "1"
     },
     {
       "key": "missionId",
-      "value": "1",
-      "type": "string"
+      "value": "1"
     }
   ]
 }
