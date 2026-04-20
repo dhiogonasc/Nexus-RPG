@@ -49,16 +49,16 @@ public class ExecuteMission {
     public UserAttemptDTO start(Long missionId) {
 
         var user = context.getAuthenticatedUser();
-        var userMission = uMissionRepository.findByUserIdAndEntityId(user.getId(), missionId);
+        var uMission = uMissionRepository.findByUserIdAndEntityId(user.getId(), missionId);
 
-        missionValidator.isAccessible(userMission);
-        attemptValidator.hasActiveAttempt(userMission);
+        missionValidator.isAccessible(uMission);
+        attemptValidator.hasActiveAttempt(uMission);
         userValidator.hasEnoughOxygen(user);
 
         user.consumeOxygen();
 
         var attempt = UserAttempt.builder()
-                .uMission(userMission)
+                .uMission(uMission)
                 .startAt(LocalDateTime.now())
                 .build();
 

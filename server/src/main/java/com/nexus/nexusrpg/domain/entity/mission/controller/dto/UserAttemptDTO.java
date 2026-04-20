@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public record UserAttemptDTO(
 
         Long id,
-        UMissionDTOR userMission,
+        UMissionDTOR mission,
         LocalDateTime startAt,
         LocalDateTime endAt,
         BigDecimal result

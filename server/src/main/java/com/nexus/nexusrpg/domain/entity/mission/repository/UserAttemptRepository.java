@@ -21,6 +21,9 @@ public interface UserAttemptRepository extends JpaRepository<UserAttempt, Long> 
                 .orElseThrow(() -> new BusinessException("Attempt", "Nenhum registro encontrado!", HttpStatus.BAD_REQUEST));
     }
 
-    @Query("SELECT COUNT(ua) > 0 FROM UserAttempt ua WHERE ua.uMission.id = :uMissionId AND ua.endAt IS NULL")
-    boolean existsActiveAttempt(Long id);
+    @Query("SELECT COUNT(ua) > 0 " +
+            "FROM UserAttempt ua " +
+            "WHERE ua.uMission.id = :uMissionId " +
+            "AND ua.endAt IS NULL")
+    boolean existsActiveAttempt(@Param("uMissionId") Long id);
 }

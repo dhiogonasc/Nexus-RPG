@@ -26,9 +26,9 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/register",
+              "raw": "{{server.url}}/auth/register",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "auth",
@@ -46,7 +46,7 @@
               "script": {
                 "exec": [
                   "const response = pm.response.json();",
-                  "pm.environment.set(\"accessToken\", response.accessToken);"
+                  "pm.environment.set(\"token\", response.accessToken);"
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -67,9 +67,9 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/login",
+              "raw": "{{server.url}}/auth/login",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "auth",
@@ -144,9 +144,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/planets/{{planetId}}",
+              "raw": "{{server.url}}/planets/{{planetId}}",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "planets",
@@ -157,16 +157,6 @@
           "response": []
         }
       ],
-      "auth": {
-        "type": "bearer",
-        "bearer": [
-          {
-            "key": "token",
-            "value": "{{accessToken}}",
-            "type": "string"
-          }
-        ]
-      },
       "event": [
         {
           "listen": "prerequest",
@@ -201,9 +191,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/missions",
+              "raw": "{{server.url}}/missions",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "missions"
@@ -218,13 +208,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/missions/{{missionId}}",
+              "raw": "{{server.url}}/missions/{{mission.id}}",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "missions",
-                "{{missionId}}"
+                "{{mission.id}}"
               ]
             }
           },
@@ -236,13 +226,13 @@
             "method": "POST",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/missions/{{missionId}}/start",
+              "raw": "{{server.url}}/missions/{{mission.id}}/start",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "missions",
-                "{{missionId}}",
+                "{{mission.id}}",
                 "start"
               ]
             }
@@ -264,14 +254,14 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/missions/attempts/{{attemptId}}/answer",
+              "raw": "{{server.url}}/missions/attempts/{{mission.attempt.id}}/answer",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "missions",
                 "attempts",
-                "{{attemptId}}",
+                "{{mission.attempt.id}}",
                 "answer"
               ]
             }
@@ -284,14 +274,14 @@
             "method": "PUT",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/missions/attempts/{{attemptId}}/finish",
+              "raw": "{{server.url}}/missions/attempts/{{mission.attempt.id}}/finish",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "missions",
                 "attempts",
-                "{{attemptId}}",
+                "{{mission.attempt.id}}",
                 "finish"
               ]
             }
@@ -299,16 +289,6 @@
           "response": []
         }
       ],
-      "auth": {
-        "type": "bearer",
-        "bearer": [
-          {
-            "key": "token",
-            "value": "{{accessToken}}",
-            "type": "string"
-          }
-        ]
-      },
       "event": [
         {
           "listen": "prerequest",
@@ -343,9 +323,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/resources",
+              "raw": "{{server.url}}/resources",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "resources"
@@ -360,13 +340,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/resources/{{resourceId}}",
+              "raw": "{{server.url}}/resources/{{resource.id}}",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "resources",
-                "{{resourceId}}"
+                "{{resource.id}}"
               ]
             }
           },
@@ -407,9 +387,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/me",
+              "raw": "{{server.url}}/me",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "me"
@@ -419,16 +399,6 @@
           "response": []
         }
       ],
-      "auth": {
-        "type": "bearer",
-        "bearer": [
-          {
-            "key": "token",
-            "value": "{{accessToken}}",
-            "type": "string"
-          }
-        ]
-      },
       "event": [
         {
           "listen": "prerequest",
@@ -460,7 +430,7 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{accessToken}}",
+        "value": "{{access.token}}",
         "type": "string"
       }
     ]
@@ -487,20 +457,6 @@
           ""
         ]
       }
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:8080"
-    },
-    {
-      "key": "planetId",
-      "value": "1"
-    },
-    {
-      "key": "missionId",
-      "value": "1"
     }
   ]
 }
