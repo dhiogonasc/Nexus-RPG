@@ -29,8 +29,8 @@ public interface UResourceRepository extends JpaRepository<UResource, Long>, UEn
 
     @Query("SELECT ur " +
             "FROM UResource ur " +
-            "JOIN FETCH ur.planet " +
+            "JOIN FETCH ur.resource " +
             "WHERE ur.user.id = :userId " +
-            "AND ur.planet.id = :entityId")
+            "AND ur.resource.id = :entityId")
     Optional<UResource> findUEntity(@Param("userId") Long userId, @Param("entityId") Long entityId);
 }

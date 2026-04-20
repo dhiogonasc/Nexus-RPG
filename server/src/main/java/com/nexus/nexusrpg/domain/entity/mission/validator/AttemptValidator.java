@@ -22,7 +22,7 @@ public class AttemptValidator {
 
     public void hasActiveAttempt(UMission mission) {
 
-        boolean hasActive = userAttemptRepository.existsByUserMissionIdAndEndAtIsNull(mission.getId());
+        boolean hasActive = userAttemptRepository.existsActiveAttempt(mission.getId());
 
         if (hasActive) {
 

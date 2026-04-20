@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserAttemptRepository extends JpaRepository<UserAttempt, Long> {
@@ -22,5 +21,6 @@ public interface UserAttemptRepository extends JpaRepository<UserAttempt, Long> 
                 .orElseThrow(() -> new BusinessException("Attempt", "Nenhum registro encontrado!", HttpStatus.BAD_REQUEST));
     }
 
-    boolean existsByUserMissionIdAndEndAtIsNull(Long id);
+    @Query("SELECT COUNT(ua) > 0 FROM UserAttempt ua WHERE ua.uMission.id = :uMissionId AND ua.endAt IS NULL")
+    boolean existsActiveAttempt(Long id);
 }
