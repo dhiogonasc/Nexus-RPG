@@ -56,7 +56,7 @@ public class ProgressionService {
                 )
                 .ifPresent(up -> {
                     this.completePlanet(up);
-                    this.completeResource(userId, up.getPlanet().getResources().get(0));
+                    this.completeResource(userId, up.getResources().get(0));
                 });
 
         uPlanetRepository
@@ -66,21 +66,21 @@ public class ProgressionService {
                 )
                 .ifPresent(up -> {
                     this.unlockPlanet(up);
-                    this.unlockResource(userId, up.getPlanet().getResources().get(0));
+                    this.unlockResource(userId, up.getResources().get(0));
                     unlockFirstMissionOfPlanet(userId, up.getPlanet().getId());
                 });
     }
 
     private void unlockPlanet(UPlanet up){
-        if (up.getExecution().getStatus() == LOCKED) {
-            up.getExecution().unlock();
+        if (up.getStatus() == LOCKED) {
+            up.unlock();
             uPlanetRepository.save(up);
         }
     }
 
     private void completePlanet(UPlanet up){
-        if (up.getExecution().getStatus() == UNLOCKED) {
-            up.getExecution().complete();
+        if (up.getStatus() == UNLOCKED) {
+            up.complete();
             uPlanetRepository.save(up);
         }
     }
@@ -93,8 +93,8 @@ public class ProgressionService {
                         currentResource.getId()
                 )
                 .ifPresent(ur -> {
-                    if (ur.getExecution().getStatus() == UNLOCKED) {
-                        ur.getExecution().complete();
+                    if (ur.getStatus() == UNLOCKED) {
+                        ur.complete();
                         uResourceRepository.save(ur);
                     }
                 });
@@ -108,8 +108,8 @@ public class ProgressionService {
                         currentResource.getId()
                 )
                 .ifPresent(ur -> {
-                    if (ur.getExecution().getStatus() == LOCKED) {
-                        ur.getExecution().unlock();
+                    if (ur.getStatus() == LOCKED) {
+                        ur.unlock();
                         uResourceRepository.save(ur);
                     }
                 });

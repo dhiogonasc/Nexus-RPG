@@ -4,7 +4,6 @@ import com.nexus.nexusrpg.common.entity.service.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTOR;
-import com.nexus.nexusrpg.domain.entity.resource.validator.ResourceValidator;
 import com.nexus.nexusrpg.domain.mapper.UResourceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.Resource;
@@ -20,14 +19,11 @@ public class GetResource extends GetEntity<
         UResourceDTOR
         > {
 
-    private final ResourceValidator validator;
-
     public GetResource(
             Context context,
             UResourceRepository repository,
             UResourceMapper mapper,
-            UResourceRefMapper refMapper,
-            ResourceValidator validator
+            UResourceRefMapper refMapper
     ) {
         super(
                 context,
@@ -35,12 +31,8 @@ public class GetResource extends GetEntity<
                 mapper,
                 refMapper
         );
-
-        this.validator = validator;
     }
 
     @Override
-    protected void validate(UResource uResource) {
-        validator.isCollectable(uResource);
-    }
+    protected void validate(UResource uResource) {}
 }
