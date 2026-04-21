@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.controller;
 
+import com.nexus.nexusrpg.common.dto.MainDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
 import com.nexus.nexusrpg.domain.entity.resource.service.GetResource;
@@ -20,7 +21,7 @@ public class ResourceController {
     private final GetResource getResource;
 
     @GetMapping
-    public ResponseEntity<List<UResourceRDTO>> getResources() {
+    public ResponseEntity<MainDTO<UResourceRDTO>> getResources() {
         return ResponseEntity.ok(getResource.getAll());
     }
 

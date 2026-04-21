@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.controller;
 
+import com.nexus.nexusrpg.common.dto.MainDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserResponseDTO;
 import com.nexus.nexusrpg.domain.entity.mission.service.ExecuteMission;
@@ -22,7 +23,7 @@ public class MissionController {
     private final ExecuteMission executeMission;
 
     @GetMapping
-    public ResponseEntity<List<UMissionRDTO>> getMissions() {
+    public ResponseEntity<MainDTO<UMissionRDTO>> getMissions() {
         return ResponseEntity.ok(getMission.getAll());
     }
 

@@ -1,9 +1,7 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.common.dto.ProgressionDTO;
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
-import com.nexus.nexusrpg.common.state.mapper.ProgressionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;

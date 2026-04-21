@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.controller;
 
+import com.nexus.nexusrpg.common.dto.MainDTO;
 import com.nexus.nexusrpg.domain.entity.planet.service.GetPlanet;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
@@ -18,7 +19,7 @@ public class PlanetController {
     private final GetPlanet getPlanet;
 
     @GetMapping
-    public ResponseEntity<List<UPlanetRDTO>> getPlanets() {
+    public ResponseEntity<MainDTO<UPlanetRDTO>> getPlanets() {
         return ResponseEntity.ok(getPlanet.getAll());
     }
 
