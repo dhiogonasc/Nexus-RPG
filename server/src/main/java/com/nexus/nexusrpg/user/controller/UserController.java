@@ -15,7 +15,6 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<UserDTO> getMe() {
-
         return ResponseEntity.ok(context.getProfile());
     }
 }

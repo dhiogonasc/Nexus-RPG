@@ -1,15 +1,16 @@
 package com.nexus.nexusrpg.domain.model.relation;
 
-import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
-import com.nexus.nexusrpg.common.entity.interfaces.State;
+import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.common.state.State;
+import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.execution.UResourceExec;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.UNLOCKED;
 
 @Data
 @Builder
@@ -52,6 +53,11 @@ public class UResource implements State {
         return this.execution.getStatus();
     }
 
+    @Override
+    public boolean isCurrent() {
+        return this.execution.getIsCurrent();
+    }
+
     public static UResource initialize(User user, Resource resource){
 
         boolean isFirst = resource.getPlanet().getOrder() == 1;
@@ -66,4 +72,10 @@ public class UResource implements State {
                 .execution(initialStats)
                 .build();
     }
+
+
+    public Planet getPlanet(){
+        return this.resource.getPlanet();
+    }
+
 }

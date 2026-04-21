@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.entity.mapper;
+package com.nexus.nexusrpg.common.mapper;
 
 import com.nexus.nexusrpg.user.model.User;
 

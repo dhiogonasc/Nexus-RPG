@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.model.relation.execution;
 
-import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
-import com.nexus.nexusrpg.common.entity.interfaces.Progression;
+import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.common.state.Progression;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.*;
 
 @Data
 @Builder
@@ -41,7 +40,7 @@ public class UPlanetExec implements Progression {
 
     @Override
     public void complete() {
-        this.status = EntityStatus.COMPLETED;
+        this.status = COMPLETED;
         this.isCurrent = false;
     }
 }

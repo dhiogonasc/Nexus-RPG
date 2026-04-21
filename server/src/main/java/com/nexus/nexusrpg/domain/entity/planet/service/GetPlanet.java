@@ -41,7 +41,7 @@ public class GetPlanet extends GetEntity<
     }
 
     @Override
-    protected void validateAccess(com.nexus.nexusrpg.domain.model.relation.UPlanet uPlanet) {
+    protected void validate(UPlanet uPlanet) {
         validator.isAccessible(uPlanet);
     }
 }

@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.model.relation.execution;
 
-import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
-import com.nexus.nexusrpg.common.entity.interfaces.Progression;
+import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.common.state.Progression;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
@@ -15,7 +15,7 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.*;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.*;
 
 @Data
 @Builder

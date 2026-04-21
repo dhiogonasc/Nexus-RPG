@@ -16,13 +16,11 @@ public class Context {
     private final UserMapper userMapper;
 
     public User getAuthenticatedUser() {
-
         String authenticatedEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         return userService.findByEmail(authenticatedEmail);
     }
 
     public UserDTO getProfile() {
-
         return userMapper.toDTO(getAuthenticatedUser());
     }
 }

@@ -1,12 +1,15 @@
 package com.nexus.nexusrpg.user.mapper;
 
-import com.nexus.nexusrpg.common.entity.mapper.Mapper;
+import com.nexus.nexusrpg.common.mapper.Mapper;
+import com.nexus.nexusrpg.domain.controller.dto.level.LevelDTO;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
-import com.nexus.nexusrpg.user.controller.dto.CurrentDTO;
 import com.nexus.nexusrpg.user.controller.dto.UserDTO;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
@@ -17,44 +20,42 @@ import org.springframework.stereotype.Component;
 public class UserMapper implements Mapper<User, UserDTO> {
 
     private final LevelMapper levelMapper;
-    private final UPlanetRefMapper UPlanetRefMapper;
-    private final UMissionRefMapper UMissionRefMapper;
+    private final UPlanetRefMapper uPlanetRefMapper;
+    private final UMissionRefMapper uMissionRefMapper;
+    private final UResourceRefMapper uResourceRefMapper;
 
     @Override
     public UserDTO toDTO(User user){
-
-        var current = mapCurrent(user);
-
         return new UserDTO(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getXp(),
                 user.getOxygen(),
-                current
+                mapCurrentLevel(user),
+                mapCurrentPlanet(user),
+                mapCurrentMission(user)
+
         );
     }
 
-    private CurrentDTO mapCurrent(User user){
+    private LevelDTO mapCurrentLevel(User user){
+        return levelMapper.toDTO(user.getLevel());
+    }
 
-        var currentLevel = levelMapper.toReferenceDTO(user.getLevel());
-
-        var currentPlanet = user.getPlanets().stream()
+    private UPlanetDTOR mapCurrentPlanet(User user){
+        return user.getPlanets().stream()
                 .filter(UPlanet::isCurrent)
                 .findFirst()
-                .map(UPlanetRefMapper::toRefDTO)
+                .map(uPlanetRefMapper::toRefDTO)
                 .orElse(null);
+    }
 
-        var currentMission = user.getMissions().stream()
+    private UMissionDTOR mapCurrentMission(User user){
+        return user.getMissions().stream()
                 .filter(UMission::isCurrent)
                 .findFirst()
-                .map(UMissionRefMapper::toRefDTO)
+                .map(uMissionRefMapper::toRefDTO)
                 .orElse(null);
-
-        return new CurrentDTO(
-                currentLevel,
-                currentPlanet,
-                currentMission
-        );
     }
 }

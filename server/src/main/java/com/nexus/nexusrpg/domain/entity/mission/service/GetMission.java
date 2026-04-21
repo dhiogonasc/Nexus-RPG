@@ -41,7 +41,7 @@ public class GetMission extends GetEntity<
     }
 
     @Override
-    protected void validateAccess(UMission uMission) {
+    protected void validate(UMission uMission) {
         validator.isAccessible(uMission);
     }
 }

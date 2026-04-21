@@ -1,8 +1,10 @@
 package com.nexus.nexusrpg.domain.model.relation;
 
-import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
-import com.nexus.nexusrpg.common.entity.interfaces.State;
+import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.common.state.State;
+import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
+import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExec;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
@@ -11,8 +13,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
+import java.util.List;
+
+import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.UNLOCKED;
 
 @Data
 @Builder
@@ -72,5 +76,14 @@ public class UPlanet implements State {
                 .planet(planet)
                 .execution(initialStats)
                 .build();
+    }
+
+
+    public List<Resource> getResources(){
+        return this.planet.getResources();
+    }
+
+    public List<Mission> getMissions(){
+        return this.planet.getMissions();
     }
 }

@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
-import com.nexus.nexusrpg.common.entity.mapper.RefMapper;
+import com.nexus.nexusrpg.common.mapper.RefMapper;
+import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTOR;
-import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceExecDTO;
 import com.nexus.nexusrpg.domain.repository.relation.UResourceRepository;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
@@ -12,20 +12,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UResourceRefMapper extends RefMapper<Resource, UResource, UResourceDTOR> {
+public class UResourceRefMapper
+        extends RefMapper<Resource, UResource, UResourceDTOR>
+    implements ExecutionMapper<UResource>
+{
 
     private final UResourceRepository uResourceRepository;
 
     @Override
-    public UResourceDTOR toRefDTO(UResource ur){
+    public UResourceDTOR toRefDTO(UResource uResource){
 
-        var resource = ur.getResource();
-        var execution = new UResourceExecDTO(ur.getStatus());
+        var resource = uResource.getResource();
 
         return new UResourceDTOR(
                 resource.getId(),
                 resource.getName(),
-                execution
+                mapExecution(uResource)
         );
     }
 

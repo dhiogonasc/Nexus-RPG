@@ -34,11 +34,6 @@ public interface UMissionRepository extends JpaRepository<UMission, Long>, UEnti
             "AND um.mission.id = :entityId")
     Optional<UMission> findUEntity(@Param("userId") Long userId, @Param("entityId") Long entityId);
 
-    Optional<UMission> findByUserIdAndMissionPlanetIdAndMissionOrder(Long userId, Long missionId, int nextMissionOrder);
-    Optional<List<UMission>> findByUserIdAndMissionPlanetId(Long userId, Long planetId);
-    default List<UMission> findByUserIdAndMissionPlanetIdOrThrow(Long userId, Long planetId){
-        return findByUserIdAndMissionPlanetId(userId, planetId)
-                .orElseThrow(() -> new BusinessException("Mission", "Nenhum registro encontrado", NOT_FOUND));
-    }
+    Optional<UMission> findByUserIdAndMissionPlanetIdAndMissionOrder(Long userId, Long planetId, int nextMissionOrder);
 
 }

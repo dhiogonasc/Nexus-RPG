@@ -177,8 +177,8 @@ INSERT INTO
 VALUES
     (1, 'Planet - 1 : Mission - 1 ', NULL, 1, 10),
     (1, 'Planet - 1 : Mission - 2 ', NULL, 2, 10),
-    (2, 'Planet - 2 : Mission - 3 ', NULL, 1, 10),
-    (2, 'Planet - 2 : Mission - 1 ', NULL, 2, 10);
+    (2, 'Planet - 2 : Mission - 1 ', NULL, 1, 10),
+    (2, 'Planet - 2 : Mission - 2 ', NULL, 2, 10);
 
 CREATE TABLE
     "user_mission" (
@@ -414,6 +414,7 @@ CREATE TABLE
         user_id bigint NOT NULL,
         resource_id bigint NOT NULL,
         "status" entity_status NOT NULL DEFAULT 'LOCKED',
+        "is_current" boolean NOT NULL DEFAULT false,
         CONSTRAINT pk_user_resource PRIMARY KEY (id),
         CONSTRAINT fk_user_resource_user FOREIGN KEY (user_id) REFERENCES "user" (id) ON DELETE CASCADE,
         CONSTRAINT fk_user_resource_resource FOREIGN KEY (resource_id) REFERENCES "resource" (id) ON DELETE CASCADE,

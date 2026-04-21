@@ -1,38 +1,68 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.common.entity.mapper.Mapper;
+import com.nexus.nexusrpg.common.mapper.Mapper;
+import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.*;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
+import com.nexus.nexusrpg.domain.entity.question.AlternativeDTO;
+import com.nexus.nexusrpg.domain.entity.question.QuestionDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
-public class UMissionMapper implements Mapper<UMission, UMissionDTO> {
+public class UMissionMapper implements
+        Mapper<UMission, UMissionDTO>,
+        ExecutionMapper<UMission>
+{
 
     private final UPlanetRefMapper uPlanetRefMapper;
 
     public UMissionDTO toDTO(UMission uMission){
 
-        var user =  uMission.getUser();
         var mission = uMission.getMission();
-
-        var planet = uPlanetRefMapper.map(user, mission.getPlanet());
-        var execution = new UMissionExecDTO(
-                uMission.getStatus(),
-                uMission.isCurrent(),
-                uMission.getResult()
-        );
 
         return new UMissionDTO(
                 mission.getId(),
                 mission.getName(),
                 mission.getDescription(),
-                mission.getOrder(),
                 mission.getXpBonus(),
-                planet,
-                execution
+                mapQuestions(uMission),
+                mapPlanet(uMission),
+                mapExecution(uMission)
         );
+    }
+
+    private List<QuestionDTO> mapQuestions(UMission uMission) {
+
+        return uMission.getQuestions().stream()
+                .map(question -> new QuestionDTO(
+                        question.getId(),
+                        question.getName(),
+                        question.getDescription(),
+                        question.getCodeSnippet(),
+                        question.getAlternatives().stream()
+                                .map(alternative -> new AlternativeDTO(
+                                        alternative.getId(),
+                                        question.getId(),
+                                        alternative.getContent(),
+                                        alternative.getFeedbackTip(),
+                                        alternative.getIsCorrect()
+                                ))
+                                .toList()
+                ))
+                .toList();
+    }
+
+    public UPlanetDTOR mapPlanet(UMission uMission){
+
+        var user = uMission.getUser();
+        var planet = uMission.getPlanet();
+
+        return uPlanetRefMapper.map(user, planet);
     }
 }

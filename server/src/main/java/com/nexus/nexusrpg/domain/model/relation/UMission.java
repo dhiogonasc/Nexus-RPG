@@ -1,17 +1,20 @@
 package com.nexus.nexusrpg.domain.model.relation;
 
-import com.nexus.nexusrpg.common.entity.enums.EntityStatus;
-import com.nexus.nexusrpg.common.entity.interfaces.State;
+import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.common.state.State;
+import com.nexus.nexusrpg.domain.entity.question.model.Question;
 import com.nexus.nexusrpg.domain.model.Mission;
+import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.execution.UMissionExec;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.UNLOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.UNLOCKED;
 
 @Data
 @Builder
@@ -58,10 +61,6 @@ public class UMission implements State {
         return this.execution.getIsCurrent();
     }
 
-    public BigDecimal getResult(){
-        return this.execution.getBestResult();
-    }
-
     public static UMission initialize(User user, Mission mission) {
 
         boolean isFirst = mission.getOrder() == 1 & mission.getPlanet().getOrder() == 1;
@@ -76,5 +75,14 @@ public class UMission implements State {
                 .mission(mission)
                 .execution(initialStats)
                 .build();
+    }
+
+
+    public Planet getPlanet(){
+        return this.mission.getPlanet();
+    }
+
+    public List<Question> getQuestions() {
+        return this.mission.getQuestions();
     }
 }

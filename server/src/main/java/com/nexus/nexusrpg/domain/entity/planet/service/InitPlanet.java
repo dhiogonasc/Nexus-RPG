@@ -15,13 +15,11 @@ public class InitPlanet extends InitEntity<Planet, UPlanet> {
             PlanetRepository planetRepository,
             UPlanetRepository uPlanetRepository
     ){
-
         super(planetRepository, uPlanetRepository);
     }
 
     @Override
     protected UPlanet initRelation(User user, Planet planet) {
-
         return UPlanet.initialize(user, planet);
     }
 }

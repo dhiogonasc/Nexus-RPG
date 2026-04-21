@@ -1,9 +1,10 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.common.entity.mapper.Mapper;
+import com.nexus.nexusrpg.common.mapper.Mapper;
+import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetExecDTO;
-import com.nexus.nexusrpg.domain.entity.planet.service.PlanetProgress;
+import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTOR;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
@@ -11,41 +12,47 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
-public class UPlanetMapper implements Mapper<UPlanet, UPlanetDTO> {
+public class UPlanetMapper implements
+        Mapper<UPlanet, UPlanetDTO>,
+        ExecutionMapper<UPlanet>
+{
 
     private final UResourceRefMapper uResourceRefMapper;
     private final UMissionRefMapper uMissionRefMapper;
-    private final PlanetProgress planetProgress;
 
     @Override
     public UPlanetDTO toDTO(UPlanet uPlanet){
 
-        var user =  uPlanet.getUser();
         var planet = uPlanet.getPlanet();
-
-        var resources = uResourceRefMapper
-                .map(user, planet.getResources());
-        var missions = uMissionRefMapper
-                .map(user, planet.getMissions());
-
-        var progress = planetProgress.calculate(uPlanet);
-        var execution = new UPlanetExecDTO(
-                uPlanet.getStatus(),
-                uPlanet.isCurrent(),
-                progress
-        );
 
         return new UPlanetDTO(
                 planet.getId(),
                 planet.getName(),
                 planet.getDescription(),
-                planet.getOrder(),
                 planet.getXpBonus(),
-                resources,
-                missions,
-                execution
+                mapResources(uPlanet),
+                mapMissions(uPlanet),
+                mapExecution(uPlanet)
         );
+    }
+
+    private List<UMissionDTOR> mapMissions(UPlanet uPlanet){
+
+        var user  = uPlanet.getUser();
+        var missions = uPlanet.getMissions();
+
+        return uMissionRefMapper.map(user, missions);
+    }
+
+    private List<UResourceDTOR> mapResources(UPlanet uPlanet){
+
+        var user  = uPlanet.getUser();
+        var resources = uPlanet.getResources();
+
+        return uResourceRefMapper.map(user, resources);
     }
 }

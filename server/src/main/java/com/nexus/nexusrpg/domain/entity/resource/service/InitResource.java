@@ -16,13 +16,11 @@ public class InitResource extends InitEntity<Resource, UResource> {
             ResourceRepository resourceRepository,
             UResourceRepository uResourceRepository
     ) {
-
         super(resourceRepository, uResourceRepository);
     }
 
     @Override
     protected UResource initRelation(User user, Resource resource) {
-
         return UResource.initialize(user, resource);
     }
 }

@@ -7,7 +7,7 @@ import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 @Component
@@ -21,7 +21,6 @@ public class PlanetValidator {
         var planetStatus =  uPlanet.getStatus();
 
         if(planetStatus == LOCKED){
-
             throw new BusinessException(
                     "Planet",
                     "Bloqueado! Complete o planeta anterior!",
@@ -33,9 +32,9 @@ public class PlanetValidator {
     public void isAccessibleByMission(UMission uMission) {
 
         var userId = uMission.getUser().getId();
-        var planetId = uMission.getMission().getPlanet().getId();
-        var userPlanet = uPlanetRepository.findByUserIdAndEntityId(userId, planetId);
+        var planetId = uMission.getPlanet().getId();
 
+        var userPlanet = uPlanetRepository.findByUserIdAndEntityId(userId, planetId);
         isAccessible(userPlanet);
     }
 }

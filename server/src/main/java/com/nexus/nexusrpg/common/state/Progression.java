@@ -1,7 +1,6 @@
-package com.nexus.nexusrpg.common.entity.interfaces;
+package com.nexus.nexusrpg.common.state;
 
 public interface Progression {
-
     void unlock();
     void complete();
 }

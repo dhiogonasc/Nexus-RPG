@@ -12,7 +12,6 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class UserValidator {
 
     public void hasEnoughOxygen(User user) {
-
         if (user.getOxygen() <= 0) {
             throw new BusinessException("User", "Não possui oxigênio suficiente", BAD_REQUEST);
         }

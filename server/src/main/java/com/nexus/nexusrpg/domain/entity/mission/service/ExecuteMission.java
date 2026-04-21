@@ -14,6 +14,7 @@ import com.nexus.nexusrpg.domain.entity.mission.model.UAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UAttemptRepository;
 import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
 import com.nexus.nexusrpg.domain.entity.question.repository.QuestionRepository;
+import com.nexus.nexusrpg.user.repository.UserRepository;
 import com.nexus.nexusrpg.user.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.COMPLETED;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +37,7 @@ public class ExecuteMission {
     private final QuestionRepository questionRepository;
     private final AlternativeRepository alternativeRepository;
 
+    private final UserRepository userRepository;
     private final UMissionRepository uMissionRepository;
     private final UserResponseRepository userResponseRepository;
     private final UAttemptRepository uAttemptRepository;
@@ -48,7 +50,9 @@ public class ExecuteMission {
     @Transactional
     public UAttemptDTO start(Long missionId) {
 
-        var user = context.getAuthenticatedUser();
+        var authUser = context.getAuthenticatedUser();
+        var user = userRepository.findById(authUser.getId()).orElseThrow();
+        
         var uMission = uMissionRepository.findByUserIdAndEntityId(user.getId(), missionId);
 
         missionValidator.isAccessible(uMission);
@@ -56,6 +60,7 @@ public class ExecuteMission {
         userValidator.hasEnoughOxygen(user);
 
         user.consumeOxygen();
+        userRepository.save(user);
 
         var attempt = UAttempt.builder()
                 .uMission(uMission)

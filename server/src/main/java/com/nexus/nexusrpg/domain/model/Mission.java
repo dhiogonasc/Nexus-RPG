@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.model;
 
 import com.nexus.nexusrpg.domain.entity.question.model.Question;
+import com.nexus.nexusrpg.domain.model.enums.PlanetLabel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,14 +26,15 @@ public class Mission {
     @JoinColumn(name = "planet_id", nullable = false)
     private Planet planet;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "\"name\"", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "\"description\"", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "order", nullable = false)
+    @Column(name = "\"order\"", nullable = false, unique = true)
     private int order;
+
 
     @Column(name = "xp_bonus", nullable = false, columnDefinition = "xp")
     private long xpBonus;

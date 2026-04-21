@@ -6,7 +6,7 @@ import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Component

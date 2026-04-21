@@ -44,7 +44,7 @@ public class AuthService {
         var loggedInAt = Instant.now();
 
         var claims = JwtClaimsSet.builder()
-                .issuer("nexus-rpg")
+                .issuer("nexus")
                 .subject(user.getEmail())
                 .issuedAt(loggedInAt)
                 .expiresAt(loggedInAt.plusSeconds(expiresIn))

@@ -5,7 +5,7 @@ import com.nexus.nexusrpg.domain.model.relation.UResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.nexus.nexusrpg.common.entity.enums.EntityStatus.COMPLETED;
+import static com.nexus.nexusrpg.common.enums.EntityStatus.COMPLETED;
 import static org.springframework.http.HttpStatus.CONFLICT;
 
 @Component
@@ -14,7 +14,7 @@ public class ResourceValidator {
 
     public void isCollectable(UResource resource) {
 
-        var resourceStatus = resource.getExecution().getStatus();
+        var resourceStatus = resource.getStatus();
 
         if (resourceStatus == COMPLETED) {
             throw new BusinessException(
