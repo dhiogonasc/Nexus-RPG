@@ -64,6 +64,7 @@ public class UResource implements State {
 
         var initialStats = UResourceExec.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
+                .isCurrent(true)
                 .build();
 
         return UResource.builder()

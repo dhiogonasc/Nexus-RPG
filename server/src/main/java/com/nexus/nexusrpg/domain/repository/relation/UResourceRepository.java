@@ -33,4 +33,18 @@ public interface UResourceRepository extends JpaRepository<UResource, Long>, UEn
             "WHERE ur.user.id = :userId " +
             "AND ur.resource.id = :entityId")
     Optional<UResource> findUEntity(@Param("userId") Long userId, @Param("entityId") Long entityId);
+
+    @Override
+    @Query("SELECT COUNT(ur) " +
+            "FROM UResource ur " +
+            "WHERE ur.user.id = :userId ")
+    long countTotalTasks(@Param("userId") Long userId);
+
+    @Override
+    @Query("SELECT COUNT(ur) " +
+            "FROM UResource ur " +
+            "WHERE ur.user.id = :userId " +
+            "AND ur.execution.status = 'COMPLETED'")
+    long countCompletedTasks(@Param("userId") Long userId);
+
 }

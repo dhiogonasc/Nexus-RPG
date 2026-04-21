@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.controller.dto.mission;
 
 import com.nexus.nexusrpg.common.dto.ExecutionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import com.nexus.nexusrpg.domain.entity.question.QuestionDTO;
 
 import java.util.List;
@@ -12,6 +12,6 @@ public record UMissionDTO(
         String description,
         long xpBonus,
         List<QuestionDTO> questions,
-        UPlanetDTOR planet,
+        UPlanetRDTO planet,
         ExecutionDTO execution
 ) {}

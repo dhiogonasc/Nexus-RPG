@@ -34,5 +34,18 @@ public interface UPlanetRepository extends JpaRepository<UPlanet, Long>, UEntity
             "AND up.planet.id = :entityId")
     Optional<UPlanet> findUEntity(@Param("userId") Long userId, @Param("entityId") Long entityId);
 
+    @Override
+    @Query("SELECT COUNT(up) " +
+            "FROM UPlanet up " +
+            "WHERE up.user.id = :userId ")
+    long countTotalTasks(@Param("userId") Long userId);
+
+    @Override
+    @Query("SELECT COUNT(up) " +
+            "FROM UPlanet up " +
+            "WHERE up.user.id = :userId " +
+            "AND up.execution.status = 'COMPLETED'")
+    long countCompletedTasks(@Param("userId") Long userId);
+
     Optional<UPlanet> findByUserIdAndPlanetOrder(Long userId, int nextPlanetOrder);
 }

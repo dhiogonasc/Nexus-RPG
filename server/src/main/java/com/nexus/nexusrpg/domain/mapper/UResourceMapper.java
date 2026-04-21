@@ -2,9 +2,8 @@ package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
-import com.nexus.nexusrpg.domain.entity.question.QuestionDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,7 @@ public class UResourceMapper implements
         );
     }
 
-    public UPlanetDTOR mapPlanet(UResource uResource){
+    public UPlanetRDTO mapPlanet(UResource uResource){
 
         var user = uResource.getUser();
         var planet = uResource.getPlanet();

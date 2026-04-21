@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.model.relation.execution;
 
 import com.nexus.nexusrpg.common.enums.EntityStatus;
-import com.nexus.nexusrpg.common.state.Progression;
+import com.nexus.nexusrpg.common.state.Execution;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
@@ -20,7 +20,7 @@ import static com.nexus.nexusrpg.common.enums.EntityStatus.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UResourceExec implements Progression {
+public class UResourceExec implements Execution {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)

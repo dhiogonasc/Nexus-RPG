@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 import com.nexus.nexusrpg.common.entity.service.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.mapper.UMissionMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
 import com.nexus.nexusrpg.domain.model.Mission;
@@ -17,7 +17,7 @@ public class GetMission extends GetEntity<
         Mission,
         UMission,
         UMissionDTO,
-        UMissionDTOR
+        UMissionRDTO
         > {
 
     private final MissionValidator validator;

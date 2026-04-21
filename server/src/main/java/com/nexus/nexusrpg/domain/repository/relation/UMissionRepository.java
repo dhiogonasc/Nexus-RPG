@@ -34,6 +34,19 @@ public interface UMissionRepository extends JpaRepository<UMission, Long>, UEnti
             "AND um.mission.id = :entityId")
     Optional<UMission> findUEntity(@Param("userId") Long userId, @Param("entityId") Long entityId);
 
+    @Override
+    @Query("SELECT COUNT(um) " +
+            "FROM UMission um " +
+            "WHERE um.user.id = :userId ")
+    long countTotalTasks(@Param("userId") Long userId);
+
+    @Override
+    @Query("SELECT COUNT(um) " +
+            "FROM UMission um " +
+            "WHERE um.user.id = :userId " +
+            "AND um.execution.status = 'COMPLETED'")
+    long countCompletedTasks(@Param("userId") Long userId);
+
     Optional<UMission> findByUserIdAndMissionPlanetIdAndMissionOrder(Long userId, Long planetId, int nextMissionOrder);
 
 }

@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.mapper.reference;
 
 import com.nexus.nexusrpg.common.mapper.RefMapper;
 import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
@@ -13,18 +13,18 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class UMissionRefMapper
-        extends RefMapper<Mission, UMission, UMissionDTOR>
+        extends RefMapper<Mission, UMission, UMissionRDTO>
     implements ExecutionMapper<UMission>
 {
 
     private final UMissionRepository uMissionRepository;
 
     @Override
-    public UMissionDTOR toRefDTO(UMission uMission) {
+    public UMissionRDTO toRefDTO(UMission uMission) {
 
         var mission =  uMission.getMission();
 
-        return new UMissionDTOR(
+        return new UMissionRDTO(
                 mission.getId(),
                 mission.getName(),
                 mapExecution(uMission)

@@ -1,8 +1,8 @@
-package com.nexus.nexusrpg.domain.controller.dto.resource;
+package com.nexus.nexusrpg.domain.controller.dto.mission;
 
 import com.nexus.nexusrpg.common.dto.ExecutionDTO;
 
-public record UResourceDTOR(
+public record UMissionRDTO(
         Long id,
         String name,
         ExecutionDTO execution

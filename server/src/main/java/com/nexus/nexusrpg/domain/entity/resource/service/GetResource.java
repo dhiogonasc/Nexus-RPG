@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.entity.resource.service;
 import com.nexus.nexusrpg.common.entity.service.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
-import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
 import com.nexus.nexusrpg.domain.mapper.UResourceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.Resource;
@@ -16,7 +16,7 @@ public class GetResource extends GetEntity<
         Resource,
         UResource,
         UResourceDTO,
-        UResourceDTOR
+        UResourceRDTO
         > {
 
     public GetResource(

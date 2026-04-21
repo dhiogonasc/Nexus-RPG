@@ -4,7 +4,7 @@ import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserResponseDTO;
 import com.nexus.nexusrpg.domain.entity.mission.service.ExecuteMission;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.entity.mission.service.GetMission;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -22,7 +22,7 @@ public class MissionController {
     private final ExecuteMission executeMission;
 
     @GetMapping
-    public ResponseEntity<List<UMissionDTOR>> getMissions() {
+    public ResponseEntity<List<UMissionRDTO>> getMissions() {
         return ResponseEntity.ok(getMission.getAll());
     }
 

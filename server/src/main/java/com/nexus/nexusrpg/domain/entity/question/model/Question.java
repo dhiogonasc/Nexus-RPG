@@ -24,17 +24,14 @@ public class Question {
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
 
-    @Column(name = "\"name\"", nullable = false)
-    private String name;
-
-    @Column(name = "\"description\"", nullable = false, columnDefinition = "text")
-    private String description;
-
-    @Column(name = "\"order\"", nullable = false)
-    private Integer order;
+    @Column(name = "\"content\"", nullable = false, columnDefinition = "text")
+    private String content;
 
     @Column(name = "\"code_snippet\"", columnDefinition = "text")
     private String codeSnippet;
+
+    @Column(name = "\"order\"", nullable = false)
+    private Integer order;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alternative> alternatives;

@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.common.state;
 
-public interface Progression {
-    void unlock();
-    void complete();
+public interface Progression{
+    long getCompleted();
+    long getTotal();
 }

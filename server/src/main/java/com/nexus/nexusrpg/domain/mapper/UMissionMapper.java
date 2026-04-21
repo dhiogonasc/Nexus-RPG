@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.mapper;
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.*;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import com.nexus.nexusrpg.domain.entity.question.AlternativeDTO;
 import com.nexus.nexusrpg.domain.entity.question.QuestionDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
@@ -42,23 +42,19 @@ public class UMissionMapper implements
         return uMission.getQuestions().stream()
                 .map(question -> new QuestionDTO(
                         question.getId(),
-                        question.getName(),
-                        question.getDescription(),
+                        question.getContent(),
                         question.getCodeSnippet(),
                         question.getAlternatives().stream()
                                 .map(alternative -> new AlternativeDTO(
                                         alternative.getId(),
-                                        question.getId(),
-                                        alternative.getContent(),
-                                        alternative.getFeedbackTip(),
-                                        alternative.getIsCorrect()
+                                        alternative.getContent()
                                 ))
                                 .toList()
                 ))
                 .toList();
     }
 
-    public UPlanetDTOR mapPlanet(UMission uMission){
+    public UPlanetRDTO mapPlanet(UMission uMission){
 
         var user = uMission.getUser();
         var planet = uMission.getPlanet();

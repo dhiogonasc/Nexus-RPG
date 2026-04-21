@@ -7,6 +7,6 @@ public record UserDTO(
         String email,
         long xp,
         int oxygen,
-        ProgressionDTO progression
+        UserProgressionDTO progression
 ) {
 }

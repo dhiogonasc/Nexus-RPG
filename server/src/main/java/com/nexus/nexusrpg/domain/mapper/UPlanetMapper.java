@@ -1,10 +1,13 @@
 package com.nexus.nexusrpg.domain.mapper;
 
+import com.nexus.nexusrpg.common.dto.ProgressionDTO;
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTOR;
+import com.nexus.nexusrpg.common.state.mapper.ProgressionMapper;
+import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
-import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
+import com.nexus.nexusrpg.domain.entity.planet.service.CountPlanet;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
@@ -21,6 +24,7 @@ public class UPlanetMapper implements
         ExecutionMapper<UPlanet>
 {
 
+    private final CountPlanet countPlanet;
     private final UResourceRefMapper uResourceRefMapper;
     private final UMissionRefMapper uMissionRefMapper;
 
@@ -40,7 +44,7 @@ public class UPlanetMapper implements
         );
     }
 
-    private List<UMissionDTOR> mapMissions(UPlanet uPlanet){
+    private List<UMissionRDTO> mapMissions(UPlanet uPlanet){
 
         var user  = uPlanet.getUser();
         var missions = uPlanet.getMissions();
@@ -48,7 +52,7 @@ public class UPlanetMapper implements
         return uMissionRefMapper.map(user, missions);
     }
 
-    private List<UResourceDTOR> mapResources(UPlanet uPlanet){
+    private List<UResourceRDTO> mapResources(UPlanet uPlanet){
 
         var user  = uPlanet.getUser();
         var resources = uPlanet.getResources();

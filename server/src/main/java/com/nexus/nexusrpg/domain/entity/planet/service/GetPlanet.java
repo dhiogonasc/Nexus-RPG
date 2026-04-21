@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.entity.planet.service;
 
 import com.nexus.nexusrpg.common.entity.service.GetEntity;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTOR;
+import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import com.nexus.nexusrpg.domain.mapper.UPlanetMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
 import com.nexus.nexusrpg.domain.model.Planet;
@@ -17,7 +17,7 @@ public class GetPlanet extends GetEntity<
         Planet,
         UPlanet,
         UPlanetDTO,
-        UPlanetDTOR
+        UPlanetRDTO
         > {
 
     private final PlanetValidator validator;

@@ -10,5 +10,5 @@ public interface ExecutionMapper<T extends State> {
                 entity.getStatus(),
                 entity.isCurrent()
         );
-    };
+    }
 }
