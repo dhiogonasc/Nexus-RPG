@@ -68,16 +68,16 @@ export default function Footer() {
       {/* Botão Perfil */}
       <TouchableOpacity 
         style={styles.button} 
-        onPress={() => router.replace('/account')}
+        onPress={() => router.replace('/Account')}
       >
         <MaterialCommunityIcons 
           name="account-circle" 
           size={24} 
-          color={pathname === '/account' ? corAtiva : corInativa} 
+          color={pathname === '/Account' ? corAtiva : corInativa} 
         />
         <Text style={[
           styles.buttonText,
-          pathname === '/account' && { color: corAtiva }
+          pathname === '/Account' && { color: corAtiva }
         ]}>
           Perfil
         </Text>
