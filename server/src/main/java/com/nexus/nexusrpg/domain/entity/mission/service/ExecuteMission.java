@@ -52,7 +52,7 @@ public class ExecuteMission {
 
         var authUser = context.getAuthenticatedUser();
         var user = userRepository.findById(authUser.getId()).orElseThrow();
-        
+
         var uMission = uMissionRepository.findByUserIdAndEntityId(user.getId(), missionId);
 
         missionValidator.isAccessible(uMission);
@@ -82,27 +82,6 @@ public class ExecuteMission {
         registerAnswer(attempt, request);
     }
 
-    private void registerAnswer(UAttempt attempt, UserResponseDTO request) {
-
-        var questionId = request.questionId();
-        var question = questionRepository.findByIdOrThrow(questionId);
-
-        var alternativeId = request.alternativeId();
-        var alternative = alternativeRepository.findByIdOrThrow(alternativeId);
-
-        attemptValidator.isAnswerValid(alternative, question);
-
-        var response = userResponseRepository
-                .findByAttemptIdAndQuestionId(attempt.getId(), questionId)
-                .orElseGet(() -> UserResponse.builder()
-                        .attempt(attempt)
-                        .question(question)
-                        .build());
-
-        response.setAlternative(alternative);
-        userResponseRepository.save(response);
-    }
-
     @Transactional
     public UAttemptDTO finish(Long attemptId) {
 
@@ -111,7 +90,6 @@ public class ExecuteMission {
 
         attemptValidator.isUserAuth(user, attempt);
         attemptValidator.isActive(attempt);
-        attemptValidator.isCompleted(attempt);
 
         var responses = userResponseRepository.findByAttemptId(attemptId);
         var result = scoreService.calculateResult(attempt, responses);
@@ -125,5 +103,25 @@ public class ExecuteMission {
         levelService.findNextLevel(user.getLevel()).ifPresent(user::levelUp);
 
         return uAttemptMapper.toDTO(uAttemptRepository.save(attempt));
+    }
+
+    private void registerAnswer(UAttempt attempt, UserResponseDTO request) {
+
+        attemptValidator.isAlreadyAnswered(attempt.getId(), request.questionId());
+
+        var question = questionRepository.findByIdOrThrow(request.questionId());
+        var alternative = alternativeRepository.findByIdOrThrow(request.alternativeId());
+
+        attemptValidator.isAnswerValid(alternative, question);
+
+        var response = userResponseRepository
+                .findByAttemptIdAndQuestionId(attempt.getId(), request.questionId())
+                .orElseGet(() -> UserResponse.builder()
+                        .attempt(attempt)
+                        .question(question)
+                        .build());
+
+        response.setAlternative(alternative);
+        userResponseRepository.save(response);
     }
 }
