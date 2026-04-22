@@ -1,11 +1,13 @@
-package com.nexus.nexusrpg.common.state.mapper;
+package com.nexus.nexusrpg.common.mapping.mapper;
 
 import com.nexus.nexusrpg.common.dto.ExecutionDTO;
 import com.nexus.nexusrpg.common.state.State;
+import org.springframework.stereotype.Component;
 
-public interface ExecutionMapper<T extends State> {
+@Component
+public class ExecutionMapper<T extends State> {
 
-    default ExecutionDTO mapExecution(T entity){
+    public ExecutionDTO map(T entity){
         return new ExecutionDTO(
                 entity.getStatus(),
                 entity.isCurrent()

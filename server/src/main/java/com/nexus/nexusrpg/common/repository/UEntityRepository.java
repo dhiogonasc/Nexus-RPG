@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.entity.repository;
+package com.nexus.nexusrpg.common.repository;
 
 import java.util.List;
 

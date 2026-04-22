@@ -1,23 +1,30 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
-import com.nexus.nexusrpg.common.mapper.ReferenceMapper;
-import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
+import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
+import com.nexus.nexusrpg.common.mapping.mapper.ReferenceMapper;
+import com.nexus.nexusrpg.common.mapping.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
 import com.nexus.nexusrpg.domain.repository.relation.UResourceRepository;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
 import com.nexus.nexusrpg.user.model.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
-public class UResourceReferenceMapper
-        extends ReferenceMapper<Resource, UResource, UResourceRDTO>
-    implements ExecutionMapper<UResource>
-{
+public class UResourceReferenceMapper extends ReferenceMapper<Resource, UResource, UResourceRDTO> {
 
+    private final ExecutionMapper<UResource> executionMapper;
     private final UResourceRepository uResourceRepository;
+
+    public UResourceReferenceMapper(
+            TaskMapper<UResourceRDTO> taskMapper,
+            ExecutionMapper<UResource> executionMapper,
+            UResourceRepository uResourceRepository
+    ) {
+        super(taskMapper);
+        this.executionMapper = executionMapper;
+        this.uResourceRepository = uResourceRepository;
+    }
 
     @Override
     public UResourceRDTO toRefDTO(UResource uResource){
@@ -27,7 +34,7 @@ public class UResourceReferenceMapper
         return new UResourceRDTO(
                 resource.getId(),
                 resource.getName(),
-                mapExecution(uResource)
+                executionMapper.map(uResource)
         );
     }
 

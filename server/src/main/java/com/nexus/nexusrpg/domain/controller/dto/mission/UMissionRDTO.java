@@ -10,7 +10,7 @@ public record UMissionRDTO(
         ExecutionDTO execution
 ) implements Task {
     @Override
-    public EntityStatus getStatus() {
+    public EntityStatus status() {
         return execution.status();
     }
 }

@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.dto.TaskDTO;
-import com.nexus.nexusrpg.common.mapper.Mapper;
-import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
+import com.nexus.nexusrpg.common.mapping.Mapper;
+import com.nexus.nexusrpg.common.mapping.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
@@ -15,11 +15,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UPlanetMapper implements
-        Mapper<UPlanet, UPlanetDTO>,
-        ExecutionMapper<UPlanet>
-{
+public class UPlanetMapper implements Mapper<UPlanet, UPlanetDTO> {
 
+    private final ExecutionMapper<UPlanet> executionMapper;
     private final UResourceReferenceMapper uResourceRefMapper;
     private final UMissionReferenceMapper uMissionRefMapper;
 
@@ -35,7 +33,7 @@ public class UPlanetMapper implements
                 planet.getXpBonus(),
                 mapResources(uPlanet),
                 mapMissions(uPlanet),
-                mapExecution(uPlanet)
+                executionMapper.map(uPlanet)
         );
     }
 

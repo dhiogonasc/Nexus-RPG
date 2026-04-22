@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.repository.relation;
 
-import com.nexus.nexusrpg.common.entity.repository.UEntityRepository;
+import com.nexus.nexusrpg.common.repository.UEntityRepository;
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
 import org.springframework.data.jpa.repository.JpaRepository;

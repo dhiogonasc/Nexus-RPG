@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.common.mapper.Mapper;
+import com.nexus.nexusrpg.common.mapping.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.level.LevelDTO;
 import com.nexus.nexusrpg.domain.model.Level;
 import org.springframework.stereotype.Component;

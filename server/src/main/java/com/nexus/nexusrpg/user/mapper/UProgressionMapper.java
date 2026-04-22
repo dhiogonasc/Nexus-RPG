@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.user.mapper;
 
-import com.nexus.nexusrpg.common.mapper.Mapper;
+import com.nexus.nexusrpg.common.mapping.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.level.LevelDTO;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;

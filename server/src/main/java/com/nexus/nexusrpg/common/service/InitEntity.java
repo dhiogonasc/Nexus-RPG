@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.entity.service;
+package com.nexus.nexusrpg.common.service;
 
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;

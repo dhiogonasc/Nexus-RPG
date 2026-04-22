@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.entity.resource.service;
 
-import com.nexus.nexusrpg.common.entity.service.GetEntity;
+import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
+import com.nexus.nexusrpg.common.service.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
@@ -23,13 +24,15 @@ public class GetResource extends GetEntity<
             Context context,
             UResourceRepository repository,
             UResourceMapper mapper,
-            UResourceReferenceMapper refMapper
+            UResourceReferenceMapper refMapper,
+            TaskMapper<UResourceRDTO> taskMapper
     ) {
         super(
                 context,
                 repository,
                 mapper,
-                refMapper
+                refMapper,
+                taskMapper
         );
     }
 

@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.common.mapper.Mapper;
-import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
+import com.nexus.nexusrpg.common.mapping.Mapper;
+import com.nexus.nexusrpg.common.mapping.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.*;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import com.nexus.nexusrpg.domain.entity.question.AlternativeDTO;
@@ -15,11 +15,9 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class UMissionMapper implements
-        Mapper<UMission, UMissionDTO>,
-        ExecutionMapper<UMission>
-{
+public class UMissionMapper implements Mapper<UMission, UMissionDTO> {
 
+    private final ExecutionMapper<UMission> executionMapper;
     private final UPlanetReferenceMapper uPlanetRefMapper;
 
     public UMissionDTO toDTO(UMission uMission){
@@ -33,7 +31,7 @@ public class UMissionMapper implements
                 mission.getXpBonus(),
                 mapQuestions(uMission),
                 mapPlanet(uMission),
-                mapExecution(uMission)
+                executionMapper.map(uMission)
         );
     }
 

@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.entity.mission.service;
 
-import com.nexus.nexusrpg.common.entity.service.GetEntity;
+import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
+import com.nexus.nexusrpg.common.service.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTO;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
@@ -27,14 +28,16 @@ public class GetMission extends GetEntity<
             UMissionRepository repository,
             UMissionMapper mapper,
             UMissionReferenceMapper refMapper,
-            MissionValidator validator
+            MissionValidator validator,
+            TaskMapper<UMissionRDTO> taskMapper
     ) {
 
         super(
                 context,
                 repository,
                 mapper,
-                refMapper
+                refMapper,
+                taskMapper
         );
 
         this.validator = validator;

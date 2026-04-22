@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.mission.service;
 
-import com.nexus.nexusrpg.common.entity.service.InitEntity;
+import com.nexus.nexusrpg.common.service.InitEntity;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.repository.MissionRepository;
 import com.nexus.nexusrpg.domain.model.relation.UMission;

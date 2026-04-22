@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.entity.planet.service;
 
-import com.nexus.nexusrpg.common.entity.service.GetEntity;
+import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
+import com.nexus.nexusrpg.common.service.GetEntity;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import com.nexus.nexusrpg.domain.mapper.UPlanetMapper;
@@ -27,14 +28,16 @@ public class GetPlanet extends GetEntity<
             UPlanetRepository repository,
             UPlanetMapper mapper,
             UPlanetReferenceMapper refMapper,
-            PlanetValidator validator
+            PlanetValidator validator,
+            TaskMapper<UPlanetRDTO> taskMapper
     ) {
 
         super(
                 context,
                 repository,
                 mapper,
-                refMapper
+                refMapper,
+                taskMapper
         );
 
         this.validator = validator;
