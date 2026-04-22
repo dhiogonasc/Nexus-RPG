@@ -3,8 +3,7 @@ package com.nexus.nexusrpg.domain.entity.resource.service;
 import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
 import com.nexus.nexusrpg.common.service.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
-import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
+import com.nexus.nexusrpg.domain.controller.dto.UResourceDTO;
 import com.nexus.nexusrpg.domain.mapper.UResourceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceReferenceMapper;
 import com.nexus.nexusrpg.domain.model.Resource;
@@ -16,8 +15,7 @@ import org.springframework.stereotype.Service;
 public class GetResource extends GetEntity<
         Resource,
         UResource,
-        UResourceDTO,
-        UResourceRDTO
+        UResourceDTO
         > {
 
     public GetResource(
@@ -25,7 +23,7 @@ public class GetResource extends GetEntity<
             UResourceRepository repository,
             UResourceMapper mapper,
             UResourceReferenceMapper refMapper,
-            TaskMapper<UResourceRDTO> taskMapper
+            TaskMapper taskMapper
     ) {
         super(
                 context,

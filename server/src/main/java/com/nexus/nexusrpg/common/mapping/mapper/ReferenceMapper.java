@@ -1,22 +1,22 @@
 package com.nexus.nexusrpg.common.mapping.mapper;
 
-import com.nexus.nexusrpg.common.dto.Task;
 import com.nexus.nexusrpg.common.dto.TaskDTO;
+import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class ReferenceMapper<Entity, UserEntity, UserEntityRefDTO extends Task> {
+public abstract class ReferenceMapper<Entity, UserEntity> {
 
-    private final TaskMapper<UserEntityRefDTO> taskMapper;
+    private final TaskMapper taskMapper;
 
-    public UserEntityRefDTO mapReference(User user, Entity entity) {
-        return toRefDTO(findRelation(user, entity));
+    public EntityReferenceDTO mapReference(User user, Entity entity) {
+        return toReferenceDTO(findRelation(user, entity));
     }
 
-    public TaskDTO<UserEntityRefDTO> mapTasks(User user, List<Entity> entities) {
+    public TaskDTO<EntityReferenceDTO> mapTasks(User user, List<Entity> entities) {
         var tasks = entities.stream()
                 .map(e -> mapReference(user, e))
                 .toList();
@@ -24,6 +24,6 @@ public abstract class ReferenceMapper<Entity, UserEntity, UserEntityRefDTO exten
         return new TaskDTO<>(tasks, taskMapper.mapProgress(tasks));
     }
 
-    public abstract UserEntityRefDTO toRefDTO(UserEntity userEntity);
+    public abstract EntityReferenceDTO toReferenceDTO(UserEntity userEntity);
     protected abstract UserEntity findRelation(User user, Entity entity);
 }

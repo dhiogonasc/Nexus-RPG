@@ -2,8 +2,7 @@ package com.nexus.nexusrpg.domain.entity.planet.service;
 
 import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
 import com.nexus.nexusrpg.common.service.GetEntity;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
+import com.nexus.nexusrpg.domain.controller.dto.UPlanetDTO;
 import com.nexus.nexusrpg.domain.mapper.UPlanetMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetReferenceMapper;
 import com.nexus.nexusrpg.domain.model.Planet;
@@ -17,8 +16,7 @@ import org.springframework.stereotype.Component;
 public class GetPlanet extends GetEntity<
         Planet,
         UPlanet,
-        UPlanetDTO,
-        UPlanetRDTO
+        UPlanetDTO
         > {
 
     private final PlanetValidator validator;
@@ -29,7 +27,7 @@ public class GetPlanet extends GetEntity<
             UPlanetMapper mapper,
             UPlanetReferenceMapper refMapper,
             PlanetValidator validator,
-            TaskMapper<UPlanetRDTO> taskMapper
+            TaskMapper taskMapper
     ) {
 
         super(

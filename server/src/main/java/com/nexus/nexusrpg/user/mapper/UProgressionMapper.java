@@ -1,9 +1,8 @@
 package com.nexus.nexusrpg.user.mapper;
 
 import com.nexus.nexusrpg.common.mapping.Mapper;
-import com.nexus.nexusrpg.domain.controller.dto.level.LevelDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
+import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.LevelDTO;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetReferenceMapper;
@@ -35,19 +34,19 @@ public class UProgressionMapper implements Mapper<User, UserProgressionDTO> {
         return levelMapper.toDTO(user.getLevel());
     }
 
-    private UPlanetRDTO mapCurrentPlanet(User user){
+    private EntityReferenceDTO mapCurrentPlanet(User user){
         return user.getPlanets().stream()
                 .filter(UPlanet::isCurrent)
                 .findFirst()
-                .map(uPlanetRefMapper::toRefDTO)
+                .map(uPlanetRefMapper::toReferenceDTO)
                 .orElse(null);
     }
 
-    private UMissionRDTO mapCurrentMission(User user){
+    private EntityReferenceDTO mapCurrentMission(User user){
         return user.getMissions().stream()
                 .filter(UMission::isCurrent)
                 .findFirst()
-                .map(uMissionRefMapper::toRefDTO)
+                .map(uMissionRefMapper::toReferenceDTO)
                 .orElse(null);
     }
 }

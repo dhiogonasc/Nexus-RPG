@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.mission.controller.dto;
 
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
+import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public record UAttemptDTO(
 
         Long id,
-        UMissionRDTO mission,
+        EntityReferenceDTO mission,
         LocalDateTime startAt,
         LocalDateTime endAt,
         BigDecimal result

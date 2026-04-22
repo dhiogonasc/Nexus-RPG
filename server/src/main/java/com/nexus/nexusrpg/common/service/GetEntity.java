@@ -2,9 +2,9 @@ package com.nexus.nexusrpg.common.service;
 
 import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.common.dto.Task;
 import com.nexus.nexusrpg.common.dto.TaskDTO;
 import com.nexus.nexusrpg.common.mapping.mapper.ReferenceMapper;
+import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
 import com.nexus.nexusrpg.common.repository.UEntityRepository;
 import com.nexus.nexusrpg.common.mapping.Mapper;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class GetEntity<Entity, UEntity, UEntityDTO, UEntityRDTO extends Task> {
+public abstract class GetEntity<Entity, UEntity, UEntityDTO> {
 
     protected final Context context;
     protected final UEntityRepository<UEntity> userEntityRepository;
     protected final Mapper<UEntity, UEntityDTO> mapper;
-    protected final ReferenceMapper<Entity, UEntity, UEntityRDTO> referenceMapper;
-    private final TaskMapper<UEntityRDTO> taskMapper;
+    protected final ReferenceMapper<Entity, UEntity> referenceMapper;
+    private final TaskMapper taskMapper;
 
     @Transactional(readOnly = true)
     public UEntityDTO getById(Long id) {
@@ -35,13 +35,13 @@ public abstract class GetEntity<Entity, UEntity, UEntityDTO, UEntityRDTO extends
     }
 
     @Transactional(readOnly = true)
-    public TaskDTO<UEntityRDTO> getAll() {
+    public TaskDTO<EntityReferenceDTO> getAll() {
         var userId = context.getAuthenticatedUser().getId();
 
         List<UEntity> userEntities = userEntityRepository.findByUserId(userId);
 
-        List<UEntityRDTO> tasks = userEntities.stream()
-                .map(referenceMapper::toRefDTO)
+        List<EntityReferenceDTO> tasks = userEntities.stream()
+                .map(referenceMapper::toReferenceDTO)
                 .toList();
 
         return new TaskDTO<>(tasks, taskMapper.mapProgress(tasks));

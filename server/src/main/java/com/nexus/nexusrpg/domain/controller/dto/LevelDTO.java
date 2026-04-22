@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.controller.dto.level;
+package com.nexus.nexusrpg.domain.controller.dto;
 
 import com.nexus.nexusrpg.domain.model.enums.LevelLabel;
 

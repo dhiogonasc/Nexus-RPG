@@ -3,9 +3,8 @@ package com.nexus.nexusrpg.domain.mapper;
 import com.nexus.nexusrpg.common.dto.TaskDTO;
 import com.nexus.nexusrpg.common.mapping.Mapper;
 import com.nexus.nexusrpg.common.mapping.mapper.ExecutionMapper;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
-import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
+import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.UPlanetDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
@@ -18,8 +17,8 @@ import org.springframework.stereotype.Component;
 public class UPlanetMapper implements Mapper<UPlanet, UPlanetDTO> {
 
     private final ExecutionMapper<UPlanet> executionMapper;
-    private final UResourceReferenceMapper uResourceRefMapper;
-    private final UMissionReferenceMapper uMissionRefMapper;
+    private final UResourceReferenceMapper uResourceReferenceMapper;
+    private final UMissionReferenceMapper uMissionReferenceMapper;
 
     @Override
     public UPlanetDTO toDTO(UPlanet uPlanet){
@@ -37,19 +36,19 @@ public class UPlanetMapper implements Mapper<UPlanet, UPlanetDTO> {
         );
     }
 
-    private TaskDTO<UMissionRDTO> mapMissions(UPlanet uPlanet){
+    private TaskDTO<EntityReferenceDTO> mapMissions(UPlanet uPlanet){
 
         var user  = uPlanet.getUser();
         var missions = uPlanet.getMissions();
 
-        return uMissionRefMapper.mapTasks(user, missions);
+        return uMissionReferenceMapper.mapTasks(user, missions);
     }
 
-    private TaskDTO<UResourceRDTO> mapResources(UPlanet uPlanet){
+    private TaskDTO<EntityReferenceDTO> mapResources(UPlanet uPlanet){
 
         var user  = uPlanet.getUser();
         var resources = uPlanet.getResources();
 
-        return uResourceRefMapper.mapTasks(user, resources);
+        return uResourceReferenceMapper.mapTasks(user, resources);
     }
 }

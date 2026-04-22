@@ -14,7 +14,7 @@ public class UAttemptMapper {
 
     public UAttemptDTO toDTO(UAttempt uAttempt){
 
-        var uMission = uMissionRefMapper.toRefDTO(uAttempt.getUMission());
+        var uMission = uMissionRefMapper.toReferenceDTO(uAttempt.getUMission());
 
         return new UAttemptDTO(
                 uAttempt.getId(),

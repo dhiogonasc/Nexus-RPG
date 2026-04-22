@@ -1,12 +1,11 @@
 package com.nexus.nexusrpg.user.controller.dto;
 
-import com.nexus.nexusrpg.domain.controller.dto.level.LevelDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
-import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
+import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.LevelDTO;
 
 public record UserProgressionDTO(
         LevelDTO level,
-        UPlanetRDTO planet,
-        UMissionRDTO mission
+        EntityReferenceDTO planet,
+        EntityReferenceDTO mission
 ) {
 }

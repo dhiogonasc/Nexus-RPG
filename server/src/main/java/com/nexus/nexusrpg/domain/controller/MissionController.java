@@ -1,11 +1,11 @@
 package com.nexus.nexusrpg.domain.controller;
 
 import com.nexus.nexusrpg.common.dto.TaskDTO;
+import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserResponseDTO;
 import com.nexus.nexusrpg.domain.entity.mission.service.ExecuteMission;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
+import com.nexus.nexusrpg.domain.controller.dto.UMissionDTO;
 import com.nexus.nexusrpg.domain.entity.mission.service.GetMission;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -21,7 +21,7 @@ public class MissionController {
     private final ExecuteMission executeMission;
 
     @GetMapping
-    public ResponseEntity<TaskDTO<UMissionRDTO>> getMissions() {
+    public ResponseEntity<TaskDTO<EntityReferenceDTO>> getMissions() {
         return ResponseEntity.ok(getMission.getAll());
     }
 

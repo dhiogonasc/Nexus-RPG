@@ -3,8 +3,7 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
 import com.nexus.nexusrpg.common.service.GetEntity;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
+import com.nexus.nexusrpg.domain.controller.dto.UMissionDTO;
 import com.nexus.nexusrpg.domain.mapper.UMissionMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
 import com.nexus.nexusrpg.domain.model.Mission;
@@ -17,8 +16,7 @@ import org.springframework.stereotype.Service;
 public class GetMission extends GetEntity<
         Mission,
         UMission,
-        UMissionDTO,
-        UMissionRDTO
+        UMissionDTO
         > {
 
     private final MissionValidator validator;
@@ -29,7 +27,7 @@ public class GetMission extends GetEntity<
             UMissionMapper mapper,
             UMissionReferenceMapper refMapper,
             MissionValidator validator,
-            TaskMapper<UMissionRDTO> taskMapper
+            TaskMapper taskMapper
     ) {
 
         super(
