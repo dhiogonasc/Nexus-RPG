@@ -1,9 +1,11 @@
 package com.nexus.nexusrpg.common.entity.service;
 
+import com.nexus.nexusrpg.common.MapTask;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.common.dto.Task;
 import com.nexus.nexusrpg.common.dto.TaskDTO;
 import com.nexus.nexusrpg.common.dto.ProgressDTO;
+import com.nexus.nexusrpg.common.enums.EntityStatus;
 import com.nexus.nexusrpg.common.mapper.ReferenceMapper;
 import com.nexus.nexusrpg.common.entity.repository.UEntityRepository;
 import com.nexus.nexusrpg.common.mapper.Mapper;
@@ -19,6 +21,7 @@ public abstract class GetEntity<Entity, UEntity, UEntityDTO, UEntityRDTO extends
     protected final UEntityRepository<UEntity> userEntityRepository;
     protected final Mapper<UEntity, UEntityDTO> mapper;
     protected final ReferenceMapper<Entity, UEntity, UEntityRDTO> referenceMapper;
+    private final MapTask<UEntityRDTO> mapTask;
 
     @Transactional(readOnly = true)
     public UEntityDTO getById(Long id) {
@@ -43,12 +46,7 @@ public abstract class GetEntity<Entity, UEntity, UEntityDTO, UEntityRDTO extends
                 .map(referenceMapper::toRefDTO)
                 .toList();
 
-        long total = userEntities.size();
-        long completed = userEntityRepository.countCompletedTasks(userId);
-
-        var progress = new ProgressDTO(completed, total);
-
-        return new TaskDTO<>(tasks, progress);
+        return new TaskDTO<>(tasks, mapTask.mapProgress(tasks));
     }
 
     protected abstract void validate(UEntity uEntity);

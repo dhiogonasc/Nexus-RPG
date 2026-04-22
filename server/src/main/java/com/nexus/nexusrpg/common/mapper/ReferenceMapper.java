@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.common.mapper;
 
+import com.nexus.nexusrpg.common.MapTask;
 import com.nexus.nexusrpg.common.dto.ProgressDTO;
 import com.nexus.nexusrpg.common.dto.Task;
 import com.nexus.nexusrpg.common.dto.TaskDTO;
@@ -12,6 +13,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public abstract class ReferenceMapper<Entity, UserEntity, UserEntityRefDTO extends Task> {
 
+    private final MapTask<UserEntityRefDTO> mapTask;
+
     public UserEntityRefDTO mapReference(User user, Entity entity) {
         return toRefDTO(findRelation(user, entity));
     }
@@ -22,14 +25,7 @@ public abstract class ReferenceMapper<Entity, UserEntity, UserEntityRefDTO exten
                 .map(e -> mapReference(user, e))
                 .toList();
 
-        var progress = new ProgressDTO(
-                tasks.stream()
-                        .filter(task -> task.getStatus() == EntityStatus.COMPLETED)
-                        .count(),
-                tasks.size()
-        );
-
-        return new TaskDTO<>(tasks, progress);
+        return new TaskDTO<>(tasks, mapTask.mapProgress(tasks));
     }
 
     public abstract UserEntityRefDTO toRefDTO(UserEntity userEntity);
