@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.entity.mission.mapper;
 
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.model.UAttempt;
-import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UAttemptMapper {
 
-    private final UMissionRefMapper uMissionRefMapper;
+    private final UMissionReferenceMapper uMissionRefMapper;
 
     public UAttemptDTO toDTO(UAttempt uAttempt){
 

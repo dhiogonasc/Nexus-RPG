@@ -5,7 +5,7 @@ import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionDTO;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.mapper.UMissionMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
@@ -26,7 +26,7 @@ public class GetMission extends GetEntity<
             Context context,
             UMissionRepository repository,
             UMissionMapper mapper,
-            UMissionRefMapper refMapper,
+            UMissionReferenceMapper refMapper,
             MissionValidator validator
     ) {
 

@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.controller;
 
-import com.nexus.nexusrpg.common.dto.MainDTO;
+import com.nexus.nexusrpg.common.dto.TaskDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserResponseDTO;
 import com.nexus.nexusrpg.domain.entity.mission.service.ExecuteMission;
@@ -12,8 +12,6 @@ import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/missions")
 @RequiredArgsConstructor
@@ -23,7 +21,7 @@ public class MissionController {
     private final ExecuteMission executeMission;
 
     @GetMapping
-    public ResponseEntity<MainDTO<UMissionRDTO>> getMissions() {
+    public ResponseEntity<TaskDTO<UMissionRDTO>> getMissions() {
         return ResponseEntity.ok(getMission.getAll());
     }
 

@@ -5,7 +5,7 @@ import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
 import com.nexus.nexusrpg.domain.mapper.UResourceMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UResourceReferenceMapper;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
 import com.nexus.nexusrpg.domain.repository.relation.UResourceRepository;
@@ -23,7 +23,7 @@ public class GetResource extends GetEntity<
             Context context,
             UResourceRepository repository,
             UResourceMapper mapper,
-            UResourceRefMapper refMapper
+            UResourceReferenceMapper refMapper
     ) {
         super(
                 context,

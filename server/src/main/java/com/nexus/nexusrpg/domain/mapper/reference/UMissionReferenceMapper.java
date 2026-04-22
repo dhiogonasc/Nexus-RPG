@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
-import com.nexus.nexusrpg.common.mapper.RefMapper;
+import com.nexus.nexusrpg.common.mapper.ReferenceMapper;
 import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UMissionRefMapper
-        extends RefMapper<Mission, UMission, UMissionRDTO>
+public class UMissionReferenceMapper
+        extends ReferenceMapper<Mission, UMission, UMissionRDTO>
     implements ExecutionMapper<UMission>
 {
 

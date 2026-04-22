@@ -37,12 +37,6 @@ public interface UMissionRepository extends JpaRepository<UMission, Long>, UEnti
     @Override
     @Query("SELECT COUNT(um) " +
             "FROM UMission um " +
-            "WHERE um.user.id = :userId ")
-    long countTotalTasks(@Param("userId") Long userId);
-
-    @Override
-    @Query("SELECT COUNT(um) " +
-            "FROM UMission um " +
             "WHERE um.user.id = :userId " +
             "AND um.execution.status = 'COMPLETED'")
     long countCompletedTasks(@Param("userId") Long userId);

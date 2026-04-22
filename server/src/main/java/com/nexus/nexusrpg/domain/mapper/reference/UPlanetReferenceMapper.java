@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
-import com.nexus.nexusrpg.common.mapper.RefMapper;
+import com.nexus.nexusrpg.common.mapper.ReferenceMapper;
 import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import com.nexus.nexusrpg.domain.repository.relation.UPlanetRepository;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UPlanetRefMapper
-        extends RefMapper<Planet, UPlanet, UPlanetRDTO>
+public class UPlanetReferenceMapper
+        extends ReferenceMapper<Planet, UPlanet, UPlanetRDTO>
         implements ExecutionMapper<UPlanet>
 {
 

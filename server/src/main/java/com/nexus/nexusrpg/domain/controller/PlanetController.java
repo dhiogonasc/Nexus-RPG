@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.controller;
 
-import com.nexus.nexusrpg.common.dto.MainDTO;
+import com.nexus.nexusrpg.common.dto.TaskDTO;
 import com.nexus.nexusrpg.domain.entity.planet.service.GetPlanet;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
@@ -8,8 +8,6 @@ import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/planets")
@@ -19,7 +17,7 @@ public class PlanetController {
     private final GetPlanet getPlanet;
 
     @GetMapping
-    public ResponseEntity<MainDTO<UPlanetRDTO>> getPlanets() {
+    public ResponseEntity<TaskDTO<UPlanetRDTO>> getPlanets() {
         return ResponseEntity.ok(getPlanet.getAll());
     }
 

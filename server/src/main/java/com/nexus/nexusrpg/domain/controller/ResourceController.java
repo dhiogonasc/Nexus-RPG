@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.controller;
 
-import com.nexus.nexusrpg.common.dto.MainDTO;
+import com.nexus.nexusrpg.common.dto.TaskDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
 import com.nexus.nexusrpg.domain.entity.resource.service.GetResource;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/resources")
 @RequiredArgsConstructor
@@ -21,7 +19,7 @@ public class ResourceController {
     private final GetResource getResource;
 
     @GetMapping
-    public ResponseEntity<MainDTO<UResourceRDTO>> getResources() {
+    public ResponseEntity<TaskDTO<UResourceRDTO>> getResources() {
         return ResponseEntity.ok(getResource.getAll());
     }
 

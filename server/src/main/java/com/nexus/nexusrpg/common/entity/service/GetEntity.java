@@ -1,9 +1,10 @@
 package com.nexus.nexusrpg.common.entity.service;
 
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.common.dto.MainDTO;
+import com.nexus.nexusrpg.common.dto.Task;
+import com.nexus.nexusrpg.common.dto.TaskDTO;
 import com.nexus.nexusrpg.common.dto.ProgressDTO;
-import com.nexus.nexusrpg.common.mapper.RefMapper;
+import com.nexus.nexusrpg.common.mapper.ReferenceMapper;
 import com.nexus.nexusrpg.common.entity.repository.UEntityRepository;
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import lombok.RequiredArgsConstructor;
@@ -12,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class GetEntity<Entity, UEntity, UEntityDTO, UEntityRDTO> {
+public abstract class GetEntity<Entity, UEntity, UEntityDTO, UEntityRDTO extends Task> {
 
     protected final Context context;
     protected final UEntityRepository<UEntity> userEntityRepository;
     protected final Mapper<UEntity, UEntityDTO> mapper;
-    protected final RefMapper<Entity, UEntity, UEntityRDTO> refMapper;
+    protected final ReferenceMapper<Entity, UEntity, UEntityRDTO> referenceMapper;
 
     @Transactional(readOnly = true)
     public UEntityDTO getById(Long id) {
@@ -33,13 +34,13 @@ public abstract class GetEntity<Entity, UEntity, UEntityDTO, UEntityRDTO> {
     }
 
     @Transactional(readOnly = true)
-    public MainDTO<UEntityRDTO> getAll() {
+    public TaskDTO<UEntityRDTO> getAll() {
         var userId = context.getAuthenticatedUser().getId();
 
         List<UEntity> userEntities = userEntityRepository.findByUserId(userId);
 
         List<UEntityRDTO> tasks = userEntities.stream()
-                .map(refMapper::toRefDTO)
+                .map(referenceMapper::toRefDTO)
                 .toList();
 
         long total = userEntities.size();
@@ -47,7 +48,7 @@ public abstract class GetEntity<Entity, UEntity, UEntityDTO, UEntityRDTO> {
 
         var progress = new ProgressDTO(completed, total);
 
-        return new MainDTO<>(tasks, progress);
+        return new TaskDTO<>(tasks, progress);
     }
 
     protected abstract void validate(UEntity uEntity);

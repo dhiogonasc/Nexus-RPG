@@ -5,8 +5,8 @@ import com.nexus.nexusrpg.domain.controller.dto.level.LevelDTO;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UPlanetReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.user.controller.dto.UserProgressionDTO;
@@ -16,11 +16,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ProgressionMapper implements Mapper<User, UserProgressionDTO> {
+public class UProgressionMapper implements Mapper<User, UserProgressionDTO> {
 
     private final LevelMapper levelMapper;
-    private final UPlanetRefMapper uPlanetRefMapper;
-    private final UMissionRefMapper uMissionRefMapper;
+    private final UPlanetReferenceMapper uPlanetRefMapper;
+    private final UMissionReferenceMapper uMissionRefMapper;
 
     @Override
     public UserProgressionDTO toDTO(User user) {

@@ -37,12 +37,6 @@ public interface UResourceRepository extends JpaRepository<UResource, Long>, UEn
     @Override
     @Query("SELECT COUNT(ur) " +
             "FROM UResource ur " +
-            "WHERE ur.user.id = :userId ")
-    long countTotalTasks(@Param("userId") Long userId);
-
-    @Override
-    @Query("SELECT COUNT(ur) " +
-            "FROM UResource ur " +
             "WHERE ur.user.id = :userId " +
             "AND ur.execution.status = 'COMPLETED'")
     long countCompletedTasks(@Param("userId") Long userId);

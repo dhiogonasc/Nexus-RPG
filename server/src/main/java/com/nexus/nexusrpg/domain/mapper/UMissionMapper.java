@@ -6,7 +6,7 @@ import com.nexus.nexusrpg.domain.controller.dto.mission.*;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetRDTO;
 import com.nexus.nexusrpg.domain.entity.question.AlternativeDTO;
 import com.nexus.nexusrpg.domain.entity.question.QuestionDTO;
-import com.nexus.nexusrpg.domain.mapper.reference.UPlanetRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UPlanetReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class UMissionMapper implements
         ExecutionMapper<UMission>
 {
 
-    private final UPlanetRefMapper uPlanetRefMapper;
+    private final UPlanetReferenceMapper uPlanetRefMapper;
 
     public UMissionDTO toDTO(UMission uMission){
 
@@ -59,6 +59,6 @@ public class UMissionMapper implements
         var user = uMission.getUser();
         var planet = uMission.getPlanet();
 
-        return uPlanetRefMapper.map(user, planet);
+        return uPlanetRefMapper.mapReference(user, planet);
     }
 }

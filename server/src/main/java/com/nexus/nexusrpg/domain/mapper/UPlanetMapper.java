@@ -1,19 +1,17 @@
 package com.nexus.nexusrpg.domain.mapper;
 
+import com.nexus.nexusrpg.common.dto.TaskDTO;
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.common.state.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.domain.controller.dto.mission.UMissionRDTO;
 import com.nexus.nexusrpg.domain.controller.dto.planet.UPlanetDTO;
 import com.nexus.nexusrpg.domain.controller.dto.resource.UResourceRDTO;
-import com.nexus.nexusrpg.domain.entity.planet.service.CountPlanet;
-import com.nexus.nexusrpg.domain.mapper.reference.UMissionRefMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.UResourceRefMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UResourceReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -22,9 +20,8 @@ public class UPlanetMapper implements
         ExecutionMapper<UPlanet>
 {
 
-    private final CountPlanet countPlanet;
-    private final UResourceRefMapper uResourceRefMapper;
-    private final UMissionRefMapper uMissionRefMapper;
+    private final UResourceReferenceMapper uResourceRefMapper;
+    private final UMissionReferenceMapper uMissionRefMapper;
 
     @Override
     public UPlanetDTO toDTO(UPlanet uPlanet){
@@ -42,19 +39,19 @@ public class UPlanetMapper implements
         );
     }
 
-    private List<UMissionRDTO> mapMissions(UPlanet uPlanet){
+    private TaskDTO<UMissionRDTO> mapMissions(UPlanet uPlanet){
 
         var user  = uPlanet.getUser();
         var missions = uPlanet.getMissions();
 
-        return uMissionRefMapper.map(user, missions);
+        return uMissionRefMapper.mapTasks(user, missions);
     }
 
-    private List<UResourceRDTO> mapResources(UPlanet uPlanet){
+    private TaskDTO<UResourceRDTO> mapResources(UPlanet uPlanet){
 
         var user  = uPlanet.getUser();
         var resources = uPlanet.getResources();
 
-        return uResourceRefMapper.map(user, resources);
+        return uResourceRefMapper.mapTasks(user, resources);
     }
 }

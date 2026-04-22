@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserMapper implements Mapper<User, UserDTO> {
 
-    private final ProgressionMapper progressionMapper;
+    private final UProgressionMapper uProgressionMapper;
 
     @Override
     public UserDTO toDTO(User user){
@@ -20,7 +20,7 @@ public class UserMapper implements Mapper<User, UserDTO> {
                 user.getEmail(),
                 user.getXp(),
                 user.getOxygen(),
-                progressionMapper.toDTO(user)
+                uProgressionMapper.toDTO(user)
         );
     }
 }
