@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.entity.mission.service;
+package com.nexus.nexusrpg.domain.service;
 
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
