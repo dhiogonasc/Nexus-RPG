@@ -24,7 +24,7 @@ public class AttemptController {
     }
 
     @PostMapping("/{id}/finish")
-    public ResponseEntity<AttemptResponseDTO> start(
+    public ResponseEntity<AttemptResponseDTO> finish(
             @PathVariable Long id,
             @Valid @RequestBody List<AttemptRequestDTO> request){
         return null;

@@ -42,9 +42,7 @@ public class AttemptService {
                 .build();
         attemptRepository.save(attempt);
 
-        List<ResponseDTO> responses = attempt.getResponses().stream()
-                .map(responseMapper::toDTO)
-                .toList();
+        List<ResponseDTO> responses = List.of();
 
         return new AttemptResponseDTO(
                 attempt.getId(),
