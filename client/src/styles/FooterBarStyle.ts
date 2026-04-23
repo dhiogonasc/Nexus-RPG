@@ -5,7 +5,7 @@ const { width } = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     width: '100%', 
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111a29',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around', 

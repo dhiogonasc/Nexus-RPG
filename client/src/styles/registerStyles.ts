@@ -1,9 +1,15 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+
+const MAX_CONTENT_WIDTH = 650; 
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: Platform.OS === 'web' ? 40 : 60,
   },
 
   // --- Estilos da Imagem de Topo ---
@@ -11,6 +17,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 230,
     position: 'relative',
+    alignSelf: 'center', 
   },
   topImage: {
     width: '100%',
@@ -24,11 +31,20 @@ export const styles = StyleSheet.create({
     height: 120,
   },
 
+  // --- Wrapper de Responsividade ---
+  contentWrapper: {
+    width: '100%',
+    maxWidth: MAX_CONTENT_WIDTH,
+    alignSelf: 'center', // Centraliza o formulário na Web
+    flex: 1, 
+  },
+
   // --- Estilos do Formulário ---
   formContainer: {
     flex: 1,
     paddingHorizontal: 40,
     paddingTop: 25,
+    width: '100%',
   },
   title: {
     fontSize: 32,
@@ -55,7 +71,7 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 0,
+    marginTop: 0, // Adicione uma margem aqui (ex: marginTop: 20) se o DoublePasswordInput não tiver espaço na base
   },
   buttonText: {
     color: '#000000',
@@ -64,10 +80,9 @@ export const styles = StyleSheet.create({
   },
   registerContainer: {
     marginTop: 30,
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row', // Removido o display: 'flex' pois já é o padrão no React Native
     justifyContent: 'center',
+    alignItems: 'center',
   },
   registerButton: {
     color: '#888888',
@@ -80,11 +95,11 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
   },
 
-  // --- Estilos logo la em baixo ---
+  // --- Estilos logo lá embaixo ---
   bottomLogo: {
     width: 120,
     height: 120,
     alignSelf: 'center',
-    marginTop: 0,
+    marginTop: 50, // Mudei de 0 para 50 para afastar a logo do link de "Entrar", seguindo a tela de Login
   },
 });

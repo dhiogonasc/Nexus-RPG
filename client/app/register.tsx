@@ -8,13 +8,13 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 
-import { styles } from "@/styles/registerStyles";
+import { styles as S } from "@/styles/registerStyles"; // Apelido 'S' para facilitar
 
 import { LinearGradient } from "expo-linear-gradient";
 import { Link, router } from "expo-router";
-import { Alert } from "react-native";
 
 import DoublePasswordInput from "@/components/DoublePasswordInput";
 import EmailInput from "@/components/EmailInput";
@@ -61,10 +61,10 @@ export default function RegisterScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
+      style={S.container}
     >
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={S.scrollContent}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
@@ -74,64 +74,66 @@ export default function RegisterScreen() {
           backgroundColor="transparent"
         />
 
-        <View style={styles.imageContainer}>
+        {/* ── Banner ── */}
+        <View style={S.imageContainer}>
           <Image
             source={require("../assets/RegisterImg.png")}
-            style={styles.topImage}
+            style={S.topImage}
             resizeMode="cover"
           />
-
-          {/* Efeito esfumaçado na base da imagem */}
 
           <LinearGradient
             colors={["transparent", "#000000"]}
-            style={styles.gradientFade}
+            style={S.gradientFade}
           />
         </View>
 
-        <View style={styles.formContainer}>
-          <Text style={styles.title}>Crie sua conta agora!</Text>
+        {/* ── Wrapper Centralizado para a Web ── */}
+        <View style={S.contentWrapper}>
+          <View style={S.formContainer}>
+            <Text style={S.title}>Crie sua conta agora!</Text>
 
-          <UserInput
-            iconName="user"
-            placeholder="Digite seu nome de usuário"
-            value={username}
-            onChangeText={setUsername}
-          />
+            <UserInput
+              iconName="user"
+              placeholder="Digite seu nome de usuário"
+              value={username}
+              onChangeText={setUsername}
+            />
 
-          <EmailInput
-            iconName="mail"
-            placeholder="Digite seu e-mail"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCorrect={false}
-            value={email}
-            onChangeText={setEmail}
-          />
+            <EmailInput
+              iconName="mail"
+              placeholder="Digite seu e-mail"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={email}
+              onChangeText={setEmail}
+            />
 
-          <DoublePasswordInput
-            password={password}
-            setPassword={setPassword}
-            confirmPassword={confirmPassword}
-            setConfirmPassword={setConfirmPassword}
-          />
+            <DoublePasswordInput
+              password={password}
+              setPassword={setPassword}
+              confirmPassword={confirmPassword}
+              setConfirmPassword={setConfirmPassword}
+            />
 
-          <TouchableOpacity style={styles.button} onPress={handleRegister}>
-            <Text style={styles.buttonText}>Entrar</Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={S.button} onPress={handleRegister}>
+              <Text style={S.buttonText}>Entrar</Text>
+            </TouchableOpacity>
 
-          <View style={styles.registerContainer}>
-            <Text style={styles.registerButton}> Já tem uma conta? </Text>
-            <Link href="/" style={styles.registerLink}>
-              Entrar
-            </Link>
+            <View style={S.registerContainer}>
+              <Text style={S.registerButton}> Já tem uma conta? </Text>
+              <Link href="/" style={S.registerLink}>
+                Entrar
+              </Link>
+            </View>
+
+            <Image
+              source={require("../assets/LogoNexus.jpg")}
+              style={S.bottomLogo}
+              resizeMode="cover"
+            />
           </View>
-
-          <Image
-            source={require("../assets/LogoNexus.jpg")}
-            style={styles.bottomLogo}
-            resizeMode="cover"
-          />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -1,141 +1,98 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
+// ─── Design Tokens ────────────────────────────────────────────────────────────
+const TOKEN = {
+  bg:         '#020617',
+  surface:    '#0F172A',
+  surfaceAlt: '#1E293B',
+  border:     '#1E293B',
+  borderAlt:  '#334155',
+  accent:     '#38BDF8',
+  accentWarm: '#F59E0B',
+  textPrimary:   '#F1F5F9',
+  textSecondary: '#94A3B8',
+  textMuted:     '#475569',
+};
 
- export const HomeStyles = StyleSheet.create({
+// Largura máxima para que a interface não estique ao infinito num monitor Web
+const MAX_WEB_WIDTH = 800; 
+
+// ─── Home Page ─────────────────────────────────────────────────────────────────
+export const HomeStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: TOKEN.bg,
   },
-  header: {
-    paddingTop : 40,
+
+  // Header responsivo
+  headerContainer: {
+    width: '100%',
+    alignItems: 'center', // Centraliza o headerContent na Web
+    borderBottomColor: TOKEN.border,
+    borderBottomWidth: 1,
+  },
+  headerContent: {
+    width: '100%',
+    maxWidth: MAX_WEB_WIDTH, // Na Web, para aqui. No mobile, é 100%.
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: '#000000',
+    paddingHorizontal: 24,
+    paddingVertical: 16,
   },
-
-  imageContainer: {
-    width: '100%',
-    height: 150,
-    position: 'relative',
+  headerText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
   },
-  topImage: {
-    width: '100%',
-    height: '100%',
+  headerIcon: {
+    fontSize: 28,
   },
-  gradientFade: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 120,
-  },
-
   greeting: {
-    color: '#94A3B8',
-    fontSize: 14,
+    color: TOKEN.textSecondary,
+    fontSize: 13,
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+    fontWeight: '500',
+    marginBottom: 2,
   },
   userName: {
-    color: '#F8FAFC',
+    color: TOKEN.textPrimary,
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: '700',
+    letterSpacing: -0.5,
   },
-  profileBadge: {
-    backgroundColor: '#334155',
-    padding: 10,
-    borderRadius: 12,
-    alignItems: 'center',
-  },
-  textProfile: {
-    color: '#fff',
-  },
+
+  // Scroll Responsivo
   scrollContent: {
-    paddingBottom: 120,
+    // Reduzimos o espaço vazio na web, já que geralmente não tem NavBar lá
+    paddingBottom: Platform.OS === 'web' ? 40 : 130, 
+    alignItems: 'center', // Isso garante que todas as <View style={S.section}> fiquem no centro na Web
   },
-  charCard: {
-    backgroundColor: '#1E293B',
-    borderRadius: 20,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: '#334155',
-    marginBottom: 25,
+
+  // Sections
+  section: {
+    marginTop: 28,
+    paddingHorizontal: 20,
+    width: '100%',
+    maxWidth: MAX_WEB_WIDTH,
   },
-  charInfo: {
+  sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 15,
-    marginBottom: 20,
+    gap: 10,
+    marginBottom: 16,
   },
-  avatarPlaceholder: {
-    width: 60,
-    height: 60,
-    backgroundColor: '#334155',
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  avatarEmoji: {
-    fontSize: 30,
-  },
-  charName: {
-    color: '#F8FAFC',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  charClass: {
-    color: '#A855F7',
-    fontWeight: '600',
-  },
-  buttonPrimary: {
-    backgroundColor: '#7C3AED',
-    paddingVertical: 12,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#FFF',
-    fontWeight: 'bold',
+  sectionAccent: {
+    width: 3,
+    height: 16,
+    borderRadius: 2,
+    backgroundColor: TOKEN.accent,
   },
   sectionTitle: {
-    color: '#F8FAFC',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  achievementList: {
-    gap: 10,
-    marginBottom: 25,
-  },
-  achievementItem: {
-    flexDirection: 'row',
-    backgroundColor: '#020617',
-    padding: 15,
-    borderRadius: 15,
-    alignItems: 'center',
-    gap: 15,
-    borderWidth: 1,
-    borderColor: '#1E293B',
-  },
-  achievementTextCont: {
-    flex: 1,
-  },
-  achievementTitle: {
-    color: '#F8FAFC',
-    fontWeight: 'bold',
-  },
-  achievementDesc: {
-    color: '#64748B',
-    fontSize: 12,
-  },
-  textTituloPlaneta: {
-    alignItems: 'center',
-  },
-  textTitulo: {
-    fontSize: 24,
-    color: '#fff',
-    fontWeight: 'bold',
+    color: TOKEN.textSecondary,
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 2.5,
   },
 });
