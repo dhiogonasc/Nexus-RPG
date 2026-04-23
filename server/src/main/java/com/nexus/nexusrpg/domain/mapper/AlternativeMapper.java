@@ -1,19 +1,20 @@
 package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.mapping.Mapper;
-import com.nexus.nexusrpg.domain.controller.dto.response.AlternativeFeedbackDTO;
+import com.nexus.nexusrpg.domain.controller.dto.AlternativeDTO;
 import com.nexus.nexusrpg.domain.model.Alternative;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AlternativeMapper implements Mapper<Alternative, AlternativeFeedbackDTO> {
+@RequiredArgsConstructor
+public class AlternativeMapper implements Mapper<Alternative, AlternativeDTO> {
 
     @Override
-    public AlternativeFeedbackDTO toDTO(Alternative alternative) {
-        return new AlternativeFeedbackDTO(
+    public AlternativeDTO toDTO(Alternative alternative) {
+        return new AlternativeDTO(
                 alternative.getId(),
-                alternative.getContent(),
-                alternative.getIsCorrect()
+                alternative.getContent()
         );
     }
 }
