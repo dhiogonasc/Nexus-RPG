@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.model.relation.execution;
 
-import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.common.state.Execution;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
-import static com.nexus.nexusrpg.common.enums.EntityStatus.*;
+import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.*;
 
 @Data
 @Builder

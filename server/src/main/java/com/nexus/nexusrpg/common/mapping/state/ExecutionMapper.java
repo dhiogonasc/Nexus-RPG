@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.mapping.mapper;
+package com.nexus.nexusrpg.common.mapping.state;
 
 import com.nexus.nexusrpg.common.dto.ExecutionDTO;
 import com.nexus.nexusrpg.common.state.State;

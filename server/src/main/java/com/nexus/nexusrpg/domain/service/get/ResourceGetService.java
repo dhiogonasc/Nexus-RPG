@@ -1,36 +1,35 @@
-package com.nexus.nexusrpg.domain.entity.resource.service;
+package com.nexus.nexusrpg.domain.service.get;
 
-import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
-import com.nexus.nexusrpg.common.service.GetEntity;
+import com.nexus.nexusrpg.common.mapping.state.ProgressMapper;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.UResourceDTO;
 import com.nexus.nexusrpg.domain.mapper.UResourceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceReferenceMapper;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
-import com.nexus.nexusrpg.domain.repository.relation.UResourceRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UserResourceRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GetResource extends GetEntity<
+public class ResourceGetService extends GetService<
         Resource,
         UResource,
         UResourceDTO
         > {
 
-    public GetResource(
+    public ResourceGetService(
             Context context,
-            UResourceRepository repository,
+            UserResourceRepository repository,
             UResourceMapper mapper,
             UResourceReferenceMapper refMapper,
-            TaskMapper taskMapper
+            ProgressMapper progressMapper
     ) {
         super(
                 context,
                 repository,
                 mapper,
                 refMapper,
-                taskMapper
+                progressMapper
         );
     }
 

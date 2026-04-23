@@ -2,17 +2,17 @@ package com.nexus.nexusrpg.domain.entity.mission.service;
 
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.entity.alternative.repository.AlternativeRepository;
-import com.nexus.nexusrpg.domain.entity.level.service.LevelService;
+import com.nexus.nexusrpg.domain.service.LevelService;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UAttemptDTO;
 import com.nexus.nexusrpg.domain.entity.mission.controller.dto.UserResponseDTO;
 import com.nexus.nexusrpg.domain.entity.mission.mapper.UAttemptMapper;
 import com.nexus.nexusrpg.domain.entity.mission.model.UserResponse;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UserResponseRepository;
 import com.nexus.nexusrpg.domain.entity.mission.validator.AttemptValidator;
-import com.nexus.nexusrpg.domain.entity.mission.validator.MissionValidator;
+import com.nexus.nexusrpg.domain.validator.MissionValidator;
 import com.nexus.nexusrpg.domain.entity.mission.model.UAttempt;
 import com.nexus.nexusrpg.domain.entity.mission.repository.UAttemptRepository;
-import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.entity.question.repository.QuestionRepository;
 import com.nexus.nexusrpg.user.repository.UserRepository;
 import com.nexus.nexusrpg.user.validator.UserValidator;
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
-import static com.nexus.nexusrpg.common.enums.EntityStatus.COMPLETED;
+import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.COMPLETED;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +38,7 @@ public class ExecuteMission {
     private final AlternativeRepository alternativeRepository;
 
     private final UserRepository userRepository;
-    private final UMissionRepository uMissionRepository;
+    private final UserMissionRepository uMissionRepository;
     private final UserResponseRepository userResponseRepository;
     private final UAttemptRepository uAttemptRepository;
     private final UAttemptMapper uAttemptMapper;

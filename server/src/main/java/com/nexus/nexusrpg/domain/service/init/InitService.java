@@ -1,11 +1,11 @@
-package com.nexus.nexusrpg.common.service;
+package com.nexus.nexusrpg.domain.service.init;
 
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @RequiredArgsConstructor
-public abstract class InitEntity<Entity, UserEntity> implements Initializable {
+public abstract class InitService<Entity, UserEntity> implements Initializable {
 
     private final JpaRepository<Entity, Long> baseRepository;
     private final JpaRepository<UserEntity, Long> relationRepository;

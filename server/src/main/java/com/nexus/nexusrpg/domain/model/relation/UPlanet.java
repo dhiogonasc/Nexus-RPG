@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.model.relation;
 
-import com.nexus.nexusrpg.common.enums.EntityStatus;
+import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.common.state.State;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
-import static com.nexus.nexusrpg.common.enums.EntityStatus.UNLOCKED;
+import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 
 @Data
 @Builder

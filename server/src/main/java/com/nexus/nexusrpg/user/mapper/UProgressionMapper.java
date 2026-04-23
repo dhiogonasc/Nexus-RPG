@@ -6,8 +6,10 @@ import com.nexus.nexusrpg.domain.controller.dto.LevelDTO;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetReferenceMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.UResourceReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UResource;
 import com.nexus.nexusrpg.user.controller.dto.UserProgressionDTO;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
@@ -20,13 +22,15 @@ public class UProgressionMapper implements Mapper<User, UserProgressionDTO> {
     private final LevelMapper levelMapper;
     private final UPlanetReferenceMapper uPlanetRefMapper;
     private final UMissionReferenceMapper uMissionRefMapper;
+    private final UResourceReferenceMapper uResourceRefMapper;
 
     @Override
     public UserProgressionDTO toDTO(User user) {
         return new UserProgressionDTO(
                 mapCurrentLevel(user),
                 mapCurrentPlanet(user),
-                mapCurrentMission(user)
+                mapCurrentMission(user),
+                mapCurrentResource(user)
         );
     }
 
@@ -47,6 +51,14 @@ public class UProgressionMapper implements Mapper<User, UserProgressionDTO> {
                 .filter(UMission::isCurrent)
                 .findFirst()
                 .map(uMissionRefMapper::toReferenceDTO)
+                .orElse(null);
+    }
+
+    private EntityReferenceDTO mapCurrentResource(User user){
+        return user.getResources().stream()
+                .filter(UResource::isCurrent)
+                .findFirst()
+                .map(uResourceRefMapper::toReferenceDTO)
                 .orElse(null);
     }
 }

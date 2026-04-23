@@ -1,30 +1,20 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
-import com.nexus.nexusrpg.common.mapping.mapper.TaskMapper;
-import com.nexus.nexusrpg.common.mapping.mapper.ReferenceMapper;
-import com.nexus.nexusrpg.common.mapping.mapper.ExecutionMapper;
+import com.nexus.nexusrpg.common.mapping.state.ExecutionMapper;
 import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
-import com.nexus.nexusrpg.domain.repository.relation.UResourceRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UserResourceRepository;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
 import com.nexus.nexusrpg.user.model.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class UResourceReferenceMapper extends ReferenceMapper<Resource, UResource> {
 
     private final ExecutionMapper<UResource> executionMapper;
-    private final UResourceRepository uResourceRepository;
-
-    public UResourceReferenceMapper(
-            TaskMapper taskMapper,
-            ExecutionMapper<UResource> executionMapper,
-            UResourceRepository uResourceRepository
-    ) {
-        super(taskMapper);
-        this.executionMapper = executionMapper;
-        this.uResourceRepository = uResourceRepository;
-    }
+    private final UserResourceRepository uResourceRepository;
 
     @Override
     public EntityReferenceDTO toReferenceDTO(UResource uResource){

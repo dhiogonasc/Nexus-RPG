@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.service;
+package com.nexus.nexusrpg.domain.service.init;
 
 import com.nexus.nexusrpg.user.model.User;
 

@@ -1,19 +1,18 @@
-package com.nexus.nexusrpg.domain.entity.mission.service;
+package com.nexus.nexusrpg.domain.service.init;
 
-import com.nexus.nexusrpg.common.service.InitEntity;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.repository.MissionRepository;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.user.model.User;
-import com.nexus.nexusrpg.domain.repository.relation.UMissionRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UserMissionRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InitMission extends InitEntity<Mission, UMission> {
+public class MissionInitService extends InitService<Mission, UMission> {
 
-    public InitMission(
+    public MissionInitService(
             MissionRepository missionRepository,
-            UMissionRepository uMissionRepository
+            UserMissionRepository uMissionRepository
     ) {
 
         super(missionRepository, uMissionRepository);

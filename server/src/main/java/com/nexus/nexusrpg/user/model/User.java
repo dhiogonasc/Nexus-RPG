@@ -3,6 +3,7 @@ package com.nexus.nexusrpg.user.model;
 import com.nexus.nexusrpg.domain.model.Level;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
+import com.nexus.nexusrpg.domain.model.relation.UResource;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,6 +47,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     List<UMission> missions;
+
+    @OneToMany(mappedBy = "user")
+    List<UResource> resources;
 
     public void addXp(long xp) {
         this.xp += xp;

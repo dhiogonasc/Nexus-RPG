@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.nexus.nexusrpg.common.enums.EntityStatus.COMPLETED;
+import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.COMPLETED;
 
 @Data
 @Builder

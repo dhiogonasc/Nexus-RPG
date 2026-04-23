@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.mapping.Mapper;
-import com.nexus.nexusrpg.common.mapping.mapper.ExecutionMapper;
+import com.nexus.nexusrpg.common.mapping.state.ExecutionMapper;
 import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.UMissionDTO;
 import com.nexus.nexusrpg.domain.entity.question.AlternativeDTO;
@@ -57,6 +57,6 @@ public class UMissionMapper implements Mapper<UMission, UMissionDTO> {
         var user = uMission.getUser();
         var planet = uMission.getPlanet();
 
-        return uPlanetReferenceMapper.mapReference(user, planet);
+        return uPlanetReferenceMapper.map(user, planet);
     }
 }

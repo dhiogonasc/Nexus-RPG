@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.entity.level.service;
+package com.nexus.nexusrpg.domain.service;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.model.Level;

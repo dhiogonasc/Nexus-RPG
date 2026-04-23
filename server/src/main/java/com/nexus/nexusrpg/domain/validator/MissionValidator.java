@@ -1,12 +1,11 @@
-package com.nexus.nexusrpg.domain.entity.mission.validator;
+package com.nexus.nexusrpg.domain.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.entity.planet.validator.PlanetValidator;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.nexus.nexusrpg.common.enums.EntityStatus.LOCKED;
+import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Component

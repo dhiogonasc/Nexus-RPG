@@ -1,19 +1,18 @@
-package com.nexus.nexusrpg.domain.entity.planet.service;
+package com.nexus.nexusrpg.domain.service.init;
 
-import com.nexus.nexusrpg.common.service.InitEntity;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.repository.PlanetRepository;
 import com.nexus.nexusrpg.user.model.User;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
-import com.nexus.nexusrpg.domain.repository.relation.UPlanetRepository;
+import com.nexus.nexusrpg.domain.repository.relation.UserPlanetRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InitPlanet extends InitEntity<Planet, UPlanet> {
+public class PlanetInitService extends InitService<Planet, UPlanet> {
 
-    public InitPlanet(
+    public PlanetInitService(
             PlanetRepository planetRepository,
-            UPlanetRepository uPlanetRepository
+            UserPlanetRepository uPlanetRepository
     ){
         super(planetRepository, uPlanetRepository);
     }
