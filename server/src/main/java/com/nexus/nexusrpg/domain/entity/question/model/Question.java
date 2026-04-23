@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.entity.question.model;
 
-import com.nexus.nexusrpg.domain.entity.alternative.model.Alternative;
+import com.nexus.nexusrpg.domain.model.Alternative;
 import com.nexus.nexusrpg.domain.model.Mission;
 import jakarta.persistence.*;
 import lombok.*;

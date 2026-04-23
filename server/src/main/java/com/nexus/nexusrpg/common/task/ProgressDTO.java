@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.dto;
+package com.nexus.nexusrpg.common.task;
 
 public record ProgressDTO(
         long completed,

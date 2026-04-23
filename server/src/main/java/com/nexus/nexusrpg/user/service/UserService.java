@@ -1,13 +1,9 @@
 package com.nexus.nexusrpg.user.service;
 
-import com.nexus.nexusrpg.domain.model.relation.UPlanet;
-import com.nexus.nexusrpg.domain.model.relation.UResource;
 import com.nexus.nexusrpg.user.model.User;
 import com.nexus.nexusrpg.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

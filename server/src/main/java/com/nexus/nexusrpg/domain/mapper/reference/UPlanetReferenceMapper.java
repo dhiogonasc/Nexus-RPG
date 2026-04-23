@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
-import com.nexus.nexusrpg.common.mapping.state.ExecutionMapper;
-import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.mapping.ExecutionMapper;
+import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.repository.relation.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;

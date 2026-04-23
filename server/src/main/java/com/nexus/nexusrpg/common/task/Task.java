@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.dto;
+package com.nexus.nexusrpg.common.task;
 
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 

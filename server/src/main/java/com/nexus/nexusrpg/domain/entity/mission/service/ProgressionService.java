@@ -85,21 +85,6 @@ public class ProgressionService {
         }
     }
 
-    private void completeResource(Long userId, Resource currentResource){
-
-        uResourceRepository
-                .findUEntity(
-                        userId,
-                        currentResource.getId()
-                )
-                .ifPresent(ur -> {
-                    if (ur.getStatus() == UNLOCKED) {
-                        ur.complete();
-                        uResourceRepository.save(ur);
-                    }
-                });
-    }
-
     private void unlockResource(Long userId, Resource currentResource){
 
         uResourceRepository
@@ -110,6 +95,21 @@ public class ProgressionService {
                 .ifPresent(ur -> {
                     if (ur.getStatus() == LOCKED) {
                         ur.unlock();
+                        uResourceRepository.save(ur);
+                    }
+                });
+    }
+
+    private void completeResource(Long userId, Resource currentResource){
+
+        uResourceRepository
+                .findUEntity(
+                        userId,
+                        currentResource.getId()
+                )
+                .ifPresent(ur -> {
+                    if (ur.getStatus() == UNLOCKED) {
+                        ur.complete();
                         uResourceRepository.save(ur);
                     }
                 });

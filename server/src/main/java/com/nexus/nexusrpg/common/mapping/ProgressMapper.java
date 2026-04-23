@@ -1,7 +1,7 @@
-package com.nexus.nexusrpg.common.mapping.state;
+package com.nexus.nexusrpg.common.mapping;
 
-import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
-import com.nexus.nexusrpg.common.dto.ProgressDTO;
+import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.task.ProgressDTO;
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import org.springframework.stereotype.Component;
 

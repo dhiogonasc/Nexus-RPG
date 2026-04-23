@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.service.get;
 
-import com.nexus.nexusrpg.common.mapping.state.ProgressMapper;
-import com.nexus.nexusrpg.domain.controller.dto.UPlanetDTO;
+import com.nexus.nexusrpg.common.mapping.ProgressMapper;
+import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
 import com.nexus.nexusrpg.domain.mapper.UPlanetMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetReferenceMapper;
 import com.nexus.nexusrpg.domain.model.Planet;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class PlanetGetService extends GetService<
         Planet,
         UPlanet,
-        UPlanetDTO
+        PlanetDTO
         > {
 
     private final PlanetValidator validator;

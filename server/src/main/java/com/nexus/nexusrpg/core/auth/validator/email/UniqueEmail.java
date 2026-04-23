@@ -7,8 +7,8 @@ import java.lang.annotation.*;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = EmailUnicoValidator.class)
-public @interface EmailUnico {
+@Constraint(validatedBy = RegisterInputValidator.class)
+public @interface UniqueEmail {
     String message() default "Este e-mail já está cadastrado";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

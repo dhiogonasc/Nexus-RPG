@@ -1,10 +1,10 @@
 package com.nexus.nexusrpg.domain.service.get;
 
-import com.nexus.nexusrpg.common.mapping.state.ProgressMapper;
+import com.nexus.nexusrpg.common.mapping.ProgressMapper;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.common.dto.TaskDTO;
+import com.nexus.nexusrpg.common.task.TaskDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.ReferenceMapper;
-import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.repository.relation.UserEntityRepository;
 import com.nexus.nexusrpg.common.mapping.Mapper;
 import lombok.RequiredArgsConstructor;

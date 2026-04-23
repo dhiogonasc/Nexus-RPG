@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.mapping.Mapper;
-import com.nexus.nexusrpg.common.mapping.state.ExecutionMapper;
-import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
-import com.nexus.nexusrpg.domain.controller.dto.UMissionDTO;
+import com.nexus.nexusrpg.common.mapping.ExecutionMapper;
+import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
 import com.nexus.nexusrpg.domain.entity.question.AlternativeDTO;
 import com.nexus.nexusrpg.domain.entity.question.QuestionDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetReferenceMapper;
@@ -15,16 +15,16 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class UMissionMapper implements Mapper<UMission, UMissionDTO> {
+public class UMissionMapper implements Mapper<UMission, MissionDTO> {
 
     private final ExecutionMapper<UMission> executionMapper;
     private final UPlanetReferenceMapper uPlanetReferenceMapper;
 
-    public UMissionDTO toDTO(UMission uMission){
+    public MissionDTO toDTO(UMission uMission){
 
         var mission = uMission.getMission();
 
-        return new UMissionDTO(
+        return new MissionDTO(
                 mission.getId(),
                 mission.getName(),
                 mission.getDescription(),

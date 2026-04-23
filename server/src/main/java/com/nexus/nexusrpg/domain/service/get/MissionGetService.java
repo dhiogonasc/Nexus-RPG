@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.service.get;
 
-import com.nexus.nexusrpg.common.mapping.state.ProgressMapper;
+import com.nexus.nexusrpg.common.mapping.ProgressMapper;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.controller.dto.UMissionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
 import com.nexus.nexusrpg.domain.mapper.UMissionMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
 import com.nexus.nexusrpg.domain.model.Mission;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class MissionGetService extends GetService<
         Mission,
         UMission,
-        UMissionDTO
+        MissionDTO
         > {
 
     private final MissionValidator validator;

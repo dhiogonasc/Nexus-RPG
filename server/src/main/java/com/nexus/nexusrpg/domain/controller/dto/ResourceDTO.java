@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.domain.controller.dto;
 
-import com.nexus.nexusrpg.common.dto.ExecutionDTO;
-import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.task.ExecutionDTO;
+import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 
-public record UResourceDTO(
+public record ResourceDTO(
         Long id,
         String name,
         String description,

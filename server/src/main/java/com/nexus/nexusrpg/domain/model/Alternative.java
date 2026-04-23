@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.entity.alternative.model;
+package com.nexus.nexusrpg.domain.model;
 
 import com.nexus.nexusrpg.domain.entity.question.model.Question;
 import jakarta.persistence.*;

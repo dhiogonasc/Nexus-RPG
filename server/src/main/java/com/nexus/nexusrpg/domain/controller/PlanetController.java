@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.domain.controller;
 
-import com.nexus.nexusrpg.common.dto.TaskDTO;
-import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.task.TaskDTO;
+import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.service.get.PlanetGetService;
-import com.nexus.nexusrpg.domain.controller.dto.UPlanetDTO;
+import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
 
 import lombok.*;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class PlanetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UPlanetDTO> getPlanet(@PathVariable Long id) {
+    public ResponseEntity<PlanetDTO> getPlanet(@PathVariable Long id) {
         return ResponseEntity.ok(planetGetService.getById(id));
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class EmailUnicoValidator implements ConstraintValidator<EmailUnico, String> {
+public class RegisterInputValidator implements ConstraintValidator<UniqueEmail, String> {
 
     private final UserRepository userRepository;
 

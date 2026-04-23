@@ -16,7 +16,7 @@ spring:
   data:
     web:
       pageable:
-        page-serialization-mode: via-dto
+        page-serialization-mode: via-task
 server:
   port: 8080
   error:

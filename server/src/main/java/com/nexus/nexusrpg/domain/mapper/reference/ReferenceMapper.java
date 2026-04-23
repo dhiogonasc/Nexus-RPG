@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.mapper.reference;
 
-import com.nexus.nexusrpg.common.dto.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 

@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.service.get;
 
-import com.nexus.nexusrpg.common.mapping.state.ProgressMapper;
+import com.nexus.nexusrpg.common.mapping.ProgressMapper;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.controller.dto.UResourceDTO;
+import com.nexus.nexusrpg.domain.controller.dto.ResourceDTO;
 import com.nexus.nexusrpg.domain.mapper.UResourceMapper;
 import com.nexus.nexusrpg.domain.mapper.reference.UResourceReferenceMapper;
 import com.nexus.nexusrpg.domain.model.Resource;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class ResourceGetService extends GetService<
         Resource,
         UResource,
-        UResourceDTO
+        ResourceDTO
         > {
 
     public ResourceGetService(
