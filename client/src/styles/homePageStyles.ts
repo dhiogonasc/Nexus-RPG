@@ -52,7 +52,6 @@ import { StyleSheet } from 'react-native';
     color: '#fff',
   },
   scrollContent: {
-    padding: 20,
     paddingBottom: 120,
   },
   charCard: {

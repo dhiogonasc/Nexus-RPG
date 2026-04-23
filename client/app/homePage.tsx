@@ -1,10 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAreaView, StatusBar, Image, ImageBackground } from 'react-native';
+import { StyleSheet, 
+  Text, 
+  View, 
+  ScrollView, 
+  TouchableOpacity, 
+  StatusBar, 
+  Image, 
+} from 'react-native';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { HomeStyles } from '@/styles/homePageStyles';
 import { LinearGradient } from 'expo-linear-gradient';
+
+
 import PlanetCarousel from '@/components/PlanetCarousel';
-import Footer from '@/components/Footer.jsx';
+import Footer from '@/components/FooterBar';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
@@ -40,20 +52,6 @@ export default function HomePage() {
                 />
               </View>
         
-        <View style={HomeStyles.charCard}>
-          <View style={HomeStyles.charInfo}>
-            <View style={HomeStyles.avatarPlaceholder}>
-              <FontAwesome5 name="user-astronaut" size={24} color="#fff" />
-            </View>
-            <View>
-              <Text style={HomeStyles.charName}>ChuckBass</Text>
-              <Text style={HomeStyles.charClass}>Nível 5</Text>
-            </View>
-          </View>
-          <TouchableOpacity style={HomeStyles.buttonPrimary}>
-            <Text style={HomeStyles.buttonText}>Abrir Inventário de Personagem</Text>
-          </TouchableOpacity>
-        </View>
         <View style={HomeStyles.textTituloPlaneta}>
             <Text style={HomeStyles.textTitulo}>Planeta Atual</Text>
         </View>
@@ -83,7 +81,7 @@ export default function HomePage() {
         
       </ScrollView>
 
-      <Footer/>
+
 
     </SafeAreaView>
   );

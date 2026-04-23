@@ -4,8 +4,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { styles } from '@/styles/CarouselStyle'; 
 import { LinearGradient } from 'expo-linear-gradient';
 
-const { width } = Dimensions.get('window');
-
 const PLANETAS = [
   { id: '1', nome: 'Xylos-Prime', imagem: require('../../assets/PurplePlanet.png') },
   { id: '2', nome: 'Zion', imagem: require('../../assets/Earth.png')},
@@ -25,7 +23,6 @@ export default function PlanetCarousel() {
 
   return (
     <View>
-      
     <ImageBackground
       source={require('../../assets/GalaxyPNG.png')} 
       style={styles.navegador}
@@ -56,7 +53,6 @@ export default function PlanetCarousel() {
         <TouchableOpacity onPress={() => navegar('prox')}>
           <MaterialCommunityIcons name="chevron-right" size={45} color="#ffffff" />
         </TouchableOpacity>
-
       </View>
 
       <Text style={styles.nome}>{PLANETAS[index].nome}</Text>

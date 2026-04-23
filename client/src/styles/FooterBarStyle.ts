@@ -1,17 +1,10 @@
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-const BOTTOM_SAFE_AREA_PADDING = Platform.OS === 'ios' ? 25 : 15;
-
 export const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    bottom: 0,           
-    left: 0,
-    width: width, 
-    height: 70 + BOTTOM_SAFE_AREA_PADDING, 
-    paddingBottom: BOTTOM_SAFE_AREA_PADDING,
+    width: '100%', 
     backgroundColor: '#1E293B',
     flexDirection: 'row',
     alignItems: 'center',
@@ -31,14 +24,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1, 
     paddingVertical: 10,
-  },
-  
-  homeButton: {
-    backgroundColor: 'rgba(124, 58, 237, 0.1)',
-    borderRadius: 20,
-    marginHorizontal: width * 0.05,
-    borderWidth: 1,
-    borderColor: '#7C3AED',
   },
   
   buttonText: {

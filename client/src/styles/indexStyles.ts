@@ -129,4 +129,56 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 50,
   },
+
+  // --- Estilos Missões ---
+  gridContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+    marginTop: -20,
+  },
+  card: {
+    backgroundColor: '#2A2765',
+    borderRadius: 24,
+    padding: 20,
+    width: '48%',
+    height: '60%',
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  circleContainer: {
+    marginBottom: 16,
+    backgroundColor: '#1C1A4A',
+    borderRadius: 50,
+    padding: 4,
+  },
+  circle: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth: 3,
+    borderColor: '#4A478A',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cardTitle: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  cardDescription: {
+    color: '#9CA3AF',
+    fontSize: 12,
+    textAlign: 'center',
+    lineHeight: 16,
+  },
+  imageCards: {
+    width: 100,
+    height: 80,
+    resizeMode: 'contain',
+  }
 });
