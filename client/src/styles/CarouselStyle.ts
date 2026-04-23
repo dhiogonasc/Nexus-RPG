@@ -20,7 +20,7 @@ export const CarouselStyles = StyleSheet.create({
   // Galaxy background
   galaxyBackground: {
     width: '100%',
-    height: 600,
+    height: 520,
     justifyContent: 'center',
     alignItems: 'center',
   },

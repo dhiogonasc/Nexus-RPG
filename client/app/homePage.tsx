@@ -8,9 +8,8 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { HomeStyles as S } from '@/styles/homePageStyles'; // Ajuste o path conforme seu projeto
+import { HomeStyles as S } from '@/styles/homePageStyles'; 
 import PlanetCarousel from '@/components/PlanetCarousel';
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface UserData {
   id: string;
@@ -32,7 +31,6 @@ export default function HomePage() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 800,
-        // useNativeDriver funciona na Web para transform e opacity
         useNativeDriver: true, 
       }),
       Animated.timing(slideAnim, {
@@ -47,25 +45,26 @@ export default function HomePage() {
     <SafeAreaView style={S.container} edges={['top']}>
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
 
-      {/* ── Header ── */}
-      <Animated.View
-        style={[
-          S.headerContainer,
-          { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
-        ]}
-      >
-        <View style={S.headerContent}>
-          <View style={S.headerText}>
-            <Text style={S.headerIcon}> 🧑‍🚀 </Text>
-            <Text style={S.userName}>Astronauta {user.name}!</Text>
-          </View>
-        </View>
-      </Animated.View>
-
+      {/* Trazemos o ScrollView para abraçar tudo que deve rolar */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={S.scrollContent}
       >
+        {/* ── Header agora rola junto com a tela ── */}
+        <Animated.View
+          style={[
+            S.headerContainer,
+            { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
+          ]}
+        >
+          <View style={S.headerContent}>
+            <View style={S.headerText}>
+              <Text style={S.headerIcon}> 🧑‍🚀 </Text>
+              <Text style={S.userName}>Astronauta {user.name}!</Text>
+            </View>
+          </View>
+        </Animated.View>
+
         {/* ── Section: Planeta Atual ── */}
         <View style={S.section}>
           <View style={S.sectionHeader}>
@@ -75,6 +74,7 @@ export default function HomePage() {
           
           <PlanetCarousel />
         </View>
+
       </ScrollView>
     </SafeAreaView>
   );

@@ -24,7 +24,7 @@ export default function Footer() {
       style={[
         styles.container,
         // essa parte aqui usa o tamanho da barra do celular OU 16px (o que for maior) para não ficar colado em celulares antigos.
-        { paddingBottom: Math.max(insets.bottom, 8), paddingTop: 8 }
+        { paddingBottom: Math.max(insets.bottom, 2), paddingTop: 2 }
       ]}
     >
       {/* Botão Missões */}

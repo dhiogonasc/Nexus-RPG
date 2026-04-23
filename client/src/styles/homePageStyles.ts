@@ -27,13 +27,13 @@ export const HomeStyles = StyleSheet.create({
   // Header responsivo
   headerContainer: {
     width: '100%',
-    alignItems: 'center', // Centraliza o headerContent na Web
+    alignItems: 'center',
     borderBottomColor: TOKEN.border,
     borderBottomWidth: 1,
   },
   headerContent: {
     width: '100%',
-    maxWidth: MAX_WEB_WIDTH, // Na Web, para aqui. No mobile, é 100%.
+    maxWidth: MAX_WEB_WIDTH,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
