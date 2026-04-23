@@ -1,7 +1,5 @@
 package com.nexus.nexusrpg.domain.model;
 
-import com.nexus.nexusrpg.domain.entity.question.model.Question;
-import com.nexus.nexusrpg.domain.model.enums.PlanetLabel;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.model.relation;
 
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.common.state.State;
-import com.nexus.nexusrpg.domain.entity.question.model.Question;
+import com.nexus.nexusrpg.domain.model.Question;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.execution.UMissionExec;

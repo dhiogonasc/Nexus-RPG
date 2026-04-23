@@ -1,6 +1,5 @@
 package com.nexus.nexusrpg.domain.model;
 
-import com.nexus.nexusrpg.domain.entity.question.model.Question;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,14 +25,7 @@ public class Alternative {
     @Column(name = "\"content\"", nullable = false, columnDefinition = "text")
     private String content;
 
-    @Column(name = "\"feedback_tip\"", nullable = false, columnDefinition = "text")
-    private String feedbackTip;
-
     @Builder.Default
     @Column(name = "\"is_correct\"", nullable = false)
     private Boolean isCorrect = false;
-
-    public boolean isCorrect() {
-        return Boolean.TRUE.equals(this.isCorrect);
-    }
 }

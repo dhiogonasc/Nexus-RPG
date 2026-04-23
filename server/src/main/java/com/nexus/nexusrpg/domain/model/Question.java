@@ -1,7 +1,5 @@
-package com.nexus.nexusrpg.domain.entity.question.model;
+package com.nexus.nexusrpg.domain.model;
 
-import com.nexus.nexusrpg.domain.model.Alternative;
-import com.nexus.nexusrpg.domain.model.Mission;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -27,19 +25,12 @@ public class Question {
     @Column(name = "\"content\"", nullable = false, columnDefinition = "text")
     private String content;
 
-    @Column(name = "\"code_snippet\"", columnDefinition = "text")
-    private String codeSnippet;
+    @Column(name = "\"feedback\"", nullable = false, columnDefinition = "text")
+    private String feedback;
 
     @Column(name = "\"order\"", nullable = false)
     private Integer order;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alternative> alternatives;
-
-    public Alternative getCorrectAlternative() {
-        return this.alternatives.stream()
-                .filter(Alternative::getIsCorrect)
-                .findFirst()
-                .orElse(null);
-    }
 }
