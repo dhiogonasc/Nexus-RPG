@@ -1,0 +1,8 @@
+-- ====================
+-- DOMAINS
+-- ====================
+CREATE DOMAIN xp bigint CHECK (VALUE >= 0);
+
+CREATE DOMAIN oxygen int CHECK (VALUE BETWEEN 0 AND 10);
+
+CREATE DOMAIN score DECIMAL(5, 2) CHECK (VALUE BETWEEN 0 AND 100);
