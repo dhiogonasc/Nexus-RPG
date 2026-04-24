@@ -10,48 +10,22 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { CarouselStyles as S } from '@/styles/CarouselStyle';
+import { router } from 'expo-router';
+import { PLANETAS } from '@/data/planetas'; 
 
-type Planeta = {
-  id: string;
-  nome: string;
-  description: string;
-  imagem: any; 
-  accentColor: string;
-};
-
-const PLANETAS: Planeta[] = [
-  {
-    id: '1',
-    nome: 'Terra',
-    description: 'Gigante Gasoso',
-    imagem: require('../../assets/Planet1.png'),
-    accentColor: '#49d730',
-  },
-  {
-    id: '2',
-    nome: 'Zion',
-    description: 'Planeta Rochoso',
-    imagem: require('../../assets/Planet2.png'),
-    accentColor: '#A78BFA',
-  },
-  {
-    id: '3',
-    nome: 'Glacies',
-    description: 'Mundo de Cristal',
-    imagem: require('../../assets/Planet3.png'),
-    accentColor: '#67E8F9',
-  },
-];
 
 export default function PlanetCarousel() {
   const [index, setIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const userCurrentPlanetId = '2';
 
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const opacityAnim = useRef(new Animated.Value(1)).current;
   const translateXAnim = useRef(new Animated.Value(0)).current;
 
   const planeta = PLANETAS[index];
+
+
 
   const navegar = (alvo: 'ant' | 'prox' | number) => {
     if (isAnimating) return;
@@ -150,7 +124,27 @@ export default function PlanetCarousel() {
         {/* Info card do planeta */}
         <Animated.View style={[S.infoCard, { opacity: opacityAnim }]}>
           <BlurView intensity={40} tint="dark" style={S.infoBlur}>
+
+            
             <View style={[S.accentLine, { backgroundColor: planeta.accentColor }]} />
+
+            {/* Visualização da posição do usuário */}
+            {planeta.id === userCurrentPlanetId && (
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 6 }}>
+                <MaterialCommunityIcons name="map-marker" size={14} color={planeta.accentColor} />
+                <Text style={{ 
+                  color: planeta.accentColor, 
+                  fontSize: 12, 
+                  fontWeight: 'bold', 
+                  marginLeft: 4,
+                  textTransform: 'uppercase',
+                  letterSpacing: 1
+                }}>
+                  Você está aqui
+                </Text>
+              </View>
+            )}
+
             <Text style={S.planetName}>{planeta.nome}</Text>
             <View style={S.infoRow}>
               <View style={S.infoPill}>
@@ -158,6 +152,7 @@ export default function PlanetCarousel() {
                 <Text style={S.infoPillText}>{planeta.description}</Text>
               </View>
             </View>
+
           </BlurView>
         </Animated.View>
 
@@ -175,8 +170,30 @@ export default function PlanetCarousel() {
               />
             </TouchableOpacity>
           ))}
+
+
         </View>
       </ImageBackground>
+
+          <TouchableOpacity 
+              style={{ 
+                backgroundColor: planeta.accentColor, 
+                padding: 7,
+                paddingLeft: 25,
+                paddingRight: 25, 
+                borderRadius: 8, 
+                marginTop: 15,
+                marginBottom: 25,
+                alignItems: 'center',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }}
+              onPress={() => router.push(`/planet/${planeta.id}`)} // <- NAVEGAÇÃO AQUI
+            >
+              <Text style={{ color: '#fff', fontWeight: 'bold' }}>
+                Explorar {planeta.nome}
+              </Text>
+            </TouchableOpacity>
     </View>
   );
 }

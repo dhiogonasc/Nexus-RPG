@@ -39,7 +39,7 @@ const mockMissions: Mission[] = [
   { id: 4, 
     namePlanet: 'Vertex', 
     description: 'Mapeie e colete recursos biológicos raros no núcleo profundo do planeta.', 
-    imgPlanet: require('../assets/BluePlanet.png')},
+    imgPlanet: require('../assets/Planet4.png')},
 ];
 
 export default function missions() {

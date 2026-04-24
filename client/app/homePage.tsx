@@ -69,7 +69,7 @@ export default function HomePage() {
         <View style={S.section}>
           <View style={S.sectionHeader}>
             <View style={S.sectionAccent} />
-            <Text style={S.sectionTitle}>PLANETA ATUAL</Text>
+            <Text style={S.sectionTitle}>LISTA DE PLANETAS</Text>
           </View>
           
           <PlanetCarousel />
