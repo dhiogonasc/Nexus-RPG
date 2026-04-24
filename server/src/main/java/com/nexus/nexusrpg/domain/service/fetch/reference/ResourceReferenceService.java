@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.service.get;
+package com.nexus.nexusrpg.domain.service.fetch.reference;
 
 import com.nexus.nexusrpg.common.mapping.ProgressMapper;
 import com.nexus.nexusrpg.common.context.Context;
@@ -11,13 +11,13 @@ import com.nexus.nexusrpg.domain.repository.relation.UserResourceRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ResourceGetService extends GetService<
+public class ResourceReferenceService extends ReferenceService<
         Resource,
         UResource,
         ResourceDTO
         > {
 
-    public ResourceGetService(
+    public ResourceReferenceService(
             Context context,
             UserResourceRepository repository,
             UResourceMapper mapper,
@@ -32,7 +32,4 @@ public class ResourceGetService extends GetService<
                 progressMapper
         );
     }
-
-    @Override
-    protected void validate(UResource uResource) {}
 }

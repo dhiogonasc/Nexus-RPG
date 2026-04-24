@@ -1,0 +1,30 @@
+package com.nexus.nexusrpg.domain.service.fetch.detail;
+
+import com.nexus.nexusrpg.common.context.Context;
+import com.nexus.nexusrpg.common.mapping.Mapper;
+import com.nexus.nexusrpg.domain.repository.relation.UserEntityRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
+
+@RequiredArgsConstructor
+public abstract class DetailService<UEntity, UEntityDTO> {
+
+    protected final Context context;
+    protected final UserEntityRepository<UEntity> userEntityRepository;
+    protected final Mapper<UEntity, UEntityDTO> mapper;
+
+    @Transactional(readOnly = true)
+    public UEntityDTO getById(Long id) {
+
+        var userId = context.getAuthenticatedUser().getId();
+
+        UEntity uEntity = userEntityRepository
+                .findByUserIdAndEntityId(userId, id);
+
+        validate(uEntity);
+
+        return mapper.toDTO(uEntity);
+    }
+
+    protected abstract void validate(UEntity uEntity);
+}

@@ -1,40 +1,29 @@
-package com.nexus.nexusrpg.domain.service.get;
+package com.nexus.nexusrpg.domain.service.fetch.detail;
 
-import com.nexus.nexusrpg.common.mapping.ProgressMapper;
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
 import com.nexus.nexusrpg.domain.mapper.UMissionMapper;
-import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
-import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.validator.MissionValidator;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MissionGetService extends GetService<
-        Mission,
-        UMission,
-        MissionDTO
-        > {
+public class MissionDetailService extends DetailService<UMission, MissionDTO> {
 
     private final MissionValidator validator;
 
-    public MissionGetService(
+    public MissionDetailService(
             Context context,
             UserMissionRepository repository,
             UMissionMapper mapper,
-            UMissionReferenceMapper refMapper,
-            MissionValidator validator,
-            ProgressMapper progressMapper
+            MissionValidator validator
     ) {
 
         super(
                 context,
                 repository,
-                mapper,
-                refMapper,
-                progressMapper
+                mapper
         );
 
         this.validator = validator;
@@ -42,6 +31,6 @@ public class MissionGetService extends GetService<
 
     @Override
     protected void validate(UMission uMission) {
-        validator.isAccessible(uMission);
+        this.validator.isAccessible(uMission);
     }
 }

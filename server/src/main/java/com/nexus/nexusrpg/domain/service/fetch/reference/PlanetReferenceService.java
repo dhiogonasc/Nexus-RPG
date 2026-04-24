@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.domain.service.get;
+package com.nexus.nexusrpg.domain.service.fetch.reference;
 
 import com.nexus.nexusrpg.common.mapping.ProgressMapper;
 import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
@@ -8,24 +8,20 @@ import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.domain.repository.relation.UserPlanetRepository;
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.validator.PlanetValidator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PlanetGetService extends GetService<
+public class PlanetReferenceService extends ReferenceService<
         Planet,
         UPlanet,
         PlanetDTO
         > {
 
-    private final PlanetValidator validator;
-
-    public PlanetGetService(
+    public PlanetReferenceService(
             Context context,
             UserPlanetRepository repository,
             UPlanetMapper mapper,
             UPlanetReferenceMapper refMapper,
-            PlanetValidator validator,
             ProgressMapper progressMapper
     ) {
 
@@ -36,12 +32,5 @@ public class PlanetGetService extends GetService<
                 refMapper,
                 progressMapper
         );
-
-        this.validator = validator;
-    }
-
-    @Override
-    protected void validate(UPlanet uPlanet) {
-        validator.isAccessible(uPlanet);
     }
 }
