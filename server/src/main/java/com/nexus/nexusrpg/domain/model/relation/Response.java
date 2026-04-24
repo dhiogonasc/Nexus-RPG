@@ -30,4 +30,8 @@ public class Response {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "alternative_id", nullable = false)
     private Alternative alternative;
+
+    public boolean isHit(){
+        return this.alternative.getIsCorrect();
+    }
 }

@@ -10,10 +10,14 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    default User findByIdOrThrow(Long id){
+        return findById(id)
+                .orElseThrow(() -> new BusinessException("User", "Nenhum usuário encontrado!", NOT_FOUND));
+    }
+
     boolean existsByEmail(String email);
 
     default User findByEmailOrThrow(String email){
-
         return findByEmail(email)
                 .orElseThrow(() -> new BusinessException("User", "Nenhum usuário encontrado!", NOT_FOUND));
     }

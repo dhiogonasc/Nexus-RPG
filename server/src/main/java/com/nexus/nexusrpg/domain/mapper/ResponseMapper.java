@@ -1,14 +1,18 @@
 package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.mapping.Mapper;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptRequestDTO;
 import com.nexus.nexusrpg.domain.controller.dto.response.AlternativeFeedbackDTO;
 import com.nexus.nexusrpg.domain.controller.dto.response.QuestionFeedbackDTO;
 import com.nexus.nexusrpg.domain.controller.dto.response.ResponseDTO;
 import com.nexus.nexusrpg.domain.mapper.feedback.AlternativeFeedbackMapper;
 import com.nexus.nexusrpg.domain.mapper.feedback.QuestionFeedbackMapper;
+import com.nexus.nexusrpg.domain.model.relation.Attempt;
 import com.nexus.nexusrpg.domain.model.relation.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor

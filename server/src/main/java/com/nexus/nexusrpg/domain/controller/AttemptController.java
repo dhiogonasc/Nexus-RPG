@@ -27,6 +27,6 @@ public class AttemptController {
     public ResponseEntity<AttemptResponseDTO> finish(
             @PathVariable Long id,
             @Valid @RequestBody List<AttemptRequestDTO> request){
-        return null;
+        return ResponseEntity.ok(attemptService.finish(id, request));
     }
 }

@@ -42,6 +42,6 @@ public class Attempt {
     private BigDecimal result = ZERO;
 
     @Builder.Default
-    @OneToMany(mappedBy = "attempt", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "attempt", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Response> responses = new java.util.ArrayList<>();
 }

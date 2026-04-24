@@ -2,7 +2,6 @@ package com.nexus.nexusrpg.domain.model.relation;
 
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.common.state.State;
-import com.nexus.nexusrpg.domain.model.Question;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.relation.execution.UMissionExec;
@@ -40,6 +39,9 @@ public class UMission implements State {
     @Embedded
     @Builder.Default
     private UMissionExec execution = new UMissionExec();
+
+    @OneToMany(mappedBy = "mission")
+    private List<Attempt> attempts;
 
     @Override
     public void unlock() {
@@ -79,9 +81,5 @@ public class UMission implements State {
 
     public Planet getPlanet(){
         return this.mission.getPlanet();
-    }
-
-    public List<Question> getQuestions() {
-        return this.mission.getQuestions();
     }
 }
