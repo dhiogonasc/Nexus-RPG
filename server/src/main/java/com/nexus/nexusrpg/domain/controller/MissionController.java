@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class MissionController {
 
-    private final MissionReferenceService planetReferenceService;
-    private final MissionDetailService missionDetailService;
+    private final MissionReferenceService referenceService;
+    private final MissionDetailService detailService;
 
     @GetMapping
     public ResponseEntity<TaskDTO<EntityReferenceDTO>> getMissions() {
-        return ResponseEntity.ok(planetReferenceService.getAll());
+        return ResponseEntity.ok(referenceService.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MissionDTO> getMission(@PathVariable Long id) {
-        return ResponseEntity.ok(missionDetailService.getById(id));
+        return ResponseEntity.ok(detailService.getById(id));
     }
 }

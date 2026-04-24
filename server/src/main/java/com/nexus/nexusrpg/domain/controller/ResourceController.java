@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ResourceController {
 
-    private final ResourceReferenceService resourceReferenceService;
-    private final ResourceDetailService resourceDetailService;
+    private final ResourceReferenceService referenceService;
+    private final ResourceDetailService detailService;
 
     @GetMapping
     public ResponseEntity<TaskDTO<EntityReferenceDTO>> getResources() {
-        return ResponseEntity.ok(resourceReferenceService.getAll());
+        return ResponseEntity.ok(referenceService.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ResourceDTO> getResource(@PathVariable Long id) {
-        return ResponseEntity.ok(resourceDetailService.getById(id));
+        return ResponseEntity.ok(detailService.getById(id));
     }
 }

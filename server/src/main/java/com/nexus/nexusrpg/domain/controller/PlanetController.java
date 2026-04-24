@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PlanetController {
 
-    private final PlanetReferenceService planetReferenceService;
-    private final PlanetDetailService planetDetailService;
+    private final PlanetReferenceService referenceService;
+    private final PlanetDetailService detailService;
 
     @GetMapping
     public ResponseEntity<TaskDTO<EntityReferenceDTO>> getPlanets() {
-        return ResponseEntity.ok(planetReferenceService.getAll());
+        return ResponseEntity.ok(referenceService.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PlanetDTO> getPlanet(@PathVariable Long id) {
-        return ResponseEntity.ok(planetDetailService.getById(id));
+        return ResponseEntity.ok(detailService.getById(id));
     }
 }
