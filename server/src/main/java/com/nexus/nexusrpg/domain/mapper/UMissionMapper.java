@@ -32,6 +32,7 @@ public class UMissionMapper implements Mapper<UMission, MissionDTO> {
                 mapPlanet(uMission),
                 mapQuestions(uMission),
                 executionMapper.map(uMission),
+                uMission.getBestResult(),
                 mission.getOrder()
         );
     }

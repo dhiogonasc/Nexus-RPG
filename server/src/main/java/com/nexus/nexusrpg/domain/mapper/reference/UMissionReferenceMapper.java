@@ -2,9 +2,9 @@ package com.nexus.nexusrpg.domain.mapper.reference;
 
 import com.nexus.nexusrpg.common.mapping.ExecutionMapper;
 import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
-import com.nexus.nexusrpg.domain.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
+import com.nexus.nexusrpg.domain.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,6 +25,7 @@ public class UMissionReferenceMapper extends ReferenceMapper<Mission, UMission> 
                 mission.getId(),
                 mission.getName(),
                 mission.getDescription(),
+                mission.getOrder(),
                 executionMapper.map(uMission)
         );
     }

@@ -6,6 +6,7 @@ public record EntityReferenceDTO(
         Long id,
         String name,
         String description,
+        int order,
         ExecutionDTO execution
 ) implements Task {
     @Override

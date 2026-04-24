@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
@@ -63,6 +64,10 @@ public class UMission implements State {
 
     public boolean isCurrent(){
         return this.execution.getIsCurrent();
+    }
+
+    public BigDecimal getBestResult(){
+        return this.execution.getBestResult();
     }
 
     public static UMission initialize(User user, Mission mission) {

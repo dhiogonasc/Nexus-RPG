@@ -77,6 +77,7 @@ public class AttemptService {
         attemptValidator.isCurrent(attempt);
 
         var uMission = attempt.getUMission();
+        var exec = uMission.getExecution();
         var mission = uMission.getMission();
 
         attemptValidator.validateAnswers(request, mission);
@@ -85,7 +86,7 @@ public class AttemptService {
         var responses = createResponses(attempt, request);
 
         attempt.finish(responses);
-        uMission.getExecution().updateBestResult(attempt.getResult());
+        exec.updateBestResult(attempt.getResult());
 
         var user = uMission.getUser();
         user.addXp(mission.getXpBonus());

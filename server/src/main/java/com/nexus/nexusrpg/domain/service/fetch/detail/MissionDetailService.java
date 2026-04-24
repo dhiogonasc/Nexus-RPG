@@ -19,13 +19,7 @@ public class MissionDetailService extends DetailService<UMission, MissionDTO> {
             UMissionMapper mapper,
             MissionValidator validator
     ) {
-
-        super(
-                context,
-                repository,
-                mapper
-        );
-
+        super(context, repository, mapper);
         this.validator = validator;
     }
 

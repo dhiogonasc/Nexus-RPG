@@ -19,13 +19,7 @@ public class PlanetDetailService extends DetailService<UPlanet, PlanetDTO> {
             UPlanetMapper mapper,
             PlanetValidator validator
     ) {
-
-        super(
-                context,
-                repository,
-                mapper
-        );
-
+        super(context, repository, mapper);
         this.validator = validator;
     }
 

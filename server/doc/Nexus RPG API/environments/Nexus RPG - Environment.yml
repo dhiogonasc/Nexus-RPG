@@ -9,6 +9,6 @@ variables:
   - name: resource.id
     value: "1"
   - name: mission.id
-    value: "3"
+    value: "1"
   - name: question.id
     value: "1"

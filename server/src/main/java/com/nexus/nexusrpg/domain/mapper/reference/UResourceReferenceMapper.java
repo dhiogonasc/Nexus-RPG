@@ -2,9 +2,9 @@ package com.nexus.nexusrpg.domain.mapper.reference;
 
 import com.nexus.nexusrpg.common.mapping.ExecutionMapper;
 import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
-import com.nexus.nexusrpg.domain.repository.relation.UserResourceRepository;
 import com.nexus.nexusrpg.domain.model.Resource;
 import com.nexus.nexusrpg.domain.model.relation.UResource;
+import com.nexus.nexusrpg.domain.repository.relation.UserResourceRepository;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,6 +25,7 @@ public class UResourceReferenceMapper extends ReferenceMapper<Resource, UResourc
                 resource.getId(),
                 resource.getName(),
                 resource.getDescription(),
+                resource.getOrder(),
                 executionMapper.map(uResource)
         );
     }

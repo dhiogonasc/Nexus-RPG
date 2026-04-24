@@ -21,6 +21,11 @@ http:
       ]
   auth: inherit
 
+runtime:
+  variables:
+    - name: attempt.id
+      value: "13"
+
 settings:
   encodeUrl: true
   timeout: 0
