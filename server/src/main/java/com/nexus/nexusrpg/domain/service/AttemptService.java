@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.service;
 
 import com.nexus.nexusrpg.common.context.Context;
+import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptRequestDTO;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptResponseDTO;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptStartDTO;
@@ -27,6 +28,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.math.RoundingMode.HALF_UP;
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 @Service
 @RequiredArgsConstructor
@@ -84,6 +86,18 @@ public class AttemptService {
         attemptValidator.isCurrent(attempt);
 
         var mission = attempt.getMission();
+        var missionBase = mission.getMission(); // Entidade base da missão
+        int totalQuestions = missionBase.getQuestions().size();
+        int answeredQuestions = request.size();
+
+        if (answeredQuestions < totalQuestions) {
+            throw new BusinessException(
+                    "Mission",
+                    "Missão incompleta: " + answeredQuestions + " de " + totalQuestions + " questões respondidas.",
+                    UNPROCESSABLE_ENTITY
+            );
+        }
+
         var user = mission.getUser();
         user.addXp(mission.getMission().getXpBonus());
         userRepository.save(user);
@@ -114,8 +128,25 @@ public class AttemptService {
     }
 
     private Response mapResponse(Attempt attempt, AttemptRequestDTO request) {
+
         var question = questionRepository.findByIdOrThrow(request.questionId());
+        if (!question.getMission().getId().equals(attempt.getMission().getMission().getId())) {
+            throw new BusinessException(
+                    "Question",
+                    "A questão não pertence a esta missão.",
+                    UNPROCESSABLE_ENTITY
+            );
+        }
+
         var alternative = alternativeRepository.findByIdOrThrow(request.alternativeId());
+        if (!alternative.getQuestion().getId().equals(question.getId())) {
+            throw new BusinessException(
+                    "Alternative",
+                    "A alternativa não pertence a esta questão.",
+                    UNPROCESSABLE_ENTITY
+            );
+        }
+
         var response = Response.builder()
                 .attempt(attempt)
                 .question(question)

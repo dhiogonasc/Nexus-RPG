@@ -1,7 +1,8 @@
 package com.nexus.nexusrpg.domain.controller.dto;
 
-import com.nexus.nexusrpg.common.task.ExecutionDTO;
 import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.task.ExecutionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.response.QuestionDTO;
 
 import java.util.List;
 

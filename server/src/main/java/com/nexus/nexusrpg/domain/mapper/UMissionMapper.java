@@ -1,10 +1,10 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.common.mapping.Mapper;
 import com.nexus.nexusrpg.common.mapping.ExecutionMapper;
+import com.nexus.nexusrpg.common.mapping.Mapper;
 import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.QuestionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.response.QuestionDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;

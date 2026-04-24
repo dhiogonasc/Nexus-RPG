@@ -13,7 +13,11 @@ public class UserValidator {
 
     public void hasEnoughOxygen(User user) {
         if (user.getOxygen() <= 0) {
-            throw new BusinessException("User", "Não possui oxigênio suficiente", BAD_REQUEST);
+            throw new BusinessException(
+                    "User",
+                    "Não possui oxigênio suficiente",
+                    BAD_REQUEST
+            );
         }
     }
 }

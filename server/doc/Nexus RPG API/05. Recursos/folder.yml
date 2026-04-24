@@ -1,0 +1,9 @@
+info:
+  name: 05. Recursos
+  type: folder
+  seq: 6
+
+request:
+  auth:
+    type: bearer
+    token: "{{access.token}}"

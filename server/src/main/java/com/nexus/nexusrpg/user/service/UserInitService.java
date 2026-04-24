@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class InitUser {
+public class UserInitService {
 
     private final LevelService levelService;
     private final List<Initializable> initializers;

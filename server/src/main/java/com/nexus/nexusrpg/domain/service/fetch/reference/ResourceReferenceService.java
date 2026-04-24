@@ -21,14 +21,14 @@ public class ResourceReferenceService extends ReferenceService<
             Context context,
             UserResourceRepository repository,
             UResourceMapper mapper,
-            UResourceReferenceMapper refMapper,
+            UResourceReferenceMapper referenceMapper,
             ProgressMapper progressMapper
     ) {
         super(
                 context,
                 repository,
                 mapper,
-                refMapper,
+                referenceMapper,
                 progressMapper
         );
     }

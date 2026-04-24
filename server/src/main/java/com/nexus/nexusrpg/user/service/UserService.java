@@ -4,20 +4,22 @@ import com.nexus.nexusrpg.user.model.User;
 import com.nexus.nexusrpg.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
-    private final InitUser initUser;
+    private final UserInitService userInitService;
     private final UserRepository userRepository;
 
+    @Transactional
     public void createUser(
             String username,
             String email,
             String password
     ){
-        var level = initUser.initialLevel();
+        var level = userInitService.initialLevel();
 
         var user = User.builder()
                 .username(username)
@@ -27,7 +29,7 @@ public class UserService {
                 .build();
 
         userRepository.save(user);
-        initUser.initialize(user);
+        userInitService.initialize(user);
     }
 
     public User findByEmail(String email) {

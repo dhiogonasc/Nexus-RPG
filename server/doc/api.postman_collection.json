@@ -46,7 +46,7 @@
               "script": {
                 "exec": [
                   "const response = pm.response.json();",
-                  "pm.environment.set(\"token\", response.accessToken);"
+                  "pm.environment.set(\"access.token\", response.accessToken);"
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -114,22 +114,12 @@
         {
           "name": "Listar Planetas",
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJuZXh1cy1ycGciLCJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJleHAiOjE3NzYzNTc5NTUsImlhdCI6MTc3NjM1NDM1NX0.twMKyVj68Vry2vJdOOhtpzc77ilve-GNpuXE4WOYenjHSHwVehd87MSmMIJDvBD-k1H2TajhtuNe-P3GeeByukXnwDqe2LCFnoyxtWQm7fz7yFls3yq_hVhx6ScBNGNtEdJ5TUKyjH5VEF4P9W7r2uxMuoUwCGgaTSZ38sQOUytOen35X_FMiET6zusViJMsW1cv29VwofMYKUUGbtH3PeGD05nLUiqAGHNE6WXRpTY3U_dLx1NQh4QeAzZVUiCQNu11aVU3HdKbCv-f9rVaE66hy8WlXRtmCJJO2xaA7KcWVuqzn-PjM_tV3m6bETnfs7CbpeSaz2cfuU9z5dit5Q",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/planets",
+              "raw": "{{server.url}}/planets",
               "host": [
-                "{{baseUrl}}"
+                "{{server.url}}"
               ],
               "path": [
                 "planets"
@@ -215,74 +205,6 @@
               "path": [
                 "missions",
                 "{{mission.id}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Iniciar tentativa",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "url": {
-              "raw": "{{server.url}}/missions/{{mission.id}}/start",
-              "host": [
-                "{{server.url}}"
-              ],
-              "path": [
-                "missions",
-                "{{mission.id}}",
-                "start"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Responder",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"questionId\": 1,\r\n    \"alternativeId\": 1\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{server.url}}/missions/attempts/{{mission.attempt.id}}/answer",
-              "host": [
-                "{{server.url}}"
-              ],
-              "path": [
-                "missions",
-                "attempts",
-                "{{mission.attempt.id}}",
-                "answer"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Finalizar tentativa",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "url": {
-              "raw": "{{server.url}}/missions/attempts/{{mission.attempt.id}}/finish",
-              "host": [
-                "{{server.url}}"
-              ],
-              "path": [
-                "missions",
-                "attempts",
-                "{{mission.attempt.id}}",
-                "finish"
               ]
             }
           },
@@ -423,6 +345,60 @@
           }
         }
       ]
+    },
+    {
+      "name": "iniciar missão (tentativa)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"missionId\": {{mission.id}}\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{server.url}}/attempts",
+          "host": [
+            "{{server.url}}"
+          ],
+          "path": [
+            "attempts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "concluir missão (responder)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "[\r\n  {\r\n    \"questionId\": 1,\r\n    \"alternativeId\": 1\r\n  },\r\n  {\r\n    \"questionId\": 2,\r\n    \"alternativeId\": 3\r\n  }\r\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{server.url}}/attempts/{{attempt.id}}/finish",
+          "host": [
+            "{{server.url}}"
+          ],
+          "path": [
+            "attempts",
+            "{{attempt.id}}",
+            "finish"
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "auth": {

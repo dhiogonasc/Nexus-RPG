@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.mapping.Mapper;
-import com.nexus.nexusrpg.domain.controller.dto.AlternativeDTO;
+import com.nexus.nexusrpg.domain.controller.dto.response.AlternativeDTO;
 import com.nexus.nexusrpg.domain.model.Alternative;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

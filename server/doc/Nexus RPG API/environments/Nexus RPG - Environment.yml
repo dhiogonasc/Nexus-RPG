@@ -1,0 +1,14 @@
+name: Nexus RPG - Environment
+variables:
+  - name: server.url
+    value: http://localhost:8080
+  - name: access.token
+    value: ""
+  - name: planet.id
+    value: "1"
+  - name: resource.id
+    value: "1"
+  - name: mission.id
+    value: "1"
+  - name: question.id
+    value: "1"

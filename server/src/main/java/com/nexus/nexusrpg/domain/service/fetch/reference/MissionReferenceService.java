@@ -21,7 +21,7 @@ public class MissionReferenceService extends ReferenceService<
             Context context,
             UserMissionRepository repository,
             UMissionMapper mapper,
-            UMissionReferenceMapper refMapper,
+            UMissionReferenceMapper referenceMapper,
             ProgressMapper progressMapper
     ) {
 
@@ -29,7 +29,7 @@ public class MissionReferenceService extends ReferenceService<
                 context,
                 repository,
                 mapper,
-                refMapper,
+                referenceMapper,
                 progressMapper
         );
     }
