@@ -21,7 +21,8 @@ public class ResponseMapper implements Mapper<Response, ResponseDTO> {
     public ResponseDTO toDTO(Response response) {
         return new ResponseDTO(
                 mapQuestion(response),
-                mapAlternative(response)
+                mapAlternative(response),
+                response.isHit()
         );
     }
 

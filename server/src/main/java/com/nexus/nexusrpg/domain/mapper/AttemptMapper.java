@@ -40,7 +40,7 @@ public class AttemptMapper implements Mapper<Attempt, AttemptResponseDTO> {
     }
 
     private EntityReferenceDTO mapMission(Attempt attempt){
-        var mission = attempt.getMission();
+        var mission = attempt.getUMission();
         return uMissionReferenceMapper.toReferenceDTO(mission);
     }
 }

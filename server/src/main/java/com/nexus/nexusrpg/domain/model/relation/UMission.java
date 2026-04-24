@@ -1,13 +1,16 @@
 package com.nexus.nexusrpg.domain.model.relation;
 
-import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.common.state.State;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
+import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.model.relation.execution.UMissionExec;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -40,7 +43,7 @@ public class UMission implements State {
     @Builder.Default
     private UMissionExec execution = new UMissionExec();
 
-    @OneToMany(mappedBy = "mission")
+    @OneToMany(mappedBy = "uMission")
     private List<Attempt> attempts;
 
     @Override

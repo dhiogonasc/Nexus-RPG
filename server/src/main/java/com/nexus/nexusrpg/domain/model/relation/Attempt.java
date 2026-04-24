@@ -8,11 +8,13 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static java.math.BigDecimal.ZERO;
+import static java.math.RoundingMode.HALF_UP;
 
 @Data
 @Builder
@@ -28,7 +30,7 @@ public class Attempt {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_mission_id", nullable = false)
-    private UMission mission;
+    private UMission uMission;
 
     @Builder.Default
     @Column(name = "start_at", nullable = false)
@@ -44,4 +46,24 @@ public class Attempt {
     @Builder.Default
     @OneToMany(mappedBy = "attempt", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Response> responses = new java.util.ArrayList<>();
+
+    public void finish(List<Response> responses) {
+
+        if (this.responses == null) {
+            this.responses = new ArrayList<>();
+        }
+
+        this.responses.clear();
+        this.responses.addAll(responses);
+
+        long correctCount = responses.stream()
+                .filter(Response::isHit)
+                .count();
+
+        this.result = BigDecimal.valueOf(correctCount)
+                .multiply(BigDecimal.valueOf(100))
+                .divide(BigDecimal.valueOf(responses.size()), 2, HALF_UP);
+
+        this.endAt = LocalDateTime.now();
+    }
 }

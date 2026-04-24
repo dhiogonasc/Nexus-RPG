@@ -8,11 +8,10 @@ http:
   url: "{{server.url}}/attempts"
   body:
     type: json
-    data: "{\r
-
-      \  \"missionId\": {{mission.id}}\r
-
-      }"
+    data: |-
+      {
+        "missionId": 1
+      }
   auth: inherit
 
 runtime:
