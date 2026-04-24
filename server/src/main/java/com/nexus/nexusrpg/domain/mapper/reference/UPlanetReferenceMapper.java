@@ -24,6 +24,7 @@ public class UPlanetReferenceMapper extends ReferenceMapper<Planet, UPlanet> {
         return new EntityReferenceDTO(
                 planet.getId(),
                 planet.getName().toString(),
+                planet.getDescription(),
                 executionMapper.map(uPlanet)
         );
     }

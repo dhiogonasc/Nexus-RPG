@@ -24,6 +24,7 @@ public class UMissionReferenceMapper extends ReferenceMapper<Mission, UMission> 
         return new EntityReferenceDTO(
                 mission.getId(),
                 mission.getName(),
+                mission.getDescription(),
                 executionMapper.map(uMission)
         );
     }

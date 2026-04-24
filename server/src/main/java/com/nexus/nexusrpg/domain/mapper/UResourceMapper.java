@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.common.mapping.Mapper;
 import com.nexus.nexusrpg.common.mapping.ExecutionMapper;
+import com.nexus.nexusrpg.common.mapping.Mapper;
 import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.ResourceDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.UPlanetReferenceMapper;
@@ -26,12 +26,12 @@ public class UResourceMapper implements Mapper<UResource, ResourceDTO> {
                 resource.getDescription(),
                 resource.getXpBonus(),
                 mapPlanet(uResource),
-                executionMapper.map(uResource)
+                executionMapper.map(uResource),
+                resource.getOrder()
         );
     }
 
     public EntityReferenceDTO mapPlanet(UResource uResource){
-
         var user = uResource.getUser();
         var planet = uResource.getPlanet();
 

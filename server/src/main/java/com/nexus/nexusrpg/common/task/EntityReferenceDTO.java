@@ -5,6 +5,7 @@ import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 public record EntityReferenceDTO(
         Long id,
         String name,
+        String description,
         ExecutionDTO execution
 ) implements Task {
     @Override

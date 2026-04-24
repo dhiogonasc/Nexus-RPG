@@ -31,7 +31,8 @@ public class UMissionMapper implements Mapper<UMission, MissionDTO> {
                 mission.getXpBonus(),
                 mapPlanet(uMission),
                 mapQuestions(uMission),
-                executionMapper.map(uMission)
+                executionMapper.map(uMission),
+                mission.getOrder()
         );
     }
 

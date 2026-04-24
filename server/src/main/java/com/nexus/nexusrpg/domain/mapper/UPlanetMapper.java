@@ -1,15 +1,14 @@
 package com.nexus.nexusrpg.domain.mapper;
 
-import com.nexus.nexusrpg.common.task.TaskDTO;
-import com.nexus.nexusrpg.common.mapping.Mapper;
 import com.nexus.nexusrpg.common.mapping.ExecutionMapper;
+import com.nexus.nexusrpg.common.mapping.Mapper;
 import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.task.TaskDTO;
 import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
 import com.nexus.nexusrpg.domain.mapper.task.UMissionTaskMapper;
 import com.nexus.nexusrpg.domain.mapper.task.UResourceTaskMapper;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,15 +28,16 @@ public class UPlanetMapper implements Mapper<UPlanet, PlanetDTO> {
                 planet.getId(),
                 planet.getName(),
                 planet.getDescription(),
+                planet.getContent(),
                 planet.getXpBonus(),
                 mapResources(uPlanet),
                 mapMissions(uPlanet),
-                executionMapper.map(uPlanet)
+                executionMapper.map(uPlanet),
+                planet.getOrder()
         );
     }
 
     private TaskDTO<EntityReferenceDTO> mapMissions(UPlanet uPlanet){
-
         var user  = uPlanet.getUser();
         var missions = uPlanet.getMissions();
 
@@ -45,7 +45,6 @@ public class UPlanetMapper implements Mapper<UPlanet, PlanetDTO> {
     }
 
     private TaskDTO<EntityReferenceDTO> mapResources(UPlanet uPlanet){
-
         var user  = uPlanet.getUser();
         var resources = uPlanet.getResources();
 

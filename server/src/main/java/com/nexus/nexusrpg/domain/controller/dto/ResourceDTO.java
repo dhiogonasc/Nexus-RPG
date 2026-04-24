@@ -9,5 +9,6 @@ public record ResourceDTO(
         String description,
         long xpBonus,
         EntityReferenceDTO planet,
-        ExecutionDTO execution
+        ExecutionDTO execution,
+        int order
 ) {}

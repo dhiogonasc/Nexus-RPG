@@ -25,6 +25,9 @@ public class Planet {
     @Column(name = "\"description\"", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "\"content\"", columnDefinition = "TEXT")
+    private String content;
+
     @Column(name = "\"order\"", nullable = false, unique = true)
     private int order;
 

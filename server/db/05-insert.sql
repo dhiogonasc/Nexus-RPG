@@ -17,10 +17,10 @@ VALUES
 -- PLANET
 -- ====================
 INSERT INTO
-    "planet" ("name", "description", "order", "xp_bonus")
+    "planet" ("name", "description", "content", "order", "xp_bonus")
 VALUES
-    ('VARIABILI', NULL, 1, 10),
-    ('BIFURCA_9', NULL, 2, 10);
+    ('VARIABILI', 'planet description', 'planet content', 1, 10),
+    ('BIFURCA_9', 'planet description', 'planet content', 2, 10);
 
 -- ====================
 -- MISSION

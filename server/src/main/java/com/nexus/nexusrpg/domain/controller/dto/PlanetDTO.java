@@ -9,8 +9,10 @@ public record PlanetDTO(
         Long id,
         PlanetLabel name,
         String description,
+        String content,
         long xpBonus,
         TaskDTO<EntityReferenceDTO> resources,
         TaskDTO<EntityReferenceDTO> missions,
-        ExecutionDTO execution
+        ExecutionDTO execution,
+        int order
 ) {}

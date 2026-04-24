@@ -12,5 +12,6 @@ public record MissionDTO(
         long xpBonus,
         EntityReferenceDTO planet,
         List<QuestionDTO> questions,
-        ExecutionDTO execution
+        ExecutionDTO execution,
+        int order
 ) {}

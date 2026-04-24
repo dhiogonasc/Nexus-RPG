@@ -24,6 +24,7 @@ public class UResourceReferenceMapper extends ReferenceMapper<Resource, UResourc
         return new EntityReferenceDTO(
                 resource.getId(),
                 resource.getName(),
+                resource.getDescription(),
                 executionMapper.map(uResource)
         );
     }
