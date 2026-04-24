@@ -10,7 +10,7 @@ http:
     type: json
     data: |-
       {
-        "missionId": 1
+        "missionId": {{mission.id}}
       }
   auth: inherit
 

@@ -11,20 +11,15 @@ http:
     data: |-
       [
         {
-          "questionId": 1,
-          "alternativeId": 1
+          "questionId": 3,
+          "alternativeId": 5
         },
         {
-          "questionId": 2,
-          "alternativeId": 3
+          "questionId": 4,
+          "alternativeId": 7
         }
       ]
   auth: inherit
-
-runtime:
-  variables:
-    - name: attempt.id
-      value: "13"
 
 settings:
   encodeUrl: true
