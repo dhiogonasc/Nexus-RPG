@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.controller.dto;
 
+import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.common.task.ExecutionDTO;
 import com.nexus.nexusrpg.common.task.TaskDTO;
-import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.model.enums.PlanetLabel;
 
 public record PlanetDTO(
@@ -11,7 +11,6 @@ public record PlanetDTO(
         String description,
         String content,
         long xpBonus,
-        TaskDTO<EntityReferenceDTO> resources,
         TaskDTO<EntityReferenceDTO> missions,
         ExecutionDTO execution,
         int order

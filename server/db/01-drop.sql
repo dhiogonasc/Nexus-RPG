@@ -1,8 +1,6 @@
 -- ====================
 -- DROPS
 -- ====================
-DROP TABLE IF EXISTS "user_resource" CASCADE;
-
 DROP TABLE IF EXISTS "user_response" CASCADE;
 
 DROP TABLE IF EXISTS "user_mission_attempt" CASCADE;
@@ -14,8 +12,6 @@ DROP TABLE IF EXISTS "user_planet" CASCADE;
 DROP TABLE IF EXISTS "alternative" CASCADE;
 
 DROP TABLE IF EXISTS "question" CASCADE;
-
-DROP TABLE IF EXISTS "resource" CASCADE;
 
 DROP TABLE IF EXISTS "mission" CASCADE;
 

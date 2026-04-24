@@ -1,13 +1,11 @@
 package com.nexus.nexusrpg.domain.service;
 
 import com.nexus.nexusrpg.domain.model.Mission;
-import com.nexus.nexusrpg.domain.model.relation.UMission;
-import com.nexus.nexusrpg.domain.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.model.Planet;
+import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
+import com.nexus.nexusrpg.domain.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.repository.relation.UserPlanetRepository;
-import com.nexus.nexusrpg.domain.model.Resource;
-import com.nexus.nexusrpg.domain.repository.relation.UserResourceRepository;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +20,6 @@ public class ProgressionService {
 
     private final UserMissionRepository uMissionRepository;
     private final UserPlanetRepository uPlanetRepository;
-    private final UserResourceRepository uResourceRepository;
 
     @Transactional
     public void unlockNextMission(User user, Mission currentMission) {
@@ -54,10 +51,7 @@ public class ProgressionService {
                         userId,
                         currentPlanet.getOrder()
                 )
-                .ifPresent(up -> {
-                    this.completePlanet(up);
-                    this.completeResource(userId, up.getResources().get(0));
-                });
+                .ifPresent(this::completePlanet);
 
         uPlanetRepository
                 .findByUserIdAndPlanetOrder(
@@ -66,7 +60,6 @@ public class ProgressionService {
                 )
                 .ifPresent(up -> {
                     this.unlockPlanet(up);
-                    this.unlockResource(userId, up.getResources().get(0));
                     unlockFirstMissionOfPlanet(userId, up.getPlanet().getId());
                 });
     }
@@ -83,36 +76,6 @@ public class ProgressionService {
             up.complete();
             uPlanetRepository.save(up);
         }
-    }
-
-    private void unlockResource(Long userId, Resource currentResource){
-
-        uResourceRepository
-                .findUEntity(
-                        userId,
-                        currentResource.getId()
-                )
-                .ifPresent(ur -> {
-                    if (ur.getStatus() == LOCKED) {
-                        ur.unlock();
-                        uResourceRepository.save(ur);
-                    }
-                });
-    }
-
-    private void completeResource(Long userId, Resource currentResource){
-
-        uResourceRepository
-                .findUEntity(
-                        userId,
-                        currentResource.getId()
-                )
-                .ifPresent(ur -> {
-                    if (ur.getStatus() == UNLOCKED) {
-                        ur.complete();
-                        uResourceRepository.save(ur);
-                    }
-                });
     }
 
     private void unlockFirstMissionOfPlanet(Long userId, Long planetId) {

@@ -1,9 +1,12 @@
 package com.nexus.nexusrpg.domain.model;
 
-
 import com.nexus.nexusrpg.domain.model.enums.PlanetLabel;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Data
@@ -36,7 +39,4 @@ public class Planet {
 
     @OneToMany(mappedBy = "planet")
     private List<Mission> missions;
-
-    @OneToMany(mappedBy = "planet")
-    private List<Resource> resources;
 }

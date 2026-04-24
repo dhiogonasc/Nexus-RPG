@@ -152,18 +152,3 @@ VALUES
         'Content Alt 2 - Question 2 - Mission 2 - Planet 2',
         false
     );
-
--- ====================
--- RESOURCE
--- ====================
-INSERT INTO
-    "resource" (
-    planet_id,
-    "name",
-    "description",
-    "order",
-    "xp_bonus"
-)
-VALUES
-    (1, 'Planet - 1 : Resource', NULL, 1, 10),
-    (2, 'Planet - 2 : Resource', NULL, 1, 10);

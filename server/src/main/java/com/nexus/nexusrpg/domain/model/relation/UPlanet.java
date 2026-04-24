@@ -1,10 +1,9 @@
 package com.nexus.nexusrpg.domain.model.relation;
 
-import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.common.state.State;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.model.Resource;
+import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExec;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
@@ -78,11 +77,6 @@ public class UPlanet implements State {
                 .planet(planet)
                 .execution(initialStats)
                 .build();
-    }
-
-
-    public List<Resource> getResources(){
-        return this.planet.getResources();
     }
 
     public List<Mission> getMissions(){

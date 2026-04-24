@@ -6,7 +6,6 @@ import com.nexus.nexusrpg.domain.controller.dto.LevelDTO;
 public record UserProgressionDTO(
         LevelDTO level,
         EntityReferenceDTO planet,
-        EntityReferenceDTO mission,
-        EntityReferenceDTO resource
+        EntityReferenceDTO mission
 ) {
 }
