@@ -25,10 +25,10 @@ public class Planet {
     @Column(name = "\"name\"", nullable = false, unique = true, columnDefinition = "planet_label")
     private PlanetLabel name;
 
-    @Column(name = "\"description\"", columnDefinition = "TEXT")
+    @Column(name = "\"description\"", columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @Column(name = "\"content\"", columnDefinition = "TEXT")
+    @Column(name = "\"content\"", columnDefinition = "TEXT", nullable = false)
     private String content;
 
     @Column(name = "\"order\"", nullable = false, unique = true)

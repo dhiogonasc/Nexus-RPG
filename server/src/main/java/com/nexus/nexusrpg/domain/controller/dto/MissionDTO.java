@@ -11,6 +11,7 @@ public record MissionDTO(
         Long id,
         String name,
         String description,
+        String content,
         long xpBonus,
         EntityReferenceDTO planet,
         List<QuestionDTO> questions,

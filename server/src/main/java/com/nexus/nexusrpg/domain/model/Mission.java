@@ -1,7 +1,10 @@
 package com.nexus.nexusrpg.domain.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -27,8 +30,11 @@ public class Mission {
     @Column(name = "\"name\"", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "\"description\"", columnDefinition = "TEXT")
+    @Column(name = "\"description\"", columnDefinition = "TEXT", nullable = false)
     private String description;
+
+    @Column(name = "\"content\"", columnDefinition = "TEXT", nullable = false)
+    private String content;
 
     @Column(name = "\"order\"", nullable = false, unique = true)
     private int order;

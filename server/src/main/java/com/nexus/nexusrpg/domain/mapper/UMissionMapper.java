@@ -28,6 +28,7 @@ public class UMissionMapper implements Mapper<UMission, MissionDTO> {
                 mission.getId(),
                 mission.getName(),
                 mission.getDescription(),
+                mission.getContent(),
                 mission.getXpBonus(),
                 mapPlanet(uMission),
                 mapQuestions(uMission),

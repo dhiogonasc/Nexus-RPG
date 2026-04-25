@@ -30,14 +30,15 @@ INSERT INTO
     planet_id,
     "name",
     "description",
+    "content",
     "order",
     "xp_bonus"
 )
 VALUES
-    (1, 'Planet - 1 : Mission - 1 ', NULL, 1, 10),
-    (1, 'Planet - 1 : Mission - 2 ', NULL, 2, 10),
-    (2, 'Planet - 2 : Mission - 1 ', NULL, 1, 10),
-    (2, 'Planet - 2 : Mission - 2 ', NULL, 2, 10);
+    (1, 'Planet - 1 : Mission - 1 ', 'mission description', 'mission content', 1, 10),
+    (1, 'Planet - 1 : Mission - 2 ', 'mission description', 'mission content', 2, 10),
+    (2, 'Planet - 2 : Mission - 1 ', 'mission description', 'mission content', 1, 10),
+    (2, 'Planet - 2 : Mission - 2 ', 'mission description', 'mission content', 2, 10);
 
 -- ====================
 -- QUESTION
