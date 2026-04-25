@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.controller;
 
 import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptRequestDTO;
-import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptResponseDTO;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptStartDTO;
+import com.nexus.nexusrpg.domain.controller.dto.response.AttemptResponseDTO;
 import com.nexus.nexusrpg.domain.service.AttemptService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

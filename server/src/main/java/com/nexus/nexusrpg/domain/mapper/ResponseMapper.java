@@ -2,8 +2,8 @@ package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.response.AlternativeFeedbackDTO;
+import com.nexus.nexusrpg.domain.controller.dto.response.FeedbackDTO;
 import com.nexus.nexusrpg.domain.controller.dto.response.QuestionFeedbackDTO;
-import com.nexus.nexusrpg.domain.controller.dto.response.ResponseDTO;
 import com.nexus.nexusrpg.domain.mapper.feedback.AlternativeFeedbackMapper;
 import com.nexus.nexusrpg.domain.mapper.feedback.QuestionFeedbackMapper;
 import com.nexus.nexusrpg.domain.model.relation.Response;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ResponseMapper implements Mapper<Response, ResponseDTO> {
+public class ResponseMapper implements Mapper<Response, FeedbackDTO> {
 
     private final QuestionFeedbackMapper questionFeedbackMapper;
     private final AlternativeFeedbackMapper alternativeFeedbackMapper;
 
     @Override
-    public ResponseDTO map(Response response) {
-        return new ResponseDTO(
+    public FeedbackDTO map(Response response) {
+        return new FeedbackDTO(
                 mapQuestion(response),
                 mapAlternative(response),
                 response.isHit()

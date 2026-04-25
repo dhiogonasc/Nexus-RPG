@@ -5,8 +5,9 @@ import com.nexus.nexusrpg.common.task.ExecutionDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ExecutionMapper<T extends State> {
+public class ExecutionMapper<T extends State> implements Mapper<T, ExecutionDTO> {
 
+    @Override
     public ExecutionDTO map(T entity){
         return new ExecutionDTO(
                 entity.getStatus(),

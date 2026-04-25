@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.controller;
 
 import com.nexus.nexusrpg.common.task.TaskDTO;
-import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
+import com.nexus.nexusrpg.domain.controller.dto.PlanetDetail;
 import com.nexus.nexusrpg.domain.service.fetch.detail.PlanetDetailService;
 import com.nexus.nexusrpg.domain.service.fetch.reference.PlanetReferenceService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class PlanetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PlanetDTO> getPlanet(@PathVariable Long id) {
+    public ResponseEntity<PlanetDetail> getPlanet(@PathVariable Long id) {
         return ResponseEntity.ok(detailService.getById(id));
     }
 }

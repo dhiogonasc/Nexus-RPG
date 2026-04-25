@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.controller;
 
-import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.MissionDetail;
 import com.nexus.nexusrpg.domain.service.fetch.detail.MissionDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ public class MissionController {
     private final MissionDetailService detailService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<MissionDTO> getMission(@PathVariable Long id) {
+    public ResponseEntity<MissionDetail> getMission(@PathVariable Long id) {
         return ResponseEntity.ok(detailService.getById(id));
     }
 }

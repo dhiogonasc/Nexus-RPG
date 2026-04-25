@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.service.fetch.detail;
 
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.common.service.DetailService;
-import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.MissionDetail;
 import com.nexus.nexusrpg.domain.mapper.MissionMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.repository.relation.UserMissionRepository;
@@ -10,7 +10,7 @@ import com.nexus.nexusrpg.domain.validator.MissionValidator;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MissionDetailService extends DetailService<UMission, MissionDTO> {
+public class MissionDetailService extends DetailService<UMission, MissionDetail> {
 
     private final MissionValidator validator;
 

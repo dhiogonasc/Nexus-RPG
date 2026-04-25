@@ -2,8 +2,8 @@ package com.nexus.nexusrpg.domain.service;
 
 import com.nexus.nexusrpg.common.context.Context;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptRequestDTO;
-import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptResponseDTO;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptStartDTO;
+import com.nexus.nexusrpg.domain.controller.dto.response.AttemptResponseDTO;
 import com.nexus.nexusrpg.domain.mapper.AttemptMapper;
 import com.nexus.nexusrpg.domain.model.relation.Attempt;
 import com.nexus.nexusrpg.domain.model.relation.Response;

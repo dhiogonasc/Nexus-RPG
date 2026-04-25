@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.mapper;
 import com.nexus.nexusrpg.common.dto.EntityDynamicReference;
 import com.nexus.nexusrpg.common.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.common.mapper.Mapper;
-import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.MissionDetail;
 import com.nexus.nexusrpg.domain.controller.dto.response.QuestionDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.dynamics.PlanetDynamicReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
@@ -14,28 +14,27 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class MissionMapper implements Mapper<UMission, MissionDTO> {
+public class MissionMapper implements Mapper<UMission, MissionDetail>{
 
     private final ExecutionMapper<UMission> executionMapper;
     private final PlanetDynamicReferenceMapper referenceMapper;
     private final QuestionMapper questionMapper;
 
-    public MissionDTO map(UMission uMission){
-
+    public MissionDetail map(UMission uMission){
         var mission = uMission.getMission();
 
-        return new MissionDTO(
-                mission.getId(),
-                mission.getName(),
-                mission.getDescription(),
-                mission.getContent(),
-                mission.getXpBonus(),
-                mapPlanet(uMission),
-                mapQuestions(uMission),
-                executionMapper.map(uMission),
-                uMission.getBestResult(),
-                mission.getOrder()
-        );
+        return MissionDetail.builder()
+                .id(mission.getId())
+                .name(mission.getName())
+                .description(mission.getDescription())
+                .content(mission.getContent())
+                .order(mission.getOrder())
+                .questions(mapQuestions(uMission))
+                .xpBonus(mission.getXpBonus())
+                .bestResult(uMission.getBestResult())
+                .execution(executionMapper.map(uMission))
+                .planet(mapPlanet(uMission))
+                .build();
     }
 
     private EntityDynamicReference mapPlanet(UMission uMission){

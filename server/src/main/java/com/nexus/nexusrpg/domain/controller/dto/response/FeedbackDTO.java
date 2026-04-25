@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.controller.dto.response;
 
-public record ResponseDTO(
+public record FeedbackDTO(
         QuestionFeedbackDTO question,
         AlternativeFeedbackDTO alternative,
         boolean hit
