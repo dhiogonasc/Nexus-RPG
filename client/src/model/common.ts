@@ -1,3 +1,5 @@
+import { EntityStatus } from "./enum";
+
 export interface ExecutionDTO {
   status: EntityStatus;
   isCurrent: boolean;
