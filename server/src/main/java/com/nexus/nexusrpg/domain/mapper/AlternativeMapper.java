@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class AlternativeMapper implements Mapper<Alternative, AlternativeDTO> {
 
     @Override
-    public AlternativeDTO toDTO(Alternative alternative) {
+    public AlternativeDTO map(Alternative alternative) {
         return new AlternativeDTO(
                 alternative.getId(),
                 alternative.getContent()

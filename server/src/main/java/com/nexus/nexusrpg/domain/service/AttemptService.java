@@ -54,7 +54,7 @@ public class AttemptService {
         user.consumeOxygen();
         userRepository.save(user);
 
-        return attemptMapper.toDTO(attemptRepository.save(attempt));
+        return attemptMapper.map(attemptRepository.save(attempt));
     }
 
     private UMission getMission(User user, AttemptStartDTO request) {
@@ -95,7 +95,7 @@ public class AttemptService {
             progressionService.unlockNextMission(user, mission);
         }
 
-        return attemptMapper.toDTO(attemptRepository.save(attempt));
+        return attemptMapper.map(attemptRepository.save(attempt));
     }
 
     private List<Response> createResponses(Attempt attempt, List<AttemptRequestDTO> request) {

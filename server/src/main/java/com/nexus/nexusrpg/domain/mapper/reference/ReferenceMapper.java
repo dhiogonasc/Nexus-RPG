@@ -5,7 +5,7 @@ import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public abstract class ReferenceMapper<Entity, UserEntity> {
+public abstract class ReferenceMapper<Entity, UserEntity>{
 
     public EntityReferenceDTO map(User user, Entity entity) {
         return toReferenceDTO(findRelation(user, entity));

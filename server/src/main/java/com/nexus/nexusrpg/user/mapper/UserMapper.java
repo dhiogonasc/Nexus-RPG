@@ -13,14 +13,14 @@ public class UserMapper implements Mapper<User, UserDTO> {
     private final UProgressionMapper uProgressionMapper;
 
     @Override
-    public UserDTO toDTO(User user){
+    public UserDTO map(User user){
         return new UserDTO(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getXp(),
                 user.getOxygen(),
-                uProgressionMapper.toDTO(user)
+                uProgressionMapper.map(user)
         );
     }
 }

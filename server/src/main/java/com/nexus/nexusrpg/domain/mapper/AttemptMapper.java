@@ -20,7 +20,7 @@ public class AttemptMapper implements Mapper<Attempt, AttemptResponseDTO> {
     private final ResponseMapper responseMapper;
 
     @Override
-    public AttemptResponseDTO toDTO(Attempt attempt) {
+    public AttemptResponseDTO map(Attempt attempt) {
         return new AttemptResponseDTO(
                 attempt.getId(),
                 mapMission(attempt),
@@ -35,7 +35,7 @@ public class AttemptMapper implements Mapper<Attempt, AttemptResponseDTO> {
         return Optional.ofNullable(attempt.getResponses())
                 .orElseGet(List::of)
                 .stream()
-                .map(responseMapper::toDTO)
+                .map(responseMapper::map)
                 .toList();
     }
 

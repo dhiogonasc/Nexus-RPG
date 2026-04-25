@@ -1,22 +1,22 @@
 package com.nexus.nexusrpg.domain.mapper.current;
 
-import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.dto.EntityStaticReference;
 import com.nexus.nexusrpg.common.state.State;
-import com.nexus.nexusrpg.domain.mapper.reference.ReferenceMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.statics.StaticReferenceMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class CurrentMapper<Entity, UEntity extends State> {
+public abstract class CurrentMapper<UEntity extends State> {
 
-    private final ReferenceMapper<Entity, UEntity> referenceMapper;
+    private final StaticReferenceMapper<UEntity> referenceMapper;
 
-    public EntityReferenceDTO map(List<UEntity> uEntities) {
+    public EntityStaticReference map(List<UEntity> uEntities) {
         return uEntities.stream()
                 .filter(UEntity::isCurrent)
                 .findFirst()
-                .map(referenceMapper::toReferenceDTO)
+                .map(referenceMapper::map)
                 .orElse(null);
     }
 }

@@ -17,7 +17,7 @@ public class UPlanetMapper implements Mapper<UPlanet, PlanetDTO> {
     private final UMissionTaskMapper missionMapper;
 
     @Override
-    public PlanetDTO toDTO(UPlanet uPlanet){
+    public PlanetDTO map(UPlanet uPlanet){
 
         var planet = uPlanet.getPlanet();
 

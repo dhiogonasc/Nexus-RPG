@@ -18,7 +18,7 @@ public class ResponseMapper implements Mapper<Response, ResponseDTO> {
     private final AlternativeFeedbackMapper alternativeFeedbackMapper;
 
     @Override
-    public ResponseDTO toDTO(Response response) {
+    public ResponseDTO map(Response response) {
         return new ResponseDTO(
                 mapQuestion(response),
                 mapAlternative(response),

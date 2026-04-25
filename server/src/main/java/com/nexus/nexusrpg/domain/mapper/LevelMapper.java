@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class LevelMapper implements Mapper<Level, LevelDTO> {
 
     @Override
-    public LevelDTO toDTO(Level level) {
+    public LevelDTO map(Level level) {
 
         return new LevelDTO(
                 level.getId(),

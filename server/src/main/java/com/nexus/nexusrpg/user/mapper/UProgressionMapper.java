@@ -19,7 +19,7 @@ public class UProgressionMapper implements Mapper<User, UserProgressionDTO>  {
     private final CurrentMissionMapper currentMissionMapper;
 
     @Override
-    public UserProgressionDTO toDTO(User user) {
+    public UserProgressionDTO map(User user) {
 
         var currentPlanet = currentPlanetMapper.map(user.getPlanets());
         var currentMission = currentMissionMapper.map(user.getMissions());
@@ -32,6 +32,6 @@ public class UProgressionMapper implements Mapper<User, UserProgressionDTO>  {
     }
 
     private LevelDTO mapCurrentLevel(User user){
-        return levelMapper.toDTO(user.getLevel());
+        return levelMapper.map(user.getLevel());
     }
 }

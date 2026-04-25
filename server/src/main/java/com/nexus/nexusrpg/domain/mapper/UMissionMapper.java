@@ -20,7 +20,7 @@ public class UMissionMapper implements Mapper<UMission, MissionDTO> {
     private final UPlanetReferenceMapper uPlanetReferenceMapper;
     private final QuestionMapper questionMapper;
 
-    public MissionDTO toDTO(UMission uMission){
+    public MissionDTO map(UMission uMission){
 
         var mission = uMission.getMission();
 
@@ -48,7 +48,7 @@ public class UMissionMapper implements Mapper<UMission, MissionDTO> {
     private List<QuestionDTO> mapQuestions(UMission uMission){
         var questions = uMission.getMission().getQuestions();
         return questions.stream()
-                .map(questionMapper::toDTO)
+                .map(questionMapper::map)
                 .toList();
     }
 }

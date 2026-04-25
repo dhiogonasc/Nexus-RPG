@@ -21,6 +21,6 @@ public class Context {
     }
 
     public UserDTO getProfile() {
-        return userMapper.toDTO(getAuthenticatedUser());
+        return userMapper.map(getAuthenticatedUser());
     }
 }

@@ -23,7 +23,7 @@ public abstract class DetailService<UEntity, UEntityDTO> {
 
         validate(uEntity);
 
-        return mapper.toDTO(uEntity);
+        return mapper.map(uEntity);
     }
 
     protected abstract void validate(UEntity uEntity);

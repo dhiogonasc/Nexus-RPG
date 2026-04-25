@@ -16,7 +16,7 @@ public class QuestionMapper implements Mapper<Question, QuestionDTO> {
     private final AlternativeMapper alternativeMapper;
 
     @Override
-    public QuestionDTO toDTO(Question question) {
+    public QuestionDTO map(Question question) {
         return new QuestionDTO(
                 question.getId(),
                 question.getContent(),
@@ -28,7 +28,7 @@ public class QuestionMapper implements Mapper<Question, QuestionDTO> {
     private List<AlternativeDTO> mapAlternative(Question question){
         var alternatives = question.getAlternatives();
         return alternatives.stream()
-                .map(alternativeMapper::toDTO)
+                .map(alternativeMapper::map)
                 .toList();
     }
 }
