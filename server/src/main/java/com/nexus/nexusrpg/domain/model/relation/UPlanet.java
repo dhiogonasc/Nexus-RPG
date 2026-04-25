@@ -87,4 +87,8 @@ public class UPlanet implements State {
                 .filter(uMission -> uMission.getPlanet().equals(this.planet))
                 .toList();
     }
+
+    public long getXpBonus() {
+        return this.planet.getXpBonus();
+    }
 }

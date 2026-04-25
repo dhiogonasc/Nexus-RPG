@@ -32,7 +32,7 @@ public class ProgressionService {
                 )
                 .ifPresentOrElse(
                         this::unlockMission,
-                        () -> unlockNextPlanet(user.getId(), currentMission.getPlanet())
+                        () -> unlockNextPlanet(user, currentMission.getPlanet())
                 );
     }
 
@@ -44,23 +44,26 @@ public class ProgressionService {
         }
     }
 
-    private void unlockNextPlanet(Long userId, Planet currentPlanet) {
+    private void unlockNextPlanet(User user, Planet currentPlanet) {
 
         uPlanetRepository
                 .findByUserIdAndPlanetOrder(
-                        userId,
+                        user.getId(),
                         currentPlanet.getOrder()
                 )
-                .ifPresent(this::completePlanet);
+                .ifPresent(uPlanet -> {
+                    this.completePlanet(uPlanet);
+                    user.addXp(uPlanet.getXpBonus());
+                });
 
         uPlanetRepository
                 .findByUserIdAndPlanetOrder(
-                        userId,
+                        user.getId(),
                         currentPlanet.getOrder() + 1
                 )
                 .ifPresent(up -> {
                     this.unlockPlanet(up);
-                    unlockFirstMissionOfPlanet(userId, up.getPlanet().getId());
+                    unlockFirstMissionOfPlanet(user.getId(), up.getPlanet().getId());
                 });
     }
 
