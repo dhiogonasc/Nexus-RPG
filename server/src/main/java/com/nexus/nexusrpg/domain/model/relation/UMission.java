@@ -90,4 +90,13 @@ public class UMission implements State {
     public Planet getPlanet(){
         return this.mission.getPlanet();
     }
+
+    public UPlanet getUPlanet() {
+        var targetPlanet = this.getPlanet();
+
+        return this.user.getPlanets().stream()
+                .filter(up -> up.getPlanet().equals(targetPlanet))
+                .findFirst()
+                .orElse(null);
+    }
 }

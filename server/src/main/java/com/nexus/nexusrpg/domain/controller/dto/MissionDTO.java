@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.controller.dto;
 
-import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
+import com.nexus.nexusrpg.common.dto.EntityDynamicReference;
 import com.nexus.nexusrpg.common.task.ExecutionDTO;
 import com.nexus.nexusrpg.domain.controller.dto.response.QuestionDTO;
 
@@ -13,7 +13,7 @@ public record MissionDTO(
         String description,
         String content,
         long xpBonus,
-        EntityReferenceDTO planet,
+        EntityDynamicReference planet,
         List<QuestionDTO> questions,
         ExecutionDTO execution,
         BigDecimal bestResult,

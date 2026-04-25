@@ -1,10 +1,10 @@
 package com.nexus.nexusrpg.domain.mapper;
 
+import com.nexus.nexusrpg.common.dto.EntityDynamicReference;
 import com.nexus.nexusrpg.common.mapping.Mapper;
-import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptResponseDTO;
 import com.nexus.nexusrpg.domain.controller.dto.response.ResponseDTO;
-import com.nexus.nexusrpg.domain.mapper.reference.UMissionReferenceMapper;
+import com.nexus.nexusrpg.domain.mapper.reference.dynamics.MissionDynamicReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.Attempt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,18 +16,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AttemptMapper implements Mapper<Attempt, AttemptResponseDTO> {
 
-    private final UMissionReferenceMapper uMissionReferenceMapper;
+    private final MissionDynamicReferenceMapper referenceMapper;
     private final ResponseMapper responseMapper;
 
     @Override
     public AttemptResponseDTO map(Attempt attempt) {
         return new AttemptResponseDTO(
                 attempt.getId(),
-                mapMission(attempt),
                 attempt.getStartAt(),
                 attempt.getEndAt(),
                 attempt.getResult(),
-                mapResponses(attempt)
+                mapResponses(attempt),
+                mapMission(attempt)
         );
     }
 
@@ -39,8 +39,8 @@ public class AttemptMapper implements Mapper<Attempt, AttemptResponseDTO> {
                 .toList();
     }
 
-    private EntityReferenceDTO mapMission(Attempt attempt){
+    private EntityDynamicReference mapMission(Attempt attempt){
         var mission = attempt.getUMission();
-        return uMissionReferenceMapper.toReferenceDTO(mission);
+        return referenceMapper.map(mission);
     }
 }

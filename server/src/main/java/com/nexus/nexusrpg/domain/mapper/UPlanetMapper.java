@@ -34,9 +34,7 @@ public class UPlanetMapper implements Mapper<UPlanet, PlanetDTO> {
     }
 
     private TaskDTO mapMissions(UPlanet uPlanet){
-        var user  = uPlanet.getUser();
-        var missions = uPlanet.getMissions();
-
-        return missionMapper.map(user, missions);
+        var missions = uPlanet.getUMissions();
+        return missionMapper.map(missions);
     }
 }

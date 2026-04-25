@@ -1,24 +1,26 @@
 package com.nexus.nexusrpg.domain.mapper.task;
 
 import com.nexus.nexusrpg.common.mapping.ProgressMapper;
+import com.nexus.nexusrpg.common.state.State;
 import com.nexus.nexusrpg.common.task.TaskDTO;
-import com.nexus.nexusrpg.domain.mapper.reference.ReferenceMapper;
-import com.nexus.nexusrpg.user.model.User;
+import com.nexus.nexusrpg.domain.mapper.reference.dynamics.DynamicReferenceMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class TaskMapper<Entity, UserEntity> {
+public abstract class TaskMapper<UserEntity extends State> {
 
-    private final ReferenceMapper<Entity, UserEntity> referenceMapper;
+    private final DynamicReferenceMapper<UserEntity> referenceMapper;
     private final ProgressMapper progressMapper;
 
-    public TaskDTO map(User user, List<Entity> entities) {
+    public TaskDTO map(List<UserEntity> entities) {
         var tasks = entities.stream()
-                .map(e -> referenceMapper.map(user, e))
+                .map(referenceMapper::map)
                 .toList();
 
-        return new TaskDTO(tasks, progressMapper.map(tasks));
+        var progress = progressMapper.map(tasks);
+
+        return new TaskDTO(tasks, progress);
     }
 }

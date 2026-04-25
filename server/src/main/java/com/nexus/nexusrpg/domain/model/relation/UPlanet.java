@@ -82,4 +82,10 @@ public class UPlanet implements State {
     public List<Mission> getMissions(){
         return this.planet.getMissions();
     }
+
+    public List<UMission> getUMissions() {
+        return this.user.getMissions().stream()
+                .filter(uMission -> uMission.getPlanet().equals(this.planet))
+                .toList();
+    }
 }
