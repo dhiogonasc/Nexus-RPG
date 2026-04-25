@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.common.mapper;
 
-import com.nexus.nexusrpg.common.state.State;
 import com.nexus.nexusrpg.common.task.ExecutionDTO;
+import com.nexus.nexusrpg.domain.model.relation.State;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,10 +1,10 @@
 package com.nexus.nexusrpg.user.controller.dto;
 
 import com.nexus.nexusrpg.common.dto.EntityStaticReference;
-import com.nexus.nexusrpg.domain.controller.dto.LevelDTO;
+import com.nexus.nexusrpg.domain.controller.dto.LevelReference;
 
 public record UserProgressionDTO(
-        LevelDTO level,
+        LevelReference level,
         EntityStaticReference planet,
         EntityStaticReference mission
 ) {

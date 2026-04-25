@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.common.service;
 
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.common.state.State;
 import com.nexus.nexusrpg.common.task.TaskDTO;
 import com.nexus.nexusrpg.domain.mapper.task.TaskMapper;
+import com.nexus.nexusrpg.domain.model.relation.State;
 import com.nexus.nexusrpg.domain.repository.relation.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;

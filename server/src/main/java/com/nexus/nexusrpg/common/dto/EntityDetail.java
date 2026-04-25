@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @RequiredArgsConstructor
-public class EntityDetail implements DynamicReference, Task {
+public abstract class EntityDetail implements DynamicReference, Task {
 
     private final Long id;
     private final String name;

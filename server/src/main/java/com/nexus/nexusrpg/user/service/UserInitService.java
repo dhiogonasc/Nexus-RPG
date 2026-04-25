@@ -21,6 +21,6 @@ public class UserInitService {
     }
 
     public Level initialLevel() {
-        return levelService.initialLevel();
+        return levelService.findInitialLevel();
     }
 }

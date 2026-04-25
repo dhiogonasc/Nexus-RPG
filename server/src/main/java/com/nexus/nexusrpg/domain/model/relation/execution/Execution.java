@@ -1,4 +1,4 @@
-package com.nexus.nexusrpg.common.state;
+package com.nexus.nexusrpg.domain.model.relation.execution;
 
 public interface Execution {
     void unlock();
