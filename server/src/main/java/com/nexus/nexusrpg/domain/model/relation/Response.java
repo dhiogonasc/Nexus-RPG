@@ -3,7 +3,10 @@ package com.nexus.nexusrpg.domain.model.relation;
 import com.nexus.nexusrpg.domain.model.Alternative;
 import com.nexus.nexusrpg.domain.model.Question;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder

@@ -3,9 +3,11 @@ package com.nexus.nexusrpg.common.dto;
 import com.nexus.nexusrpg.common.task.ExecutionDTO;
 import com.nexus.nexusrpg.common.task.Task;
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+@Data
 @SuperBuilder
 @RequiredArgsConstructor
 public abstract class EntityDetail implements DynamicReference, Task {

@@ -19,15 +19,22 @@ public class ResponseMapper implements Mapper<Response, FeedbackDTO> {
 
     @Override
     public FeedbackDTO map(Response response) {
+        boolean hit = response.isHit();
         return new FeedbackDTO(
                 mapQuestion(response),
-                mapAlternative(response),
-                response.isHit()
+                mapUserAlternative(response),
+                hit ? null : mapCorrectAlternative(response),
+                hit
         );
     }
 
-    private AlternativeFeedbackDTO mapAlternative(Response response) {
+    private AlternativeFeedbackDTO mapUserAlternative(Response response) {
         var alternative = response.getAlternative();
+        return alternativeFeedbackMapper.map(alternative);
+    }
+
+    private AlternativeFeedbackDTO mapCorrectAlternative(Response response) {
+        var alternative = response.getQuestion().getCorrect();
         return alternativeFeedbackMapper.map(alternative);
     }
 

@@ -2,11 +2,13 @@ package com.nexus.nexusrpg.domain.controller.dto;
 
 import com.nexus.nexusrpg.common.dto.StaticReference;
 import lombok.Builder;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+@Data
 @Builder
 @RequiredArgsConstructor
-public class LevelReference implements StaticReference {
+public class LevelDTO implements StaticReference {
 
     private final Long id;
     private final String name;

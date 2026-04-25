@@ -11,8 +11,7 @@ public class AlternativeFeedbackMapper implements Mapper<Alternative, Alternativ
     public AlternativeFeedbackDTO map(Alternative alternative) {
         return new AlternativeFeedbackDTO(
                 alternative.getId(),
-                alternative.getContent(),
-                alternative.getIsCorrect()
+                alternative.getContent()
         );
     }
 }

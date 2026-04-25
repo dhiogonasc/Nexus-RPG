@@ -1,13 +1,12 @@
 package com.nexus.nexusrpg.domain.controller.dto.attempt;
-
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public record AttemptRequestDTO(
 
-        @NotEmpty
+        @NotNull(message = "Campo obrigatório")
         Long questionId,
-        
-        @NotEmpty
+
+        @NotNull(message = "Campo obrigatório")
         Long alternativeId
 ) {
 }

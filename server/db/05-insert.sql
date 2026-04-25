@@ -11,7 +11,7 @@ INSERT INTO
 )
 VALUES
     ('ALUMINIUM_I', NULL, 1, 0, 0),
-    ('ALUMINIUM_II', NULL, 2, 10, 500);
+    ('ALUMINIUM_II', NULL, 2, 10, 50);
 
 -- ====================
 -- PLANET

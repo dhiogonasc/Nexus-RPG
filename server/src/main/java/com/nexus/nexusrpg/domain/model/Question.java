@@ -1,7 +1,11 @@
 package com.nexus.nexusrpg.domain.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Data
@@ -33,4 +37,11 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alternative> alternatives;
+
+    public Alternative getCorrect(){
+        return alternatives.stream()
+                .filter(Alternative::getIsCorrect)
+                .findFirst()
+                .orElse(null);
+    }
 }
