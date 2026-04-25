@@ -1,12 +1,12 @@
 package com.nexus.nexusrpg.domain.service.fetch.reference;
 
-import com.nexus.nexusrpg.common.mapping.ProgressMapper;
 import com.nexus.nexusrpg.common.context.Context;
+import com.nexus.nexusrpg.common.mapping.Mapper;
+import com.nexus.nexusrpg.common.mapping.ProgressMapper;
+import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.common.task.TaskDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.ReferenceMapper;
-import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.domain.repository.relation.UserEntityRepository;
-import com.nexus.nexusrpg.common.mapping.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,7 @@ public abstract class ReferenceService<Entity, UEntity, UEntityDTO> {
     private final ProgressMapper progressMapper;
 
     @Transactional(readOnly = true)
-    public TaskDTO<EntityReferenceDTO> getAll() {
+    public TaskDTO getAll() {
         var userId = context.getAuthenticatedUser().getId();
 
         List<UEntity> userEntities = userEntityRepository.findByUserId(userId);
@@ -31,6 +31,6 @@ public abstract class ReferenceService<Entity, UEntity, UEntityDTO> {
                 .map(referenceMapper::toReferenceDTO)
                 .toList();
 
-        return new TaskDTO<>(tasks, progressMapper.map(tasks));
+        return new TaskDTO(tasks, progressMapper.map(tasks));
     }
 }

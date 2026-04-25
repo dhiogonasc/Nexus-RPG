@@ -2,7 +2,6 @@ package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.mapping.ExecutionMapper;
 import com.nexus.nexusrpg.common.mapping.Mapper;
-import com.nexus.nexusrpg.common.task.EntityReferenceDTO;
 import com.nexus.nexusrpg.common.task.TaskDTO;
 import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
 import com.nexus.nexusrpg.domain.mapper.task.UMissionTaskMapper;
@@ -34,7 +33,7 @@ public class UPlanetMapper implements Mapper<UPlanet, PlanetDTO> {
         );
     }
 
-    private TaskDTO<EntityReferenceDTO> mapMissions(UPlanet uPlanet){
+    private TaskDTO mapMissions(UPlanet uPlanet){
         var user  = uPlanet.getUser();
         var missions = uPlanet.getMissions();
 
