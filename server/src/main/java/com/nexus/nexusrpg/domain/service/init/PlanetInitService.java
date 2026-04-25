@@ -1,10 +1,11 @@
 package com.nexus.nexusrpg.domain.service.init;
 
+import com.nexus.nexusrpg.common.service.InitService;
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.repository.PlanetRepository;
-import com.nexus.nexusrpg.user.model.User;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
+import com.nexus.nexusrpg.domain.repository.PlanetRepository;
 import com.nexus.nexusrpg.domain.repository.relation.UserPlanetRepository;
+import com.nexus.nexusrpg.user.model.User;
 import org.springframework.stereotype.Service;
 
 @Service

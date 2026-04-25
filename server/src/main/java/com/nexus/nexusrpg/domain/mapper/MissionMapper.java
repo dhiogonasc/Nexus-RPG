@@ -1,8 +1,8 @@
 package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.dto.EntityDynamicReference;
-import com.nexus.nexusrpg.common.mapping.ExecutionMapper;
-import com.nexus.nexusrpg.common.mapping.Mapper;
+import com.nexus.nexusrpg.common.mapper.ExecutionMapper;
+import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
 import com.nexus.nexusrpg.domain.controller.dto.response.QuestionDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.dynamics.PlanetDynamicReferenceMapper;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class UMissionMapper implements Mapper<UMission, MissionDTO> {
+public class MissionMapper implements Mapper<UMission, MissionDTO> {
 
     private final ExecutionMapper<UMission> executionMapper;
     private final PlanetDynamicReferenceMapper referenceMapper;

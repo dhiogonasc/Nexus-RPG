@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.user.mapper;
 
-import com.nexus.nexusrpg.common.mapping.Mapper;
+import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.LevelDTO;
 import com.nexus.nexusrpg.domain.mapper.LevelMapper;
 import com.nexus.nexusrpg.domain.mapper.current.CurrentMissionMapper;

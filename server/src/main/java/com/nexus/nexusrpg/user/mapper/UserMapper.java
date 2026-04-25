@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.user.mapper;
 
-import com.nexus.nexusrpg.common.mapping.Mapper;
+import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.user.controller.dto.UserDTO;
 import com.nexus.nexusrpg.user.model.User;
 import lombok.RequiredArgsConstructor;

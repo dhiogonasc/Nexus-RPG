@@ -1,7 +1,7 @@
-package com.nexus.nexusrpg.common.mapping;
+package com.nexus.nexusrpg.common.mapper;
 
-import com.nexus.nexusrpg.common.task.ExecutionDTO;
 import com.nexus.nexusrpg.common.state.State;
+import com.nexus.nexusrpg.common.task.ExecutionDTO;
 import org.springframework.stereotype.Component;
 
 @Component

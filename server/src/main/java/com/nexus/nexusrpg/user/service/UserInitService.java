@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.user.service;
 
-import com.nexus.nexusrpg.domain.service.init.Initializable;
+import com.nexus.nexusrpg.common.service.Initializable;
 import com.nexus.nexusrpg.domain.model.Level;
 import com.nexus.nexusrpg.domain.service.LevelService;
 import com.nexus.nexusrpg.user.model.User;

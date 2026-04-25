@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.domain.mapper.task;
 
-import com.nexus.nexusrpg.common.mapping.ProgressMapper;
+import com.nexus.nexusrpg.common.mapper.DynamicReferenceMapper;
+import com.nexus.nexusrpg.common.mapper.ProgressMapper;
 import com.nexus.nexusrpg.common.state.State;
 import com.nexus.nexusrpg.common.task.TaskDTO;
-import com.nexus.nexusrpg.domain.mapper.reference.dynamics.DynamicReferenceMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

@@ -1,8 +1,9 @@
 package com.nexus.nexusrpg.domain.service.fetch.detail;
 
 import com.nexus.nexusrpg.common.context.Context;
+import com.nexus.nexusrpg.common.service.DetailService;
 import com.nexus.nexusrpg.domain.controller.dto.PlanetDTO;
-import com.nexus.nexusrpg.domain.mapper.UPlanetMapper;
+import com.nexus.nexusrpg.domain.mapper.PlanetMapper;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import com.nexus.nexusrpg.domain.repository.relation.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.validator.PlanetValidator;
@@ -16,7 +17,7 @@ public class PlanetDetailService extends DetailService<UPlanet, PlanetDTO> {
     public PlanetDetailService(
             Context context,
             UserPlanetRepository repository,
-            UPlanetMapper mapper,
+            PlanetMapper mapper,
             PlanetValidator validator
     ) {
         super(context, repository, mapper);

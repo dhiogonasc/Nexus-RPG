@@ -1,7 +1,7 @@
-package com.nexus.nexusrpg.domain.service.fetch.detail;
+package com.nexus.nexusrpg.common.service;
 
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.common.mapping.Mapper;
+import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.domain.repository.relation.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;

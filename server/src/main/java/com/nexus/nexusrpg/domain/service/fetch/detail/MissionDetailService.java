@@ -1,8 +1,9 @@
 package com.nexus.nexusrpg.domain.service.fetch.detail;
 
 import com.nexus.nexusrpg.common.context.Context;
+import com.nexus.nexusrpg.common.service.DetailService;
 import com.nexus.nexusrpg.domain.controller.dto.MissionDTO;
-import com.nexus.nexusrpg.domain.mapper.UMissionMapper;
+import com.nexus.nexusrpg.domain.mapper.MissionMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.repository.relation.UserMissionRepository;
 import com.nexus.nexusrpg.domain.validator.MissionValidator;
@@ -16,7 +17,7 @@ public class MissionDetailService extends DetailService<UMission, MissionDTO> {
     public MissionDetailService(
             Context context,
             UserMissionRepository repository,
-            UMissionMapper mapper,
+            MissionMapper mapper,
             MissionValidator validator
     ) {
         super(context, repository, mapper);
