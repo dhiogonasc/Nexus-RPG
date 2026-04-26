@@ -1,7 +1,11 @@
 package com.nexus.nexusrpg.domain.model;
 
+import com.nexus.nexusrpg.common.feedback.FeedbackItem;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
@@ -12,7 +16,7 @@ import lombok.*;
         @UniqueConstraint(name = "uk_alternative_content", columnNames = {"question_id", "content"}),
         @UniqueConstraint(name = "uk_alternative", columnNames = {"question_id", "id"})
 })
-public class Alternative {
+public class Alternative implements FeedbackItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

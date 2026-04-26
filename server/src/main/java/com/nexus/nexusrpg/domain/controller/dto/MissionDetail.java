@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.controller.dto;
 
 import com.nexus.nexusrpg.common.dto.EntityDetail;
 import com.nexus.nexusrpg.common.dto.EntityDynamicReference;
-import com.nexus.nexusrpg.domain.controller.dto.response.QuestionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.QuestionDTO;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 

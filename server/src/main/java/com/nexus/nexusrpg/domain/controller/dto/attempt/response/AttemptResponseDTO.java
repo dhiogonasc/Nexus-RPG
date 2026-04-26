@@ -1,6 +1,7 @@
-package com.nexus.nexusrpg.domain.controller.dto.response;
+package com.nexus.nexusrpg.domain.controller.dto.attempt.response;
 
 import com.nexus.nexusrpg.common.dto.EntityDynamicReference;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.response.feedback.Feedback;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ public record AttemptResponseDTO(
         LocalDateTime startAt,
         LocalDateTime endAt,
         BigDecimal result,
-        List<FeedbackDTO> feedbacks,
+        List<Feedback> feedback,
         EntityDynamicReference mission
 ) {
 }

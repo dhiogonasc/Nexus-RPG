@@ -37,4 +37,12 @@ public class Response {
     public boolean isHit(){
         return this.alternative.getIsCorrect();
     }
+
+    public Alternative getCorrect(){
+        return this.question.getCorrect();
+    }
+
+    public String getFeedback(){
+        return this.question.getFeedback();
+    }
 }

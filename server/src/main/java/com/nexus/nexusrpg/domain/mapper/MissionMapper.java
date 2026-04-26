@@ -4,7 +4,7 @@ import com.nexus.nexusrpg.common.dto.EntityDynamicReference;
 import com.nexus.nexusrpg.common.mapper.ExecutionMapper;
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.MissionDetail;
-import com.nexus.nexusrpg.domain.controller.dto.response.QuestionDTO;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.QuestionDTO;
 import com.nexus.nexusrpg.domain.mapper.reference.dynamics.PlanetDynamicReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;

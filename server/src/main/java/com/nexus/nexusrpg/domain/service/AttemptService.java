@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.domain.service;
 
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptRequestDTO;
-import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptStartDTO;
-import com.nexus.nexusrpg.domain.controller.dto.response.AttemptResponseDTO;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.request.AttemptAnswerRequestDTO;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.request.AttemptStartRequestDTO;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.response.AttemptResponseDTO;
 import com.nexus.nexusrpg.domain.mapper.AttemptMapper;
 import com.nexus.nexusrpg.domain.model.relation.Attempt;
 import com.nexus.nexusrpg.domain.model.relation.Response;
@@ -39,10 +39,9 @@ public class AttemptService {
     private final AttemptValidator attemptValidator;
     private final UserValidator userValidator;
     private final ProgressionService progressionService;
-    private final LevelService levelService;
 
     @Transactional
-    public AttemptResponseDTO start(AttemptStartDTO request) {
+    public AttemptResponseDTO start(AttemptStartRequestDTO request) {
         var user = userRepository
                 .findByIdOrThrow(context.getAuthenticatedUser().getId());
         userValidator.hasEnoughOxygen(user);
@@ -58,7 +57,7 @@ public class AttemptService {
         return attemptMapper.map(attemptRepository.save(attempt));
     }
 
-    private UMission getMission(User user, AttemptStartDTO request) {
+    private UMission getMission(User user, AttemptStartRequestDTO request) {
 
         var mission = userMissionRepository
                 .findByUserIdAndEntityId(
@@ -73,7 +72,7 @@ public class AttemptService {
     }
 
     @Transactional
-    public AttemptResponseDTO finish(Long id, List<AttemptRequestDTO> request) {
+    public AttemptResponseDTO finish(Long id, List<AttemptAnswerRequestDTO> request) {
         var attempt = attemptRepository.findByIdOrThrow(id);
         attemptValidator.isCurrent(attempt);
 
@@ -102,11 +101,10 @@ public class AttemptService {
 
     private void updateUserStats(User user, long xpBonus) {
         user.addXp(xpBonus);
-        user.levelUp(levelService.findNextLevel(user.getLevel()));
         userRepository.save(user);
     }
 
-    private List<Response> createResponses(Attempt attempt, List<AttemptRequestDTO> request) {
+    private List<Response> createResponses(Attempt attempt, List<AttemptAnswerRequestDTO> request) {
 
         return request.stream()
                 .map(r -> {

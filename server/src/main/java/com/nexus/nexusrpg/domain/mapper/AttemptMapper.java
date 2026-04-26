@@ -2,8 +2,8 @@ package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.dto.EntityDynamicReference;
 import com.nexus.nexusrpg.common.mapper.Mapper;
-import com.nexus.nexusrpg.domain.controller.dto.response.AttemptResponseDTO;
-import com.nexus.nexusrpg.domain.controller.dto.response.FeedbackDTO;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.response.AttemptResponseDTO;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.response.feedback.Feedback;
 import com.nexus.nexusrpg.domain.mapper.reference.dynamics.MissionDynamicReferenceMapper;
 import com.nexus.nexusrpg.domain.model.relation.Attempt;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class AttemptMapper implements Mapper<Attempt, AttemptResponseDTO> {
         );
     }
 
-    private List<FeedbackDTO> mapResponses(Attempt attempt) {
+    private List<Feedback> mapResponses(Attempt attempt) {
         return Optional.ofNullable(attempt.getResponses())
                 .orElseGet(List::of)
                 .stream()

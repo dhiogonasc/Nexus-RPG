@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.controller.dto.attempt.AttemptRequestDTO;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.request.AttemptAnswerRequestDTO;
 import com.nexus.nexusrpg.domain.model.Alternative;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Question;
@@ -45,10 +45,10 @@ public class AttemptValidator {
         }
     }
 
-    public void validateUniqueQuestions(List<AttemptRequestDTO> request) {
+    public void validateUniqueQuestions(List<AttemptAnswerRequestDTO> request) {
 
         var uniqueQuestions = request.stream()
-                .map(AttemptRequestDTO::questionId)
+                .map(AttemptAnswerRequestDTO::questionId)
                 .distinct()
                 .count();
 
@@ -98,7 +98,7 @@ public class AttemptValidator {
         }
     }
 
-    public void validateAnswers(List<AttemptRequestDTO> request, Mission mission) {
+    public void validateAnswers(List<AttemptAnswerRequestDTO> request, Mission mission) {
 
         int total = mission.getQuestions().size();
         int answered = request.size();
