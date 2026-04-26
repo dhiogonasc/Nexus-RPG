@@ -35,9 +35,8 @@ public class UMissionExec implements Execution {
     @Column(name = "\"is_current\"", nullable = false)
     private Boolean isCurrent = false;
 
-    @Builder.Default
-    @Column(name = "\"best_result\"", nullable = false, columnDefinition = "score")
-    private BigDecimal bestResult = BigDecimal.ZERO;
+    @Column(name = "\"best_result\"", columnDefinition = "score")
+    private BigDecimal bestResult;
 
     @Override
     public void unlock() {
@@ -52,7 +51,6 @@ public class UMissionExec implements Execution {
     }
 
     public void updateBestResult(BigDecimal currentResult) {
-
         if (currentResult == null) return;
 
         if (this.bestResult == null || currentResult.compareTo(this.bestResult) > 0) {

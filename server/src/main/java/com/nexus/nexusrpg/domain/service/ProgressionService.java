@@ -35,13 +35,6 @@ public class ProgressionService {
                 );
     }
 
-    private void unlockMission(UMission um) {
-        if (um.getExecution().getStatus() == LOCKED) {
-            um.unlock();
-            uMissionRepository.save(um);
-        }
-    }
-
     private void unlockNextPlanet(User user, Planet currentPlanet) {
         uPlanetRepository
                 .findByUserIdAndPlanetOrder(
@@ -62,6 +55,13 @@ public class ProgressionService {
                     this.unlockPlanet(up);
                     unlockFirstMissionOfPlanet(user.getId(), up.getPlanet().getId());
                 });
+    }
+
+    private void unlockMission(UMission um) {
+        if (um.getExecution().getStatus() == LOCKED) {
+            um.unlock();
+            uMissionRepository.save(um);
+        }
     }
 
     private void unlockPlanet(UPlanet up){

@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.mapper;
 
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.QuestionDTO;
-import com.nexus.nexusrpg.domain.controller.dto.attempt.response.feedback.FeedbackComponent;
+import com.nexus.nexusrpg.domain.controller.dto.attempt.response.AnswerComponentDTO;
 import com.nexus.nexusrpg.domain.model.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ public class QuestionMapper implements Mapper<Question, QuestionDTO> {
         );
     }
 
-    private List<FeedbackComponent> mapAlternative(Question question){
+    private List<AnswerComponentDTO> mapAlternative(Question question){
         var alternatives = question.getAlternatives();
         return alternatives.stream()
                 .map(feedbackMapper::map)

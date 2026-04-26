@@ -5,8 +5,8 @@ import com.nexus.nexusrpg.domain.controller.dto.attempt.request.AttemptAnswerReq
 import com.nexus.nexusrpg.domain.controller.dto.attempt.request.AttemptStartRequestDTO;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.response.AttemptResponseDTO;
 import com.nexus.nexusrpg.domain.mapper.AttemptMapper;
+import com.nexus.nexusrpg.domain.model.relation.Answer;
 import com.nexus.nexusrpg.domain.model.relation.Attempt;
-import com.nexus.nexusrpg.domain.model.relation.Response;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.repository.AlternativeRepository;
 import com.nexus.nexusrpg.domain.repository.AttemptRepository;
@@ -104,7 +104,7 @@ public class AttemptService {
         userRepository.save(user);
     }
 
-    private List<Response> createResponses(Attempt attempt, List<AttemptAnswerRequestDTO> request) {
+    private List<Answer> createResponses(Attempt attempt, List<AttemptAnswerRequestDTO> request) {
 
         return request.stream()
                 .map(r -> {
@@ -113,7 +113,7 @@ public class AttemptService {
 
                     attemptValidator.validateResponseConsistency(attempt, question, alternative);
 
-                    return Response.builder()
+                    return Answer.builder()
                             .attempt(attempt)
                             .question(question)
                             .alternative(alternative)

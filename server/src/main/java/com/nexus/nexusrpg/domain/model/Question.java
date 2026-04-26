@@ -30,8 +30,8 @@ public class Question implements FeedbackItem {
     @Column(name = "\"content\"", nullable = false, columnDefinition = "text")
     private String content;
 
-    @Column(name = "\"feedback\"", nullable = false, columnDefinition = "text")
-    private String feedback;
+    @Column(name = "\"explanation\"", nullable = false, columnDefinition = "text")
+    private String explanation;
 
     @Column(name = "\"order\"", nullable = false)
     private Integer order;

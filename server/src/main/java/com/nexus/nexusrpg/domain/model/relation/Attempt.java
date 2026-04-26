@@ -13,7 +13,6 @@ import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
-import static java.math.BigDecimal.ZERO;
 import static java.math.RoundingMode.HALF_UP;
 
 @Data
@@ -39,15 +38,14 @@ public class Attempt {
     @Column(name = "end_at")
     private LocalDateTime endAt;
 
-    @Builder.Default
     @Column(nullable = false, columnDefinition = "score")
-    private BigDecimal result = ZERO;
+    private BigDecimal result;
 
     @Builder.Default
     @OneToMany(mappedBy = "attempt", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Response> responses = new java.util.ArrayList<>();
+    private List<Answer> responses = new java.util.ArrayList<>();
 
-    public void finish(List<Response> responses) {
+    public void finish(List<Answer> responses) {
 
         if (this.responses == null) {
             this.responses = new ArrayList<>();
@@ -57,7 +55,7 @@ public class Attempt {
         this.responses.addAll(responses);
 
         long correctCount = responses.stream()
-                .filter(Response::isHit)
+                .filter(Answer::isHit)
                 .count();
 
         this.result = BigDecimal.valueOf(correctCount)

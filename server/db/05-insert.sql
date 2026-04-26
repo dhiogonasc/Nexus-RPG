@@ -44,16 +44,16 @@ VALUES
 -- QUESTION
 -- ====================
 INSERT INTO
-    "question" (mission_id, "content", "feedback", "order")
+    "question" (mission_id, "content", "explanation", "order")
 VALUES
-    (1, 'Question 1 - Mission 1 - Planet 1', 'feedback', 1),
-    (1, 'Question 2 - Mission 1 - Planet 1', 'feedback', 2),
-    (2, 'Question 1 - Mission 2 - Planet 1', 'feedback', 1),
-    (2, 'Question 2 - Mission 2 - Planet 1', 'feedback', 2),
-    (3, 'Question 1 - Mission 1 - Planet 2', 'feedback', 1),
-    (3, 'Question 2 - Mission 1 - Planet 2', 'feedback', 2),
-    (4, 'Question 1 - Mission 2 - Planet 2', 'feedback', 1),
-    (4, 'Question 2 - Mission 2 - Planet 2', 'feedback', 2);
+    (1, 'Question 1 - Mission 1 - Planet 1', 'question explanation', 1),
+    (1, 'Question 2 - Mission 1 - Planet 1', 'question explanation', 2),
+    (2, 'Question 1 - Mission 2 - Planet 1', 'question explanation', 1),
+    (2, 'Question 2 - Mission 2 - Planet 1', 'question explanation', 2),
+    (3, 'Question 1 - Mission 1 - Planet 2', 'question explanation', 1),
+    (3, 'Question 2 - Mission 1 - Planet 2', 'question explanation', 2),
+    (4, 'Question 1 - Mission 2 - Planet 2', 'question explanation', 1),
+    (4, 'Question 2 - Mission 2 - Planet 2', 'question explanation', 2);
 
 -- ====================
 -- ALTERNATIVE

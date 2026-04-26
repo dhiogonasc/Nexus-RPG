@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "response", uniqueConstraints = {
+@Table(name = "answer", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_response", columnNames = {"attempt_id", "question_id"})
 })
-public class Response {
+public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +42,7 @@ public class Response {
         return this.question.getCorrect();
     }
 
-    public String getFeedback(){
-        return this.question.getFeedback();
+    public String getExplanation(){
+        return this.question.getExplanation();
     }
 }
