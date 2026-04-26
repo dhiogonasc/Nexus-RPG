@@ -98,4 +98,8 @@ public class UMission implements State {
                 .findFirst()
                 .orElse(null);
     }
+
+    public long getXpBonus() {
+        return this.mission.getXpBonus();
+    }
 }

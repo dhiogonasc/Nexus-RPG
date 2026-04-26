@@ -23,7 +23,6 @@ public class ProgressionService {
 
     @Transactional
     public void unlockNextMission(User user, Mission currentMission) {
-
         uMissionRepository
                 .findByUserIdAndMissionPlanetIdAndMissionOrder(
                         user.getId(),
@@ -37,7 +36,6 @@ public class ProgressionService {
     }
 
     private void unlockMission(UMission um) {
-
         if (um.getExecution().getStatus() == LOCKED) {
             um.unlock();
             uMissionRepository.save(um);
@@ -45,7 +43,6 @@ public class ProgressionService {
     }
 
     private void unlockNextPlanet(User user, Planet currentPlanet) {
-
         uPlanetRepository
                 .findByUserIdAndPlanetOrder(
                         user.getId(),
@@ -82,7 +79,6 @@ public class ProgressionService {
     }
 
     private void unlockFirstMissionOfPlanet(Long userId, Long planetId) {
-
         uMissionRepository
                 .findByUserIdAndMissionPlanetIdAndMissionOrder(userId, planetId, 1)
                 .ifPresent(this::unlockMission);

@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{server.url}}/planets/2"
+  url: "{{server.url}}/planets/1"
   auth: inherit
 
 settings:

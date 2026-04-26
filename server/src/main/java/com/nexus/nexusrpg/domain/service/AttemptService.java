@@ -39,6 +39,7 @@ public class AttemptService {
     private final AttemptValidator attemptValidator;
     private final UserValidator userValidator;
     private final ProgressionService progressionService;
+    private final LevelService levelService;
 
     @Transactional
     public AttemptResponseDTO start(AttemptStartDTO request) {
@@ -89,13 +90,20 @@ public class AttemptService {
         exec.updateBestResult(attempt.getResult());
 
         var user = uMission.getUser();
-        user.addXp(mission.getXpBonus());
+        var xpBonus = uMission.getXpBonus();
+        updateUserStats(user, xpBonus);
 
         if (attempt.getResult().compareTo(BigDecimal.valueOf(70)) >= 0) {
             progressionService.unlockNextMission(user, mission);
         }
 
         return attemptMapper.map(attemptRepository.save(attempt));
+    }
+
+    private void updateUserStats(User user, long xpBonus) {
+        user.addXp(xpBonus);
+        user.levelUp(levelService.findNextLevel(user.getLevel()));
+        userRepository.save(user);
     }
 
     private List<Response> createResponses(Attempt attempt, List<AttemptRequestDTO> request) {
