@@ -112,6 +112,7 @@ public class AttemptService {
                 .map(r -> {
                     var question = questionRepository.getReferenceById(r.questionId());
                     var alternative = alternativeRepository.getReferenceById(r.alternativeId());
+
                     attemptValidator.validateResponseConsistency(attempt, question, alternative);
 
                     return Response.builder()
