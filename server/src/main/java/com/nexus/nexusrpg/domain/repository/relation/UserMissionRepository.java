@@ -33,6 +33,16 @@ public interface UserMissionRepository extends JpaRepository<UMission, Long>, Us
             "AND um.mission.id = :entityId")
     Optional<UMission> findUEntity(@Param("userId") Long userId, @Param("entityId") Long entityId);
 
-    Optional<UMission> findByUserIdAndMissionPlanetIdAndMissionOrder(Long userId, Long planetId, int nextMissionOrder);
-
+    @Query("SELECT um " +
+            "FROM UMission um " +
+            "JOIN FETCH um.mission " +
+            "WHERE um.user.id = :userId " +
+            "AND um.mission.order = :missionOrder " +
+            "AND um.mission.planet.id = :planetId"
+    )
+    Optional<UMission> findByUserIdAndMissionOrderAndPlanetId(
+            @Param("userId") Long userId,
+            @Param("missionOrder") int missionOrder,
+            @Param("planetId") Long planetId
+    );
 }

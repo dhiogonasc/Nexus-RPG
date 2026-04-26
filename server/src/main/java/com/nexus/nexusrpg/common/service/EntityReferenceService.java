@@ -1,30 +1,23 @@
 package com.nexus.nexusrpg.common.service;
 
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.common.mapper.Mapper;
+import com.nexus.nexusrpg.common.task.TaskDTO;
+import com.nexus.nexusrpg.domain.mapper.task.TaskMapper;
+import com.nexus.nexusrpg.domain.model.relation.Statable;
 import com.nexus.nexusrpg.domain.repository.relation.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
-public abstract class DetailService<UEntity, UEntityDTO> {
+public abstract class EntityReferenceService<UEntity extends Statable> {
 
     protected final Context context;
     protected final UserEntityRepository<UEntity> userEntityRepository;
-    protected final Mapper<UEntity, UEntityDTO> mapper;
+    protected final TaskMapper<UEntity> taskMapper;
 
     @Transactional(readOnly = true)
-    public UEntityDTO getById(Long id) {
-
+    public TaskDTO getAll() {
         var userId = context.getAuthenticatedUser().getId();
-
-        UEntity uEntity = userEntityRepository
-                .findByUserIdAndEntityId(userId, id);
-
-        validate(uEntity);
-
-        return mapper.map(uEntity);
+        return taskMapper.map(userEntityRepository.findByUserId(userId));
     }
-
-    protected abstract void validate(UEntity uEntity);
 }

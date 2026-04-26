@@ -25,7 +25,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_mission\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_mission", columnNames = {"user_id", "mission_id"})
 })
-public class UMission implements State {
+public class UMission implements Usable, Statable, Orientable  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,5 +101,14 @@ public class UMission implements State {
 
     public long getXpBonus() {
         return this.mission.getXpBonus();
+    }
+
+    @Override
+    public int getOrder() {
+        return this.mission.getOrder();
+    }
+
+    public boolean isLastMission() {
+        return this.mission.isLastMission();
     }
 }

@@ -2,9 +2,7 @@ package com.nexus.nexusrpg.domain.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.request.AttemptAnswerRequestDTO;
-import com.nexus.nexusrpg.domain.model.Alternative;
 import com.nexus.nexusrpg.domain.model.Mission;
-import com.nexus.nexusrpg.domain.model.Question;
 import com.nexus.nexusrpg.domain.model.relation.Attempt;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.repository.AttemptRepository;
@@ -56,43 +54,6 @@ public class AttemptValidator {
             throw new BusinessException(
                     "Question",
                     "Existem questões duplicadas na requisição.",
-                    UNPROCESSABLE_ENTITY
-            );
-        }
-    }
-
-    public void validateResponseConsistency(
-            Attempt attempt,
-            Question question,
-            Alternative alternative
-    ) {
-        validateQuestion(attempt, question);
-        validateAlternative(question, alternative);
-    }
-
-    private void validateQuestion(Attempt attempt, Question question){
-
-        var attemptMissionId = attempt.getUMission().getMission().getId();
-        var questionMissionId = question.getMission().getId();
-
-        if (!questionMissionId.equals(attemptMissionId)) {
-            throw new BusinessException(
-                    "Question",
-                    "A questão não pertence a esta missão.",
-                    UNPROCESSABLE_ENTITY
-            );
-        }
-    }
-
-    private void validateAlternative(Question question, Alternative alternative){
-
-        var questionId = question.getId();
-        var alternativeQuestionId = alternative.getQuestion().getId();
-
-        if (!alternativeQuestionId.equals(questionId)) {
-            throw new BusinessException(
-                    "Alternative",
-                    "A alternativa não pertence a esta questão.",
                     UNPROCESSABLE_ENTITY
             );
         }

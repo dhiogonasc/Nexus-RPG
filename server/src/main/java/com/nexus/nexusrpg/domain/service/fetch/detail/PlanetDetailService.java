@@ -1,7 +1,7 @@
 package com.nexus.nexusrpg.domain.service.fetch.detail;
 
 import com.nexus.nexusrpg.common.context.Context;
-import com.nexus.nexusrpg.common.service.DetailService;
+import com.nexus.nexusrpg.common.service.EntityDetailService;
 import com.nexus.nexusrpg.domain.controller.dto.PlanetDetail;
 import com.nexus.nexusrpg.domain.mapper.PlanetMapper;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
@@ -10,7 +10,7 @@ import com.nexus.nexusrpg.domain.validator.PlanetValidator;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PlanetDetailService extends DetailService<UPlanet, PlanetDetail> {
+public class PlanetDetailService extends EntityDetailService<UPlanet, PlanetDetail> {
 
     private final PlanetValidator validator;
 

@@ -1,6 +1,5 @@
 package com.nexus.nexusrpg.domain.model.relation;
 
-import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExec;
@@ -12,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
@@ -24,7 +24,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_planet\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_planet", columnNames = {"user_id", "planet_id"})
 })
-public class UPlanet implements State {
+public class UPlanet implements Usable, Statable, Orientable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,10 +78,6 @@ public class UPlanet implements State {
                 .build();
     }
 
-    public List<Mission> getMissions(){
-        return this.planet.getMissions();
-    }
-
     public List<UMission> getUMissions() {
         return this.user.getMissions().stream()
                 .filter(uMission -> uMission.getPlanet().equals(this.planet))
@@ -90,5 +86,14 @@ public class UPlanet implements State {
 
     public long getXpBonus() {
         return this.planet.getXpBonus();
+    }
+
+    public Optional<UMission> getFirstMission() {
+        return getUMissions().stream().findFirst();
+    }
+
+    @Override
+    public int getOrder() {
+        return this.planet.getOrder();
     }
 }

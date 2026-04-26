@@ -46,4 +46,12 @@ public class Mission {
     @OneToMany(mappedBy = "mission", fetch = FetchType.LAZY)
     @OrderBy("order ASC")
     private List<Question> questions;
+
+    public boolean isLastMission() {
+        return this.planet.getMissions().stream()
+                .map(Mission::getOrder)
+                .max(Integer::compareTo)
+                .map(maxOrder -> this.order == maxOrder)
+                .orElse(false);
+    }
 }

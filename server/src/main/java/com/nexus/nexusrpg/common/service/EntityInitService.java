@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @RequiredArgsConstructor
-public abstract class InitService<Entity, UserEntity> implements Initializable {
+public abstract class EntityInitService<Entity, UserEntity> implements Initializable {
 
     private final JpaRepository<Entity, Long> baseRepository;
     private final JpaRepository<UserEntity, Long> relationRepository;

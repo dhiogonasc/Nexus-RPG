@@ -3,6 +3,10 @@ package com.nexus.nexusrpg.domain.mapper;
 import com.nexus.nexusrpg.common.mapper.Mapper;
 import com.nexus.nexusrpg.domain.controller.dto.attempt.response.AnswerDTO;
 import com.nexus.nexusrpg.domain.model.relation.Answer;
+import com.nexus.nexusrpg.domain.model.relation.Attempt;
+import com.nexus.nexusrpg.domain.repository.AlternativeRepository;
+import com.nexus.nexusrpg.domain.repository.QuestionRepository;
+import com.nexus.nexusrpg.domain.validator.AnswerValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +15,9 @@ import org.springframework.stereotype.Component;
 public class AnswerMapper implements Mapper<Answer, AnswerDTO> {
 
     private final FeedbackMapper feedbackMapper;
+    private final AnswerValidator answerValidator;
+    private final QuestionRepository questionRepository;
+    private final AlternativeRepository alternativeRepository;
 
     @Override
     public AnswerDTO map(Answer answer) {
@@ -23,5 +30,22 @@ public class AnswerMapper implements Mapper<Answer, AnswerDTO> {
                 hit,
                 answer.getExplanation()
         );
+    }
+
+    public Answer create(
+            Attempt attempt,
+            Long questionId,
+            Long alternativeId) {
+
+        var question = questionRepository.getReferenceById(questionId);
+        var alternative = alternativeRepository.getReferenceById(alternativeId);
+
+        answerValidator.validateResponseConsistency(attempt, question, alternative);
+
+        return Answer.builder()
+                .attempt(attempt)
+                .question(question)
+                .alternative(alternative)
+                .build();
     }
 }

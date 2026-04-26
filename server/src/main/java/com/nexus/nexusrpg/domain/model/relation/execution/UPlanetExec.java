@@ -19,7 +19,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UPlanetExec implements Execution {
+public class UPlanetExec implements Executable {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
