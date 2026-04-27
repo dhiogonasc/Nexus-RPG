@@ -19,13 +19,18 @@ public class LevelService {
 
     public Level findNextLevel(Level currentLevel) {
         return levelRepository
-                .findByOrderOrThrow(currentLevel.getOrder() + 1);
+                .findByOrder(currentLevel.getOrder() + 1)
+                .orElse(currentLevel);
     }
 
     public void levelUp(User user){
-        var nextLevel = findNextLevel(user.getLevel());
-        if(user.getXp() >= nextLevel.getXpRequired()){
-            user.up(nextLevel);
+        while (!user.getLevel().isLast()) {
+            Level nextLevel = findNextLevel(user.getLevel());
+            if (user.getXp() >= nextLevel.getXpRequired()) {
+                user.up(nextLevel);
+            } else {
+                break;
+            }
         }
     }
 }

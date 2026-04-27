@@ -9,16 +9,8 @@ import java.util.Optional;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 public interface LevelRepository extends JpaRepository<Level, Long> {
-    Optional<Level> findByOrder(int order);
 
-    default Level findByOrderOrThrow(int order){
-        return findByOrder(order)
-                .orElseThrow(() -> new BusinessException(
-                        "Level",
-                        "Level 1 não encontrado",
-                        NOT_FOUND
-                ));
-    }
+    Optional<Level> findByOrder(int order);
 
     default Level findByIdOrThrow(long id){
         return findById(id)
