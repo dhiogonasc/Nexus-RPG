@@ -27,43 +27,6 @@ export default function Footer() {
         { paddingBottom: Math.max(insets.bottom, 2), paddingTop: 2 }
       ]}
     >
-      {/* Botão Missões */}
-      <TouchableOpacity 
-        style={styles.button} 
-        onPress={() => router.replace('/missions')}
-      >
-        <MaterialCommunityIcons 
-          name="shield-check" 
-          size={24} 
-          color={pathname === '/missions' ? corAtiva : corInativa} 
-        />
-        <Text style={[
-          styles.buttonText, 
-          pathname === '/missions' && { color: corAtiva }
-        ]}>
-          Missões
-        </Text>
-      </TouchableOpacity>
-
-
-      {/* Botão Home */}
-      <TouchableOpacity 
-        style={styles.button} 
-        onPress={() => router.replace('/homePage')}
-      >
-        <MaterialCommunityIcons 
-          name="home-variant" 
-          size={28} 
-          color={pathname === '/homePage' ? corAtiva : corInativa}
-        />
-        <Text style={[
-          styles.buttonText,
-          pathname === '/homePage' && { color: corAtiva }
-        ]}>
-          Home
-        </Text>
-      </TouchableOpacity>
-
 
       {/* Botão Perfil */}
       <TouchableOpacity 
@@ -80,6 +43,24 @@ export default function Footer() {
           pathname === '/Account' && { color: corAtiva }
         ]}>
           Perfil
+        </Text>
+      </TouchableOpacity>
+
+            {/* Botão Home */}
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={() => router.replace('/homePage')}
+      >
+        <MaterialCommunityIcons 
+          name="home-variant" 
+          size={28} 
+          color={pathname === '/homePage' ? corAtiva : corInativa}
+        />
+        <Text style={[
+          styles.buttonText,
+          pathname === '/homePage' && { color: corAtiva }
+        ]}>
+          Home
         </Text>
       </TouchableOpacity>
 

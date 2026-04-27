@@ -32,7 +32,7 @@ export const PLANETAS: Planeta[] = [
     content: 'Conteúdo do planeta Ciclus aqui...',
 
     imagem: require('../../assets/Planet3.png'),
-    accentColor: '#67E8F9',
+    accentColor: '#3b8a95',
   },
   {
     id: '4',
