@@ -1,9 +1,9 @@
 package com.nexus.nexusrpg.domain.validator;
 
 import com.nexus.nexusrpg.core.exception.BusinessException;
-import com.nexus.nexusrpg.domain.repository.relation.UserPlanetRepository;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
+import com.nexus.nexusrpg.domain.repository.relation.UserPlanetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +18,9 @@ public class PlanetValidator {
 
     public void isAccessible(UPlanet uPlanet) {
 
-        var planetStatus =  uPlanet.getStatus();
+        var execution =  uPlanet.getExecution();
 
-        if(planetStatus == LOCKED){
+        if(execution.getStatus() == LOCKED){
             throw new BusinessException(
                     "Planet",
                     "Bloqueado! Complete o planeta anterior!",

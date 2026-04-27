@@ -21,7 +21,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UMissionExecution implements Executable {
+public class UMissionExecution implements Execution {
 
     private static final BigDecimal MISSION_COMPLETION_THRESHOLD = BigDecimal.valueOf(7);
 
@@ -37,4 +37,18 @@ public class UMissionExecution implements Executable {
 
     @Column(name = "\"best_result\"", columnDefinition = "score")
     private BigDecimal bestResult;
+
+    @Override
+    public void unlock() {
+        if(this.status == LOCKED) {
+            this.status = EntityStatus.UNLOCKED;
+            this.current = true;
+        }
+    }
+
+    @Override
+    public void complete() {
+        this.status = EntityStatus.COMPLETED;
+        this.current = false;
+    }
 }

@@ -18,9 +18,9 @@ public class MissionValidator {
 
         planetValidator.isAccessibleByMission(uMission);
 
-        var missionStatus = uMission.getStatus();
+        var execution = uMission.getExecution();
 
-        if(missionStatus == LOCKED){
+        if(execution.getStatus() == LOCKED){
 
             throw new BusinessException(
                     "Missão",

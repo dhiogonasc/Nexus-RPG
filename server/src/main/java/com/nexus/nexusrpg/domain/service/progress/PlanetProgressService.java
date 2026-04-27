@@ -24,7 +24,10 @@ public class PlanetProgressService extends EntityProgressService<UPlanet> {
     }
 
     @Override
-    protected void onUnlock(UPlanet current) {
-        current.getFirstMission().unlock();
+    protected void onUnlock(UPlanet currentPlanet) {
+        var firstMission = currentPlanet.getFirstMission();
+        var execution = firstMission.getExecution();
+
+        execution.unlock();
     }
 }

@@ -1,8 +1,7 @@
 package com.nexus.nexusrpg.domain.model.relation;
 
 import com.nexus.nexusrpg.domain.model.Planet;
-import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
-import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExec;
+import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExecution;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,7 +22,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_planet\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_planet", columnNames = {"user_id", "planet_id"})
 })
-public class UPlanet implements Usable, Statable, Orientable {
+public class UPlanet implements Usable, Orientable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,36 +37,15 @@ public class UPlanet implements Usable, Statable, Orientable {
     private Planet planet;
 
     @Embedded @Builder.Default
-    private UPlanetExec execution = new UPlanetExec();
-
-
-    @Override
-    public void unlock() {
-        this.execution.unlock();
-    }
-
-    @Override
-    public void complete() {
-        this.execution.complete();
-    }
-
-    @Override
-    public EntityStatus getStatus(){
-        return this.execution.getStatus();
-    }
-
-    @Override
-    public boolean isCurrent() {
-        return this.execution.getIsCurrent();
-    }
+    private UPlanetExecution execution = new UPlanetExecution();
 
     public static UPlanet initialize(User user, Planet planet) {
 
         boolean isFirst = planet.getOrder() == 1;
 
-        var initialStats = UPlanetExec.builder()
+        var initialStats = UPlanetExecution.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
-                .isCurrent(isFirst)
+                .current(isFirst)
                 .build();
 
         return UPlanet.builder()

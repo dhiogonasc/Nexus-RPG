@@ -29,7 +29,8 @@ public class GlobalProgressService {
     }
 
     private void check(UMission currentMission){
-        if (currentMission.isLast() && currentMission.getStatus() == EntityStatus.COMPLETED){
+        var execution = currentMission.getExecution();
+        if (currentMission.isLast() && execution.getStatus() == EntityStatus.COMPLETED){
             planetProgressService.process(currentMission.getUPlanet());
 
         }
