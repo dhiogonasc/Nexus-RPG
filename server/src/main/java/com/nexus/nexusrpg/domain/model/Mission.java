@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.model;
 
 import com.nexus.nexusrpg.domain.model.relation.Orientable;
+import com.nexus.nexusrpg.domain.model.relation.Rewardable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ import java.util.List;
         @UniqueConstraint(name = "uk_mission_planet_name", columnNames = {"planet_id", "\"name\""}),
         @UniqueConstraint(name = "uk_mission_planet_order", columnNames = {"planet_id", "\"order\""})
 })
-public class Mission implements Orientable {
+public class Mission implements Orientable, Rewardable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,6 @@ package com.nexus.nexusrpg.common.service;
 
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.model.relation.Orientable;
-import com.nexus.nexusrpg.domain.model.relation.Usable;
 import com.nexus.nexusrpg.domain.model.relation.execution.Executable;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 
 @Service
 @RequiredArgsConstructor
-public abstract class EntityProgressService<T extends Usable & Orientable & Executable> {
+public abstract class EntityProgressService<T extends Orientable & Executable> {
 
     @Transactional
     public void process(T current){

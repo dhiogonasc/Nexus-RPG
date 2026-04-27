@@ -2,6 +2,7 @@ package com.nexus.nexusrpg.domain.model;
 
 import com.nexus.nexusrpg.domain.model.enums.PlanetLabel;
 import com.nexus.nexusrpg.domain.model.relation.Orientable;
+import com.nexus.nexusrpg.domain.model.relation.Rewardable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "\"planet\"")
-public class Planet implements Orientable {
+public class Planet implements Orientable, Rewardable {
 
     private static final int PLANETS_COUNT = PlanetLabel.values().length;
 

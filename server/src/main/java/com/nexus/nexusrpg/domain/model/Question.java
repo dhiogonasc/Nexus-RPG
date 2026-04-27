@@ -1,6 +1,6 @@
 package com.nexus.nexusrpg.domain.model;
 
-import com.nexus.nexusrpg.common.feedback.FeedbackItem;
+import com.nexus.nexusrpg.common.feedback.AnswerComponent;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "\"question\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_question_mission_order", columnNames = {"mission_id", "order"})
 })
-public class Question implements FeedbackItem {
+public class Question implements AnswerComponent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,6 @@ package com.nexus.nexusrpg.domain.model.relation;
 
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
-import com.nexus.nexusrpg.domain.model.relation.execution.Executable;
 import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExecution;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
@@ -24,7 +23,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_planet\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_planet", columnNames = {"user_id", "planet_id"})
 })
-public class UPlanet implements Usable, Orientable, Executable, Rewardable {
+public class UPlanet implements Usable, Orientable, Rewardable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -96,14 +95,16 @@ public class UPlanet implements Usable, Orientable, Executable, Rewardable {
     }
 
 
+    @Override
+    public long getXpBonus() {
+        return this.planet.getXpBonus();
+    }
+
+
     public List<UMission> getUMissions() {
         return this.user.getMissions().stream()
                 .filter(uMission -> uMission.getPlanet().equals(this.planet))
                 .toList();
-    }
-
-    public long getXpBonus() {
-        return this.planet.getXpBonus();
     }
 
     public UMission getFirstMission() {
