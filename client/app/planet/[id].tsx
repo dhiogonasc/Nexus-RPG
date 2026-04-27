@@ -81,9 +81,15 @@ export default function PlanetDetails() {
             </Text>
             
             <View style={styles.descriptionContainer}>
-              <MaterialCommunityIcons name="atom" size={16} color="#94A3B8" />
+              
+              <Text style={[styles.description, {alignSelf: 'flex-start', paddingBottom: 16}]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <MaterialCommunityIcons name="atom" size={16} color="#94A3B8" style={{ marginRight: 8 }} />
+                  {planeta.description}
+                </View>
+              </Text>
               <Text style={styles.description}>
-                {planeta.description}
+                {planeta.content}
               </Text>
             </View>
 

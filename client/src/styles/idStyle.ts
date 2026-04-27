@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+const MAX_WEB_WIDTH = 800; 
+
 export const styles = StyleSheet.create({
   container: { 
     flex: 1, 
@@ -44,6 +46,9 @@ export const styles = StyleSheet.create({
     height: 250 
   },
   contentWrapper: {
+    maxWidth: MAX_WEB_WIDTH,
+    width: '100%',
+    alignSelf: 'center',
     flex: 1,
     paddingHorizontal: 20,
   },
@@ -68,8 +73,6 @@ export const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   descriptionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
     marginBottom: 30,
     backgroundColor: 'rgba(255,255,255,0.05)',
     padding: 12,
