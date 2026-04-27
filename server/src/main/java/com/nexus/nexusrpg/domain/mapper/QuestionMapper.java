@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuestionMapper implements Mapper<Question, QuestionDTO> {
 
-    private final FeedbackMapper feedbackMapper;
+    private final AnswerComponentMapper answerComponentMapper;
 
     @Override
     public QuestionDTO map(Question question) {
@@ -28,7 +28,7 @@ public class QuestionMapper implements Mapper<Question, QuestionDTO> {
     private List<AnswerComponentDTO> mapAlternative(Question question){
         var alternatives = question.getAlternatives();
         return alternatives.stream()
-                .map(feedbackMapper::map)
+                .map(answerComponentMapper::map)
                 .toList();
     }
 }

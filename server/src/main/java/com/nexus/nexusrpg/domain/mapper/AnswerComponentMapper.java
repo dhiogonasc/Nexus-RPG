@@ -6,7 +6,7 @@ import com.nexus.nexusrpg.domain.controller.dto.attempt.response.AnswerComponent
 import org.springframework.stereotype.Component;
 
 @Component
-public class FeedbackMapper implements Mapper<AnswerComponent, AnswerComponentDTO>{
+public class AnswerComponentMapper implements Mapper<AnswerComponent, AnswerComponentDTO>{
 
     @Override
     public AnswerComponentDTO map(AnswerComponent item) {

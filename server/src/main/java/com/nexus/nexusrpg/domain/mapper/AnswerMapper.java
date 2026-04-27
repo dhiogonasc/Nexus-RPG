@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AnswerMapper implements Mapper<Answer, AnswerDTO> {
 
-    private final FeedbackMapper feedbackMapper;
+    private final AnswerComponentMapper answerComponentMapper;
     private final AnswerValidator answerValidator;
     private final QuestionRepository questionRepository;
     private final AlternativeRepository alternativeRepository;
@@ -24,9 +24,9 @@ public class AnswerMapper implements Mapper<Answer, AnswerDTO> {
         boolean hit = answer.isHit();
         return new AnswerDTO(
                 answer.getQuestion().getOrder(),
-                feedbackMapper.map(answer.getQuestion()),
-                feedbackMapper.map(answer.getAlternative()),
-                hit ? null : feedbackMapper.map(answer.getCorrect()),
+                answerComponentMapper.map(answer.getQuestion()),
+                answerComponentMapper.map(answer.getAlternative()),
+                hit ? null : answerComponentMapper.map(answer.getCorrect()),
                 hit,
                 answer.getExplanation()
         );
