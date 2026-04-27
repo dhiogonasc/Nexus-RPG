@@ -5,6 +5,7 @@ import com.nexus.nexusrpg.domain.model.relation.Attempt;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -17,6 +18,7 @@ public class GlobalProgressService {
     private final MissionProgressService missionProgressService;
     private final PlanetProgressService planetProgressService;
 
+    @Transactional
     public void process(Attempt attempt) {
         if (attempt.getResult().compareTo(PROGRESS_THRESHOLD) < 0){
             return;
