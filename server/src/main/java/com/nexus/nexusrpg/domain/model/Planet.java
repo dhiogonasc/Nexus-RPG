@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.domain.model;
 
 import com.nexus.nexusrpg.domain.model.enums.PlanetLabel;
+import com.nexus.nexusrpg.domain.model.relation.Orientable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "\"planet\"")
-public class Planet {
+public class Planet implements Orientable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,4 +40,9 @@ public class Planet {
 
     @OneToMany(mappedBy = "planet")
     private List<Mission> missions;
+
+    @Override
+    public boolean isLast() {
+        return this.order == 4;
+    }
 }

@@ -22,4 +22,9 @@ public class PlanetProgressService extends EntityProgressService<UPlanet> {
                         order
                 );
     }
+
+    @Override
+    protected void onUnlock(UPlanet current) {
+        current.getFirstMission().unlock();
+    }
 }

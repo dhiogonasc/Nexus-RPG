@@ -11,7 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
@@ -88,12 +87,22 @@ public class UPlanet implements Usable, Statable, Orientable {
         return this.planet.getXpBonus();
     }
 
-    public Optional<UMission> getFirstMission() {
-        return getUMissions().stream().findFirst();
+    public UMission getFirstMission() {
+        return getUMissions().stream()
+                .filter(UMission::isFirst)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public int getOrder() {
         return this.planet.getOrder();
     }
+
+    @Override
+    public boolean isLast() {
+        return this.planet.isLast();
+    }
+
+
 }

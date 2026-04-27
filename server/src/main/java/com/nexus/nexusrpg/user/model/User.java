@@ -58,13 +58,6 @@ public class User {
         this.oxygen -= 1;
     }
 
-    public void levelUp(Level nextLevel) {
-
-        if (nextLevel == null) return;
-
-        if (this.xp >= this.level.getXpRequired()) {
-            this.level = nextLevel;
-            this.oxygen = 10;
-        }
+    public void levelUp() {
     }
 }

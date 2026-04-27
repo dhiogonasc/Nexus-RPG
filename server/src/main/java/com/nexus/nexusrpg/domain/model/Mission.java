@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.domain.model;
 
+import com.nexus.nexusrpg.domain.model.relation.Orientable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,7 @@ import java.util.List;
         @UniqueConstraint(name = "uk_mission_planet_name", columnNames = {"planet_id", "\"name\""}),
         @UniqueConstraint(name = "uk_mission_planet_order", columnNames = {"planet_id", "\"order\""})
 })
-public class Mission {
+public class Mission implements Orientable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,11 +48,8 @@ public class Mission {
     @OrderBy("order ASC")
     private List<Question> questions;
 
-    public boolean isLastMission() {
-        return this.planet.getMissions().stream()
-                .map(Mission::getOrder)
-                .max(Integer::compareTo)
-                .map(maxOrder -> this.order == maxOrder)
-                .orElse(false);
+    @Override
+    public boolean isLast() {
+        return this.planet.getMissions().size() == this.getOrder();
     }
 }

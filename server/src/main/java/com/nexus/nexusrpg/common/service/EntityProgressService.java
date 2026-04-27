@@ -4,6 +4,7 @@ import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.model.relation.Orientable;
 import com.nexus.nexusrpg.domain.model.relation.Statable;
 import com.nexus.nexusrpg.domain.model.relation.Usable;
+import com.nexus.nexusrpg.user.model.User;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,19 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 public abstract class EntityProgressService<T extends Usable & Orientable & Statable> {
 
     @Transactional
-    public void handleCompletion(T current){
+    public void process(T current){
+        handleCompletion(current);
+        handleUnlock(current);
+
+        updateUserStats(current.getUser(), current);
+    }
+
+    private void updateUserStats(User user, T current) {
+        user.addXp(current.getXpBonus());
+        user.levelUp();
+    }
+
+    private void handleCompletion(T current){
         handleProcess(
                 current,
                 current.getOrder(),
@@ -29,13 +42,15 @@ public abstract class EntityProgressService<T extends Usable & Orientable & Stat
         );
     }
 
-    @Transactional
-    public void handleUnlock(T current){
+    private void handleUnlock(T current){
         handleProcess(
                 current,
                 current.getOrder() + 1,
                 LOCKED,
-                T::unlock
+                next -> {
+                    next.unlock();
+                    onUnlock(next);
+                }
         );
     }
 
@@ -51,4 +66,5 @@ public abstract class EntityProgressService<T extends Usable & Orientable & Stat
     }
 
     protected abstract Optional<@NonNull T> findEntityByOrder(T current, int order);
+    protected void onUnlock(T current){}
 }

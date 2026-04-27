@@ -25,7 +25,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_mission\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_mission", columnNames = {"user_id", "mission_id"})
 })
-public class UMission implements Usable, Statable, Orientable  {
+public class UMission implements Usable, Statable, Orientable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,37 +56,32 @@ public class UMission implements Usable, Statable, Orientable  {
         this.execution.complete();
     }
 
+
     @Override
     public EntityStatus getStatus() {
         return this.execution.getStatus();
     }
 
-    public boolean isCurrent(){
+    @Override
+    public boolean isCurrent() {
         return this.execution.getIsCurrent();
     }
 
-    public BigDecimal getBestResult(){
+    @Override
+    public int getOrder() {
+        return this.mission.getOrder();
+    }
+
+    @Override
+    public boolean isLast() {
+        return this.mission.isLast();
+    }
+
+    public BigDecimal getBestResult() {
         return this.execution.getBestResult();
     }
 
-    public static UMission initialize(User user, Mission mission) {
-
-        boolean isFirst = mission.getOrder() == 1 & mission.getPlanet().getOrder() == 1;
-
-        var initialStats = UMissionExec.builder()
-                .status(isFirst ? UNLOCKED : LOCKED)
-                .isCurrent(isFirst)
-                .build();
-
-        return UMission.builder()
-                .user(user)
-                .mission(mission)
-                .execution(initialStats)
-                .build();
-    }
-
-
-    public Planet getPlanet(){
+    public Planet getPlanet() {
         return this.mission.getPlanet();
     }
 
@@ -103,12 +98,19 @@ public class UMission implements Usable, Statable, Orientable  {
         return this.mission.getXpBonus();
     }
 
-    @Override
-    public int getOrder() {
-        return this.mission.getOrder();
-    }
+    public static UMission initialize(User user, Mission mission) {
 
-    public boolean isLastMission() {
-        return this.mission.isLastMission();
+        boolean isFirst = mission.getOrder() == 1 & mission.getPlanet().getOrder() == 1;
+
+        var initialStats = UMissionExec.builder()
+                .status(isFirst ? UNLOCKED : LOCKED)
+                .isCurrent(isFirst)
+                .build();
+
+        return UMission.builder()
+                .user(user)
+                .mission(mission)
+                .execution(initialStats)
+                .build();
     }
 }
