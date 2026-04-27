@@ -41,9 +41,10 @@ public class UPlanet implements Usable, Orientable, Executable, Rewardable {
     @Embedded @Builder.Default
     private UPlanetExecution execution = new UPlanetExecution();
 
+
     public static UPlanet initialize(User user, Planet planet) {
 
-        boolean isFirst = planet.getOrder() == 1;
+        boolean isFirst = planet.isFirst();
 
         var initialStats = UPlanetExecution.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
@@ -56,6 +57,7 @@ public class UPlanet implements Usable, Orientable, Executable, Rewardable {
                 .execution(initialStats)
                 .build();
     }
+
 
     @Override
     public EntityStatus getStatus() {
@@ -77,6 +79,23 @@ public class UPlanet implements Usable, Orientable, Executable, Rewardable {
         this.execution.complete();
     }
 
+
+    @Override
+    public int getOrder() {
+        return this.planet.getOrder();
+    }
+
+    @Override
+    public boolean isFirst() {
+        return this.planet.isFirst();
+    }
+
+    @Override
+    public boolean isLast() {
+        return this.planet.isLast();
+    }
+
+
     public List<UMission> getUMissions() {
         return this.user.getMissions().stream()
                 .filter(uMission -> uMission.getPlanet().equals(this.planet))
@@ -93,16 +112,4 @@ public class UPlanet implements Usable, Orientable, Executable, Rewardable {
                 .findFirst()
                 .orElse(null);
     }
-
-    @Override
-    public int getOrder() {
-        return this.planet.getOrder();
-    }
-
-    @Override
-    public boolean isLast() {
-        return this.planet.isLast();
-    }
-
-
 }

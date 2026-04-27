@@ -18,6 +18,8 @@ import java.util.List;
 @Table(name = "\"planet\"")
 public class Planet implements Orientable {
 
+    private static final int PLANETS_COUNT = PlanetLabel.values().length;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,6 +45,6 @@ public class Planet implements Orientable {
 
     @Override
     public boolean isLast() {
-        return this.order == 4;
+        return this.order == PLANETS_COUNT;
     }
 }

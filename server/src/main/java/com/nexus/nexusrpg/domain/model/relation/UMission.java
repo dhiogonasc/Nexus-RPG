@@ -47,9 +47,10 @@ public class UMission implements Usable, Orientable, Executable {
     @OneToMany(mappedBy = "uMission")
     private List<Attempt> attempts;
 
+
     public static UMission initialize(User user, Mission mission) {
 
-        boolean isFirst = mission.getOrder() == 1 & mission.getPlanet().getOrder() == 1;
+        boolean isFirst = mission.isFirst() & mission.getPlanet().isFirst();
 
         var initialStats = UMissionExecution.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
@@ -62,6 +63,7 @@ public class UMission implements Usable, Orientable, Executable {
                 .execution(initialStats)
                 .build();
     }
+
 
     @Override
     public EntityStatus getStatus() {
@@ -85,7 +87,6 @@ public class UMission implements Usable, Orientable, Executable {
 
 
 
-
     @Override
     public int getOrder() {
         return this.mission.getOrder();
@@ -100,6 +101,8 @@ public class UMission implements Usable, Orientable, Executable {
     public boolean isLast() {
         return this.mission.isLast();
     }
+
+
 
     public BigDecimal getBestResult() {
         return this.execution.getBestResult();

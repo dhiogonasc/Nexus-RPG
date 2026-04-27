@@ -1,8 +1,12 @@
 package com.nexus.nexusrpg.domain.model;
 
 import com.nexus.nexusrpg.domain.model.enums.LevelLabel;
+import com.nexus.nexusrpg.domain.model.relation.Orientable;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
@@ -10,7 +14,9 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "\"level\"")
-public class Level {
+public class Level implements Orientable {
+
+    private static final int LEVEL_COUNT = LevelLabel.values().length;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +37,9 @@ public class Level {
 
     @Column(name = "\"xp_required\"", nullable = false, columnDefinition = "xp")
     private long xpRequired;
+
+    @Override
+    public boolean isLast() {
+        return this.getOrder() == LEVEL_COUNT;
+    }
 }

@@ -37,7 +37,7 @@ public abstract class EntityProgressService<T extends Usable & Orientable & Exec
     private void handleUnlock(T current){
         handleProcess(
                 current,
-                current.getOrder() + 1,
+                current.getNextOrder(),
                 LOCKED,
                 next -> {
                     next.unlock();
