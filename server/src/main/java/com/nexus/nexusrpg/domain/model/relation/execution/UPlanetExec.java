@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
-import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.*;
+import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 
 @Data
 @Builder
@@ -29,17 +29,5 @@ public class UPlanetExec implements Executable {
 
     @Builder.Default
     @Column(name = "\"is_current\"", nullable = false)
-    private Boolean isCurrent = false;
-
-    @Override
-    public void unlock() {
-        this.status = UNLOCKED;
-        this.isCurrent = true;
-    }
-
-    @Override
-    public void complete() {
-        this.status = COMPLETED;
-        this.isCurrent = false;
-    }
+    private boolean current = false;
 }

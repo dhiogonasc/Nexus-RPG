@@ -14,14 +14,14 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 
-import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.*;
+import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UMissionExec implements Executable {
+public class UMissionExecution implements Executable {
 
     private static final BigDecimal MISSION_COMPLETION_THRESHOLD = BigDecimal.valueOf(7);
 
@@ -33,20 +33,8 @@ public class UMissionExec implements Executable {
 
     @Builder.Default
     @Column(name = "\"is_current\"", nullable = false)
-    private Boolean isCurrent = false;
+    private boolean current = false;
 
     @Column(name = "\"best_result\"", columnDefinition = "score")
     private BigDecimal bestResult;
-
-    @Override
-    public void unlock() {
-        this.status = UNLOCKED;
-        this.isCurrent = true;
-    }
-
-    @Override
-    public void complete() {
-        this.status = COMPLETED;
-        this.isCurrent = false;
-    }
 }

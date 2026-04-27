@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.model.relation;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
-import com.nexus.nexusrpg.domain.model.relation.execution.UMissionExec;
+import com.nexus.nexusrpg.domain.model.relation.execution.UMissionExecution;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -41,7 +41,7 @@ public class UMission implements Usable, Statable, Orientable {
 
     @Embedded
     @Builder.Default
-    private UMissionExec execution = new UMissionExec();
+    private UMissionExecution execution = new UMissionExecution();
 
     @OneToMany(mappedBy = "uMission")
     private List<Attempt> attempts;
@@ -106,7 +106,7 @@ public class UMission implements Usable, Statable, Orientable {
 
         boolean isFirst = mission.getOrder() == 1 & mission.getPlanet().getOrder() == 1;
 
-        var initialStats = UMissionExec.builder()
+        var initialStats = UMissionExecution.builder()
                 .status(isFirst ? UNLOCKED : LOCKED)
                 .isCurrent(isFirst)
                 .build();
