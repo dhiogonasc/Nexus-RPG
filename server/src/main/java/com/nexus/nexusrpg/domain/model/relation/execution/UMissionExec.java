@@ -49,16 +49,4 @@ public class UMissionExec implements Executable {
         this.status = COMPLETED;
         this.isCurrent = false;
     }
-
-    public void updateBestResult(BigDecimal currentResult) {
-        if (currentResult == null) return;
-
-        if (this.bestResult == null || currentResult.compareTo(this.bestResult) > 0) {
-            this.bestResult = currentResult;
-        }
-
-        if (this.status != COMPLETED && currentResult.compareTo(MISSION_COMPLETION_THRESHOLD) >= 0) {
-            this.complete();
-        }
-    }
 }

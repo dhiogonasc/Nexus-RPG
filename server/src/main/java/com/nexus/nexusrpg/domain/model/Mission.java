@@ -40,7 +40,6 @@ public class Mission implements Orientable {
     @Column(name = "\"order\"", nullable = false, unique = true)
     private int order;
 
-
     @Column(name = "xp_bonus", nullable = false, columnDefinition = "xp")
     private long xpBonus;
 

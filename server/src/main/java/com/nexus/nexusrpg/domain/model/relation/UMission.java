@@ -47,6 +47,21 @@ public class UMission implements Usable, Statable, Orientable {
     private List<Attempt> attempts;
 
     @Override
+    public int getOrder() {
+        return this.mission.getOrder();
+    }
+
+    @Override
+    public boolean isFirst(){
+        return this.mission.isFirst();
+    }
+
+    @Override
+    public boolean isLast() {
+        return this.mission.isLast();
+    }
+
+    @Override
     public void unlock() {
         this.execution.unlock();
     }
@@ -56,7 +71,6 @@ public class UMission implements Usable, Statable, Orientable {
         this.execution.complete();
     }
 
-
     @Override
     public EntityStatus getStatus() {
         return this.execution.getStatus();
@@ -65,16 +79,6 @@ public class UMission implements Usable, Statable, Orientable {
     @Override
     public boolean isCurrent() {
         return this.execution.getIsCurrent();
-    }
-
-    @Override
-    public int getOrder() {
-        return this.mission.getOrder();
-    }
-
-    @Override
-    public boolean isLast() {
-        return this.mission.isLast();
     }
 
     public BigDecimal getBestResult() {
