@@ -1,5 +1,6 @@
 package com.nexus.nexusrpg.common.service;
 
+import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.model.relation.Orientable;
 import com.nexus.nexusrpg.domain.model.relation.Statable;
 import com.nexus.nexusrpg.domain.model.relation.Usable;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
@@ -17,23 +19,36 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 @RequiredArgsConstructor
 public abstract class EntityProgressService<T extends Usable & Orientable & Statable> {
 
-    protected abstract Optional<@NonNull T> findEntityByOrder(T current, int order);
+    @Transactional
+    public void handleCompletion(T current){
+        handleProcess(
+                current,
+                current.getOrder(),
+                UNLOCKED,
+                T::complete
+        );
+    }
 
     @Transactional
-    public void processProgress(T current) {
-        var user = current.getUser();
-        user.addXp(current.getXpBonus());
-
-        findEntityByOrder(current, current.getOrder())
-                .filter(e -> e.getStatus() == UNLOCKED)
-                .ifPresent(T::complete);
-
-        findEntityByOrder(current, current.getOrder() + 1)
-                .filter(e -> e.getStatus() == LOCKED)
-                .ifPresent(next -> {
-                    next.unlock();
-                    onAfterUnlock(next);
-                });
+    public void handleUnlock(T current){
+        handleProcess(
+                current,
+                current.getOrder() + 1,
+                LOCKED,
+                T::unlock
+        );
     }
-    protected void onAfterUnlock(T entity) {}
+
+    private void handleProcess(
+            T current,
+            int order,
+            EntityStatus status,
+            Consumer<T> action
+    ) {
+        findEntityByOrder(current, order)
+                .filter(e -> e.getStatus() == status)
+                .ifPresent(action);
+    }
+
+    protected abstract Optional<@NonNull T> findEntityByOrder(T current, int order);
 }

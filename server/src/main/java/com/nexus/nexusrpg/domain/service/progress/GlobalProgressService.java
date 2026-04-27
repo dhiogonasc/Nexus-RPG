@@ -10,14 +10,11 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class GlobalProgressService {
 
+    private final BigDecimal PROGRESS_THRESHOLD = BigDecimal.valueOf(70);
+
     private final MissionProgressService missionProgressService;
+    private final PlanetProgressService planetProgressService;
 
     public void process(Attempt attempt) {
-        var result = attempt.getResult();
-        var currentMission = attempt.getUMission();
-
-        if(result.compareTo(BigDecimal.valueOf(70))>=0){
-            missionProgressService.processProgress(currentMission);
-        }
     }
 }
