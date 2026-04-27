@@ -3,7 +3,6 @@ package com.nexus.nexusrpg.common.service;
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.model.relation.Orientable;
 import com.nexus.nexusrpg.domain.model.relation.Usable;
-import com.nexus.nexusrpg.user.model.User;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,10 +22,11 @@ public abstract class EntityProgressService<T extends Usable & Orientable> {
     public void process(T current){
         handleCompletion(current);
         handleUnlock(current);
-        updateUserStats(current.getUser(), current);
+        updateUserStats(current);
     }
 
-    private void updateUserStats(User user, T current) {
+    private void updateUserStats(T current) {
+        var user = current.getUser();
         user.addXp(current.getXpBonus());
     }
 

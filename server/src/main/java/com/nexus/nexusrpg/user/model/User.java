@@ -1,6 +1,7 @@
 package com.nexus.nexusrpg.user.model;
 
 import com.nexus.nexusrpg.domain.model.Level;
+import com.nexus.nexusrpg.domain.model.Levelable;
 import com.nexus.nexusrpg.domain.model.relation.UMission;
 import com.nexus.nexusrpg.domain.model.relation.UPlanet;
 import jakarta.persistence.*;
@@ -17,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "\"user\"")
-public class User {
+public class User implements Levelable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +59,10 @@ public class User {
         this.oxygen -= 1;
     }
 
-    public void levelUp() {
+    @Override
+    public void up(Level next) {
+        if (!this.level.isLast()){
+            this.level = next;
+        }
     }
 }

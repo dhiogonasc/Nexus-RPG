@@ -19,7 +19,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UPlanetExecution implements Executable {
+public class UPlanetExecution {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
@@ -30,18 +30,4 @@ public class UPlanetExecution implements Executable {
     @Builder.Default
     @Column(name = "\"is_current\"", nullable = false)
     private boolean current = false;
-
-    @Override
-    public void unlock() {
-        if(this.status == LOCKED) {
-            this.status = EntityStatus.UNLOCKED;
-            this.current = true;
-        }
-    }
-
-    @Override
-    public void complete() {
-        this.status = EntityStatus.COMPLETED;
-        this.current = false;
-    }
 }

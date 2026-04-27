@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
-import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
+import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.*;
 
 @Data
 @Builder
@@ -70,14 +69,17 @@ public class UPlanet implements Usable, Orientable, Rewardable {
 
     @Override
     public void unlock() {
-        this.execution.unlock();
+        if(getStatus() == LOCKED) {
+            this.execution.setStatus(UNLOCKED);
+            this.execution.setCurrent(true);
+        }
     }
 
     @Override
     public void complete() {
-        this.execution.complete();
+        this.execution.setStatus(COMPLETED);
+        this.execution.setCurrent(isLast());
     }
-
 
     @Override
     public int getOrder() {
