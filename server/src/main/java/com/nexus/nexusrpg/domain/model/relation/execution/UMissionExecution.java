@@ -21,7 +21,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UMissionExecution implements Execution {
+public class UMissionExecution implements Executable {
 
     private static final BigDecimal MISSION_COMPLETION_THRESHOLD = BigDecimal.valueOf(7);
 

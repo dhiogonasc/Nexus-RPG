@@ -1,13 +1,13 @@
 package com.nexus.nexusrpg.common.mapper;
 
 import com.nexus.nexusrpg.common.dto.EntityStaticReference;
-import com.nexus.nexusrpg.domain.model.relation.Statable;
+import com.nexus.nexusrpg.domain.model.relation.execution.Executable;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class CurrentMapper<T extends Statable> implements Mapper<List<T>, EntityStaticReference>{
+public abstract class CurrentMapper<T extends Executable> implements Mapper<List<T>, EntityStaticReference>{
 
     private final StaticReferenceMapper<T> referenceMapper;
 

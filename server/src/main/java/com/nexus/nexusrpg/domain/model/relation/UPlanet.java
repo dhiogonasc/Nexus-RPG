@@ -2,7 +2,7 @@ package com.nexus.nexusrpg.domain.model.relation;
 
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
-import com.nexus.nexusrpg.domain.model.relation.execution.Execution;
+import com.nexus.nexusrpg.domain.model.relation.execution.Executable;
 import com.nexus.nexusrpg.domain.model.relation.execution.UPlanetExecution;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
@@ -24,7 +24,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_planet\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_planet", columnNames = {"user_id", "planet_id"})
 })
-public class UPlanet implements Usable, Orientable, Execution {
+public class UPlanet implements Usable, Orientable, Executable, Rewardable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

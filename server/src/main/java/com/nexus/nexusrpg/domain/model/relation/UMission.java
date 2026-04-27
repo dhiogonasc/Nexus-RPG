@@ -3,7 +3,7 @@ package com.nexus.nexusrpg.domain.model.relation;
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
 import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
-import com.nexus.nexusrpg.domain.model.relation.execution.Execution;
+import com.nexus.nexusrpg.domain.model.relation.execution.Executable;
 import com.nexus.nexusrpg.domain.model.relation.execution.UMissionExecution;
 import com.nexus.nexusrpg.user.model.User;
 import jakarta.persistence.*;
@@ -26,7 +26,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.UNLOCKED;
 @Table(name = "\"user_mission\"", uniqueConstraints = {
         @UniqueConstraint(name = "uk_user_mission", columnNames = {"user_id", "mission_id"})
 })
-public class UMission implements Usable, Orientable, Execution {
+public class UMission implements Usable, Orientable, Executable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -19,7 +19,7 @@ import static com.nexus.nexusrpg.domain.model.enums.EntityStatus.LOCKED;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class UPlanetExecution implements Execution {
+public class UPlanetExecution implements Executable {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
