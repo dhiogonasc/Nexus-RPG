@@ -44,7 +44,6 @@ export default function PlanetDetails() {
         style={StyleSheet.absoluteFillObject}
       />
 
-      {/* Header com botão de voltar com efeito de vidro */}
       <View style={styles.header}>
         <TouchableOpacity 
           style={styles.backButton} 
@@ -57,7 +56,6 @@ export default function PlanetDetails() {
         </TouchableOpacity>
       </View>
 
-      {/* ScrollView caso o conteúdo do planeta fique muito grande */}
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
         {/* Imagem do Planeta */}
@@ -69,11 +67,9 @@ export default function PlanetDetails() {
           />
         </View>
 
-        {/* Conteúdo Dinâmico com Glassmorphism */}
         <View style={styles.contentWrapper}>
           <BlurView intensity={40} tint="dark" style={styles.contentBlur}>
             
-            {/* Linha de sotaque com a cor do planeta */}
             <View style={[styles.accentLine, { backgroundColor: planeta.accentColor }]} />
             
             <Text style={[styles.title, { color: planeta.accentColor }]}>
@@ -93,33 +89,23 @@ export default function PlanetDetails() {
               </Text>
             </View>
 
-            {/* --- ÁREA PARA O SEU CONTEÚDO (Módulos/Fases) --- */}
+            {/* --- ÁREA PARA O CONTEÚDO --- */}
             <Text style={styles.sectionTitle}>Módulos Disponíveis</Text>
             
-            <TouchableOpacity activeOpacity={0.8} style={[styles.moduleCard, { borderLeftColor: planeta.accentColor }]}>
-              <MaterialCommunityIcons name="rocket-launch-outline" size={20} color={planeta.accentColor} />
-              <Text style={styles.moduleText}>Questão 1</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={0.8} style={[styles.moduleCard, { borderLeftColor: planeta.accentColor }]}>
-              <MaterialCommunityIcons name="rocket-launch-outline" size={20} color={planeta.accentColor} />
-              <Text style={styles.moduleText}>Questão 2</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={0.8} style={[styles.moduleCard, { borderLeftColor: planeta.accentColor }]}>
-              <MaterialCommunityIcons name="rocket-launch-outline" size={20} color={planeta.accentColor} />
-              <Text style={styles.moduleText}>Questão 3</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={0.8} style={[styles.moduleCard, { borderLeftColor: planeta.accentColor }]}>
-              <MaterialCommunityIcons name="rocket-launch-outline" size={20} color={planeta.accentColor} />
-              <Text style={styles.moduleText}>Questão 4</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={0.8} style={[styles.moduleCard, { borderLeftColor: planeta.accentColor }]}>
-              <MaterialCommunityIcons name="rocket-launch-outline" size={20} color={planeta.accentColor} />
-              <Text style={styles.moduleText}>Questão 5</Text>
-            </TouchableOpacity>
+            {planeta.missoes.map((missao) => (
+              <TouchableOpacity
+                key={missao.id}
+                activeOpacity={0.8}
+                style={[styles.moduleCard, { borderLeftColor: planeta.accentColor }]}
+                onPress={() => router.push({
+                  pathname: `/mission/[id]`,
+                  params: { id: missao.id, planetId: planeta.id }
+                })}
+              >
+                <MaterialCommunityIcons name="rocket-launch-outline" size={20} color={planeta.accentColor} />
+                <Text style={styles.moduleText}>{missao.titulo}</Text>
+              </TouchableOpacity>
+            ))}
 
           </BlurView>
         </View>
