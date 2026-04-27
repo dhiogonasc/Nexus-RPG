@@ -2,6 +2,7 @@ package com.nexus.nexusrpg.domain.model.relation;
 
 import com.nexus.nexusrpg.domain.model.Mission;
 import com.nexus.nexusrpg.domain.model.Planet;
+import com.nexus.nexusrpg.domain.model.enums.EntityStatus;
 import com.nexus.nexusrpg.domain.model.relation.execution.Execution;
 import com.nexus.nexusrpg.domain.model.relation.execution.UMissionExecution;
 import com.nexus.nexusrpg.user.model.User;
@@ -46,6 +47,45 @@ public class UMission implements Usable, Orientable, Execution {
     @OneToMany(mappedBy = "uMission")
     private List<Attempt> attempts;
 
+    public static UMission initialize(User user, Mission mission) {
+
+        boolean isFirst = mission.getOrder() == 1 & mission.getPlanet().getOrder() == 1;
+
+        var initialStats = UMissionExecution.builder()
+                .status(isFirst ? UNLOCKED : LOCKED)
+                .current(isFirst)
+                .build();
+
+        return UMission.builder()
+                .user(user)
+                .mission(mission)
+                .execution(initialStats)
+                .build();
+    }
+
+    @Override
+    public EntityStatus getStatus() {
+        return this.execution.getStatus();
+    }
+
+    @Override
+    public boolean isCurrent() {
+        return this.execution.isCurrent();
+    }
+
+    @Override
+    public void unlock() {
+        this.execution.unlock();
+    }
+
+    @Override
+    public void complete() {
+        this.execution.complete();
+    }
+
+
+
+
     @Override
     public int getOrder() {
         return this.mission.getOrder();
@@ -76,21 +116,5 @@ public class UMission implements Usable, Orientable, Execution {
                 .filter(up -> up.getPlanet().equals(targetPlanet))
                 .findFirst()
                 .orElse(null);
-    }
-
-    public static UMission initialize(User user, Mission mission) {
-
-        boolean isFirst = mission.getOrder() == 1 & mission.getPlanet().getOrder() == 1;
-
-        var initialStats = UMissionExecution.builder()
-                .status(isFirst ? UNLOCKED : LOCKED)
-                .current(isFirst)
-                .build();
-
-        return UMission.builder()
-                .user(user)
-                .mission(mission)
-                .execution(initialStats)
-                .build();
     }
 }
