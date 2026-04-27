@@ -18,10 +18,7 @@ public class MissionValidator {
 
         planetValidator.isAccessibleByMission(uMission);
 
-        var execution = uMission.getExecution();
-
-        if(execution.getStatus() == LOCKED){
-
+        if(uMission.getStatus() == LOCKED){
             throw new BusinessException(
                     "Missão",
                     "Bloqueado! Complete a missão anterior!",

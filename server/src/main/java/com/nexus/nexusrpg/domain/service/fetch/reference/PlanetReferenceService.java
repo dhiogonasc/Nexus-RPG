@@ -15,7 +15,6 @@ public class PlanetReferenceService extends EntityReferenceService<UPlanet> {
             UserPlanetRepository repository,
             PlanetTaskMapper taskMapper
     ) {
-
         super(context, repository, taskMapper);
     }
 }

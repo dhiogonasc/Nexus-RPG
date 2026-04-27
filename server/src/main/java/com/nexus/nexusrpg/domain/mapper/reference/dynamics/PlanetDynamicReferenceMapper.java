@@ -15,7 +15,6 @@ public class PlanetDynamicReferenceMapper extends DynamicReferenceMapper<UPlanet
 
     public EntityDynamicReference map(UPlanet uPlanet){
         var planet = uPlanet.getPlanet();
-
         return new EntityDynamicReference(
                 planet.getId(),
                 planet.getName().toString(),

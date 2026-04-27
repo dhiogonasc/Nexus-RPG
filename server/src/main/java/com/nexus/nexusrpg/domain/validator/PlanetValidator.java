@@ -17,10 +17,7 @@ public class PlanetValidator {
     private final UserPlanetRepository uPlanetRepository;
 
     public void isAccessible(UPlanet uPlanet) {
-
-        var execution =  uPlanet.getExecution();
-
-        if(execution.getStatus() == LOCKED){
+        if(uPlanet.getStatus() == LOCKED){
             throw new BusinessException(
                     "Planet",
                     "Bloqueado! Complete o planeta anterior!",

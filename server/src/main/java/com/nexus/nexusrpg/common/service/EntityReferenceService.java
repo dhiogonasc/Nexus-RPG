@@ -17,7 +17,7 @@ public abstract class EntityReferenceService<UEntity extends Executable> {
 
     @Transactional(readOnly = true)
     public TaskDTO getAll() {
-        var userId = context.getAuthenticatedUser().getId();
-        return taskMapper.map(userEntityRepository.findByUserId(userId));
+        var user = context.getAuthenticatedUser();
+        return taskMapper.map(userEntityRepository.findByUserId(user.getId()));
     }
 }

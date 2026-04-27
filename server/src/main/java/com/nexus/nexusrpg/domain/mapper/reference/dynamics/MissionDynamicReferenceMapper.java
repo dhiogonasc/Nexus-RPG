@@ -15,7 +15,6 @@ public class MissionDynamicReferenceMapper extends DynamicReferenceMapper<UMissi
 
     public EntityDynamicReference map(UMission uMission){
         var mission = uMission.getMission();
-
         return new EntityDynamicReference(
                 mission.getId(),
                 mission.getName(),

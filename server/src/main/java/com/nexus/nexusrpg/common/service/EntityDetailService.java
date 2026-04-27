@@ -16,10 +16,10 @@ public abstract class EntityDetailService<UEntity, UEntityDTO> {
     @Transactional(readOnly = true)
     public UEntityDTO getById(Long id) {
 
-        var userId = context.getAuthenticatedUser().getId();
+        var user = context.getAuthenticatedUser();
 
         UEntity uEntity = userEntityRepository
-                .findByUserIdAndEntityId(userId, id);
+                .findByUserIdAndEntityId(user.getId(), id);
 
         validate(uEntity);
 

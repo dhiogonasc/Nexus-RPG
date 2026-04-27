@@ -15,13 +15,11 @@ public class MissionInitService extends EntityInitService<Mission, UMission> {
             MissionRepository missionRepository,
             UserMissionRepository uMissionRepository
     ) {
-
         super(missionRepository, uMissionRepository);
     }
 
     @Override
     protected UMission initRelation(User user, Mission mission) {
-
         return UMission.initialize(user, mission);
     }
 }
