@@ -11,12 +11,12 @@ http:
     data: |-
       [
         {
-          "questionId": 7,
-          "alternativeId": 13
+          "questionId": 1,
+          "alternativeId": 2
         },
         {
-          "questionId": 8,
-          "alternativeId": 15
+          "questionId": 2,
+          "alternativeId": 3
         }
       ]
   auth: inherit

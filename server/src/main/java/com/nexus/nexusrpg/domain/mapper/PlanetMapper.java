@@ -27,6 +27,7 @@ public class PlanetMapper implements Mapper<UPlanet, PlanetDetail> {
                 .description(planet.getDescription())
                 .order(planet.getOrder())
                 .execution(executionMapper.map(uPlanet))
+                .xpBonus(planet.getXpBonus())
                 .content(planet.getContent())
                 .missions(mapMissions(uPlanet))
                 .build();

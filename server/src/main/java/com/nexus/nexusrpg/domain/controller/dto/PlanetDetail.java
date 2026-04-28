@@ -9,5 +9,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class PlanetDetail extends EntityDetail {
     private final String content;
+    private final long xpBonus;
     private final TaskDTO missions;
 }

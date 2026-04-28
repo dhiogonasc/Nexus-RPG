@@ -18,7 +18,7 @@ public class CurrentLevelMapper implements Mapper<Level, LevelDetail> {
     public LevelDetail map(Level level) {
         return new LevelDetail(
                 level.getId(),
-                level.getName(),
+                level.getName().name(),
                 level.getDescription(),
                 mapNext(level)
         );
@@ -30,7 +30,7 @@ public class CurrentLevelMapper implements Mapper<Level, LevelDetail> {
 
         return new LevelReference(
                 next.getId(),
-                next.getName(),
+                next.getName().name(),
                 next.getXpBonus(),
                 next.getXpRequired()
         );

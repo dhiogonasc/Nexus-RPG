@@ -13,7 +13,7 @@ public class PlanetStaticReferenceMapper extends StaticReferenceMapper<UPlanet> 
         var planet = uPlanet.getPlanet();
         return new EntityStaticReference(
                 planet.getId(),
-                planet.getName().toString(),
+                planet.getName().name(),
                 planet.getDescription()
         );
     }
