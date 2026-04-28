@@ -12,7 +12,7 @@ http:
       [
         {
           "questionId": 1,
-          "alternativeId": 2
+          "alternativeId": 1
         },
         {
           "questionId": 2,
