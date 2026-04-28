@@ -19,8 +19,8 @@ public class LevelService {
 
     public Level findNextLevel(Level currentLevel) {
         return levelRepository
-                .findByOrder(currentLevel.getOrder() + 1)
-                .orElse(currentLevel);
+                .findByOrder(currentLevel.getNextOrder())
+                .orElse(null);
     }
 
     public void levelUp(User user){

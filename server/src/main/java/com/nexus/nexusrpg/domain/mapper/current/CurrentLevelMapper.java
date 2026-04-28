@@ -1,7 +1,8 @@
 package com.nexus.nexusrpg.domain.mapper.current;
 
 import com.nexus.nexusrpg.common.mapper.Mapper;
-import com.nexus.nexusrpg.domain.controller.dto.LevelDTO;
+import com.nexus.nexusrpg.domain.controller.dto.level.LevelDetail;
+import com.nexus.nexusrpg.domain.controller.dto.level.LevelReference;
 import com.nexus.nexusrpg.domain.model.Level;
 import com.nexus.nexusrpg.domain.service.LevelService;
 import lombok.RequiredArgsConstructor;
@@ -9,23 +10,29 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CurrentLevelMapper implements Mapper<Level, LevelDTO> {
+public class CurrentLevelMapper implements Mapper<Level, LevelDetail> {
 
     private final LevelService levelService;
 
     @Override
-    public LevelDTO map(Level level) {
-        return LevelDTO.builder()
-                .id(level.getId())
-                .name(level.getName().toString())
-                .description(level.getDescription())
-                .xpRequired(level.getXpRequired())
-                .xpBonus(level.getXpBonus())
-                .xpNextLevel(getXpNextLevel(level))
-                .build();
+    public LevelDetail map(Level level) {
+        return new LevelDetail(
+                level.getId(),
+                level.getName(),
+                level.getDescription(),
+                mapNext(level)
+        );
     }
 
-    private long getXpNextLevel(Level level) {
-        return levelService.findNextLevel(level).getXpRequired();
+    private LevelReference mapNext(Level level) {
+        var next = levelService.findNextLevel(level);
+        if (next == null) {return null;}
+
+        return new LevelReference(
+                next.getId(),
+                next.getName(),
+                next.getXpBonus(),
+                next.getXpRequired()
+        );
     }
 }
