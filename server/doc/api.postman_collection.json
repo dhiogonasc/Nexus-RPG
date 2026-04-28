@@ -1,0 +1,462 @@
+{
+  "info": {
+    "_postman_id": "72643b3c-1a21-42b6-8175-9808a33649d2",
+    "name": "Nexus RPG API",
+    "description": "Coleção organizada para o desenvolvimento do Nexus RPG, com herança de autenticação e scripts de automação.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52573108",
+    "_collection_link": "https://go.postman.co/collection/52573108-72643b3c-1a21-42b6-8175-9808a33649d2?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "01. Autenticação",
+      "item": [
+        {
+          "name": "Cadastrar Usuário",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"username\",\n    \"email\": \"email@email.com\",\n    \"password\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server.url}}/auth/register",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "pm.environment.set(\"token\", response.accessToken);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"email@email.com\",\n    \"password\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server.url}}/auth/login",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "noauth"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02. Planetas",
+      "item": [
+        {
+          "name": "Listar Planetas",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJuZXh1cy1ycGciLCJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJleHAiOjE3NzYzNTc5NTUsImlhdCI6MTc3NjM1NDM1NX0.twMKyVj68Vry2vJdOOhtpzc77ilve-GNpuXE4WOYenjHSHwVehd87MSmMIJDvBD-k1H2TajhtuNe-P3GeeByukXnwDqe2LCFnoyxtWQm7fz7yFls3yq_hVhx6ScBNGNtEdJ5TUKyjH5VEF4P9W7r2uxMuoUwCGgaTSZ38sQOUytOen35X_FMiET6zusViJMsW1cv29VwofMYKUUGbtH3PeGD05nLUiqAGHNE6WXRpTY3U_dLx1NQh4QeAzZVUiCQNu11aVU3HdKbCv-f9rVaE66hy8WlXRtmCJJO2xaA7KcWVuqzn-PjM_tV3m6bETnfs7CbpeSaz2cfuU9z5dit5Q",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/planets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "planets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Detalhes do Planeta",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server.url}}/planets/{{planet.id}}",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "planets",
+                "{{planet.id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03. Missões",
+      "item": [
+        {
+          "name": "Listar Missões",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server.url}}/missions",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "missions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Detalhes da Missão",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server.url}}/missions/{{mission.id}}",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "missions",
+                "{{mission.id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Iniciar tentativa",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server.url}}/missions/{{mission.id}}/start",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "missions",
+                "{{mission.id}}",
+                "start"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Responder",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"questionId\": 1,\r\n    \"alternativeId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server.url}}/missions/attempts/{{mission.attempt.id}}/answer",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "missions",
+                "attempts",
+                "{{mission.attempt.id}}",
+                "answer"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Finalizar tentativa",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{server.url}}/missions/attempts/{{mission.attempt.id}}/finish",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "missions",
+                "attempts",
+                "{{mission.attempt.id}}",
+                "finish"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04. Recursos",
+      "item": [
+        {
+          "name": "Listar Recursos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server.url}}/resources",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "resources"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Detalhes do Recurso",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server.url}}/resources/{{resource.id}}",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "resources",
+                "{{resource.id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05. Usuário",
+      "item": [
+        {
+          "name": "Meu Perfil",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server.url}}/me",
+              "host": [
+                "{{server.url}}"
+              ],
+              "path": [
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access.token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
