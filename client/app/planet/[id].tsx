@@ -1,24 +1,62 @@
-import React from 'react';
+// app/planet/[id].tsx
+import React, { useEffect, useState } from 'react';
 import { 
   View, 
   Text, 
   StyleSheet, 
   TouchableOpacity, 
   ImageBackground, 
-  ScrollView 
+  ScrollView,
+  ActivityIndicator
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { PLANETAS } from '@/data/planetas'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { styles } from '@/styles/idStyle';
 
+// Nossas novas importações!
+import { fetchMissoesDoPlaneta } from '@/services/api';
+import { adaptarMissoesDoPlaneta } from '@/utils/mappers';
+import { DetalhesPlaneta } from '@/types/frontend';
+import { VISUAIS_DOS_PLANETAS } from '@/data/planetVisuals'; // Para pegar a cor e imagem
+
 export default function PlanetDetails() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
 
-  const planeta = PLANETAS.find(p => p.id === id);
+  // Estados da tela
+  const [planeta, setPlaneta] = useState<DetalhesPlaneta | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Busca os dados assim que a tela abre
+  useEffect(() => {
+    async function carregarDados() {
+      try {
+        setLoading(true);
+        // 1. Busca na API
+        const dadosSujos = await fetchMissoesDoPlaneta(id as string);
+        // 2. Passa pelo Mapper
+        const dadosLimpos = adaptarMissoesDoPlaneta(dadosSujos);
+        // 3. Salva no estado
+        setPlaneta(dadosLimpos);
+      } catch (error) {
+        console.error("Erro ao carregar planeta:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (id) carregarDados();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <View style={[styles.center, { flex: 1, backgroundColor: '#020617', justifyContent: 'center' }]}>
+        <ActivityIndicator size="large" color="#406fd4" />
+      </View>
+    );
+  }
 
   if (!planeta) {
     return (
@@ -31,14 +69,16 @@ export default function PlanetDetails() {
     );
   }
 
+  // Pega a imagem e a cor baseadas no ID do planeta. 
+  // Se não achar, usa um fallback padrão.
+  const visual = VISUAIS_DOS_PLANETAS[planeta.id] || { img: null, cor: '#406fd4' };
+
   return (
-    // Fundo da Galáxia
     <ImageBackground
       source={require('../../assets/GalaxyBG.png')} 
       style={styles.container}
       resizeMode="cover"
     >
-      {/* Overlay escuro para dar contraste */}
       <LinearGradient
         colors={['rgba(2,6,23,0.3)', 'rgba(2,6,23,0.95)']}
         style={StyleSheet.absoluteFillObject}
@@ -51,17 +91,16 @@ export default function PlanetDetails() {
           activeOpacity={0.7}
         >
           <BlurView intensity={30} tint="dark" style={styles.iconBlur}>
-            <MaterialCommunityIcons name="arrow-left" size={24} color={planeta.accentColor} />
+            <MaterialCommunityIcons name="arrow-left" size={24} color={visual.cor} />
           </BlurView>
         </TouchableOpacity>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
-        {/* Imagem do Planeta */}
         <View style={styles.imageContainer}>
           <ImageBackground 
-            source={planeta.imagem} 
+            source={visual.img} 
             style={styles.image} 
             resizeMode="contain"
           />
@@ -70,46 +109,62 @@ export default function PlanetDetails() {
         <View style={styles.contentWrapper}>
           <BlurView intensity={40} tint="dark" style={styles.contentBlur}>
             
-            <View style={[styles.accentLine, { backgroundColor: planeta.accentColor }]} />
+            <View style={[styles.accentLine, { backgroundColor: visual.cor }]} />
             
-            <Text style={[styles.title, { color: planeta.accentColor }]}>
+            <Text style={[styles.title, { color: visual.cor }]}>
               {planeta.nome}
             </Text>
             
             <View style={styles.descriptionContainer}>
-              
               <Text style={[styles.description, {alignSelf: 'flex-start', paddingBottom: 16}]}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <MaterialCommunityIcons name="atom" size={16} color="#94A3B8" style={{ marginRight: 8 }} />
-                  {planeta.description}
+                  {planeta.conteudo} {/* Usando o conteúdo que vem da API */}
                 </View>
-              </Text>
-              <Text style={styles.description}>
-                {planeta.content}
               </Text>
             </View>
 
-            {/* --- ÁREA PARA O CONTEÚDO --- */}
             <Text style={styles.sectionTitle}>Módulos Disponíveis</Text>
             
-            {planeta.missoes.map((missao) => (
-              <TouchableOpacity
-                key={missao.id}
-                activeOpacity={0.8}
-                style={[styles.moduleCard, { borderLeftColor: planeta.accentColor }]}
-                onPress={() => router.push({
-                  pathname: `/mission/[id]`,
-                  params: { id: missao.id, planetId: planeta.id }
-                })}
-              >
-                <MaterialCommunityIcons name="rocket-launch-outline" size={20} color={planeta.accentColor} />
-                <Text style={styles.moduleText}>{missao.titulo}</Text>
-              </TouchableOpacity>
-            ))}
+            {/* Agora varremos o array de 'missoes' que nosso mapper criou */}
+            {planeta.missoes.map((missao) => {
+              const isLocked = missao.status === 'LOCKED';
+
+              return (
+                <TouchableOpacity
+                  key={missao.id}
+                  activeOpacity={0.8}
+                  disabled={isLocked} // Desativa o clique se estiver bloqueado
+                  style={[
+                    styles.moduleCard, 
+                    { 
+                      borderLeftColor: isLocked ? '#555' : visual.cor,
+                      opacity: isLocked ? 0.5 : 1 // Deixa meio transparente se bloqueado
+                    }
+                  ]}
+                  onPress={() => router.push({
+                    pathname: `/mission/[id]`,
+                    params: { id: missao.id, planetId: planeta.id }
+                  })}
+                >
+                  <MaterialCommunityIcons 
+                    // Troca o ícone se estiver bloqueado
+                    name={isLocked ? "lock" : "rocket-launch-outline"} 
+                    size={20} 
+                    color={isLocked ? '#999' : visual.cor} 
+                  />
+                  <Text style={[
+                    styles.moduleText, 
+                    isLocked && { color: '#999' } // Texto cinza se bloqueado
+                  ]}>
+                    {missao.titulo}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
 
           </BlurView>
         </View>
-
       </ScrollView>
     </ImageBackground>
   );
