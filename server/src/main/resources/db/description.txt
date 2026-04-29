@@ -6,18 +6,6 @@ VARIABILI : Análise de constantes, variáveis e tipagem de dados.
 
         Imagine que o computador de bordo da sua nave possui um imenso painel de armazenamento composto por bilhões de pequenos compartimentos eletrônicos. No vácuo do espaço, a memória (RAM) funciona como o convés de trabalho imediato da tripulação: quando você define um dado, o sistema reserva um endereço físico específico nesses compartimentos para garantir que a informação não se perca no ruído cósmico. É como designar um slot específico no rack de carga para um cilindro de oxigênio; o computador marca aquele espaço como "ocupado" e vincula um nome a ele, permitindo que o processador localize e recupere o valor em nanossegundos, garantindo que as operações de voo sejam fluidas e instantâneas.
 
-        Questionário:
-
-            Questão 1 - No cenário da nave espacial, qual é a principal função da memória RAM (o "convés de trabalho")?
-
-            A. Guardar todos os arquivos da nave permanentemente, mesmo se a energia acabar.
-            B. Atuar como um espaço de acesso rápido para dados que estão sendo usados no momento. [correta]
-            C. Limpar o ruído cósmico que interfere nos rádios da tripulação.
-            D. Fabricar novos cilindros de oxigênio para a carga.
-            E. Aumentar o tamanho físico dos compartimentos eletrônicos.
-
-            Explicação: A memória RAM funciona como uma mesa de trabalho: nela você coloca apenas o que precisa usar agora para ter acesso imediato (em nanossegundos). Se você tivesse que buscar tudo no "porão" (armazenamento de longo prazo) toda vez, a operação da nave seria muito lenta.
-
     Identificadores : Convenções de escrita
 
         Para que a comunicação entre os engenheiros na Terra e o software da sonda seja clara, utilizamos os identificadores, que são os nomes técnicos que damos às nossas variáveis e funções. Como em um mapa estelar, não podemos usar nomes aleatórios ou confusos; seguimos regras rígidas para evitar erros de leitura. O padrão camelCase (ex: altitudeNave) ou o snake_case (ex: pressao_interna) são as nossas linguagens de comando. Além disso, existem restrições de segurança: nunca começamos um identificador com números e evitamos caracteres especiais ou espaços, garantindo que o compilador não interprete um nome de sensor como um comando de autodestruição ou um erro de sintaxe.
