@@ -55,10 +55,6 @@ public class User implements Levelable {
         this.xp += xp;
     }
 
-    public void consumeOxygen(){
-        this.oxygen -= 1;
-    }
-
     @Override
     public void up(Level next) {
         if (!this.level.isLast()){

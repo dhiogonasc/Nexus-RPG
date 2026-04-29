@@ -49,8 +49,6 @@ public class AttemptService {
                 .uMission(uMission)
                 .build();
 
-        user.consumeOxygen();
-
         return attemptMapper.map(attemptRepository.save(attempt));
     }
 
