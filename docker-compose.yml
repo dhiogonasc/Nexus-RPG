@@ -9,9 +9,9 @@ services:
       PGPORT: ${DB_PORT}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./server/db:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      test:
+        ["CMD-SHELL", "pg_isready -p ${DB_PORT} -U ${DB_USER} -d ${DB_NAME}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -25,11 +25,10 @@ services:
     ports:
       - "${SERVER_PORT}:8080"
     environment:
-      DB_HOST: db
-      DB_PORT: ${DB_PORT}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:${DB_PORT}/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SPRING_FLYWAY_ENABLED: "true"
     depends_on:
       db:
         condition: service_healthy
