@@ -2,13 +2,15 @@ import axios from "axios";
 import { storage } from "./storage";
 
 const api = axios.create({
-  baseURL: `http://localhost:8080`,
+  //URL do servidor no Render
+  baseURL: "https://nexus-server-gewa.onrender.com",
 });
 
 api.interceptors.request.use(
   async (config) => {
     const token = await storage.getToken();
 
+    // Se tiver token e a rota NÃO for de autenticação (ex: login/cadastro), ele envia o token
     if (token && !config.url?.includes("/auth/")) {
       config.headers.Authorization = `Bearer ${token}`;
     }
